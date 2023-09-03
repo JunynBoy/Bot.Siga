@@ -18,7 +18,7 @@ namespace Siga.Cadastro
         private AlunoService _alunoService;
         public CadastroDetail()
         {
-            
+
             InitializeComponent();
             this._alunoService = new AlunoService();
 
@@ -26,12 +26,6 @@ namespace Siga.Cadastro
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-
-            bool termos = cbxTermos.Checked;
-            if (!termos)
-                throw new ArgumentException("Para usar a apicação é necessário concordar com os termos de uso!");
-
-
             string nome = txtNome.Text;
             string cpf = txtCPF.Text;
             string senha = txtSenha.Text;
@@ -40,9 +34,20 @@ namespace Siga.Cadastro
             string whatsapp = txtWhatsapp.Text;
             bool atualizarPorEmail = cbxAtualizarPeloEmail.Checked;
             bool atualizarPorWhatsapp = cbxAtualizarPeloWhatsapp.Checked;
-
-            Aluno aluno = new(nome, senha, email, atualizarPorEmail, cpf, whatsapp, atualizarPorWhatsapp);
-            this._alunoService.Save(aluno);
+            bool termos = cbxTermos.Checked;
+            try
+            {
+                if (!termos)
+                    throw new ArgumentException("Para usar a apicação é necessário concordar com os termos de uso!");
+                Aluno aluno = new(nome, senha, email, atualizarPorEmail, cpf, whatsapp, atualizarPorWhatsapp);
+                this._alunoService.Save(aluno);
+                MessageBox.Show("Usuário salvo com sucesso");
+                this.Close();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -66,6 +71,11 @@ namespace Siga.Cadastro
         }
 
         private void cbxAtualizarPeloEmail_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CadastroDetail_Load(object sender, EventArgs e)
         {
 
         }
