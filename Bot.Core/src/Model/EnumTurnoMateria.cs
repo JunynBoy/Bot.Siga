@@ -9,7 +9,5 @@ namespace Bot.Core.Model
     public enum EnumTurnoMateria
     {
         DIURNO, NOTURNO
-
-
     }
 }

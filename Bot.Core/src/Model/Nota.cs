@@ -50,6 +50,18 @@ namespace Bot.Core.Model
         public Aluno? Aluno { get; set; }
 
 
+        public Nota() { }
+        
+        public Nota(int materiaid , int alunoId, float p1, float p2, float p3)
+        {
+            this.MateriaId = materiaid;
+            this.AlunoId = alunoId;
+            this.P1 = p1;
+            this.P2 = p2;
+            this.P3 = p3;
+            this.CreatedAt = CreatedAt;
+
+        }
 
     }
 }

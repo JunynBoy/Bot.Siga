@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace Bot.Core.Model
 {
@@ -24,8 +25,11 @@ namespace Bot.Core.Model
         [Column("nome")]
         public string Nome { get; set; }
 
+        [Column("codigo")]
+        public string? Codigo { get; set; }
+
         [Column("professor")]
-        public string Professor { get; set; }
+        public string? Professor { get; set; }
 
         [Column("turno")]
         public EnumTurnoMateria Turno { get; set; }
@@ -41,6 +45,17 @@ namespace Bot.Core.Model
         public DateTime? DeletedAt { get; set; }
 
         public virtual ICollection<Nota>? Notas { get; set; }
+
+        public Materia() { }
+        public Materia(string nome, string codigo, string professor, EnumTurnoMateria turno) {
+            this.Nome = nome;
+            this.Codigo = codigo;
+            this.Professor = professor;
+            this.Turno = turno;
+
+            this.CreatedAt = DateTime.Now;
+        }
+
 
 
     }

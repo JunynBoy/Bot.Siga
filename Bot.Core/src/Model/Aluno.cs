@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using Bot.Core.Model;
+using System.Numerics;
 
 namespace Bot.Core.Model
 {
@@ -49,7 +50,9 @@ namespace Bot.Core.Model
 
         public virtual ICollection<Nota>? Notas { get ; set; }
 
-        public Aluno(string nome, string senha, string email, bool atualizarPorEmail, string cpf , string whatsapp , bool atualizarPorWhatsapp)
+        public Aluno() { }
+
+        public Aluno(string? nome, string senha, string? email, bool atualizarPorEmail, string cpf , string? whatsapp , bool atualizarPorWhatsapp)
         {
             this.Nome = nome;
             this.Senha = senha;

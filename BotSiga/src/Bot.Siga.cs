@@ -105,7 +105,7 @@ namespace Bot.Siga.src
             foreach (IWebElement NomeNota in listaDeNomesNotas)
             {
                 Console.WriteLine(NomeNota.Text);
-                NomeNota.FindElement(By.XPath(""));
+                //NomeNota.FindElement(By.XPath(""));
             }
             
 
