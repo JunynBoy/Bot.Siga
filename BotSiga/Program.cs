@@ -1,5 +1,4 @@
 ﻿using Bot.Siga;
-using Bot.Siga.src;
 
-Siga siga = new Siga();
-siga.Navegar();
+BotSiga siga = new BotSiga();
+siga.NavegarCompleto();

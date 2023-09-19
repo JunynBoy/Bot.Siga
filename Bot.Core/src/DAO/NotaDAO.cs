@@ -1,5 +1,6 @@
 ﻿using Bot.Core.DAO;
 using Bot.Core.Model;
+using Bot.Core.src.DAO.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bot.Core.DAO
+namespace Bot.Core.src.DAO
 {
-    public class AlunoDAO : GenericDAO<Aluno>, IAlunoDAO
+    public class NotaDAO : GenericDAO<Aluno>, INotaDAO
     {
-        public AlunoDAO(DbContext context) : base(context) { }
+
+        public NotaDAO(DbContext context) : base(context) { }
 
 
         //EXEMPLO DE COMO É FEITO A CONSULTA
@@ -19,11 +21,5 @@ namespace Bot.Core.DAO
         //{
         //    return context.Set<Oab>().Where(o => o.Numero == numeroOAB).FirstOrDefault();
         //}
-
-
-        public Aluno? GetByCpf(string cpf)
-        {
-            return context.Set<Aluno>().Where(a => a.Cpf == cpf).FirstOrDefault();  
-        }
     }
 }

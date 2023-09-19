@@ -17,46 +17,26 @@ namespace Siga.Cadastro
             InitializeComponent();
         }
 
-        CadastroDetail cadastroForm;
-        TelaLogin loginForm;
-
-        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (loginForm == null)
-            {
-                loginForm = new TelaLogin();
-                loginForm.MdiParent = this;
-                loginForm.Show();
-            }
-            else
-            {
-                loginForm.Activate();
-            }
-
-        }
-
-        private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cadastroToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (cadastroForm == null)
-            {
-                cadastroForm = new CadastroDetail();
-                cadastroForm.MdiParent = this;
-                cadastroForm.Show();
-            }
-            else
-            {
-                cadastroForm.Activate();
-            }
+            //FAZER VALIDAÇÃO, USUÁRIO JÁ LOGADO?
+
+            TelaUserPrincipal telaUserPrincipal = new TelaUserPrincipal();
+            //telaUserPrincipal.MdiParent = this;
+            telaUserPrincipal.ShowDialog();
+
+        }
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TelaLogin telaLogin = new TelaLogin();
+            telaLogin.ShowDialog();
+
         }
 
-        private void inicioToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void VisibleDgv()
         {
-           
+            this.dgvUsuariosLogados.Visible = this.dgvUsuariosLogados.Visible == true ? false : true;
         }
+
     }
 }

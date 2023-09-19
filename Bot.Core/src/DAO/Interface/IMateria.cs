@@ -5,13 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bot.Core.DAO
+namespace Bot.Core.src.DAO.Interface
 {
-    public interface IAlunoDAO : IGenericDAO<Aluno>
+    public interface IMateria : IGenericDAO<Materia>
     {
 
-        public Aluno? GetByCpf(string cpf);
-
+        
 
 
     }

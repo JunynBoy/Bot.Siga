@@ -1,6 +1,6 @@
 ﻿namespace Siga.Cadastro
 {
-    partial class CadastroDetail
+    partial class TelaUserPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -51,11 +51,12 @@
             // 
             // btnCadastrar
             // 
-            btnCadastrar.Location = new Point(284, 294);
+            btnCadastrar.Location = new Point(325, 392);
+            btnCadastrar.Margin = new Padding(3, 4, 3, 4);
             btnCadastrar.Name = "btnCadastrar";
-            btnCadastrar.Size = new Size(184, 23);
+            btnCadastrar.Size = new Size(210, 31);
             btnCadastrar.TabIndex = 0;
-            btnCadastrar.Text = " Cadastrar";
+            btnCadastrar.Text = "Adicionar";
             btnCadastrar.UseVisualStyleBackColor = true;
             btnCadastrar.Click += btnCadastrar_Click;
             // 
@@ -63,152 +64,158 @@
             // 
             lblCadastro.AutoSize = true;
             lblCadastro.Font = new Font("Verdana", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCadastro.Location = new Point(160, 20);
+            lblCadastro.Location = new Point(161, 27);
             lblCadastro.Name = "lblCadastro";
-            lblCadastro.Size = new Size(162, 18);
+            lblCadastro.Size = new Size(302, 23);
             lblCadastro.TabIndex = 3;
-            lblCadastro.Text = "Faça seu cadastro:";
+            lblCadastro.Text = "Adicionar Usuário principal";
+            lblCadastro.Click += lblCadastro_Click;
             // 
             // lblLogin
             // 
             lblLogin.AutoSize = true;
-            lblLogin.Location = new Point(83, 94);
+            lblLogin.Location = new Point(95, 125);
             lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(34, 15);
+            lblLogin.Size = new Size(40, 20);
             lblLogin.TabIndex = 4;
             lblLogin.Text = "CPF :";
             // 
             // lblSenha
             // 
             lblSenha.AutoSize = true;
-            lblSenha.Location = new Point(74, 130);
+            lblSenha.Location = new Point(85, 173);
             lblSenha.Name = "lblSenha";
-            lblSenha.Size = new Size(45, 15);
+            lblSenha.Size = new Size(56, 20);
             lblSenha.TabIndex = 5;
             lblSenha.Text = "Senha :";
             // 
             // lblConfirmaSenha
             // 
             lblConfirmaSenha.AutoSize = true;
-            lblConfirmaSenha.Location = new Point(11, 166);
+            lblConfirmaSenha.Location = new Point(13, 221);
             lblConfirmaSenha.Name = "lblConfirmaSenha";
-            lblConfirmaSenha.Size = new Size(106, 15);
+            lblConfirmaSenha.Size = new Size(131, 20);
             lblConfirmaSenha.TabIndex = 6;
             lblConfirmaSenha.Text = "Confirme a senha :";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(72, 201);
+            label1.Location = new Point(82, 268);
             label1.Name = "label1";
-            label1.Size = new Size(47, 15);
+            label1.Size = new Size(59, 20);
             label1.TabIndex = 8;
             label1.Text = "E-mail :";
             // 
             // cbxTermos
             // 
             cbxTermos.AutoSize = true;
-            cbxTermos.Location = new Point(123, 259);
+            cbxTermos.Location = new Point(141, 345);
+            cbxTermos.Margin = new Padding(3, 4, 3, 4);
             cbxTermos.Name = "cbxTermos";
-            cbxTermos.Size = new Size(199, 19);
+            cbxTermos.Size = new Size(246, 24);
             cbxTermos.TabIndex = 10;
             cbxTermos.Text = "Concordo com os termos de uso";
             cbxTermos.UseVisualStyleBackColor = true;
             // 
             // txtCPF
             // 
-            txtCPF.Location = new Point(123, 92);
+            txtCPF.Location = new Point(141, 123);
+            txtCPF.Margin = new Padding(3, 4, 3, 4);
             txtCPF.Mask = "000.000.000-00";
             txtCPF.Name = "txtCPF";
-            txtCPF.Size = new Size(246, 23);
+            txtCPF.Size = new Size(281, 27);
             txtCPF.TabIndex = 12;
             // 
             // txtSenha
             // 
-            txtSenha.Location = new Point(123, 127);
+            txtSenha.Location = new Point(141, 169);
+            txtSenha.Margin = new Padding(3, 4, 3, 4);
             txtSenha.Name = "txtSenha";
             txtSenha.PasswordChar = '*';
-            txtSenha.Size = new Size(246, 23);
+            txtSenha.Size = new Size(281, 27);
             txtSenha.TabIndex = 16;
             // 
             // txtConfirmaSenha
             // 
-            txtConfirmaSenha.Location = new Point(123, 164);
+            txtConfirmaSenha.Location = new Point(141, 219);
+            txtConfirmaSenha.Margin = new Padding(3, 4, 3, 4);
             txtConfirmaSenha.Name = "txtConfirmaSenha";
             txtConfirmaSenha.PasswordChar = '*';
-            txtConfirmaSenha.Size = new Size(246, 23);
+            txtConfirmaSenha.Size = new Size(281, 27);
             txtConfirmaSenha.TabIndex = 18;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(123, 199);
+            txtEmail.Location = new Point(141, 265);
+            txtEmail.Margin = new Padding(3, 4, 3, 4);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(246, 23);
+            txtEmail.Size = new Size(281, 27);
             txtEmail.TabIndex = 19;
             // 
             // txtWhatsapp
             // 
-            txtWhatsapp.Location = new Point(123, 225);
+            txtWhatsapp.Location = new Point(141, 300);
+            txtWhatsapp.Margin = new Padding(3, 4, 3, 4);
             txtWhatsapp.Mask = "+00 (00)00000-0000";
             txtWhatsapp.Name = "txtWhatsapp";
-            txtWhatsapp.Size = new Size(246, 23);
+            txtWhatsapp.Size = new Size(281, 27);
             txtWhatsapp.TabIndex = 22;
             // 
             // lblWhatsapp
             // 
             lblWhatsapp.AutoSize = true;
-            lblWhatsapp.Location = new Point(50, 227);
+            lblWhatsapp.Location = new Point(57, 303);
             lblWhatsapp.Name = "lblWhatsapp";
-            lblWhatsapp.Size = new Size(69, 15);
+            lblWhatsapp.Size = new Size(87, 20);
             lblWhatsapp.TabIndex = 21;
             lblWhatsapp.Text = "Whatsapp : ";
             // 
             // cbxAtualizarPeloWhatsapp
             // 
             cbxAtualizarPeloWhatsapp.AutoSize = true;
-            cbxAtualizarPeloWhatsapp.Location = new Point(375, 229);
+            cbxAtualizarPeloWhatsapp.Location = new Point(429, 305);
+            cbxAtualizarPeloWhatsapp.Margin = new Padding(3, 4, 3, 4);
             cbxAtualizarPeloWhatsapp.Name = "cbxAtualizarPeloWhatsapp";
-            cbxAtualizarPeloWhatsapp.Size = new Size(154, 19);
+            cbxAtualizarPeloWhatsapp.Size = new Size(195, 24);
             cbxAtualizarPeloWhatsapp.TabIndex = 23;
             cbxAtualizarPeloWhatsapp.Text = "Atualizar pelo Whatsapp";
             cbxAtualizarPeloWhatsapp.UseVisualStyleBackColor = true;
-            cbxAtualizarPeloWhatsapp.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // cbxAtualizarPeloEmail
             // 
             cbxAtualizarPeloEmail.AutoSize = true;
-            cbxAtualizarPeloEmail.Location = new Point(375, 203);
+            cbxAtualizarPeloEmail.Location = new Point(429, 271);
+            cbxAtualizarPeloEmail.Margin = new Padding(3, 4, 3, 4);
             cbxAtualizarPeloEmail.Name = "cbxAtualizarPeloEmail";
-            cbxAtualizarPeloEmail.Size = new Size(135, 19);
+            cbxAtualizarPeloEmail.Size = new Size(171, 24);
             cbxAtualizarPeloEmail.TabIndex = 24;
             cbxAtualizarPeloEmail.Text = "Atualizar pelo E-mail";
             cbxAtualizarPeloEmail.UseVisualStyleBackColor = true;
-            cbxAtualizarPeloEmail.CheckedChanged += cbxAtualizarPeloEmail_CheckedChanged;
             // 
             // txtNome
             // 
-            txtNome.Location = new Point(123, 61);
+            txtNome.Location = new Point(141, 81);
+            txtNome.Margin = new Padding(3, 4, 3, 4);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(246, 23);
+            txtNome.Size = new Size(281, 27);
             txtNome.TabIndex = 26;
-            txtNome.MaskInputRejected += maskedTextBox1_MaskInputRejected;
             // 
             // lblNome
             // 
             lblNome.AutoEllipsis = true;
             lblNome.AutoSize = true;
-            lblNome.Location = new Point(74, 61);
+            lblNome.Location = new Point(85, 81);
             lblNome.Name = "lblNome";
-            lblNome.Size = new Size(46, 15);
+            lblNome.Size = new Size(57, 20);
             lblNome.TabIndex = 25;
             lblNome.Text = "Nome :";
-            lblNome.Click += label2_Click;
             // 
-            // CadastroDetail
+            // TelaUserPrincipal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(543, 344);
+            ClientSize = new Size(621, 459);
             Controls.Add(txtNome);
             Controls.Add(lblNome);
             Controls.Add(cbxAtualizarPeloEmail);
@@ -226,11 +233,11 @@
             Controls.Add(lblLogin);
             Controls.Add(lblCadastro);
             Controls.Add(btnCadastrar);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "CadastroDetail";
-            Text = "CadastroDetail";
-            Load += CadastroDetail_Load;
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            MinimizeBox = false;
+            Name = "TelaUserPrincipal";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Adicionar";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -37,6 +37,7 @@ namespace Bot.Core.Model
         [Column("atualizar-por-whatsapp")]
         public bool AtualizarPorWhatsapp { get; set; }
 
+
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; }
 
@@ -47,6 +48,11 @@ namespace Bot.Core.Model
         [Column("deleted_at")]
         public DateTime? DeletedAt { get; set; }
 
+        [Column("autenticado")]
+        public bool autenticado { get; set; }
+
+        [Column("logado")]
+        public bool logado { get; set; }
 
         public virtual ICollection<Nota>? Notas { get ; set; }
 

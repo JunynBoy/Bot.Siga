@@ -1,20 +1,21 @@
 ﻿using Bot.Core.DAO;
 using Bot.Core.Model;
+using Bot.Core.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bot.Core.Service
+namespace Bot.Core.src.Service
 {
-    public class AlunoService : IService<Aluno>
+    public class MateriaService : IService<Aluno>
     {
-        private AlunoDAO _dao;
+        private MateriaDAO _dao;
 
-        public AlunoService()
+        public MateriaService()
         {
-            _dao = new AlunoDAO(new ApplicationDbContext());
+            _dao = new MateriaDAO(new ApplicationDbContext());
         }
 
         public IEnumerable<Aluno> GetAll()
@@ -25,11 +26,6 @@ namespace Bot.Core.Service
         public Aluno? GetById(int id)
         {
             return _dao.GetById(id);
-        }
-
-        public Aluno? GetByCpf(string cpf)
-        {
-            return _dao.GetByCpf(cpf);
         }
 
         public void Remove(Aluno entity)
@@ -51,4 +47,5 @@ namespace Bot.Core.Service
 
 
     }
+
 }

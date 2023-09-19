@@ -17,11 +17,9 @@ namespace Siga.Cadastro
             InitializeComponent();
         }
 
+        private void cbxUserPrincipal_CheckedChanged(object sender, EventArgs e)
+        {
 
-
-
-
-
-
+        }
     }
 }

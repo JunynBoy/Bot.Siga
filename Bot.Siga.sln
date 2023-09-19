@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bot.Siga", "BotSiga\Bot.Sig
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bot.Core", "Bot.Core\Bot.Core.csproj", "{E869E7F6-8631-48ED-B676-F27EDBE3C683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Siga.Cadastro", "Siga.Cadastro\Siga.Cadastro.csproj", "{F924E001-08C9-421F-BB99-924775252D69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bot.App", "Siga.Cadastro\Bot.App.csproj", "{F924E001-08C9-421F-BB99-924775252D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
