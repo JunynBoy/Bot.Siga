@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bot.Core.src.Service
+namespace Bot.Core.Service
 {
     public class MateriaService : IService<Aluno>
     {

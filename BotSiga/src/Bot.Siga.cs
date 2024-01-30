@@ -42,15 +42,19 @@ namespace Bot.Siga
 {
     public class BotSiga
     {
+        private string _cpf;
+        private string _senha;
         private IWebDriver _driver;
         private WebDriverWait _wait;
         private Action _action;
 
         private string urlBase = "https://siga.cps.sp.gov.br/aluno/login.aspx?";
 
-        public BotSiga()
+        public BotSiga(bool headless = false)
         {
-
+            this._cpf = "48710133836";
+            this._senha = "Mg131730";
+            IniciarNavegador(headless);
         }
 
         /*
@@ -58,24 +62,18 @@ namespace Bot.Siga
             -Parte do código responsável por navegar, clicar me botões e etc....
          */
 
-
-        public void Navegar()
-        {
-
-        }
-        public void NavegarCompleto(bool headleass = true)
+        public void NavegarCompleto()
         {
 
             try
             {
-                IniciarNavegador();
-                bool validado = this.FazerLogin("48710133836", "Mg131730", true);
+                bool validado = this.FazerLogin(this._cpf, this._senha);
                 if (!validado)
                 {
                     throw new Exception("O nao foi validado corretamente! Usuário ou senha podem estar incorretos");
                 }
                 Thread.Sleep(2000);
-                this.ColetarNotas(true);
+                this.ColetarNotas();
                 FecharNavegador();
             }
             catch (Exception ex)
@@ -89,11 +87,14 @@ namespace Bot.Siga
         }
 
         //rotina inteira = true quer dizer o método saberá que a rotina inteira está sendo executada então ela dá continuidade
-        public bool FazerLogin(string login, string senha, bool RotinaInteira = false , bool headless = true)
+        public bool FazerLogin(string login, string senha, bool headless = true)
         {
-            if (!RotinaInteira)
-                IniciarNavegador();
 
+            //atributos booleanos que dizem se o aluno vai querer coletar 
+            //notas
+            //faltas
+
+            
             Thread.Sleep(2000);
 
             IWebElement Login = _driver.FindElement(By.XPath("//input [@id='vSIS_USUARIOID']"));
@@ -115,18 +116,54 @@ namespace Bot.Siga
                     "Fechando o programa...");
                 return false;
             }
-            else if (!RotinaInteira)
-            {
-               FecharNavegador();
-               return true;
-            }
-
             return true;
 
+        }
 
+
+
+        public void ColetarNotas()
+        {
+
+            try
+            {
+
+
+
+                IWebElement btnNotas = _driver.FindElement(By.XPath("//span[@id = 'ygtvlabelel10Span']"));
+                btnNotas.Click();
+                Thread.Sleep(1000);
+
+    
+
+                IList<IWebElement> listaDeNomesNotas = _driver.FindElements(By.XPath("//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]"));
+                int num = listaDeNomesNotas.Count() / 2;
+                //div[@id = 'Grid1ContainerDiv_0008']
+                //tr[@id = 'Grid4ContainerRow_0008']
+
+
+                foreach (IWebElement NomeNota in listaDeNomesNotas)
+                {
+                    Console.WriteLine(NomeNota.Text);
+                }
+
+            }catch (Exception e)
+            {
+                Console.WriteLine("Nao foi encontrado nenhuma nota!!!!" , e.Message);
+            }
 
 
         }
+
+
+
+
+
+        /*
+            MÉTODOS PARA FACILITAR O DESENVOLVIMENTO
+        --------------------------------------------------------------------
+         
+         */
 
         private bool VerificarElementoPresente(IWebDriver driver, string xpath)
         {
@@ -140,50 +177,6 @@ namespace Bot.Siga
                 return false;
             }
         }
-
-        public void ColetarNotas(bool rotinaInteira = false)
-        {
-            if (!rotinaInteira)
-            {
-                //iniciar navegador e Logar antes
-            }
-            IWebElement btnNotas = _driver.FindElement(By.XPath("//span[@id = 'ygtvlabelel10Span']"));
-            btnNotas.Click();
-            Thread.Sleep(1000);
-
-            IList<IWebElement> listaDeNomesNotas = _driver.FindElements(By.XPath("//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]"));
-            foreach (IWebElement NomeNota in listaDeNomesNotas)
-            {
-                Console.WriteLine(NomeNota.Text);
-                //NomeNota.FindElement(By.XPath(""));
-            }
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-            MÉTODOS PARA FACILITAR O DESENVOLVIMENTO
-        --------------------------------------------------------------------
-         
-         
-         */
-
-
-
-
-
         private void IniciarNavegador(bool headless = false)
         {
             ChromeOptions options = new ChromeOptions();
@@ -216,8 +209,6 @@ namespace Bot.Siga
             }
 
             Console.ResetColor();
-
-
 
         }
 

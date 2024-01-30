@@ -33,10 +33,7 @@ namespace Siga.Cadastro
 
         }
 
-        private void VisibleDgv()
-        {
-            this.dgvUsuariosLogados.Visible = this.dgvUsuariosLogados.Visible == true ? false : true;
-        }
+        
 
     }
 }

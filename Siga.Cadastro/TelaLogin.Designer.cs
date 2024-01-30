@@ -88,9 +88,10 @@
             lblTitle.Font = new Font("Arial Rounded MT Bold", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             lblTitle.Location = new Point(109, 48);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(100, 32);
+            lblTitle.Size = new Size(169, 32);
             lblTitle.TabIndex = 32;
-            lblTitle.Text = "Login:";
+            lblTitle.Text = "Login Siga:";
+            lblTitle.Click += lblTitle_Click;
             // 
             // cbxUserPrincipal
             // 

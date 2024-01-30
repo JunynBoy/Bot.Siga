@@ -44,9 +44,7 @@
             toolStripMenuItem4 = new ToolStripMenuItem();
             txtUsrPrincipalStatus = new ToolStripTextBox();
             toolTip1 = new ToolTip(components);
-            dgvUsuariosLogados = new DataGridView();
             menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvUsuariosLogados).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -70,21 +68,21 @@
             // TSMIUsuarioPrincipal
             // 
             TSMIUsuarioPrincipal.Name = "TSMIUsuarioPrincipal";
-            TSMIUsuarioPrincipal.Size = new Size(224, 26);
+            TSMIUsuarioPrincipal.Size = new Size(219, 26);
             TSMIUsuarioPrincipal.Text = "Usuario Principal";
             TSMIUsuarioPrincipal.Click += cadastroToolStripMenuItem_Click;
             // 
             // loginToolStripMenuItem
             // 
             loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            loginToolStripMenuItem.Size = new Size(224, 26);
+            loginToolStripMenuItem.Size = new Size(219, 26);
             loginToolStripMenuItem.Text = "Usuário comúm";
             loginToolStripMenuItem.Click += loginToolStripMenuItem_Click;
             // 
             // horarioDeProcuraToolStripMenuItem
             // 
             horarioDeProcuraToolStripMenuItem.Name = "horarioDeProcuraToolStripMenuItem";
-            horarioDeProcuraToolStripMenuItem.Size = new Size(224, 26);
+            horarioDeProcuraToolStripMenuItem.Size = new Size(219, 26);
             horarioDeProcuraToolStripMenuItem.Text = "Horario de procura";
             // 
             // adicionarToolStripMenuItem
@@ -142,27 +140,12 @@
             txtUsrPrincipalStatus.Text = "Usuário Principal:";
             txtUsrPrincipalStatus.Visible = false;
             // 
-            // dgvUsuariosLogados
-            // 
-            dgvUsuariosLogados.BackgroundColor = SystemColors.Window;
-            dgvUsuariosLogados.BorderStyle = BorderStyle.None;
-            dgvUsuariosLogados.ColumnHeadersHeight = 29;
-            dgvUsuariosLogados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvUsuariosLogados.Location = new Point(0, 43);
-            dgvUsuariosLogados.Name = "dgvUsuariosLogados";
-            dgvUsuariosLogados.RowHeadersWidth = 51;
-            dgvUsuariosLogados.RowTemplate.Height = 29;
-            dgvUsuariosLogados.Size = new Size(1154, 203);
-            dgvUsuariosLogados.TabIndex = 3;
-            dgvUsuariosLogados.Visible = false;
-            // 
             // TelaInicial
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1154, 801);
             Controls.Add(menuStrip1);
-            Controls.Add(dgvUsuariosLogados);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 4, 3, 4);
@@ -170,7 +153,6 @@
             Text = "TelaInicial";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvUsuariosLogados).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -191,6 +173,5 @@
         private ToolStripTextBox txtUsrPrincipalStatus;
         private ToolStripMenuItem horarioDeProcuraToolStripMenuItem;
         private ToolStripMenuItem propriedadesDoProgramaToolStripMenuItem;
-        private DataGridView dgvUsuariosLogados;
     }
 }
