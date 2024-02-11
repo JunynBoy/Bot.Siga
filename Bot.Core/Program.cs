@@ -1,8 +1,6 @@
-﻿namespace Bot.Core
-{
-    public class Program
-    {
+﻿using Bot.Core;
+using System.Configuration;
 
-    }
 
-}
+
+

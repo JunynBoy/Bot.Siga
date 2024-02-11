@@ -1,6 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using Bot.Siga.src.ColetaModular;
+using Bot.Siga.src.Interface;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Configuration;
 
 
 
@@ -44,25 +47,55 @@ namespace Bot.Siga
     {
         private string _cpf;
         private string _senha;
+        private string _urlBase;
+
         private IWebDriver _driver;
         private WebDriverWait _wait;
         private Action _action;
 
-        private string urlBase = "https://siga.cps.sp.gov.br/aluno/login.aspx?";
+        private readonly Dictionary<string, IColetaModular> _estrategias;
+
 
         public BotSiga(bool headless = false)
         {
+
+            _urlBase = ConfigurationManager.AppSettings["urlLogin"];
+
             this._cpf = "48710133836";
             this._senha = "Mg131730";
+
+
             IniciarNavegador(headless);
+
+            this._estrategias = new Dictionary<string, IColetaModular>
+            {
+                { "COLETAR_NOTAS", new ColetorNotas(this._driver! ) },
+                { "COLETAR_FALTAS", new ColetorFaltas(this._driver!) }
+            };
+           
         }
+
+
+        private void IniciarNavegador(bool headless = false)
+        {
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--window-position=1920,0");
+            if (headless)
+            {
+                options.AddArgument("-headless");
+            }
+            _driver = new ChromeDriver(options);
+            this._driver.Manage().Window.Maximize();
+            this._driver.Navigate().GoToUrl(_urlBase);
+        }
+
 
         /*
             ROTINAS DE EXECUÇÃO: --------------------------------------------------------------
             -Parte do código responsável por navegar, clicar me botões e etc....
          */
 
-        public void NavegarCompleto()
+        public void ColetarDados(List<string> acoes)
         {
 
             try
@@ -73,7 +106,22 @@ namespace Bot.Siga
                     throw new Exception("O nao foi validado corretamente! Usuário ou senha podem estar incorretos");
                 }
                 Thread.Sleep(2000);
-                this.ColetarNotas();
+
+
+                foreach (var acao in acoes)
+                {
+                    if (_estrategias.ContainsKey(acao))
+                    {
+                        var estrategia = _estrategias[acao];
+                        estrategia.ColetarDados();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Ação desconhecida: {acao}");
+                    }
+                }
+
+
                 FecharNavegador();
             }
             catch (Exception ex)
@@ -122,41 +170,6 @@ namespace Bot.Siga
 
 
 
-        public void ColetarNotas()
-        {
-
-            try
-            {
-
-
-
-                IWebElement btnNotas = _driver.FindElement(By.XPath("//span[@id = 'ygtvlabelel10Span']"));
-                btnNotas.Click();
-                Thread.Sleep(1000);
-
-    
-
-                IList<IWebElement> listaDeNomesNotas = _driver.FindElements(By.XPath("//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]"));
-                int num = listaDeNomesNotas.Count() / 2;
-                //div[@id = 'Grid1ContainerDiv_0008']
-                //tr[@id = 'Grid4ContainerRow_0008']
-
-
-                foreach (IWebElement NomeNota in listaDeNomesNotas)
-                {
-                    Console.WriteLine(NomeNota.Text);
-                }
-
-            }catch (Exception e)
-            {
-                Console.WriteLine("Nao foi encontrado nenhuma nota!!!!" , e.Message);
-            }
-
-
-        }
-
-
-
 
 
         /*
@@ -177,18 +190,7 @@ namespace Bot.Siga
                 return false;
             }
         }
-        private void IniciarNavegador(bool headless = false)
-        {
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("--window-position=1920,0");
-            if (headless)
-            {
-                options.AddArgument("-headless");
-            }
-            _driver = new ChromeDriver(options);
-            this._driver.Manage().Window.Maximize();
-            this._driver.Navigate().GoToUrl(urlBase);
-        }
+       
 
         private void FecharNavegador()
         {

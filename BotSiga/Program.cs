@@ -1,4 +1,8 @@
 ﻿using Bot.Siga;
 
 BotSiga siga = new BotSiga();
-siga.NavegarCompleto();
+
+List<string> acoes = new List<string>();
+acoes.Add("COLETAR_NOTAS");
+
+siga.ColetarDados(acoes);
