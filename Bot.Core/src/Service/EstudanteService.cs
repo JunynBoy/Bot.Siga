@@ -8,36 +8,36 @@ using System.Threading.Tasks;
 
 namespace Bot.Core.Service
 {
-    public class AlunoService : IService<Aluno>
+    public class EstudanteService : IService<Estudante>
     {
-        private AlunoDAO _dao;
+        private EstudanteDAO _dao;
 
-        public AlunoService()
+        public EstudanteService()
         {
-            _dao = new AlunoDAO(new ApplicationDbContext());
+            _dao = new EstudanteDAO(new ApplicationDbContext());
         }
 
-        public IEnumerable<Aluno> GetAll()
+        public IEnumerable<Estudante> GetAll()
         {
             return _dao.GetAll();
         }
 
-        public Aluno? GetById(int id)
+        public Estudante? GetById(int id)
         {
             return _dao.GetById(id);
         }
 
-        public Aluno? GetByCpf(string cpf)
+        public Estudante? GetByCpf(string cpf)
         {
             return _dao.GetByCpf(cpf);
         }
 
-        public void Remove(Aluno entity)
+        public void Remove(Estudante entity)
         {
             _dao.Remove(entity);
         }
 
-        public void Save(Aluno entity)
+        public void Save(Estudante entity)
         {
             if (entity.Id == 0)
             {

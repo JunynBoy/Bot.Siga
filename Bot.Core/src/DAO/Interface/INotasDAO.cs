@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bot.Core.src.DAO.Interface
 {
-    public interface INotaDAO : IGenericDAO<Aluno>
+    public interface INotasDAO : IGenericDAO<Estudante>
     {
     }
 }

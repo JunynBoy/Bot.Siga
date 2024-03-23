@@ -1,4 +1,4 @@
-﻿using Bot.Siga.src.Interface;
+﻿using Bot.Siga.src.ColetaModular.Interface;
 using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -10,8 +10,6 @@ namespace Bot.Siga.src.ColetaModular
     public class ColetorFaltas : IColetaModular
     {
         private IWebDriver _driver;
-        private WebDriverWait _wait;
-        private Action _action;
         private string? _homeUrl;
 
         public ColetorFaltas(IWebDriver driver)
@@ -20,6 +18,7 @@ namespace Bot.Siga.src.ColetaModular
             _homeUrl = ConfigurationManager.AppSettings["urlHome"];
 
         }
+
 
 
 

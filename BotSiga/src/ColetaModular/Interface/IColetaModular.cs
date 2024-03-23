@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bot.Core.Model
+namespace Bot.Siga.src.ColetaModular.Interface
 {
-    public enum EnumTurnoMateria
+    public interface IColetaModular
     {
-        DIURNO, NOTURNO
+
+
+        public void ColetarDados();
+
+
     }
 }

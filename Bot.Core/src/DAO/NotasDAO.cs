@@ -2,18 +2,13 @@
 using Bot.Core.Model;
 using Bot.Core.src.DAO.Interface;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bot.Core.src.DAO
 {
-    public class NotaDAO : GenericDAO<Aluno>, INotaDAO
+    public class NotasDAO : GenericDAO<Estudante>, INotasDAO
     {
 
-        public NotaDAO(DbContext context) : base(context) { }
+        public NotasDAO(DbContext context) : base(context) { }
 
 
         //EXEMPLO DE COMO É FEITO A CONSULTA

@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace Bot.Core.DAO
 {
-    public class MateriaDAO : GenericDAO<Aluno>, INotaDAO
+    public class EstudanteDAO : GenericDAO<Estudante>, IEstudanteDAO
     {
-
-        public MateriaDAO(DbContext context) : base(context) { }
+        public EstudanteDAO(DbContext context) : base(context) { }
 
 
         //EXEMPLO DE COMO É FEITO A CONSULTA
@@ -20,5 +19,11 @@ namespace Bot.Core.DAO
         //{
         //    return context.Set<Oab>().Where(o => o.Numero == numeroOAB).FirstOrDefault();
         //}
+
+
+        public Estudante? GetByCpf(string cpf)
+        {
+            return context.Set<Estudante>().Where(a => a.Cpf == cpf).FirstOrDefault();  
+        }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bot.Core.src.DAO.Interface
 {
-    public interface IMateria : IGenericDAO<Materia>
+    public interface IMateria : IGenericDAO<MateriaMatriculado>
     {
 
         

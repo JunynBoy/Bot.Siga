@@ -8,8 +8,8 @@ using System.Numerics;
 
 namespace Bot.Core.Model
 {
-    [Table("Aluno")]
-    public class Aluno
+    [Table("estudante")]
+    public class Estudante
     { 
 
         [Key]
@@ -54,11 +54,11 @@ namespace Bot.Core.Model
         [Column("logado")]
         public bool logado { get; set; }
 
-        public virtual ICollection<Nota>? Notas { get ; set; }
+        public virtual ICollection<MateriaMatriculado>? MateriasMatriculadas { get; set; }
 
-        public Aluno() { }
+        public Estudante() { }
 
-        public Aluno(string? nome, string senha, string? email, bool atualizarPorEmail, string cpf , string? whatsapp , bool atualizarPorWhatsapp)
+        public Estudante(string? nome, string senha, string? email, bool atualizarPorEmail, string cpf , string? whatsapp , bool atualizarPorWhatsapp)
         {
             this.Nome = nome;
             this.Senha = senha;

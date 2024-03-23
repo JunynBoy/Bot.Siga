@@ -12,19 +12,12 @@ using System.Threading.Tasks;
 namespace Bot.Core.Model
 {
 
-    [Table("nota")]
-    public class Nota
+    [Table("notas")]
+    public class Notas
     {
         [Key]
         [Column("id")]
         public int Id { get; set; }
-
-        [Column("materia_id")]
-        public int MateriaId { get; set; }
-
-        [Column("aluno_id")]
-        public int AlunoId { get; set; }
-
 
         [Column("p1")]
         public float P1 { get; set; }
@@ -46,16 +39,10 @@ namespace Bot.Core.Model
         public DateTime? DeletedAt { get; set; }
 
 
-        public Materia? Materia { get; set; }
-        public Aluno? Aluno { get; set; }
-
-
-        public Nota() { }
+        public Notas() { }
         
-        public Nota(int materiaid , int alunoId, float p1, float p2, float p3)
+        public Notas(MateriaMatriculado materiaMatriculado, float p1, float p2, float p3)
         {
-            this.MateriaId = materiaid;
-            this.AlunoId = alunoId;
             this.P1 = p1;
             this.P2 = p2;
             this.P3 = p3;

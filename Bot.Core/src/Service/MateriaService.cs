@@ -9,31 +9,31 @@ using System.Threading.Tasks;
 
 namespace Bot.Core.Service
 {
-    public class MateriaService : IService<Aluno>
+    public class MateriaService : IService<Estudante>
     {
-        private MateriaDAO _dao;
+        private MateriaMatriculadoDAO _dao;
 
         public MateriaService()
         {
-            _dao = new MateriaDAO(new ApplicationDbContext());
+            _dao = new MateriaMatriculadoDAO(new ApplicationDbContext());
         }
 
-        public IEnumerable<Aluno> GetAll()
+        public IEnumerable<Estudante> GetAll()
         {
             return _dao.GetAll();
         }
 
-        public Aluno? GetById(int id)
+        public Estudante? GetById(int id)
         {
             return _dao.GetById(id);
         }
 
-        public void Remove(Aluno entity)
+        public void Remove(Estudante entity)
         {
             _dao.Remove(entity);
         }
 
-        public void Save(Aluno entity)
+        public void Save(Estudante entity)
         {
             if (entity.Id == 0)
             {

@@ -6,9 +6,9 @@ namespace Bot.Core.DAO
     public class ApplicationDbContext : DbContext
         {
 
-            public DbSet<Aluno>? Alunos { get; set; }
-            public DbSet<Materia>? Materias { get; set; }
-            public DbSet<Nota>? Notas { get; set; }
+            public DbSet<Estudante>? Estudantes { get; set; }
+            public DbSet<MateriaMatriculado>? MateriasMatriculadas { get; set; }
+            public DbSet<Notas>? Notas { get; set; }
 
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,16 +22,16 @@ namespace Bot.Core.DAO
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Nota>().HasKey(x => new { x.MateriaId, x.AlunoId });
-            modelBuilder.Entity<Nota>().HasOne(po => po.Materia).WithMany(p => p.Notas).HasForeignKey(po => po.MateriaId);
-            modelBuilder.Entity<Nota>().HasOne(po => po.Aluno).WithMany(p => p.Notas).HasForeignKey(po => po.AlunoId);
+            //modelBuilder.Entity<Nota>().HasKey(x => new { x.MateriaId, x.AlunoId });
+            //modelBuilder.Entity<Nota>().HasOne(po => po.Materia).WithMany(p => p.Notas).HasForeignKey(po => po.MateriaId);
+            //modelBuilder.Entity<Nota>().HasOne(po => po.Estudante).WithMany(p => p.Notas).HasForeignKey(po => po.AlunoId);
 
 
-            modelBuilder.Entity<Aluno>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<Estudante>().HasQueryFilter(r => r.DeletedAt == null);
 
-            modelBuilder.Entity<Materia>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<MateriaMatriculado>().HasQueryFilter(r => r.DeletedAt == null);
 
-            modelBuilder.Entity<Nota>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<Notas>().HasQueryFilter(r => r.DeletedAt == null);
         }
 
         

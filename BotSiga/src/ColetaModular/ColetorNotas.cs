@@ -1,9 +1,11 @@
-﻿using Bot.Siga.src.Interface;
+﻿using Bot.Core.Model;
+using Bot.Siga.src.ColetaModular.Interface;
 using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace Bot.Siga.src.ColetaModular
 {
@@ -22,8 +24,6 @@ namespace Bot.Siga.src.ColetaModular
         }
 
 
-
-
         public void ColetarDados()
         {
             ConsoleColoredLog(ConsoleColor.Cyan, "Iniciando Coleta de Notas...");
@@ -34,20 +34,34 @@ namespace Bot.Siga.src.ColetaModular
                 try
                 {
 
+
                     IWebElement btnNotas = _driver.FindElement(By.XPath("//span[@id = 'ygtvlabelel10Span']"));
                     btnNotas.Click();
                     Thread.Sleep(1000);
 
+                    String texto = _driver.FindElement(By.XPath("//div [@id = 'Grid4ContainerDiv']")).Text;
 
-                    IList<IWebElement> listaDeNomesNotas = _driver.FindElements(By.XPath("//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]"));
-                    int num = listaDeNomesNotas.Count() / 2;
-                    //div[@id = 'Grid1ContainerDiv_0008']
-                    //tr[@id = 'Grid4ContainerRow_0008']
+                    string patternCodigoMateria = @"([A-Z]{3}\d{3})";
+                    string patternNomeMateria = @"(?<codigo>\w+)\s+(?<nome>.+)\s+Média Final\(\*\*\) \d+,\d+";
+                    string patternFaltas = @"Faltas\(Após finalização da disciplina\) (\d+)";
+                    string patternFrequencia = @"% Frequência (\d+\.\d+)";
+                    string patternP1 = @"P1 / / (\d+\.\d+)";
+                    string patternP2 = @"P2 / / (\d+\.\d+)";
+                    string patternP3 = @"P3 / / (\d+\.\d+)";
+                    string patternMediaFinal = @"Média Final\(\*\*\) (\d+\.\d+)";
 
-                    foreach (IWebElement NomeNota in listaDeNomesNotas)
+                    MatchCollection matchesMaterias = Regex.Matches(texto, patternCodigoMateria);
+
+                    foreach (Match match in matchesMaterias)
                     {
-                        Console.WriteLine(NomeNota.Text);
+                        string codigo = match.Groups["codigo"].Value;
+                        string nome = match.Groups["nome"].Value;
+
+                        // Exibe os dados da matéria
+                        Console.WriteLine("Código: " + codigo);
+                        Console.WriteLine("Nome: " + nome);
                     }
+
 
                 }
                 catch (Exception e)
@@ -66,17 +80,10 @@ namespace Bot.Siga.src.ColetaModular
 
         public bool ValidarPaginaParaExecucao()
         {
-            string teste = _driver.Url;
-            if (teste.Equals(_homeUrl))
-            {
+            if (_driver.Url.Equals(_homeUrl))
                 return true;
-            }
             else
-            {
                 return false;
-            }
-
-
         }
 
 

@@ -1,5 +1,6 @@
-﻿using Bot.Siga.src.ColetaModular;
-using Bot.Siga.src.Interface;
+﻿using Bot.Core.Model;
+using Bot.Siga.src.ColetaModular;
+using Bot.Siga.src.ColetaModular.Interface;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;

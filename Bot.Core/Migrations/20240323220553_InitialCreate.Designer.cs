@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bot.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230901002645_InitialCreate")]
+    [Migration("20240323220553_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -22,12 +22,25 @@ namespace Bot.Core.Migrations
                 .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Bot.Core.Model.Aluno", b =>
+            modelBuilder.Entity("Bot.Core.Model.Estudante", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id");
+
+                    b.Property<bool>("AtualizarPorEmail")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("atualizar-por-email");
+
+                    b.Property<bool>("AtualizarPorWhatsapp")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("atualizar-por-whatsapp");
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("cpf");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)")
@@ -37,14 +50,14 @@ namespace Bot.Core.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("deleted_at");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("email");
+
                     b.Property<string>("Nome")
                         .HasColumnType("longtext")
                         .HasColumnName("nome");
-
-                    b.Property<string>("Numero")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("cpf");
 
                     b.Property<string>("Senha")
                         .IsRequired()
@@ -55,12 +68,73 @@ namespace Bot.Core.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("updated_at");
 
+                    b.Property<string>("Whatsapp")
+                        .HasColumnType("longtext")
+                        .HasColumnName("whatsapp");
+
+                    b.Property<bool>("autenticado")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("autenticado");
+
+                    b.Property<bool>("logado")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("logado");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Aluno");
+                    b.ToTable("estudante");
                 });
 
-            modelBuilder.Entity("Bot.Core.Model.Materia", b =>
+            modelBuilder.Entity("Bot.Core.Model.MateriaMatriculado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Codigo")
+                        .HasColumnType("longtext")
+                        .HasColumnName("codigo");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<int>("EstudanteId")
+                        .HasColumnType("int")
+                        .HasColumnName("estudante_id");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("nome");
+
+                    b.Property<int>("NotasId")
+                        .HasColumnType("int")
+                        .HasColumnName("notas_id");
+
+                    b.Property<string>("Professor")
+                        .HasColumnType("longtext")
+                        .HasColumnName("professor");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstudanteId");
+
+                    b.HasIndex("NotasId");
+
+                    b.ToTable("materia_matriculado");
+                });
+
+            modelBuilder.Entity("Bot.Core.Model.Notas", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,52 +148,6 @@ namespace Bot.Core.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("deleted_at");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("nome");
-
-                    b.Property<string>("Professor")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("professor");
-
-                    b.Property<string>("Turno")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("turno");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("updated_at");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("materia");
-                });
-
-            modelBuilder.Entity("Bot.Core.Model.Nota", b =>
-                {
-                    b.Property<int>("MateriaId")
-                        .HasColumnType("int")
-                        .HasColumnName("materia_id");
-
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int")
-                        .HasColumnName("aluno_id");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("created_at");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int")
-                        .HasColumnName("id");
 
                     b.Property<float>("P1")
                         .HasColumnType("float")
@@ -137,40 +165,31 @@ namespace Bot.Core.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("MateriaId", "AlunoId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AlunoId");
-
-                    b.ToTable("nota");
+                    b.ToTable("notas");
                 });
 
-            modelBuilder.Entity("Bot.Core.Model.Nota", b =>
+            modelBuilder.Entity("Bot.Core.Model.MateriaMatriculado", b =>
                 {
-                    b.HasOne("Bot.Core.Model.Aluno", "Aluno")
-                        .WithMany("Notas")
-                        .HasForeignKey("AlunoId")
+                    b.HasOne("Bot.Core.Model.Estudante", null)
+                        .WithMany("MateriasMatriculadas")
+                        .HasForeignKey("EstudanteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Bot.Core.Model.Materia", "Materia")
-                        .WithMany("Notas")
-                        .HasForeignKey("MateriaId")
+                    b.HasOne("Bot.Core.Model.Notas", "Notas")
+                        .WithMany()
+                        .HasForeignKey("NotasId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Aluno");
-
-                    b.Navigation("Materia");
-                });
-
-            modelBuilder.Entity("Bot.Core.Model.Aluno", b =>
-                {
                     b.Navigation("Notas");
                 });
 
-            modelBuilder.Entity("Bot.Core.Model.Materia", b =>
+            modelBuilder.Entity("Bot.Core.Model.Estudante", b =>
                 {
-                    b.Navigation("Notas");
+                    b.Navigation("MateriasMatriculadas");
                 });
 #pragma warning restore 612, 618
         }

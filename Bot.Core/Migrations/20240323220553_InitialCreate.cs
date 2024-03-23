@@ -16,56 +16,41 @@ namespace Bot.Core.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Aluno",
+                name: "estudante",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     cpf = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nome = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     senha = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    nome = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    email = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    atualizarporemail = table.Column<bool>(name: "atualizar-por-email", type: "tinyint(1)", nullable: false),
+                    whatsapp = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    atualizarporwhatsapp = table.Column<bool>(name: "atualizar-por-whatsapp", type: "tinyint(1)", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    autenticado = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    logado = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Aluno", x => x.id);
+                    table.PrimaryKey("PK_estudante", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "materia",
+                name: "notas",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nome = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    professor = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    turno = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_materia", x => x.id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "nota",
-                columns: table => new
-                {
-                    materia_id = table.Column<int>(type: "int", nullable: false),
-                    aluno_id = table.Column<int>(type: "int", nullable: false),
-                    id = table.Column<int>(type: "int", nullable: false),
                     p1 = table.Column<float>(type: "float", nullable: false),
                     p2 = table.Column<float>(type: "float", nullable: false),
                     p3 = table.Column<float>(type: "float", nullable: false),
@@ -75,39 +60,68 @@ namespace Bot.Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_nota", x => new { x.materia_id, x.aluno_id });
+                    table.PrimaryKey("PK_notas", x => x.id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "materia_matriculado",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    nome = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    professor = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    notas_id = table.Column<int>(type: "int", nullable: false),
+                    estudante_id = table.Column<int>(type: "int", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_materia_matriculado", x => x.id);
                     table.ForeignKey(
-                        name: "FK_nota_Aluno_aluno_id",
-                        column: x => x.aluno_id,
-                        principalTable: "Aluno",
+                        name: "FK_materia_matriculado_estudante_estudante_id",
+                        column: x => x.estudante_id,
+                        principalTable: "estudante",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_nota_materia_materia_id",
-                        column: x => x.materia_id,
-                        principalTable: "materia",
+                        name: "FK_materia_matriculado_notas_notas_id",
+                        column: x => x.notas_id,
+                        principalTable: "notas",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_nota_aluno_id",
-                table: "nota",
-                column: "aluno_id");
+                name: "IX_materia_matriculado_estudante_id",
+                table: "materia_matriculado",
+                column: "estudante_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_materia_matriculado_notas_id",
+                table: "materia_matriculado",
+                column: "notas_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "nota");
+                name: "materia_matriculado");
 
             migrationBuilder.DropTable(
-                name: "Aluno");
+                name: "estudante");
 
             migrationBuilder.DropTable(
-                name: "materia");
+                name: "notas");
         }
     }
 }

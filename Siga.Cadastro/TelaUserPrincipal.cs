@@ -10,14 +10,14 @@ namespace Siga.Cadastro
     public partial class TelaUserPrincipal : Form
     {
 
-        private AlunoService _alunoService;
+        private EstudanteService _alunoService;
         private Validacoes _validator;
 
         public TelaUserPrincipal()
         {
 
             InitializeComponent();
-            this._alunoService = new AlunoService();
+            this._alunoService = new EstudanteService();
             this._validator = new Validacoes();
         }
 
@@ -29,7 +29,7 @@ namespace Siga.Cadastro
 
 
             //verificar se já existe cadastro igual no banco
-            Aluno? alunoBanco = _alunoService.GetByCpf(cpf);
+            Estudante? alunoBanco = _alunoService.GetByCpf(cpf);
             if (alunoBanco != null &&  alunoBanco.autenticado == true)
             {
                //fazer login
@@ -42,7 +42,7 @@ namespace Siga.Cadastro
             bool atualizarPorWhatsapp = cbxAtualizarPeloWhatsapp.Checked;
             bool termos = cbxTermos.Checked;
 
-            Aluno aluno = new(nome, senha, email, atualizarPorEmail, cpf, whatsapp, atualizarPorWhatsapp);
+            Estudante aluno = new(nome, senha, email, atualizarPorEmail, cpf, whatsapp, atualizarPorWhatsapp);
             ValidarCadastroPrincipal(cpf, senha, aluno);
 
         }
@@ -51,7 +51,7 @@ namespace Siga.Cadastro
 
         // VALIDAÇÕES DE INPUT -------------------------------------------------
 
-        private void ValidarCadastroPrincipal(string cpf, string senha, Aluno aluno)
+        private void ValidarCadastroPrincipal(string cpf, string senha, Estudante aluno)
         {
             var listaDeProblemas = ValidarCadastroComLista(aluno);
             if (listaDeProblemas.Count > 1)
@@ -94,7 +94,7 @@ namespace Siga.Cadastro
             }
         }
 
-        public List<String> ValidarCadastroComLista(Aluno aluno)
+        public List<String> ValidarCadastroComLista(Estudante aluno)
         {
 
             var lista = new List<string>();

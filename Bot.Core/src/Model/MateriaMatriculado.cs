@@ -13,10 +13,9 @@ namespace Bot.Core.Model
 {
 
 
-    [Table("materia")]
-    public class Materia
+    [Table("materia_matriculado")]
+    public class MateriaMatriculado
     {
-
 
         [Key]
         [Column("id")]
@@ -31,11 +30,18 @@ namespace Bot.Core.Model
         [Column("professor")]
         public string? Professor { get; set; }
 
-        [Column("turno")]
-        public EnumTurnoMateria Turno { get; set; }
+        [ForeignKey("Notas")]
+        [Column("notas_id")]
+        public int NotasId { get; set; }
+
+        public virtual Notas Notas { get; set; }
+
+        [ForeignKey("Estudante")]
+        [Column("estudante_id")]
+        public int EstudanteId { get; set; }
 
         [Column("created_at")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
 
         [Column("updated_at")]
         public DateTime? UpdatedAt { get; set; }
@@ -44,16 +50,12 @@ namespace Bot.Core.Model
         [Column("deleted_at")]
         public DateTime? DeletedAt { get; set; }
 
-        public virtual ICollection<Nota>? Notas { get; set; }
+        public MateriaMatriculado() { }
 
-        public Materia() { }
-        public Materia(string nome, string codigo, string professor, EnumTurnoMateria turno) {
+        public MateriaMatriculado(string? nome, string? codigo, string? professor, Notas? nota) {
             this.Nome = nome;
             this.Codigo = codigo;
             this.Professor = professor;
-            this.Turno = turno;
-
-            this.CreatedAt = DateTime.Now;
         }
 
 
