@@ -1,4 +1,5 @@
-﻿using Bot.Siga.src.ColetaModular.Interface;
+﻿using Bot.Core.Model;
+using Bot.Siga.src.ColetaModular.Interface;
 using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -11,16 +12,14 @@ namespace Bot.Siga.src.ColetaModular
     {
         private IWebDriver _driver;
         private string? _homeUrl;
+        private Estudante _estudante;
 
-        public ColetorFaltas(IWebDriver driver)
+        public ColetorFaltas(IWebDriver driver , Estudante estudante)
         {
-            _driver = driver;
-            _homeUrl = ConfigurationManager.AppSettings["urlHome"];
-
+            this._driver = driver;
+            this._homeUrl = ConfigurationManager.AppSettings["urlHome"];
+            this._estudante = estudante;
         }
-
-
-
 
 
         public void ColetarDados()

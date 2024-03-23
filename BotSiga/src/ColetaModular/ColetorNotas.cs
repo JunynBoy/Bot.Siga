@@ -1,4 +1,5 @@
 ﻿using Bot.Core.Model;
+using Bot.Core.Service;
 using Bot.Siga.src.ColetaModular.Interface;
 using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
@@ -15,12 +16,15 @@ namespace Bot.Siga.src.ColetaModular
         private WebDriverWait _wait;
         private Action _action;
         private string _homeUrl;
+        private Estudante _estudante;
 
-        public ColetorNotas(IWebDriver driver)
+        private MateriaMatriculadoService _materiaService;
+
+        public ColetorNotas(IWebDriver driver , Estudante estudante)
         {
-            _driver = driver;
-            _homeUrl = ConfigurationManager.AppSettings["urlHome"]!;
-
+            this._driver = driver;
+            this._homeUrl = ConfigurationManager.AppSettings["urlHome"]!;
+            this._estudante = estudante;
         }
 
 

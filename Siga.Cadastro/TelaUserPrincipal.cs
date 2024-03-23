@@ -30,7 +30,7 @@ namespace Siga.Cadastro
 
             //verificar se já existe cadastro igual no banco
             Estudante? alunoBanco = _alunoService.GetByCpf(cpf);
-            if (alunoBanco != null &&  alunoBanco.autenticado == true)
+            if (alunoBanco != null &&  alunoBanco.Autenticado == true)
             {
                //fazer login
             }
@@ -70,7 +70,7 @@ namespace Siga.Cadastro
             {
                 try
                 {
-                    BotSiga botSiga = new BotSiga();
+                    BotSiga botSiga = new BotSiga(idEstudante: 1);
                     bool autenticado = botSiga.FazerLogin(cpf, senha);
                     if (!autenticado)
                     {

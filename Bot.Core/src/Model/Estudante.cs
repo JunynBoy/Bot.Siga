@@ -49,10 +49,10 @@ namespace Bot.Core.Model
         public DateTime? DeletedAt { get; set; }
 
         [Column("autenticado")]
-        public bool autenticado { get; set; }
+        public bool Autenticado { get; set; }
 
         [Column("logado")]
-        public bool logado { get; set; }
+        public bool Logado { get; set; }
 
         public virtual ICollection<MateriaMatriculado>? MateriasMatriculadas { get; set; }
 

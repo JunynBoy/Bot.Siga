@@ -1,4 +1,5 @@
 ﻿using Bot.Core.Model;
+using Bot.Core.Service;
 using Bot.Siga.src.ColetaModular;
 using Bot.Siga.src.ColetaModular.Interface;
 using OpenQA.Selenium;
@@ -46,34 +47,34 @@ namespace Bot.Siga
 {
     public class BotSiga
     {
-        private string _cpf;
-        private string _senha;
-        private string _urlBase;
-
+        private String? _urlBase;
         private IWebDriver _driver;
-        private WebDriverWait _wait;
-        private Action _action;
+
+        private EstudanteService _estudanteService;
+
+        private Estudante? _estudante;
 
         private readonly Dictionary<string, IColetaModular> _estrategias;
 
 
-        public BotSiga(bool headless = false)
+        public BotSiga( int idEstudante, bool headless = false)
         {
-
-            _urlBase = ConfigurationManager.AppSettings["urlLogin"];
-
-            this._cpf = "48710133836";
-            this._senha = "Mg131730";
-
-
-            IniciarNavegador(headless);
-
-            this._estrategias = new Dictionary<string, IColetaModular>
+            this._estudanteService = new EstudanteService();
+            this._estudante = this._estudanteService.GetById(idEstudante);
+            if (this._estudante != null)
             {
-                { "COLETAR_NOTAS", new ColetorNotas(this._driver! ) },
-                { "COLETAR_FALTAS", new ColetorFaltas(this._driver!) }
-            };
-           
+                this._urlBase = ConfigurationManager.AppSettings["urlLogin"];
+                this.IniciarNavegador(headless);
+                this._estrategias = new Dictionary<string, IColetaModular>
+                {
+                    { "COLETAR_NOTAS", new ColetorNotas(this._driver!, this._estudante ) },
+                    { "COLETAR_FALTAS", new ColetorFaltas(this._driver!, this._estudante) }
+                };
+            }
+            else
+            {
+                this.ConsoleColoredLog(ConsoleColor.Red, "Usuario não encontrado!");
+            }
         }
 
 
@@ -101,13 +102,16 @@ namespace Bot.Siga
 
             try
             {
-                bool validado = this.FazerLogin(this._cpf, this._senha);
-                if (!validado)
-                {
-                    throw new Exception("O nao foi validado corretamente! Usuário ou senha podem estar incorretos");
-                }
-                Thread.Sleep(2000);
+                if (!this.FazerLogin(this._estudante.Cpf, this._estudante.Senha))
+                    throw new Exception("O não foi validado no siga corretamente! Usuário ou senha podem estar incorretos");
 
+                if (this._estudante.Autenticado == false)
+                {
+                    this._estudante.Autenticado = true;
+                    this._estudanteService.Save(this._estudante);
+                }
+
+                Thread.Sleep(2000);
 
                 foreach (var acao in acoes)
                 {

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Bot.Core.Service
 {
-    public class MateriaService : IService<Estudante>
+    public class MateriaMatriculadoService : IService<Estudante>
     {
         private MateriaMatriculadoDAO _dao;
 
-        public MateriaService()
+        public MateriaMatriculadoService()
         {
             _dao = new MateriaMatriculadoDAO(new ApplicationDbContext());
         }
