@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bot.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,6 @@ namespace Bot.Siga.src.ColetaModular.Interface
 {
     public interface IColetaModular
     {
-
-
-        public void ColetarDados();
-
-
+        public void ColetarDados(Estudante estudante);
     }
 }

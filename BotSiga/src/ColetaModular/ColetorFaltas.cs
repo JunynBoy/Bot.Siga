@@ -1,4 +1,5 @@
 ﻿using Bot.Core.Model;
+using Bot.Core.src.Helper;
 using Bot.Siga.src.ColetaModular.Interface;
 using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
@@ -8,37 +9,31 @@ using System.Configuration;
 
 namespace Bot.Siga.src.ColetaModular
 {
-    public class ColetorFaltas : IColetaModular
+    public class ColetorFaltas : ColetorSiga , IColetaModular
     {
-        private IWebDriver _driver;
         private string? _homeUrl;
-        private Estudante _estudante;
 
-        public ColetorFaltas(IWebDriver driver , Estudante estudante)
+        public ColetorFaltas()
         {
-            this._driver = driver;
             this._homeUrl = ConfigurationManager.AppSettings["urlHome"];
-            this._estudante = estudante;
         }
 
-
-        public void ColetarDados()
+        public void ColetarDados(Estudante estudante)
         {
-            ConsoleColoredLog(ConsoleColor.Cyan, "Iniciando Coleta de Faltas...");
+            StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Iniciando Coleta de Faltas...");
 
             if (ValidarPaginaParaExecucao())
             {
-
                 try
                 {
 
-                    IWebElement btnNotas = _driver.FindElement(By.XPath("//span[@id = 'ygtvlabelel10Span']"));
+                    IWebElement btnNotas = this._driver!.FindElement(By.XPath("//span[@id = 'ygtvlabelel10Span']"));
                     btnNotas.Click();
-                    Thread.Sleep(1000);
+                    this.Aguardar(1);
 
-                    IList<IWebElement> listaDeNomesNotas = _driver.FindElements(By.XPath("//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]"));
+                    IList<IWebElement> listaDeNomesNotas = this._driver.FindElements(By.XPath("//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]"));
                     int num = listaDeNomesNotas.Count() / 2;
-                    //div[@id = 'Grid1ContainerDiv_0008']
+                    //div[@id = 'Grid1ContainerDiv_0008']x
                     //tr[@id = 'Grid4ContainerRow_0008']
 
                     foreach (IWebElement NomeNota in listaDeNomesNotas)
@@ -49,21 +44,21 @@ namespace Bot.Siga.src.ColetaModular
                 }
                 catch (Exception e)
                 {
-                    ConsoleColoredLog(ConsoleColor.Yellow, "Não foi encontrado nada!");
+                    StringHelper.ConsoleColoredLog(ConsoleColor.Yellow, $"Não foi encontrado nada:{e.Message}");
                 }
 
             }
             else
             {
-                ConsoleColoredLog(ConsoleColor.Red, "Página inválida para execução da coleta!");
+                StringHelper.ConsoleColoredLog(ConsoleColor.Red, "Página inválida para execução da coleta!");
             }
 
-            ConsoleColoredLog(ConsoleColor.Cyan, "Finalizando Coleta de Faltas...");
+            StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Finalizando Coleta de Faltas...");
         }
 
         public bool ValidarPaginaParaExecucao()
         {
-            string teste = _driver.Url;
+            string teste = this._driver!.Url;
             if (!teste.Equals(_homeUrl))
             {
                 return true;
@@ -75,49 +70,6 @@ namespace Bot.Siga.src.ColetaModular
 
 
         }
-
-
-
-
-
-        /*
-            MÉTODOS PARA FACILITAR O DESENVOLVIMENTO
-        --------------------------------------------------------------------
-         
-         */
-
-        private bool VerificarElementoPresente(IWebDriver driver, string xpath)
-        {
-            try
-            {
-                IWebElement elemento = driver.FindElement(By.XPath(xpath));
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
-
-
-        private void ConsoleColoredLog(ConsoleColor color, params string[] args)
-        {
-
-            Console.ForegroundColor = color;
-
-            foreach (string text in args)
-            {
-                Console.WriteLine(text);
-            }
-
-            Console.ResetColor();
-
-        }
-
-
-
-
-
 
 
 

@@ -1,8 +1,11 @@
-﻿using Bot.Siga;
+﻿using Bot.Core.src.Model.Enum;
+using Bot.Siga;
 
-BotSiga siga = new BotSiga(idEstudante: 1);
+ColetorSiga coletor = new ColetorSiga();
 
-List<string> acoes = new List<string>();
-acoes.Add("COLETAR_NOTAS");
+List<EnumTipoDeExecucao> acoes = new List<EnumTipoDeExecucao>() 
+{
+    EnumTipoDeExecucao.COLETAR_NOTA
+};
 
-siga.ColetarDados(acoes);
+coletor.IniciarColeta(1, acoes);

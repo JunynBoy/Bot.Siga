@@ -1,10 +1,7 @@
 ﻿
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using Bot.Core.Model;
-using System.Numerics;
 
 namespace Bot.Core.Model
 {
@@ -14,29 +11,34 @@ namespace Bot.Core.Model
 
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Column("cpf")]
-        public string Cpf { get; set; }
+        public string? Cpf { get; set; }
 
         [Column("senha")]
-        public string Senha { get; set; }
+        public string? Senha { get; set; }
 
         [Column("nome")]
         public string? Nome { get; set; }
 
         [Column("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        [Column("atualizar-por-email")]
-        public bool AtualizarPorEmail { get; set; }
+        [Column("is_atualizar_por_email")]
+        public bool AtualizarPorEmail { get; set; } = false;
 
         [Column("whatsapp")]
         public string? Whatsapp { get; set; }
 
-        [Column("atualizar-por-whatsapp")]
-        public bool AtualizarPorWhatsapp { get; set; }
+        [Column("is_atualizar_por_whatsapp")]
+        public bool AtualizarPorWhatsapp { get; set; } = false;
 
+        [Column("autenticado")]
+        public bool Autenticado { get; set; } = false;
+
+        [Column("logado")]
+        public bool Logado { get; set; } = false;
 
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; }
@@ -48,11 +50,6 @@ namespace Bot.Core.Model
         [Column("deleted_at")]
         public DateTime? DeletedAt { get; set; }
 
-        [Column("autenticado")]
-        public bool Autenticado { get; set; }
-
-        [Column("logado")]
-        public bool Logado { get; set; }
 
         public virtual ICollection<MateriaMatriculado>? MateriasMatriculadas { get; set; }
 

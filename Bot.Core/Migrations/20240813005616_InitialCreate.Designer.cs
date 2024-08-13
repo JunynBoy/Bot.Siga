@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bot.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240323220553_InitialCreate")]
+    [Migration("20240813005616_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,21 +24,24 @@ namespace Bot.Core.Migrations
 
             modelBuilder.Entity("Bot.Core.Model.Estudante", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id");
 
                     b.Property<bool>("AtualizarPorEmail")
                         .HasColumnType("tinyint(1)")
-                        .HasColumnName("atualizar-por-email");
+                        .HasColumnName("is_atualizar_por_email");
 
                     b.Property<bool>("AtualizarPorWhatsapp")
                         .HasColumnType("tinyint(1)")
-                        .HasColumnName("atualizar-por-whatsapp");
+                        .HasColumnName("is_atualizar_por_whatsapp");
+
+                    b.Property<bool>("Autenticado")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("autenticado");
 
                     b.Property<string>("Cpf")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("cpf");
 
@@ -51,16 +54,18 @@ namespace Bot.Core.Migrations
                         .HasColumnName("deleted_at");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("email");
+
+                    b.Property<bool>("Logado")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("logado");
 
                     b.Property<string>("Nome")
                         .HasColumnType("longtext")
                         .HasColumnName("nome");
 
                     b.Property<string>("Senha")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("senha");
 
@@ -72,14 +77,6 @@ namespace Bot.Core.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("whatsapp");
 
-                    b.Property<bool>("autenticado")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("autenticado");
-
-                    b.Property<bool>("logado")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("logado");
-
                     b.HasKey("Id");
 
                     b.ToTable("estudante");
@@ -87,7 +84,7 @@ namespace Bot.Core.Migrations
 
             modelBuilder.Entity("Bot.Core.Model.MateriaMatriculado", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id");
@@ -104,16 +101,15 @@ namespace Bot.Core.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("deleted_at");
 
-                    b.Property<int>("EstudanteId")
+                    b.Property<int?>("EstudanteId")
                         .HasColumnType("int")
                         .HasColumnName("estudante_id");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("nome");
 
-                    b.Property<int>("NotasId")
+                    b.Property<int?>("NotasId")
                         .HasColumnType("int")
                         .HasColumnName("notas_id");
 
@@ -136,7 +132,7 @@ namespace Bot.Core.Migrations
 
             modelBuilder.Entity("Bot.Core.Model.Notas", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id");
@@ -149,15 +145,15 @@ namespace Bot.Core.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("deleted_at");
 
-                    b.Property<float>("P1")
+                    b.Property<float?>("P1")
                         .HasColumnType("float")
                         .HasColumnName("p1");
 
-                    b.Property<float>("P2")
+                    b.Property<float?>("P2")
                         .HasColumnType("float")
                         .HasColumnName("p2");
 
-                    b.Property<float>("P3")
+                    b.Property<float?>("P3")
                         .HasColumnType("float")
                         .HasColumnName("p3");
 
@@ -174,15 +170,11 @@ namespace Bot.Core.Migrations
                 {
                     b.HasOne("Bot.Core.Model.Estudante", null)
                         .WithMany("MateriasMatriculadas")
-                        .HasForeignKey("EstudanteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EstudanteId");
 
                     b.HasOne("Bot.Core.Model.Notas", "Notas")
                         .WithMany()
-                        .HasForeignKey("NotasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("NotasId");
 
                     b.Navigation("Notas");
                 });

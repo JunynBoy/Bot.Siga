@@ -21,23 +21,23 @@ namespace Bot.Core.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    cpf = table.Column<string>(type: "longtext", nullable: false)
+                    cpf = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    senha = table.Column<string>(type: "longtext", nullable: false)
+                    senha = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     nome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    email = table.Column<string>(type: "longtext", nullable: false)
+                    email = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    atualizarporemail = table.Column<bool>(name: "atualizar-por-email", type: "tinyint(1)", nullable: false),
+                    is_atualizar_por_email = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     whatsapp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    atualizarporwhatsapp = table.Column<bool>(name: "atualizar-por-whatsapp", type: "tinyint(1)", nullable: false),
+                    is_atualizar_por_whatsapp = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    autenticado = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    logado = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    autenticado = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    logado = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,9 +51,9 @@ namespace Bot.Core.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    p1 = table.Column<float>(type: "float", nullable: false),
-                    p2 = table.Column<float>(type: "float", nullable: false),
-                    p3 = table.Column<float>(type: "float", nullable: false),
+                    p1 = table.Column<float>(type: "float", nullable: true),
+                    p2 = table.Column<float>(type: "float", nullable: true),
+                    p3 = table.Column<float>(type: "float", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
@@ -70,14 +70,14 @@ namespace Bot.Core.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nome = table.Column<string>(type: "longtext", nullable: false)
+                    nome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     professor = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    notas_id = table.Column<int>(type: "int", nullable: false),
-                    estudante_id = table.Column<int>(type: "int", nullable: false),
+                    notas_id = table.Column<int>(type: "int", nullable: true),
+                    estudante_id = table.Column<int>(type: "int", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
@@ -89,14 +89,12 @@ namespace Bot.Core.Migrations
                         name: "FK_materia_matriculado_estudante_estudante_id",
                         column: x => x.estudante_id,
                         principalTable: "estudante",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_materia_matriculado_notas_notas_id",
                         column: x => x.notas_id,
                         principalTable: "notas",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

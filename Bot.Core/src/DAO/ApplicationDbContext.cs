@@ -14,7 +14,7 @@ namespace Bot.Core.DAO
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
 
-                string connectionString = "server=localhost;port=3306;database=auto_siga;user=root;password=root";
+                string connectionString = "server=localhost;port=3306;database=siga_automatico;user=root;password=root";
                 //string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
                 optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             }

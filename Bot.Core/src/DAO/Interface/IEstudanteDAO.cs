@@ -13,6 +13,5 @@ namespace Bot.Core.src.DAO.Interface
         public Estudante? GetByCpf(string cpf);
 
 
-
     }
 }

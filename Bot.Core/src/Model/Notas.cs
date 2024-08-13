@@ -17,16 +17,16 @@ namespace Bot.Core.Model
     {
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Column("p1")]
-        public float P1 { get; set; }
+        public float? P1 { get; set; }
 
         [Column("p2")]
-        public float P2 { get; set; } 
+        public float? P2 { get; set; } 
 
         [Column("p3")]
-        public float P3 { get; set; }
+        public float? P3 { get; set; }
 
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; }

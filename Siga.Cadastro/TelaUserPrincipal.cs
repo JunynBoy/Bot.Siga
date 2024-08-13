@@ -70,7 +70,7 @@ namespace Siga.Cadastro
             {
                 try
                 {
-                    BotSiga botSiga = new BotSiga(idEstudante: 1);
+                    OrquestadorSiga botSiga = new OrquestadorSiga(idEstudante: 1);
                     bool autenticado = botSiga.FazerLogin(cpf, senha);
                     if (!autenticado)
                     {

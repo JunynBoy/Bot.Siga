@@ -1,5 +1,7 @@
-﻿using Bot.Core.Model;
+﻿using AngleSharp.Html.Dom;
+using Bot.Core.Model;
 using Bot.Core.Service;
+using Bot.Core.src.Helper;
 using Bot.Siga.src.ColetaModular.Interface;
 using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
@@ -10,81 +12,86 @@ using System.Text.RegularExpressions;
 
 namespace Bot.Siga.src.ColetaModular
 {
-    public class ColetorNotas : IColetaModular
+    public class ColetorNotas : ColetorSiga, IColetaModular
     {
-        private IWebDriver _driver;
-        private WebDriverWait _wait;
-        private Action _action;
         private string _homeUrl;
-        private Estudante _estudante;
 
         private MateriaMatriculadoService _materiaService;
 
-        public ColetorNotas(IWebDriver driver , Estudante estudante)
+        public ColetorNotas()
         {
-            this._driver = driver;
+            this._materiaService = new MateriaMatriculadoService();
             this._homeUrl = ConfigurationManager.AppSettings["urlHome"]!;
-            this._estudante = estudante;
         }
 
-
-        public void ColetarDados()
+        public void ColetarDados(Estudante estudante)
         {
-            ConsoleColoredLog(ConsoleColor.Cyan, "Iniciando Coleta de Notas...");
+            string patternCodigoMateria = @"([A-Z]{3}\d{3})";
+            string patternNomeMateria = @"(?<codigo>\w+)\s+(?<nome>.+)\s+Média Final\(\*\*\) \d+,\d+";
+            string patternFaltas = @"Faltas\(Após finalização da disciplina\) (\d+)";
+            string patternFrequencia = @"% Frequência (\d+\.\d+)";
+            string patternP1 = @"P1 / / (\d+\.\d+)";
+            string patternP2 = @"P2 / / (\d+\.\d+)";
+            string patternP3 = @"P3 / / (\d+\.\d+)";
+            string patternMediaFinal = @"Média Final\(\*\*\) (\d+\.\d+)";
 
-            if (ValidarPaginaParaExecucao())
+
+
+
+            try
             {
 
-                try
-                {
+                StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Iniciando Coleta de Notas...");
 
+                this.ClicarNoBotaoNotas();
 
-                    IWebElement btnNotas = _driver.FindElement(By.XPath("//span[@id = 'ygtvlabelel10Span']"));
-                    btnNotas.Click();
-                    Thread.Sleep(1000);
+                String? textoDaPagina = this.ExtrairTextoPorXPath("//div [@id = 'Grid4ContainerDiv']");
 
-                    String texto = _driver.FindElement(By.XPath("//div [@id = 'Grid4ContainerDiv']")).Text;
+                if (!String.IsNullOrEmpty(textoDaPagina)){
 
-                    string patternCodigoMateria = @"([A-Z]{3}\d{3})";
-                    string patternNomeMateria = @"(?<codigo>\w+)\s+(?<nome>.+)\s+Média Final\(\*\*\) \d+,\d+";
-                    string patternFaltas = @"Faltas\(Após finalização da disciplina\) (\d+)";
-                    string patternFrequencia = @"% Frequência (\d+\.\d+)";
-                    string patternP1 = @"P1 / / (\d+\.\d+)";
-                    string patternP2 = @"P2 / / (\d+\.\d+)";
-                    string patternP3 = @"P3 / / (\d+\.\d+)";
-                    string patternMediaFinal = @"Média Final\(\*\*\) (\d+\.\d+)";
-
-                    MatchCollection matchesMaterias = Regex.Matches(texto, patternCodigoMateria);
+                    MatchCollection matchesMaterias = Regex.Matches(textoDaPagina, patternCodigoMateria);
 
                     foreach (Match match in matchesMaterias)
                     {
                         string codigo = match.Groups["codigo"].Value;
                         string nome = match.Groups["nome"].Value;
 
-                        // Exibe os dados da matéria
                         Console.WriteLine("Código: " + codigo);
                         Console.WriteLine("Nome: " + nome);
                     }
-
-
                 }
-                catch (Exception e)
+                else
                 {
-                    ConsoleColoredLog(ConsoleColor.Yellow, "Não foi encontrado nada!");
+                    throw new Exception("Não há notas para coletar no momento!");
                 }
-
             }
-            else
+            catch (Exception e)
             {
-                ConsoleColoredLog(ConsoleColor.Red, "Página inválida para execução da coleta!");
+                StringHelper.ConsoleColoredLog(ConsoleColor.Yellow, $"ERRO: {e.Message}");
             }
 
-            ConsoleColoredLog(ConsoleColor.Cyan, "Finalizando Coleta de Notas...");
+            StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Finalizando Coleta de Notas...");
+        }
+
+        private void ClicarNoBotaoNotas()
+        {
+            string xpathNotas = "//span[@class='NodeTextDecoration' and contains(text(),'Notas Parciais')]";
+
+            try
+            {
+                IWebElement btnNotas = this._driver!.FindElement(By.XPath(xpathNotas));
+                btnNotas.Click();
+                this.Aguardar(1);
+            }
+            catch(Exception e)
+            {
+                throw new Exception($"Não foi possível clicar no botão das notas: {e.Message}");
+            }
         }
 
         public bool ValidarPaginaParaExecucao()
         {
-            if (_driver.Url.Equals(_homeUrl))
+            if (this._driver!.Url.Equals(_homeUrl))
                 return true;
             else
                 return false;
@@ -92,41 +99,7 @@ namespace Bot.Siga.src.ColetaModular
 
 
 
-
-
-        /*
-            MÉTODOS PARA FACILITAR O DESENVOLVIMENTO
-        --------------------------------------------------------------------
-         
-         */
-
-        private bool VerificarElementoPresente(IWebDriver driver, string xpath)
-        {
-            try
-            {
-                IWebElement elemento = driver.FindElement(By.XPath(xpath));
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
-
-
-        private void ConsoleColoredLog(ConsoleColor color, params string[] args)
-        {
-
-            Console.ForegroundColor = color;
-
-            foreach (string text in args)
-            {
-                Console.WriteLine(text);
-            }
-
-            Console.ResetColor();
-
-        }
+        
 
 
 

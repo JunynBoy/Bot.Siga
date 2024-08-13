@@ -19,10 +19,10 @@ namespace Bot.Core.Model
 
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Column("nome")]
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
 
         [Column("codigo")]
         public string? Codigo { get; set; }
@@ -32,13 +32,13 @@ namespace Bot.Core.Model
 
         [ForeignKey("Notas")]
         [Column("notas_id")]
-        public int NotasId { get; set; }
+        public int? NotasId { get; set; }
 
-        public virtual Notas Notas { get; set; }
+        public virtual Notas? Notas { get; set; }
 
         [ForeignKey("Estudante")]
         [Column("estudante_id")]
-        public int EstudanteId { get; set; }
+        public int? EstudanteId { get; set; }
 
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
