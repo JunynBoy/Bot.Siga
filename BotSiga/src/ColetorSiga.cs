@@ -62,10 +62,12 @@ namespace Bot.Siga
 
             if (estudante != null)
             {
-                this._estrategiaColeta = new EstrategiaColeta();
+                this.CreateChromeWithDriverManager(true);
+               
                 this._urlLogin = ConfigurationManager.AppSettings["urlLogin"];
                 this.statusAtualDoBot = "Criando Navegador...";
                 this.ColetarDados(tipoExecucao, estudante);
+
             }
             else
             {
@@ -91,6 +93,8 @@ namespace Bot.Siga
                 }
 
                 this.Aguardar(2);
+
+                this._estrategiaColeta = new EstrategiaColeta();
 
                 foreach (EnumTipoDeExecucao tipoExecucao in TiposExecucao)
                 {
@@ -118,7 +122,7 @@ namespace Bot.Siga
 
             this.statusAtualDoBot = "Fazendo Login...";
 
-            this._driver!.Navigate().GoToUrl(this._urlLogin);
+            _driver!.Navigate().GoToUrl(this._urlLogin);
 
             this.Aguardar(2);
 
@@ -128,21 +132,21 @@ namespace Bot.Siga
 
             this.Aguardar(1);
 
-            IWebElement Confirmar = this._driver!.FindElement(By.XPath(xpathConfirmarLogin));
+            IWebElement Confirmar = _driver!.FindElement(By.XPath(xpathConfirmarLogin));
             Confirmar.Click();
 
             this.Aguardar(3);
             
             if (this.VerificarElementoPresente(xpathPopUp))
             {
-                this._driver!.FindElement(By.XPath(xpathFecharPopUp)).Click();
+                _driver!.FindElement(By.XPath(xpathFecharPopUp)).Click();
                 this.Aguardar(1);
             }
 
             if (this.VerificarElementoPresente(xpathLoginInvalido))
             {
 
-                this.statusAtualDoBot = this._driver!.FindElement(By.XPath(xpathLoginInvalido)).Text;
+                this.statusAtualDoBot = _driver!.FindElement(By.XPath(xpathLoginInvalido)).Text;
                 StringHelper.ConsoleColoredLog(ConsoleColor.Red,
                     $"ERRO: {statusAtualDoBot}",
                     "Fechando o programa...");
@@ -155,7 +159,7 @@ namespace Bot.Siga
         {
             try
             {
-                IWebElement Senha = this._driver!.FindElement(By.XPath("//input [@id='vSIS_USUARIOSENHA']"));
+                IWebElement Senha = _driver!.FindElement(By.XPath("//input [@id='vSIS_USUARIOSENHA']"));
                 Senha.SendKeys(senha);
             }
             catch(Exception e) 
@@ -169,7 +173,8 @@ namespace Bot.Siga
         {
             try
             {
-                IWebElement Login = this._driver!.FindElement(By.XPath("//input [@id='vSIS_USUARIOID']"));
+                //CHEIRO DE BOSTA
+                IWebElement Login = _driver!.FindElement(By.XPath("//input [@id='vSIS_USUARIOID']"));
                 Login.SendKeys(cpf);
             }catch(Exception e)
             {

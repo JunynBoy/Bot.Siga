@@ -27,11 +27,11 @@ namespace Bot.Siga.src.ColetaModular
                 try
                 {
 
-                    IWebElement btnNotas = this._driver!.FindElement(By.XPath("//span[@id = 'ygtvlabelel10Span']"));
+                    IWebElement btnNotas = _driver!.FindElement(By.XPath("//span[@id = 'ygtvlabelel10Span']"));
                     btnNotas.Click();
                     this.Aguardar(1);
 
-                    IList<IWebElement> listaDeNomesNotas = this._driver.FindElements(By.XPath("//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]"));
+                    IList<IWebElement> listaDeNomesNotas = _driver.FindElements(By.XPath("//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]"));
                     int num = listaDeNomesNotas.Count() / 2;
                     //div[@id = 'Grid1ContainerDiv_0008']x
                     //tr[@id = 'Grid4ContainerRow_0008']
@@ -58,7 +58,7 @@ namespace Bot.Siga.src.ColetaModular
 
         public bool ValidarPaginaParaExecucao()
         {
-            string teste = this._driver!.Url;
+            string teste = _driver!.Url;
             if (!teste.Equals(_homeUrl))
             {
                 return true;

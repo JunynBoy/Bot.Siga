@@ -15,7 +15,6 @@ namespace Bot.Siga.src.ColetaModular
     public class ColetorNotas : ColetorSiga, IColetaModular
     {
         private string _homeUrl;
-
         private MateriaMatriculadoService _materiaService;
 
         public ColetorNotas()
@@ -34,8 +33,6 @@ namespace Bot.Siga.src.ColetaModular
             string patternP2 = @"P2 / / (\d+\.\d+)";
             string patternP3 = @"P3 / / (\d+\.\d+)";
             string patternMediaFinal = @"Média Final\(\*\*\) (\d+\.\d+)";
-
-
 
 
             try
@@ -79,9 +76,7 @@ namespace Bot.Siga.src.ColetaModular
 
             try
             {
-                IWebElement btnNotas = this._driver!.FindElement(By.XPath(xpathNotas));
-                btnNotas.Click();
-                this.Aguardar(1);
+                this.ClickOnElementByXpath(xpathNotas);
             }
             catch(Exception e)
             {
@@ -91,7 +86,7 @@ namespace Bot.Siga.src.ColetaModular
 
         public bool ValidarPaginaParaExecucao()
         {
-            if (this._driver!.Url.Equals(_homeUrl))
+            if (_driver!.Url.Equals(_homeUrl))
                 return true;
             else
                 return false;
