@@ -29,7 +29,7 @@ namespace Bot.Siga.src.ColetaModular
         public void ColetarDados(Estudante estudante)
         {
             string patternCodigoMateria = @"([A-Z]{3}\d{3})";
-            string patternNomeMateria = @"^\w+\s+(.+)$";
+            string patternNomeMateria = @"^\w+\s+(.+?)\r?\n";
             string patternP1 = @"P1 / / (\d+\.\d+)";
             string patternP2 = @"P2 / / (\d+\.\d+)";
             string patternP3 = @"P3 / / (\d+\.\d+)";
@@ -63,8 +63,7 @@ namespace Bot.Siga.src.ColetaModular
                         IWebElement headerNota = headersNotasElements[i];
 
                         string codigoMateria = RegexHelper.GetText(headerNota.Text, patternCodigoMateria).Trim();
-                        string nomeMateria = RegexHelper.GetText(headerNota.Text, patternNomeMateria ,2).Trim();
-
+                        string nomeMateria = RegexHelper.GetText(headerNota.Text, patternNomeMateria ,1).Trim();
                         MateriaMatriculado? materia = materiaMatriculados.FirstOrDefault(mm => mm.Codigo == codigoMateria);
                         if(materia == null)
                             materia = new MateriaMatriculado();
@@ -74,7 +73,6 @@ namespace Bot.Siga.src.ColetaModular
                         materia.EstudanteId = estudante.Id;
 
 
-                        //PARTE DO CÓDIGO RELATIVO A COLETA DE DADOS DAS NOTAS
                         IWebElement notaCorrespondente = notasElements[i];
                         if(materia.Notas == null)
                         {
