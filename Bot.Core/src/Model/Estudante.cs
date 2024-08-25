@@ -11,7 +11,7 @@ namespace Bot.Core.Model
 
         [Key]
         [Column("id")]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         [Column("cpf")]
         public string? Cpf { get; set; }

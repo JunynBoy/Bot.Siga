@@ -1,6 +1,7 @@
 ﻿using Bot.Core.DAO;
 using Bot.Core.Model;
 using Bot.Core.Service;
+using Bot.Core.src.DAO;
 using Bot.Core.src.DAO.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,36 +11,36 @@ using System.Threading.Tasks;
 
 namespace Bot.Core.Service
 {
-    public class MateriaMatriculadoService : IService<MateriaMatriculado>
+    public class NotasService : IService<Notas>
     {
-        private IMateriaMatriculadoDAO _dao;
+        private INotasDAO _dao;
 
-        public MateriaMatriculadoService()
+        public NotasService()
         {
-            _dao = new MateriaMatriculadoDAO(new ApplicationDbContext());
+            _dao = new NotasDAO(new ApplicationDbContext());
         }
 
-        public IEnumerable<MateriaMatriculado> GetAll()
+        public IEnumerable<Notas> GetAll()
         {
             return _dao.GetAll();
         }
 
-        public MateriaMatriculado? GetById(int id)
+        public Notas? GetById(int id)
         {
             return _dao.GetById(id);
         }
 
-        public List<MateriaMatriculado> GetByEstudanteId(int id)
+        public Notas? GetByMateriaMatriculadoId(int materiaMatriculadoId)
         {
-            return _dao.GetByEstudanteId(id);
+            return _dao.GetByMateriaMatriculadoId(materiaMatriculadoId);
         }
 
-        public void Remove(MateriaMatriculado entity)
+        public void Remove(Notas entity)
         {
             _dao.Remove(entity);
         }
 
-        public void Save(MateriaMatriculado entity)
+        public void Save(Notas entity)
         {
             if (entity.Id == 0)
             {

@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Bot.Core.src.DAO.Interface
 {
-    public interface INotasDAO : IGenericDAO<Notas>
+    public interface IMateriaMatriculadoDAO : IGenericDAO<MateriaMatriculado>
     {
-
-        Notas? GetByMateriaMatriculadoId(int id);
-
+        List<MateriaMatriculado> GetByEstudanteId(int id);
     }
 }

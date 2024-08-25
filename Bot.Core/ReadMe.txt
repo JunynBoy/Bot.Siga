@@ -5,11 +5,11 @@
 
 
 # Atualizar banco de dados
-> dotnet ef database update
+> dotnet ef database updatedotnet ef database update
 
 # Rollback
 > dotnet ef migrations list
-> dotnet ef database update NameOfYourMigration
+> dotnet ef database update InicialCreate
 
 
 #Obs: Remover referencias das tabelas que não existem mais do arquivos "ApplicationDbContextModelSnapshot.cs"

@@ -7,7 +7,9 @@ using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace Bot.Siga.src.ColetaModular
@@ -16,6 +18,7 @@ namespace Bot.Siga.src.ColetaModular
     {
         private string _homeUrl;
         private MateriaMatriculadoService _materiaService;
+        private NotasService _notasService;
 
         public ColetorNotas()
         {
@@ -26,9 +29,7 @@ namespace Bot.Siga.src.ColetaModular
         public void ColetarDados(Estudante estudante)
         {
             string patternCodigoMateria = @"([A-Z]{3}\d{3})";
-            string patternNomeMateria = @"(?<codigo>\w+)\s+(?<nome>.+)\s+Média Final\(\*\*\) \d+,\d+";
-            string patternFaltas = @"Faltas\(Após finalização da disciplina\) (\d+)";
-            string patternFrequencia = @"% Frequência (\d+\.\d+)";
+            string patternNomeMateria = @"^\w+\s+(.+)$";
             string patternP1 = @"P1 / / (\d+\.\d+)";
             string patternP2 = @"P2 / / (\d+\.\d+)";
             string patternP3 = @"P3 / / (\d+\.\d+)";
@@ -44,23 +45,57 @@ namespace Bot.Siga.src.ColetaModular
 
                 String? textoDaPagina = this.ExtrairTextoPorXPath("//div [@id = 'Grid4ContainerDiv']");
 
-                if (!String.IsNullOrEmpty(textoDaPagina)){
+                ReadOnlyCollection<IWebElement> headersNotasElements = _driver.FindElements(By.XPath("//td[contains(@valign, 'top') and ancestor::*[contains(@id,'Grid4ContainerRow_')]]/.."));
+                ReadOnlyCollection<IWebElement> notasElements = _driver.FindElements(By.XPath("//div[contains(@id, 'Grid1ContainerDiv_')]"));
 
-                    MatchCollection matchesMaterias = Regex.Matches(textoDaPagina, patternCodigoMateria);
-
-                    foreach (Match match in matchesMaterias)
+                
+                if (headersNotasElements.Count == notasElements.Count)
+                {
+                    List<MateriaMatriculado> materiaMatriculados = this._materiaService.GetByEstudanteId(estudante.Id);
+                    if (materiaMatriculados.IsNullOrEmpty())
                     {
-                        string codigo = match.Groups["codigo"].Value;
-                        string nome = match.Groups["nome"].Value;
+                        materiaMatriculados = new List<MateriaMatriculado>();
+                    }
 
-                        Console.WriteLine("Código: " + codigo);
-                        Console.WriteLine("Nome: " + nome);
+
+                    for (int i = 0; i < headersNotasElements.Count; i++)
+                    {
+                        IWebElement headerNota = headersNotasElements[i];
+
+                        string codigoMateria = RegexHelper.GetText(headerNota.Text, patternCodigoMateria).Trim();
+                        string nomeMateria = RegexHelper.GetText(headerNota.Text, patternNomeMateria ,2).Trim();
+
+                        MateriaMatriculado? materia = materiaMatriculados.FirstOrDefault(mm => mm.Codigo == codigoMateria);
+                        if(materia == null)
+                            materia = new MateriaMatriculado();
+
+                        materia.Codigo = codigoMateria;
+                        materia.Nome = nomeMateria;
+                        materia.EstudanteId = estudante.Id;
+
+
+                        //PARTE DO CÓDIGO RELATIVO A COLETA DE DADOS DAS NOTAS
+                        IWebElement notaCorrespondente = notasElements[i];
+                        if(materia.Notas == null)
+                        {
+                            materia.Notas =  new Notas();
+                        }
+
+                        materia.Notas.P1 = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternP1).Trim(), out float p1) ? p1 : 0.0f; 
+                        materia.Notas.P2 = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternP2).Trim(), out float p2) ? p2 : 0.0f;
+                        materia.Notas.P3 = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternP3).Trim(), out float p3) ? p3 : 0.0f;
+                        materia.Notas.MediaFinal = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternMediaFinal).Trim(), out float mediaFinal) ? mediaFinal : 0.0f;
+
+                        this._materiaService.Save(materia);
                     }
                 }
                 else
                 {
-                    throw new Exception("Não há notas para coletar no momento!");
+                    throw new Exception("Não foi encontrado um índice correspondente de matérias e notas");
                 }
+
+
+                
             }
             catch (Exception e)
             {

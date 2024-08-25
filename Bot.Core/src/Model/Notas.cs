@@ -17,7 +17,7 @@ namespace Bot.Core.Model
     {
         [Key]
         [Column("id")]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         [Column("p1")]
         public float? P1 { get; set; }
@@ -27,6 +27,9 @@ namespace Bot.Core.Model
 
         [Column("p3")]
         public float? P3 { get; set; }
+
+        [Column("media_final")]
+        public float? MediaFinal { get; set; }
 
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; }

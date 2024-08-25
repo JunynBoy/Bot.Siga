@@ -5,16 +5,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bot.Core.src.DAO
 {
-    public class NotasDAO : GenericDAO<Estudante>, INotasDAO
+    public class NotasDAO : GenericDAO<Notas>, INotasDAO
     {
 
         public NotasDAO(DbContext context) : base(context) { }
 
+        public Notas? GetByMateriaMatriculadoId(int materiaMatriculadoId)
+        {
+            var materiaMatriculado = context.Set<MateriaMatriculado>()
+                                            .Include(mm => mm.Notas)
+                                            .FirstOrDefault(mm => mm.Id == materiaMatriculadoId);
 
-        //EXEMPLO DE COMO É FEITO A CONSULTA
-        //public Oab? GetByNumeroOAB(string numeroOAB)
-        //{
-        //    return context.Set<Oab>().Where(o => o.Numero == numeroOAB).FirstOrDefault();
-        //}
+            if (materiaMatriculado == null || materiaMatriculado.Notas == null)
+            {
+                return null;
+            }
+
+            return materiaMatriculado.Notas;
+        }
     }
 }
