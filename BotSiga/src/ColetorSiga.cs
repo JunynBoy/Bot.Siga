@@ -55,14 +55,13 @@ namespace Bot.Siga
 
         public ColetorSiga(){}
 
-        public void IniciarColeta( int estudanteId, List<EnumTipoDeExecucao> tipoExecucao, bool headless = false)
+        public void IniciarColeta(Estudante estudante, List<EnumTipoDeExecucao> tipoExecucao, bool headless = false)
         {
-            this._estudanteService = new EstudanteService();
-            Estudante? estudante = this._estudanteService.GetById(estudanteId);
+          
 
             if (estudante != null)
             {
-                this.CreateChromeWithDriverManager(true);
+                this.CreateChromeWithDriverManager(headless);
                
                 this._urlLogin = ConfigurationManager.AppSettings["urlLogin"];
                 this.statusAtualDoBot = "Criando Navegador...";
