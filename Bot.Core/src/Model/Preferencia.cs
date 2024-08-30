@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bot.Core.src.Model
 {
     [Table("preferencia")]
-    public class Preferencia
+    public class Preferencia : Ordinary
     {
 
         [Column("id")]
@@ -24,14 +19,5 @@ namespace Bot.Core.src.Model
         [Column("whatsapp")]
         public string? Whatsapp { get; set; }
 
-        [Column("created_at")]
-        public DateTime? CreatedAt { get; set; }
-
-        [Column("updated_at")]
-        public DateTime? UpdatedAt { get; set; }
-
-        [DefaultValue(null)]
-        [Column("deleted_at")]
-        public DateTime? DeletedAt { get; set; }
     }
 }

@@ -1,14 +1,8 @@
-﻿using Bot.Core.Model;
-using Bot.Core.src.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bot.Core.src.Model;
 
 namespace Bot.Core.src.DAO.Interface
 {
-    public interface IPreferenciaDAO: IGenericDAO<Preferencia>
+    public interface IPreferenciaDAO : IGenericDAO<Preferencia>
     {
 
     }

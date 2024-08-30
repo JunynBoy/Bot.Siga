@@ -1,19 +1,14 @@
-﻿using OpenQA.Selenium.DevTools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Bot.Core.Service
 {
     public class EmailService
     {
-
+        //robozinhoDoSigaTcc@2024
+        //robozinhoDoSiga@gmail.com
         private string _provedor;
         private string _password;
         private string _username;
@@ -39,10 +34,10 @@ namespace Bot.Core.Service
         {
             var mail = new MailMessage();
             mail.From = new MailAddress(this._username);
-            
+
             foreach (var email in emailsTo)
             {
-                if(ValidateEmail(email))
+                if (ValidateEmail(email))
                     mail.To.Add(email);
             }
 
@@ -53,7 +48,7 @@ namespace Bot.Core.Service
             foreach (var file in attachments)
             {
                 var data = new Attachment(file, MediaTypeNames.Application.Octet);
-                ContentDisposition disposition = data.ContentDisposition;
+                ContentDisposition disposition = data.ContentDisposition!;
                 disposition.CreationDate = System.IO.File.GetCreationTime(file);
                 disposition.ModificationDate = System.IO.File.GetLastWriteTime(file);
                 disposition.CreationDate = System.IO.File.GetLastAccessTime(file);
@@ -68,27 +63,22 @@ namespace Bot.Core.Service
 
         public bool ValidateEmail(string email)
         {
-            Regex expression = new Regex(@"\w+2[a-zAz-Z_]+?\.[a-zA-Z]{2,3}");
-            if(expression.IsMatch(email))
-                return true;
-
-            return false;
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(email, pattern);
         }
 
         private void SendEmailBySmtp(MailMessage message)
         {
-            SmtpClient smtpCliente = new SmtpClient();
-            smtpCliente.Host = this._provedor;
-            smtpCliente.Port = 587;
+            SmtpClient smtpCliente = new SmtpClient(this._provedor, 587);
             smtpCliente.EnableSsl = true;
             smtpCliente.Timeout = 50000;
-            smtpCliente.UseDefaultCredentials = false;
+            smtpCliente.UseDefaultCredentials = true;
             smtpCliente.Credentials = new NetworkCredential(this._username, this._password);
             smtpCliente.Send(message);
             smtpCliente.Dispose();
         }
 
-        
+
 
     }
 }

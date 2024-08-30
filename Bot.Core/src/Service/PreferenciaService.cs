@@ -1,14 +1,6 @@
 ﻿using Bot.Core.DAO;
-using Bot.Core.Model;
-using Bot.Core.Service;
-using Bot.Core.src.DAO;
 using Bot.Core.src.DAO.Interface;
 using Bot.Core.src.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bot.Core.Service
 {

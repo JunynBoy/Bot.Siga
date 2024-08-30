@@ -1,9 +1,5 @@
 ﻿using Bot.Core.DAO;
 using Bot.Core.Model;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bot.Core.Service
 {

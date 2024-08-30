@@ -1,14 +1,14 @@
 ﻿
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
 using Bot.Core.src.Model;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bot.Core.Model
 {
     [Table("estudante")]
-    public class Estudante
-    { 
+    public class Estudante : Ordinary
+    {
 
         [Key]
         [Column("id")]
@@ -41,9 +41,6 @@ namespace Bot.Core.Model
         [Column("autenticado")]
         public bool Autenticado { get; set; } = false;
 
-        [Column("logado")]
-        public bool Logado { get; set; } = false;
-
 
         [ForeignKey("Preferencia")]
         [Column("preferencia_id")]
@@ -51,18 +48,9 @@ namespace Bot.Core.Model
 
         public virtual Preferencia? Preferencia { get; set; }
 
-        [Column("created_at")]
-        public DateTime? CreatedAt { get; set; }
-
-        [Column("updated_at")]
-        public DateTime? UpdatedAt { get; set; }
-
-        [DefaultValue(null)]
-        [Column("deleted_at")]
-        public DateTime? DeletedAt { get; set; }
 
 
-        public virtual ICollection<MateriaMatriculado>? MateriasMatriculadas { get; set; }
+        public virtual ICollection<Materia>? Materias { get; set; }
 
         public Estudante() { }
 
@@ -71,14 +59,14 @@ namespace Bot.Core.Model
             this.Nome = nome;
             this.Senha = senha;
             this.Cpf = cpf;
-            
+
             this.CreatedAt = DateTime.Now;
         }
 
 
 
 
-     
+
 
 
     }

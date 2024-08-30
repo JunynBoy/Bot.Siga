@@ -1,40 +1,39 @@
 ﻿using Bot.Core.DAO;
 using Bot.Core.Model;
-using Bot.Core.src.DAO;
 using Bot.Core.src.DAO.Interface;
 
 namespace Bot.Core.Service
 {
-    public class NotasService : IService<Notas>
+    public class MateriaService : IService<Materia>
     {
-        private INotasDAO _dao;
+        private IMateriaDAO _dao;
 
-        public NotasService()
+        public MateriaService()
         {
-            _dao = new NotasDAO(new ApplicationDbContext());
+            _dao = new MateriaDAO(new ApplicationDbContext());
         }
 
-        public IEnumerable<Notas> GetAll()
+        public IEnumerable<Materia> GetAll()
         {
             return _dao.GetAll();
         }
 
-        public Notas? GetById(int id)
+        public Materia? GetById(int id)
         {
             return _dao.GetById(id);
         }
 
-        public Notas? GetByMateriaId(int materiaMatriculadoId)
+        public List<Materia> GetByEstudanteId(int id)
         {
-            return _dao.GetByMateriaId(materiaMatriculadoId);
+            return _dao.GetByEstudanteId(id);
         }
 
-        public void Remove(Notas entity)
+        public void Remove(Materia entity)
         {
             _dao.Remove(entity);
         }
 
-        public void Save(Notas entity)
+        public void Save(Materia entity)
         {
             if (entity.Id == 0)
             {

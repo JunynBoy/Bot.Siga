@@ -1,27 +1,26 @@
-﻿using Bot.Core.DAO;
-using Bot.Core.Model;
+﻿using Bot.Core.Model;
 using Bot.Core.src.DAO.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bot.Core.src.DAO
+namespace Bot.Core.DAO
 {
-    public class NotasDAO : GenericDAO<Notas>, INotasDAO
+    public class FaltasDAO : GenericDAO<Faltas>, IFaltasDAO
     {
 
-        public NotasDAO(DbContext context) : base(context) { }
+        public FaltasDAO(DbContext context) : base(context) { }
 
-        public Notas? GetByMateriaId(int materiaMatriculadoId)
+        public Faltas? GetByMateriaId(int materiaMatriculadoId)
         {
             var materiaMatriculado = context.Set<Materia>()
                                             .Include(mm => mm.Notas)
                                             .FirstOrDefault(mm => mm.Id == materiaMatriculadoId);
 
-            if (materiaMatriculado == null || materiaMatriculado.Notas == null)
+            if (materiaMatriculado == null || materiaMatriculado.Faltas == null)
             {
                 return null;
             }
 
-            return materiaMatriculado.Notas;
+            return materiaMatriculado.Faltas;
         }
     }
 }

@@ -6,10 +6,12 @@ using Bot.Siga.src.ColetaModular.Interface;
 using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools.V114.Network;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Net;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 
 namespace Bot.Siga.src.ColetaModular
@@ -17,12 +19,12 @@ namespace Bot.Siga.src.ColetaModular
     public class ColetorNotas : ColetorSiga, IColetaModular
     {
         private string _homeUrl;
-        private MateriaMatriculadoService _materiaService;
+        private MateriaService _materiaService;
         private NotasService _notasService;
 
         public ColetorNotas()
         {
-            this._materiaService = new MateriaMatriculadoService();
+            this._materiaService = new MateriaService();
             this._homeUrl = ConfigurationManager.AppSettings["urlHome"]!;
         }
 
@@ -34,6 +36,7 @@ namespace Bot.Siga.src.ColetaModular
             string patternP2 = @"P2 / / (\d+\.\d+)";
             string patternP3 = @"P3 / / (\d+\.\d+)";
             string patternMediaFinal = @"Média Final\(\*\*\) (\d+\.\d+)";
+
 
 
             try
@@ -51,10 +54,10 @@ namespace Bot.Siga.src.ColetaModular
                 
                 if (headersNotasElements.Count == notasElements.Count)
                 {
-                    List<MateriaMatriculado> materiaMatriculados = this._materiaService.GetByEstudanteId(estudante.Id);
+                    List<Materia> materiaMatriculados = this._materiaService.GetByEstudanteId(estudante.Id);
                     if (materiaMatriculados.IsNullOrEmpty())
                     {
-                        materiaMatriculados = new List<MateriaMatriculado>();
+                        materiaMatriculados = new List<Materia>();
                     }
 
 
@@ -64,9 +67,9 @@ namespace Bot.Siga.src.ColetaModular
 
                         string codigoMateria = RegexHelper.GetText(headerNota.Text, patternCodigoMateria).Trim();
                         string nomeMateria = RegexHelper.GetText(headerNota.Text, patternNomeMateria ,1).Trim();
-                        MateriaMatriculado? materia = materiaMatriculados.FirstOrDefault(mm => mm.Codigo == codigoMateria);
+                        Materia? materia = materiaMatriculados.FirstOrDefault(mm => mm.Codigo == codigoMateria);
                         if(materia == null)
-                            materia = new MateriaMatriculado();
+                            materia = new Materia();
 
                         materia.Codigo = codigoMateria;
                         materia.Nome = nomeMateria;
@@ -79,9 +82,54 @@ namespace Bot.Siga.src.ColetaModular
                             materia.Notas =  new Notas();
                         }
 
-                        materia.Notas.P1 = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternP1).Trim(), out float p1) ? p1 : 0.0f; 
-                        materia.Notas.P2 = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternP2).Trim(), out float p2) ? p2 : 0.0f;
-                        materia.Notas.P3 = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternP3).Trim(), out float p3) ? p3 : 0.0f;
+                        bool contemAtributosDiferentesDoBanco = false;
+
+                        float[] notas = new float[3];
+                        string[] patterns = { patternP1, patternP2, patternP3 };
+                        float[] notasBanco =
+                        {
+                            materia.Notas.P1 ?? 0.0f,
+                            materia.Notas.P2 ?? 0.0f,
+                            materia.Notas.P3 ?? 0.0f
+                        };
+
+                        int index = 0;
+                        foreach (var pattern in patterns)
+                        {
+                            if (float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, pattern).Trim(), out notas[index]) && notasBanco[index] != notas[index])
+                            {
+                                contemAtributosDiferentesDoBanco = true;
+                                notasBanco[index] = notas[index];
+                            }
+                            index++;
+                        }
+                        //contemAtributosDiferentesDoBanco
+                        if (true)
+                        {
+                            materia.Notas.P1 = notasBanco[0];
+                            materia.Notas.P2 = notasBanco[1];
+                            materia.Notas.P3 = notasBanco[2];
+                            // notificar usuário
+                            //robozinhoDoSigaTcc@2024
+                            //robozinhoDoSiga@gmail.com
+                            EmailService emailService = new EmailService("smtp.gmail.com", "robozinhoDoSiga@gmail.com", "robozinhoDoSigaTcc@2024" );
+                            List<string> emailsTo = new List<string> { "marcos.gasparini13@gmail.com", "marcos.gaparini@fatec.sp.gov.br" };
+                            string subject = "Teste de Envio de E-mail";
+                            string body = "<h1>Olá, este é um teste de envio de e-mail!</h1><p>Este é um exemplo de corpo de e-mail.</p>";
+
+                            try
+                            {
+                                emailService.sendEmail(emailsTo, subject, body, new List<string>());
+                                Console.WriteLine("E-mail enviado com sucesso!");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
+                            }
+
+                        }
+
+
                         materia.Notas.MediaFinal = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternMediaFinal).Trim(), out float mediaFinal) ? mediaFinal : 0.0f;
 
                         this._materiaService.Save(materia);

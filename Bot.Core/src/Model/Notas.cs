@@ -1,50 +1,38 @@
-﻿using Bot.Core.Model;
-using System;
-using System.Collections.Generic;
+﻿using Bot.Core.src.Model;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bot.Core.Model
 {
 
     [Table("notas")]
-    public class Notas
+    public class Notas : Ordinary
     {
         [Key]
         [Column("id")]
         public int Id { get; set; }
 
         [Column("p1")]
-        public float? P1 { get; set; }
+        public float? P1 { get; set; } = 0.0f;
 
         [Column("p2")]
-        public float? P2 { get; set; } 
+        public float? P2 { get; set; } = 0.0f;
 
         [Column("p3")]
-        public float? P3 { get; set; }
+        public float? P3 { get; set; } = 0.0f;
 
         [Column("media_final")]
         public float? MediaFinal { get; set; }
 
-        [Column("created_at")]
-        public DateTime? CreatedAt { get; set; }
+        [Column("observacoes")]
+        public String? Observacoes { get; set; }
 
-        [Column("updated_at")]
-        public DateTime? UpdatedAt { get; set; }
-
-        [DefaultValue(null)]
-        [Column("deleted_at")]
-        public DateTime? DeletedAt { get; set; }
 
 
         public Notas() { }
-        
-        public Notas(MateriaMatriculado materiaMatriculado, float p1, float p2, float p3)
+
+        public Notas(Materia materiaMatriculado, float p1, float p2, float p3)
         {
             this.P1 = p1;
             this.P2 = p2;

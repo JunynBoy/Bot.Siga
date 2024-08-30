@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using Bot.Core.src.Model;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Numerics;
-using System.Runtime.CompilerServices;
 
 namespace Bot.Core.Model
 {
-
-
-    [Table("materia_matriculado")]
-    public class MateriaMatriculado
+    [Table("materia")]
+    public class Materia : Ordinary
     {
 
         [Key]
@@ -36,23 +28,23 @@ namespace Bot.Core.Model
 
         public virtual Notas? Notas { get; set; }
 
+        [ForeignKey("Faltas")]
+        [Column("faltas_id")]
+        public int? FaltasId { get; set; }
+
+        public virtual Faltas? Faltas { get; set; }
+
         [ForeignKey("Estudante")]
         [Column("estudante_id")]
         public int? EstudanteId { get; set; }
 
-        [Column("created_at")]
-        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        [Column("observacoes")]
+        public String? Observacoes { get; set; }
 
-        [Column("updated_at")]
-        public DateTime? UpdatedAt { get; set; }
+        public Materia() { }
 
-        [DefaultValue(null)]
-        [Column("deleted_at")]
-        public DateTime? DeletedAt { get; set; }
-
-        public MateriaMatriculado() { }
-
-        public MateriaMatriculado(string? nome, string? codigo, string? professor, Notas? nota) {
+        public Materia(string? nome, string? codigo, string? professor, Notas? nota)
+        {
             this.Nome = nome;
             this.Codigo = codigo;
             this.Professor = professor;

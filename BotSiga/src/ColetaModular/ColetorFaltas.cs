@@ -14,12 +14,12 @@ namespace Bot.Siga.src.ColetaModular
     public class ColetorFaltas : ColetorSiga , IColetaModular
     {
         private string? _homeUrl;
-        private MateriaMatriculadoService _materiaService;
+        private MateriaService _materiaService;
 
 
         public ColetorFaltas()
         {
-            this._materiaService = new MateriaMatriculadoService();
+            this._materiaService = new MateriaService();
             this._homeUrl = ConfigurationManager.AppSettings["urlHome"];
         }
 
@@ -32,10 +32,10 @@ namespace Bot.Siga.src.ColetaModular
 
                     this.ClicarBotaoFaltas();
 
-                    List<MateriaMatriculado> materiaMatriculados = this._materiaService.GetByEstudanteId(estudante.Id);
+                    List<Materia> materiaMatriculados = this._materiaService.GetByEstudanteId(estudante.Id);
                     if (materiaMatriculados.IsNullOrEmpty())
                     {
-                        materiaMatriculados = new List<MateriaMatriculado>();
+                        materiaMatriculados = new List<Materia>();
                     }
 
 
@@ -51,10 +51,10 @@ namespace Bot.Siga.src.ColetaModular
                     string presencas = colunas[2].Text.Trim();
                     string ausencias = colunas[3].Text.Trim();
 
-                    MateriaMatriculado? materia = materiaMatriculados.FirstOrDefault(mm => mm.Codigo == codigoMateria);
+                    Materia? materia = materiaMatriculados.FirstOrDefault(mm => mm.Codigo == codigoMateria);
                     if (materia == null)
                     {
-                        materia = new MateriaMatriculado
+                        materia = new Materia
                         {
                             Codigo = codigoMateria,
                             Nome = nomeMateria,
@@ -66,6 +66,8 @@ namespace Bot.Siga.src.ColetaModular
                     {
                         materia.Nome = nomeMateria;
                     }
+
+
 
                     // TODO atualizar materia com presenças e ausencias:
                     //materia.Notas.P1 = float.TryParse(presencas, out float p1) ? p1 : 0.0f;

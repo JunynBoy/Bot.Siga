@@ -12,58 +12,32 @@ using OpenQA.Selenium.Support.UI;
 using System.Configuration;
 
 
-
-/*
-#LOGIN
-//input[@id = 'vSIS_USUARIOID']
-
-#SENHA
-//input[@id = 'vSIS_USUARIOSENHA']
-
-#NOTAS
-//span[@id = 'ygtvlabelel10Span']
-//tr[contains(@id, 'ContainerRow')]
-
-#para pegar as médias:
-//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table
-
-#para pegar as notas em detalhes:
-//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]
-
-
-#para pegar o nome das matérias:
-//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table/tbody/tr/td/span[contains(@id,'span_vACD_DISCIPLINANOME')]
-
-#Para pegar os dois ( Notas e disciplina ) :
-//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')] | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table/tbody/tr/td/span[contains(@id,'span_vACD_DISCIPLINANOME')]
-
-#Para pegar os dois ( tudo ):
-//table[@id = 'Grid4ContainerTbl']/tbody/tr/td/table | //table[@id = 'Grid4ContainerTbl']/tbody/tr/td/div[contains(@id, 'Grid')]
-*/
-
 namespace Bot.Siga
 {
     public class ColetorSiga: SigaSeleniumBot
     {
 
         private String? _urlLogin;
-        private EstudanteService? _estudanteService;
         public String? statusAtualDoBot;
         protected Dictionary<EnumTipoDeExecucao, IColetaModular>? _estrategias;
         private EstrategiaColeta? _estrategiaColeta;
 
+        private EstudanteService _estudanteService;
 
-        public ColetorSiga(){}
+
+
+        public ColetorSiga()
+        {
+            this._estudanteService = new EstudanteService();
+            this._urlLogin = ConfigurationManager.AppSettings["urlLogin"];
+        }
 
         public void IniciarColeta(Estudante estudante, List<EnumTipoDeExecucao> tipoExecucao, bool headless = false)
         {
-          
 
             if (estudante != null)
             {
                 this.CreateChromeWithDriverManager(headless);
-               
-                this._urlLogin = ConfigurationManager.AppSettings["urlLogin"];
                 this.statusAtualDoBot = "Criando Navegador...";
                 this.ColetarDados(tipoExecucao, estudante);
 
@@ -84,12 +58,6 @@ namespace Bot.Siga
             {
                 if (!this.FazerLogin(estudante))
                     throw new Exception("O não foi validado no siga corretamente! Usuário ou senha podem estar incorretos");
-
-                if (estudante.Autenticado == false)
-                {
-                    estudante.Autenticado = true;
-                    this._estudanteService!.Save(estudante);
-                }
 
                 this.Aguardar(2);
 
@@ -153,25 +121,31 @@ namespace Bot.Siga
 
             ValidarAtributosDoEstudante(estudante);
 
+            this._estudanteService.Save(estudante);
+
             return true;
         }
 
         private void ValidarAtributosDoEstudante(Estudante estudante)
         {
-           estudante.Nome = this.GetTextEçementByXpath("(//span[contains(@id, 'PESSOALNOME')])[1]");
 
-           estudante.PP = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPP')])[1]") + "%";
+            estudante.Nome = this.GetTextEçementByXpath("(//span[contains(@id, 'PESSOALNOME')])[1]")?.Replace("-", "").Trim();
 
-           estudante.PR = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPR')])[1]");
+            estudante.PP = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPP')])[1]") + "%";
 
-           estudante.Ciclo = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOCICLOATUAL')])[1]");
+            estudante.PR = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPR')])[1]");
 
-           estudante.Ra = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOREGISTROACADEMICOCURSO')])[1]");
+            estudante.Ciclo = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOCICLOATUAL')])[1]");
 
-           estudante.EmailInstitucional = this.GetTextEçementByXpath("(//span[contains(@id, 'INSTITUCIONALFATEC')])[1]");
+            estudante.Ra = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOREGISTROACADEMICOCURSO')])[1]");
 
-           if (estudante.Autenticado == false)
+            estudante.EmailInstitucional = this.GetTextEçementByXpath("(//span[contains(@id, 'INSTITUCIONALFATEC')])[2]");
+
+            if (estudante.Autenticado == false)
                 estudante.Autenticado = true;
+
+            this._estudanteService!.Save(estudante);
+
         }
 
         private void PreencherSenha(string? senha)

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bot.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240827231622_InitialCreate")]
+    [Migration("20240830010641_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -53,10 +53,6 @@ namespace Bot.Core.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("email_institucional");
 
-                    b.Property<bool>("Logado")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("logado");
-
                     b.Property<string>("Nome")
                         .HasColumnType("longtext")
                         .HasColumnName("nome");
@@ -64,6 +60,10 @@ namespace Bot.Core.Migrations
                     b.Property<string>("PP")
                         .HasColumnType("longtext")
                         .HasColumnName("pp");
+
+                    b.Property<string>("PR")
+                        .HasColumnType("longtext")
+                        .HasColumnName("pr");
 
                     b.Property<int?>("PreferenciaId")
                         .HasColumnType("int")
@@ -81,10 +81,6 @@ namespace Bot.Core.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("updated_at");
 
-                    b.Property<string>("pr")
-                        .HasColumnType("longtext")
-                        .HasColumnName("pr");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PreferenciaId");
@@ -92,7 +88,47 @@ namespace Bot.Core.Migrations
                     b.ToTable("estudante");
                 });
 
-            modelBuilder.Entity("Bot.Core.Model.MateriaMatriculado", b =>
+            modelBuilder.Entity("Bot.Core.Model.Faltas", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<int?>("Ausencias")
+                        .HasColumnType("int")
+                        .HasColumnName("codigo");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<int?>("MaximoAusencia")
+                        .HasColumnType("int")
+                        .HasColumnName("maximo_ausencias");
+
+                    b.Property<string>("Observacoes")
+                        .HasColumnType("longtext")
+                        .HasColumnName("observacoes");
+
+                    b.Property<int?>("Presencas")
+                        .HasColumnType("int")
+                        .HasColumnName("nome");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("faltas");
+                });
+
+            modelBuilder.Entity("Bot.Core.Model.Materia", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -115,6 +151,10 @@ namespace Bot.Core.Migrations
                         .HasColumnType("int")
                         .HasColumnName("estudante_id");
 
+                    b.Property<int?>("FaltasId")
+                        .HasColumnType("int")
+                        .HasColumnName("faltas_id");
+
                     b.Property<string>("Nome")
                         .HasColumnType("longtext")
                         .HasColumnName("nome");
@@ -122,6 +162,10 @@ namespace Bot.Core.Migrations
                     b.Property<int?>("NotasId")
                         .HasColumnType("int")
                         .HasColumnName("notas_id");
+
+                    b.Property<string>("Observacoes")
+                        .HasColumnType("longtext")
+                        .HasColumnName("observacoes");
 
                     b.Property<string>("Professor")
                         .HasColumnType("longtext")
@@ -135,9 +179,11 @@ namespace Bot.Core.Migrations
 
                     b.HasIndex("EstudanteId");
 
+                    b.HasIndex("FaltasId");
+
                     b.HasIndex("NotasId");
 
-                    b.ToTable("materia_matriculado");
+                    b.ToTable("materia");
                 });
 
             modelBuilder.Entity("Bot.Core.Model.Notas", b =>
@@ -158,6 +204,10 @@ namespace Bot.Core.Migrations
                     b.Property<float?>("MediaFinal")
                         .HasColumnType("float")
                         .HasColumnName("media_final");
+
+                    b.Property<string>("Observacoes")
+                        .HasColumnType("longtext")
+                        .HasColumnName("observacoes");
 
                     b.Property<float?>("P1")
                         .HasColumnType("float")
@@ -225,22 +275,28 @@ namespace Bot.Core.Migrations
                     b.Navigation("Preferencia");
                 });
 
-            modelBuilder.Entity("Bot.Core.Model.MateriaMatriculado", b =>
+            modelBuilder.Entity("Bot.Core.Model.Materia", b =>
                 {
                     b.HasOne("Bot.Core.Model.Estudante", null)
-                        .WithMany("MateriasMatriculadas")
+                        .WithMany("Materias")
                         .HasForeignKey("EstudanteId");
+
+                    b.HasOne("Bot.Core.Model.Faltas", "Faltas")
+                        .WithMany()
+                        .HasForeignKey("FaltasId");
 
                     b.HasOne("Bot.Core.Model.Notas", "Notas")
                         .WithMany()
                         .HasForeignKey("NotasId");
+
+                    b.Navigation("Faltas");
 
                     b.Navigation("Notas");
                 });
 
             modelBuilder.Entity("Bot.Core.Model.Estudante", b =>
                 {
-                    b.Navigation("MateriasMatriculadas");
+                    b.Navigation("Materias");
                 });
 #pragma warning restore 612, 618
         }

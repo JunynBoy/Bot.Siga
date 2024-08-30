@@ -5,7 +5,7 @@
 
 
 # Atualizar banco de dados
-> dotnet ef database updatedotnet ef database update
+> dotnet ef database update
 
 # Rollback
 > dotnet ef migrations list

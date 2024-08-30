@@ -16,6 +16,27 @@ namespace Bot.Core.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "faltas",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    nome = table.Column<int>(type: "int", nullable: true),
+                    codigo = table.Column<int>(type: "int", nullable: true),
+                    maximo_ausencias = table.Column<int>(type: "int", nullable: true),
+                    observacoes = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_faltas", x => x.id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "notas",
                 columns: table => new
                 {
@@ -25,6 +46,8 @@ namespace Bot.Core.Migrations
                     p2 = table.Column<float>(type: "float", nullable: true),
                     p3 = table.Column<float>(type: "float", nullable: true),
                     media_final = table.Column<float>(type: "float", nullable: true),
+                    observacoes = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
@@ -79,7 +102,6 @@ namespace Bot.Core.Migrations
                     pr = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     autenticado = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    logado = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     preferencia_id = table.Column<int>(type: "int", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -97,7 +119,7 @@ namespace Bot.Core.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "materia_matriculado",
+                name: "materia",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -109,21 +131,29 @@ namespace Bot.Core.Migrations
                     professor = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     notas_id = table.Column<int>(type: "int", nullable: true),
+                    faltas_id = table.Column<int>(type: "int", nullable: true),
                     estudante_id = table.Column<int>(type: "int", nullable: true),
+                    observacoes = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     deleted_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_materia_matriculado", x => x.id);
+                    table.PrimaryKey("PK_materia", x => x.id);
                     table.ForeignKey(
-                        name: "FK_materia_matriculado_estudante_estudante_id",
+                        name: "FK_materia_estudante_estudante_id",
                         column: x => x.estudante_id,
                         principalTable: "estudante",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "FK_materia_matriculado_notas_notas_id",
+                        name: "FK_materia_faltas_faltas_id",
+                        column: x => x.faltas_id,
+                        principalTable: "faltas",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "FK_materia_notas_notas_id",
                         column: x => x.notas_id,
                         principalTable: "notas",
                         principalColumn: "id");
@@ -136,13 +166,18 @@ namespace Bot.Core.Migrations
                 column: "preferencia_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_materia_matriculado_estudante_id",
-                table: "materia_matriculado",
+                name: "IX_materia_estudante_id",
+                table: "materia",
                 column: "estudante_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_materia_matriculado_notas_id",
-                table: "materia_matriculado",
+                name: "IX_materia_faltas_id",
+                table: "materia",
+                column: "faltas_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_materia_notas_id",
+                table: "materia",
                 column: "notas_id");
         }
 
@@ -150,10 +185,13 @@ namespace Bot.Core.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "materia_matriculado");
+                name: "materia");
 
             migrationBuilder.DropTable(
                 name: "estudante");
+
+            migrationBuilder.DropTable(
+                name: "faltas");
 
             migrationBuilder.DropTable(
                 name: "notas");
