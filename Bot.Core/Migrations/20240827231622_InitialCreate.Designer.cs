@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bot.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240825200942_InitialCreate")]
+    [Migration("20240827231622_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,17 +29,13 @@ namespace Bot.Core.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    b.Property<bool>("AtualizarPorEmail")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_atualizar_por_email");
-
-                    b.Property<bool>("AtualizarPorWhatsapp")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_atualizar_por_whatsapp");
-
                     b.Property<bool>("Autenticado")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("autenticado");
+
+                    b.Property<string>("Ciclo")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ciclo");
 
                     b.Property<string>("Cpf")
                         .HasColumnType("longtext")
@@ -53,9 +49,9 @@ namespace Bot.Core.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("deleted_at");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("EmailInstitucional")
                         .HasColumnType("longtext")
-                        .HasColumnName("email");
+                        .HasColumnName("email_institucional");
 
                     b.Property<bool>("Logado")
                         .HasColumnType("tinyint(1)")
@@ -65,6 +61,18 @@ namespace Bot.Core.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("nome");
 
+                    b.Property<string>("PP")
+                        .HasColumnType("longtext")
+                        .HasColumnName("pp");
+
+                    b.Property<int?>("PreferenciaId")
+                        .HasColumnType("int")
+                        .HasColumnName("preferencia_id");
+
+                    b.Property<string>("Ra")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ra");
+
                     b.Property<string>("Senha")
                         .HasColumnType("longtext")
                         .HasColumnName("senha");
@@ -73,18 +81,20 @@ namespace Bot.Core.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("updated_at");
 
-                    b.Property<string>("Whatsapp")
+                    b.Property<string>("pr")
                         .HasColumnType("longtext")
-                        .HasColumnName("whatsapp");
+                        .HasColumnName("pr");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PreferenciaId");
 
                     b.ToTable("estudante");
                 });
 
             modelBuilder.Entity("Bot.Core.Model.MateriaMatriculado", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id");
@@ -132,7 +142,7 @@ namespace Bot.Core.Migrations
 
             modelBuilder.Entity("Bot.Core.Model.Notas", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id");
@@ -168,6 +178,51 @@ namespace Bot.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("notas");
+                });
+
+            modelBuilder.Entity("Bot.Core.src.Model.Preferencia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("AtualizarPorEmail")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("is_atualizar_por_email");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext")
+                        .HasColumnName("email");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at");
+
+                    b.Property<string>("Whatsapp")
+                        .HasColumnType("longtext")
+                        .HasColumnName("whatsapp");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("preferencia");
+                });
+
+            modelBuilder.Entity("Bot.Core.Model.Estudante", b =>
+                {
+                    b.HasOne("Bot.Core.src.Model.Preferencia", "Preferencia")
+                        .WithMany()
+                        .HasForeignKey("PreferenciaId");
+
+                    b.Navigation("Preferencia");
                 });
 
             modelBuilder.Entity("Bot.Core.Model.MateriaMatriculado", b =>

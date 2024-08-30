@@ -135,7 +135,7 @@ namespace Bot.Siga
             Confirmar.Click();
 
             this.Aguardar(3);
-            
+
             if (this.VerificarElementoPresente(xpathPopUp))
             {
                 _driver!.FindElement(By.XPath(xpathFecharPopUp)).Click();
@@ -144,14 +144,34 @@ namespace Bot.Siga
 
             if (this.VerificarElementoPresente(xpathLoginInvalido))
             {
-
                 this.statusAtualDoBot = _driver!.FindElement(By.XPath(xpathLoginInvalido)).Text;
                 StringHelper.ConsoleColoredLog(ConsoleColor.Red,
                     $"ERRO: {statusAtualDoBot}",
                     "Fechando o programa...");
                 return false;
             }
+
+            ValidarAtributosDoEstudante(estudante);
+
             return true;
+        }
+
+        private void ValidarAtributosDoEstudante(Estudante estudante)
+        {
+           estudante.Nome = this.GetTextEçementByXpath("(//span[contains(@id, 'PESSOALNOME')])[1]");
+
+           estudante.PP = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPP')])[1]") + "%";
+
+           estudante.PR = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPR')])[1]");
+
+           estudante.Ciclo = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOCICLOATUAL')])[1]");
+
+           estudante.Ra = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOREGISTROACADEMICOCURSO')])[1]");
+
+           estudante.EmailInstitucional = this.GetTextEçementByXpath("(//span[contains(@id, 'INSTITUCIONALFATEC')])[1]");
+
+           if (estudante.Autenticado == false)
+                estudante.Autenticado = true;
         }
 
         private void PreencherSenha(string? senha)
@@ -165,14 +185,12 @@ namespace Bot.Siga
             { 
                 throw new Exception($"ERRO não foi possível preencher o campo de senha: {e.Message}");
             }
-          
         }
 
         private void PreencherLogin(string? cpf)
         {
             try
             {
-                //CHEIRO DE BOSTA
                 IWebElement Login = _driver!.FindElement(By.XPath("//input [@id='vSIS_USUARIOID']"));
                 Login.SendKeys(cpf);
             }catch(Exception e)

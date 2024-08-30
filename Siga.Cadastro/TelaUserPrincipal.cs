@@ -107,11 +107,11 @@ namespace Siga.Cadastro
             {
                 lista.Add("-O campo CPF deve conter 11 dígitos");
             }
-            if (aluno.Email == "" || aluno.Email == null && aluno.Whatsapp == "" || aluno.Whatsapp == null)
+            if (aluno.EmailInstitucional == "" || aluno.EmailInstitucional == null && aluno.Whatsapp == "" || aluno.Whatsapp == null)
             {
                 lista.Add("-Ou o Campo Email ou o Campo whatsapp devem estar preenchidos para uso da aplicação");
             }
-            if (aluno.Email != null && !_validator.IsValidEmail(aluno.Email))
+            if (aluno.EmailInstitucional != null && !_validator.IsValidEmail(aluno.EmailInstitucional))
             {
                 lista.Add("-O formato de Email inserido é inválido");
             }

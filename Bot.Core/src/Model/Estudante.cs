@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Bot.Core.src.Model;
 
 namespace Bot.Core.Model
 {
@@ -22,23 +23,33 @@ namespace Bot.Core.Model
         [Column("nome")]
         public string? Nome { get; set; }
 
-        [Column("email")]
-        public string? Email { get; set; }
+        [Column("email_institucional")]
+        public string? EmailInstitucional { get; set; }
 
-        [Column("is_atualizar_por_email")]
-        public bool AtualizarPorEmail { get; set; } = false;
+        [Column("ra")]
+        public string? Ra { get; set; }
 
-        [Column("whatsapp")]
-        public string? Whatsapp { get; set; }
+        [Column("ciclo")]
+        public string? Ciclo { get; set; }
 
-        [Column("is_atualizar_por_whatsapp")]
-        public bool AtualizarPorWhatsapp { get; set; } = false;
+        [Column("pp")]
+        public string? PP { get; set; }
+
+        [Column("pr")]
+        public string? PR { get; set; }
 
         [Column("autenticado")]
         public bool Autenticado { get; set; } = false;
 
         [Column("logado")]
         public bool Logado { get; set; } = false;
+
+
+        [ForeignKey("Preferencia")]
+        [Column("preferencia_id")]
+        public int? PreferenciaId { get; set; }
+
+        public virtual Preferencia? Preferencia { get; set; }
 
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; }
@@ -55,16 +66,11 @@ namespace Bot.Core.Model
 
         public Estudante() { }
 
-        public Estudante(string? nome, string senha, string? email, bool atualizarPorEmail, string cpf , string? whatsapp , bool atualizarPorWhatsapp)
+        public Estudante(string? nome, string senha, string cpf)
         {
             this.Nome = nome;
             this.Senha = senha;
-            this.Email = email;
-            this.AtualizarPorEmail = atualizarPorEmail;
-            this.Whatsapp = whatsapp;
-            this.AtualizarPorWhatsapp = atualizarPorWhatsapp;
             this.Cpf = cpf;
-
             
             this.CreatedAt = DateTime.Now;
         }

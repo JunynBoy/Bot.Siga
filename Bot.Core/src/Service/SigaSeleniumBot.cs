@@ -58,6 +58,19 @@ namespace Bot.Core.src.Service
             }
         }
 
+        protected String? GetTextEçementByXpath(string xPath)
+        {
+            try
+            {
+                IWebElement childElement = _driver.FindElement(By.XPath(xPath));
+                return childElement.Text;
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
+        }
+
         protected void Aguardar(int segundos)
         {
             Thread.Sleep(segundos * 1000);

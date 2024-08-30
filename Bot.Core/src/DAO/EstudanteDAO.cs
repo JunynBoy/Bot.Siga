@@ -13,17 +13,9 @@ namespace Bot.Core.DAO
     {
         public EstudanteDAO(DbContext context) : base(context) { }
 
-
-        //EXEMPLO DE COMO É FEITO A CONSULTA
-        //public Oab? GetByNumeroOAB(string numeroOAB)
-        //{
-        //    return context.Set<Oab>().Where(o => o.Numero == numeroOAB).FirstOrDefault();
-        //}
-
-
         public Estudante? GetByCpf(string cpf)
         {
-            return context.Set<Estudante>().Where(a => a.Cpf == cpf).FirstOrDefault();  
+            return context.Set<Estudante>().Include(e => e.Preferencia).Where(a => a.Cpf == cpf).FirstOrDefault();  
         }
     }
 }
