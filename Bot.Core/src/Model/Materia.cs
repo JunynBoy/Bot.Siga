@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Bot.Core.Model
 {
     [Table("materia")]
-    public class Materia : Ordinary
+    public class Materia : OrdinaryEntity
     {
 
         [Key]

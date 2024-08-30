@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Bot.Core.src.Model
 {
     [Table("preferencia")]
-    public class Preferencia : Ordinary
+    public class Preferencia : OrdinaryEntity
     {
 
         [Column("id")]

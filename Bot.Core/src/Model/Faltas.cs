@@ -8,7 +8,7 @@ namespace Bot.Core.Model
 
 
     [Table("faltas")]
-    public class Faltas : Ordinary
+    public class Faltas : OrdinaryEntity
     {
 
         [Key]

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bot.Core.src.Model.Interface
 {
-    public interface IOrdinary
+    public interface IOrdinaryEntity
     {
         DateTime? CreatedAt { get; set; }
         DateTime? UpdatedAt { get; set; }

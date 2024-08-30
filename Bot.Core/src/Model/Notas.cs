@@ -7,7 +7,7 @@ namespace Bot.Core.Model
 {
 
     [Table("notas")]
-    public class Notas : Ordinary
+    public class Notas : OrdinaryEntity
     {
         [Key]
         [Column("id")]

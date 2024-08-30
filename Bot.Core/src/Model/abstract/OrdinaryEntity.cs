@@ -9,7 +9,7 @@ using Bot.Core.src.Model.Interface;
 
 namespace Bot.Core.src.Model
 {
-    public abstract class Ordinary : IOrdinary
+    public abstract class OrdinaryEntity : IOrdinaryEntity
     {
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
