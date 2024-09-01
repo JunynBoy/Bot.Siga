@@ -69,7 +69,6 @@ namespace Bot.Siga.src.ColetaModular
 
 
 
-                    // TODO atualizar materia com presenças e ausencias:
                     //materia.Notas.P1 = float.TryParse(presencas, out float p1) ? p1 : 0.0f;
                     //materia.Notas.P2 = float.TryParse(ausencias, out float p2) ? p2 : 0.0f;
                 }

@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools.V114.Network;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Net;
@@ -36,8 +37,7 @@ namespace Bot.Siga.src.ColetaModular
             string patternP2 = @"P2 / / (\d+\.\d+)";
             string patternP3 = @"P3 / / (\d+\.\d+)";
             string patternMediaFinal = @"Média Final\(\*\*\) (\d+\.\d+)";
-
-
+            bool contemAtributosDiferentesDoBanco = false;
 
             try
             {
@@ -82,7 +82,6 @@ namespace Bot.Siga.src.ColetaModular
                             materia.Notas =  new Notas();
                         }
 
-                        bool contemAtributosDiferentesDoBanco = false;
 
                         float[] notas = new float[3];
                         string[] patterns = { patternP1, patternP2, patternP3 };
@@ -103,36 +102,18 @@ namespace Bot.Siga.src.ColetaModular
                             }
                             index++;
                         }
-                        //contemAtributosDiferentesDoBanco
-                        if (true)
+
+                        if (contemAtributosDiferentesDoBanco)
                         {
                             materia.Notas.P1 = notasBanco[0];
                             materia.Notas.P2 = notasBanco[1];
                             materia.Notas.P3 = notasBanco[2];
-                            // notificar usuário
-                            //robozinhoDoSigaTcc@2024
-                            //robozinhoDoSiga@gmail.com
-                            EmailService emailService = new EmailService("smtp.gmail.com", "robozinhoDoSiga@gmail.com", "robozinhoDoSigaTcc@2024" );
-                            List<string> emailsTo = new List<string> { "marcos.gasparini13@gmail.com", "marcos.gaparini@fatec.sp.gov.br" };
-                            string subject = "Teste de Envio de E-mail";
-                            string body = "<h1>Olá, este é um teste de envio de e-mail!</h1><p>Este é um exemplo de corpo de e-mail.</p>";
+                            materia.Notas.MediaFinal = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternMediaFinal).Trim(), out float mediaFinal) ? mediaFinal : 0.0f;
+                            this._materiaService.Save(materia);
 
-                            try
-                            {
-                                emailService.sendEmail(emailsTo, subject, body, new List<string>());
-                                Console.WriteLine("E-mail enviado com sucesso!");
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
-                            }
-
+                            this.EnviarEmail(estudante, new List<Materia> { materia });
                         }
 
-
-                        materia.Notas.MediaFinal = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternMediaFinal).Trim(), out float mediaFinal) ? mediaFinal : 0.0f;
-
-                        this._materiaService.Save(materia);
                     }
                 }
                 else
@@ -149,6 +130,21 @@ namespace Bot.Siga.src.ColetaModular
             }
 
             StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Finalizando Coleta de Notas...");
+        }
+
+        private void EnviarEmail(Estudante estudante, List<Materia> materias)
+        {
+            EmailService emailService = new EmailService("smtp.office365.com", "chaninho15@outlook.com.br", "xaninho15");
+            List<string> emailsTo = new List<string> { "marcos.gasparini13@gmail.com" };
+            var dictionary = emailService.BuildarEnvioDeAutalizacaoDeNotas(estudante, materias);
+            try
+            {
+                emailService.sendEmail(emailsTo, dictionary["subject"], dictionary["body"], new List<string>());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
+            }
         }
 
         private void ClicarNoBotaoNotas()

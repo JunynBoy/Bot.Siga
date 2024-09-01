@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualização de Notas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #333333;
+        }
+        .content {
+            font-size: 16px;
+            color: #555555;
+        }
+        .content p {
+            margin-bottom: 20px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #dddddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f8f8;
+            color: #333333;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Atualização de Notas</h1>
+        </div>
+        <div class="content">
+            <p>Olá, [Estudante.Nome],</p>
+            <p>O robô de coleta de faltas identificou uma atualização!</p>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Disciplina</th>
+                        <th>Prova 1</th>
+                        <th>Prova 2</th>
+                        <th>Prova 3</th>
+                        <th>Média Final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>[Materia.Nome]</td>
+                        <td>[Nota.P1]</td>
+                        <td>[Nota.P2]</td>
+                        <td>[Nota.P3]</td>
+                        <td>[Nota.Media]</td>
+                    </tr>
+                    <!-- Adicione mais linhas conforme necessário -->
+                </tbody>
+            </table>
+        </div>
+        <div class="content">
+            <p>Caso tenha alguma dúvida ou precise de mais informações, sinta-se à vontade para nos contatar.</p>
+            <p>Atenciosamente,<br>Robôzinho do SIGA</p>
+        </div>
+        <div class="footer">
+            <p>Este email faz parte de um Trabalho de Conclusão de Curso (TCC) desenvolvido por Marcos Gasparini Junior, aluno da FATEC Botucatu.</p>
+            <p>© [AnoAtual] FATEC Botucatu.</p>
+        </div>
+        
+    </div>
+</body>
+</html>

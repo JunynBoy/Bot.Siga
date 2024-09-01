@@ -119,16 +119,13 @@ namespace Bot.Siga
                 return false;
             }
 
-            ValidarAtributosDoEstudante(estudante);
-
-            this._estudanteService.Save(estudante);
+            this.ValidarAtributosDoEstudante(estudante);
 
             return true;
         }
 
         private void ValidarAtributosDoEstudante(Estudante estudante)
         {
-
             estudante.Nome = this.GetTextEçementByXpath("(//span[contains(@id, 'PESSOALNOME')])[1]")?.Replace("-", "").Trim();
 
             estudante.PP = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPP')])[1]") + "%";
@@ -145,7 +142,6 @@ namespace Bot.Siga
                 estudante.Autenticado = true;
 
             this._estudanteService!.Save(estudante);
-
         }
 
         private void PreencherSenha(string? senha)

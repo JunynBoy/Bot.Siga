@@ -48,26 +48,9 @@ namespace Bot.Core.Model
 
         public virtual Preferencia? Preferencia { get; set; }
 
-
-
         public virtual ICollection<Materia>? Materias { get; set; }
 
         public Estudante() { }
-
-        public Estudante(string? nome, string senha, string cpf)
-        {
-            this.Nome = nome;
-            this.Senha = senha;
-            this.Cpf = cpf;
-
-            this.CreatedAt = DateTime.Now;
-        }
-
-
-
-
-
-
 
     }
 }

@@ -11,6 +11,12 @@ List<EnumTipoDeExecucao> acoes = new List<EnumTipoDeExecucao>()
     EnumTipoDeExecucao.COLETAR_NOTA
 };
 
+
+
+
+
+
+//rotina aqui
 try
 {
 
