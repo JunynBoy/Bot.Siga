@@ -11,7 +11,8 @@ namespace Bot.Core.Service
 
         public NotasService()
         {
-            _dao = new NotasDAO(new ApplicationDbContext());
+            var dbContext = DbContextFactory.GetDbContext();
+            _dao = new NotasDAO(dbContext);
         }
 
         public IEnumerable<Notas> GetAll()

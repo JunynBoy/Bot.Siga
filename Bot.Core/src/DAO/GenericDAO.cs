@@ -1,4 +1,5 @@
-﻿using Bot.Core.src.DAO.Interface;
+﻿using Bot.Core.src.DAO;
+using Bot.Core.src.DAO.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -7,11 +8,11 @@ namespace Bot.Core.DAO
     public class GenericDAO<T> : IGenericDAO<T> where T : class
     {
 
-        protected readonly DbContext context;
+        protected readonly ApplicationDbContext context;
 
-        public GenericDAO(DbContext context)
+        public GenericDAO()
         {
-            this.context = context;
+            this.context = DbContextFactory.GetDbContext();
         }
 
         public void Insert(T entity)

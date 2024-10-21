@@ -1,5 +1,6 @@
 ﻿using Bot.Core.DAO;
 using Bot.Core.Model;
+using Bot.Core.src.DAO;
 
 namespace Bot.Core.Service
 {
@@ -9,7 +10,8 @@ namespace Bot.Core.Service
 
         public EstudanteService()
         {
-            _dao = new EstudanteDAO(new ApplicationDbContext());
+            var dbContext = DbContextFactory.GetDbContext();
+            _dao = new EstudanteDAO(dbContext);
         }
 
         public IEnumerable<Estudante> GetAll()

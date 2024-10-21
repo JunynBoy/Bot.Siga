@@ -1,36 +1,41 @@
 ﻿using Bot.Core.DAO;
+using Bot.Core.Model;
 using Bot.Core.src.DAO;
 using Bot.Core.src.DAO.Interface;
-using Bot.Core.src.Model;
 
 namespace Bot.Core.Service
 {
-    public class PreferenciaService : IService<Preferencia>
+    public class FaltasService : IService<Faltas>
     {
-        private IPreferenciaDAO _dao;
+        private IFaltasDAO _dao;
 
-        public PreferenciaService()
+        public FaltasService()
         {
             var dbContext = DbContextFactory.GetDbContext();
-            _dao = new PreferenciaDAO(dbContext);
+            _dao = new FaltasDAO(dbContext);
         }
 
-        public IEnumerable<Preferencia> GetAll()
+        public IEnumerable<Faltas> GetAll()
         {
             return _dao.GetAll();
         }
 
-        public Preferencia? GetById(int id)
+        public Faltas? GetById(int id)
         {
             return _dao.GetById(id);
         }
 
-        public void Remove(Preferencia entity)
+        public Faltas? GetByMateriaId(int materiaMatriculadoId)
+        {
+            return _dao.GetByMateriaId(materiaMatriculadoId);
+        }
+
+        public void Remove(Faltas entity)
         {
             _dao.Remove(entity);
         }
 
-        public void Save(Preferencia entity)
+        public void Save(Faltas entity)
         {
             if (entity.Id == 0)
             {

@@ -7,11 +7,16 @@ namespace Bot.Core.DAO
     public class FaltasDAO : GenericDAO<Faltas>, IFaltasDAO
     {
 
-        public FaltasDAO(DbContext context) : base(context) { }
+        private readonly ApplicationDbContext _context;
+
+        public FaltasDAO(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         public Faltas? GetByMateriaId(int materiaMatriculadoId)
         {
-            var materiaMatriculado = context.Set<Materia>()
+            var materiaMatriculado = _context.Set<Materia>()
                                             .Include(mm => mm.Notas)
                                             .FirstOrDefault(mm => mm.Id == materiaMatriculadoId);
 

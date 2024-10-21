@@ -85,11 +85,11 @@ namespace Bot.Siga.src.ColetaModular
 
                         float[] notas = new float[3];
                         string[] patterns = { patternP1, patternP2, patternP3 };
-                        float[] notasBanco =
+                        float?[] notasBanco =
                         {
-                            materia.Notas.P1 ?? 0.0f,
-                            materia.Notas.P2 ?? 0.0f,
-                            materia.Notas.P3 ?? 0.0f
+                            materia.Notas.P1,
+                            materia.Notas.P2,
+                            materia.Notas.P3
                         };
 
                         int index = 0;
@@ -111,7 +111,7 @@ namespace Bot.Siga.src.ColetaModular
                             materia.Notas.MediaFinal = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternMediaFinal).Trim(), out float mediaFinal) ? mediaFinal : 0.0f;
                             this._materiaService.Save(materia);
 
-                            this.EnviarEmail(estudante, new List<Materia> { materia });
+                          this.EnviarEmail(estudante, new List<Materia> { materia });
                         }
 
                     }

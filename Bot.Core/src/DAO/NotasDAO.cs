@@ -8,11 +8,15 @@ namespace Bot.Core.src.DAO
     public class NotasDAO : GenericDAO<Notas>, INotasDAO
     {
 
-        public NotasDAO(DbContext context) : base(context) { }
+        private readonly ApplicationDbContext _context;
 
+        public NotasDAO(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public Notas? GetByMateriaId(int materiaMatriculadoId)
         {
-            var materiaMatriculado = context.Set<Materia>()
+            var materiaMatriculado = _context.Set<Materia>()
                                             .Include(mm => mm.Notas)
                                             .FirstOrDefault(mm => mm.Id == materiaMatriculadoId);
 

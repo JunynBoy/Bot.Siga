@@ -6,7 +6,12 @@ namespace Bot.Core.DAO
 {
     public class PreferenciaDAO : GenericDAO<Preferencia>, IPreferenciaDAO
     {
-        public PreferenciaDAO(DbContext context) : base(context) { }
+        private readonly ApplicationDbContext _context;
+
+        public PreferenciaDAO(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
     }
 }

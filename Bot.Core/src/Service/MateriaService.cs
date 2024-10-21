@@ -1,5 +1,6 @@
 ﻿using Bot.Core.DAO;
 using Bot.Core.Model;
+using Bot.Core.src.DAO;
 using Bot.Core.src.DAO.Interface;
 
 namespace Bot.Core.Service
@@ -10,7 +11,8 @@ namespace Bot.Core.Service
 
         public MateriaService()
         {
-            _dao = new MateriaDAO(new ApplicationDbContext());
+            var dbContext = DbContextFactory.GetDbContext();
+            _dao = new MateriaDAO(dbContext);
         }
 
         public IEnumerable<Materia> GetAll()

@@ -6,11 +6,15 @@ namespace Bot.Core.DAO
 {
     public class EstudanteDAO : GenericDAO<Estudante>, IEstudanteDAO
     {
-        public EstudanteDAO(DbContext context) : base(context) { }
+        private readonly ApplicationDbContext _context;
 
+        public EstudanteDAO(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public Estudante? GetByCpf(string cpf)
         {
-            return context.Set<Estudante>()
+            return _context.Set<Estudante>()
                 .Include(e => e.Preferencia)
                 .Include(e => e.Materias)
                 .Where(a => a.Cpf == cpf).FirstOrDefault();
