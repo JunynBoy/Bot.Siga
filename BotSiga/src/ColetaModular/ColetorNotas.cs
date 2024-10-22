@@ -102,8 +102,9 @@ namespace Bot.Siga.src.ColetaModular
                             }
                             index++;
                         }
+                        //contemAtributosDiferentesDoBanco
 
-                        if (contemAtributosDiferentesDoBanco)
+                        if (true)
                         {
                             materia.Notas.P1 = notasBanco[0];
                             materia.Notas.P2 = notasBanco[1];
@@ -134,17 +135,21 @@ namespace Bot.Siga.src.ColetaModular
 
         private void EnviarEmail(Estudante estudante, List<Materia> materias)
         {
-            EmailService emailService = new EmailService("smtp.office365.com", "chaninho15@outlook.com.br", "xaninho15");
-            List<string> emailsTo = new List<string> { "marcos.gasparini13@gmail.com" };
-            var dictionary = emailService.BuildarEnvioDeAutalizacaoDeNotas(estudante, materias);
-            try
-            {
-                emailService.sendEmail(emailsTo, dictionary["subject"], dictionary["body"], new List<string>());
+            while (true){
+                EmailService emailService = new EmailService("smtp.gmail.com", "robozinhodosiga@gmail.com", "smir wvtd uuee odvl", 587);
+                List<string> emailsTo = new List<string> { "marcos.gasparini13@gmail.com" };
+                var dictionary = emailService.BuildarEnvioDeAutalizacaoDeNotas(estudante, materias);
+                try
+                {
+                    emailService.sendEmail(emailsTo, dictionary["subject"], dictionary["body"], new List<string>());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
-            }
+
+           
         }
 
         private void ClicarNoBotaoNotas()

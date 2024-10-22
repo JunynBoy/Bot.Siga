@@ -75,7 +75,8 @@ namespace Bot.Core.Service
         {
             SmtpClient smtpCliente = new SmtpClient(this._provedor, this._port);
             smtpCliente.EnableSsl = true;
-            smtpCliente.Timeout = 5000;
+            smtpCliente.Timeout = 50000;
+            smtpCliente.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpCliente.UseDefaultCredentials = false;
             smtpCliente.Credentials = new NetworkCredential(this._username, this._password);
             smtpCliente.Send(message);
