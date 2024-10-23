@@ -1,12 +1,13 @@
 ﻿using Bot.Core.DAO;
 using Bot.Core.Model;
 using Bot.Core.src.DAO;
+using Bot.Core.src.DAO.Interface;
 
 namespace Bot.Core.Service
 {
     public class EstudanteService : IService<Estudante>
     {
-        private EstudanteDAO _dao;
+        private IEstudanteDAO _dao;
 
         public EstudanteService()
         {
@@ -21,7 +22,7 @@ namespace Bot.Core.Service
 
         public Estudante? GetById(int id)
         {
-            return _dao.GetById(id);
+            return _dao.GetByIdComplete(id);
         }
 
         public Estudante? GetByCpf(string cpf)

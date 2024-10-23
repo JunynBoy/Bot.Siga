@@ -19,5 +19,14 @@ namespace Bot.Core.DAO
                 .Include(e => e.Materias)
                 .Where(a => a.Cpf == cpf).FirstOrDefault();
         }
+
+        public Estudante? GetByIdComplete(int id)
+        {
+            return _context.Set<Estudante>()
+                .Include(e => e.Preferencia)
+                .Include(e => e.Materias)
+                .FirstOrDefault(e => e.Id == id);
+        }
+
     }
 }

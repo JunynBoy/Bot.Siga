@@ -11,7 +11,7 @@ namespace Bot.Core.src.Helper
             return resultado.Value;
         }
 
-        public static string GetText(string texto, string regexPattern, int regexGroup)
+        public static string? GetText(string texto, string regexPattern, int regexGroup)
         {
             Match resultado = Regex.Match(texto, regexPattern);
             return resultado.Groups[regexGroup].Value;

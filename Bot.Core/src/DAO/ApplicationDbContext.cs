@@ -29,7 +29,11 @@ namespace Bot.Core.DAO
             modelBuilder.Entity<Faltas>().HasQueryFilter(f => f.DeletedAt == null);
             modelBuilder.Entity<Preferencia>().HasQueryFilter(p => p.DeletedAt == null);
 
-            // Outras configurações específicas de mapeamento (se houver) podem ser adicionadas aqui.
+            modelBuilder.Entity<Estudante>()
+              .HasOne(e => e.Preferencia)    
+              .WithOne()                     
+              .HasForeignKey<Estudante>(e => e.PreferenciaId); 
+
         }
     }
 

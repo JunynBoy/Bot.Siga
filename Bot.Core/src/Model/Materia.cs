@@ -22,6 +22,9 @@ namespace Bot.Core.Model
         [Column("professor")]
         public string? Professor { get; set; }
 
+        [Column("hrs_aula")]
+        public int? HrsAula{ get; set; }
+
         [ForeignKey("Notas")]
         [Column("notas_id")]
         public int? NotasId { get; set; }

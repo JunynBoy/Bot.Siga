@@ -14,7 +14,10 @@ namespace Bot.Core.src.Model
         public string? Email { get; set; }
 
         [Column("is_atualizar_por_email")]
-        public bool AtualizarPorEmail { get; set; } = false;
+        public bool IsAtualizarPorEmail { get; set; } = false;
+
+        [Column("is_atualizar_por_whatsapp")]
+        public bool IsAtualizarPorWhatsapp { get; set; } = false;
 
         [Column("whatsapp")]
         public string? Whatsapp { get; set; }

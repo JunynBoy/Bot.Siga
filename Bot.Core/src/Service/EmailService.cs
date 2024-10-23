@@ -1,4 +1,5 @@
 ﻿using Bot.Core.Model;
+using System.Configuration;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
@@ -22,6 +23,14 @@ namespace Bot.Core.Service
             this._provedor = provedor ?? throw new ArgumentNullException(nameof(provedor));
             this._username = username ?? throw new ArgumentNullException(nameof(username));
             this._password = password ?? throw new ArgumentNullException(nameof(password));
+            this._port = port;
+        }
+
+        public EmailService(int port = 587)
+        {
+            this._provedor = ConfigurationManager.AppSettings["emailHost"]!;
+            this._username = ConfigurationManager.AppSettings["email"]!;
+            this._password = ConfigurationManager.AppSettings["emailSenha"]!;
             this._port = port;
         }
 
