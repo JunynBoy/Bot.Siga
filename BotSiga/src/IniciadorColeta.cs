@@ -14,7 +14,7 @@ using System.Configuration;
 
 namespace Bot.Siga
 {
-    public class ColetorSiga: SigaSeleniumBot
+    public class IniciadorColeta: SigaSeleniumBot
     {
 
         private String? _urlLogin;
@@ -26,7 +26,7 @@ namespace Bot.Siga
 
 
 
-        public ColetorSiga()
+        public IniciadorColeta()
         {
             this._estudanteService = new EstudanteService();
             this._urlLogin = ConfigurationManager.AppSettings["urlLogin"];
@@ -39,7 +39,7 @@ namespace Bot.Siga
             {
                 this.CreateChromeWithDriverManager(headless);
                 this.statusAtualDoBot = "Criando Navegador...";
-                this.ColetarDados(tipoExecucao, estudante);
+                this.Executar(tipoExecucao, estudante);
 
             }
             else
@@ -49,7 +49,7 @@ namespace Bot.Siga
             }
         }
 
-        private void ColetarDados(List<EnumTipoDeExecucao> TiposExecucao, Estudante estudante)
+        private async void Executar(List<EnumTipoDeExecucao> TiposExecucao, Estudante estudante)
         {
 
             this.statusAtualDoBot = "Coletando Dados...";
@@ -66,7 +66,7 @@ namespace Bot.Siga
                 foreach (EnumTipoDeExecucao tipoExecucao in TiposExecucao)
                 {
                     var rotina =  this._estrategiaColeta!.ObterEstrategia(tipoExecucao);
-                    rotina.ColetarDados(estudante);
+                    await rotina.ColetarDados(estudante);
                 }
 
                 this.FecharNavegador();
@@ -104,11 +104,6 @@ namespace Bot.Siga
 
             this.Aguardar(3);
 
-            if (this.VerificarElementoPresente(xpathPopUp))
-            {
-                _driver!.FindElement(By.XPath(xpathFecharPopUp)).Click();
-                this.Aguardar(1);
-            }
 
             if (this.VerificarElementoPresente(xpathLoginInvalido))
             {
@@ -117,6 +112,12 @@ namespace Bot.Siga
                     $"ERRO: {statusAtualDoBot}",
                     "Fechando o programa...");
                 return false;
+            }
+
+            if (this.VerificarElementoPresente(xpathPopUp))
+            {
+                _driver!.FindElement(By.XPath(xpathFecharPopUp)).Click();
+                this.Aguardar(1);
             }
 
             this.ValidarAtributosDoEstudante(estudante);

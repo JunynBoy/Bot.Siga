@@ -4,19 +4,13 @@ using Bot.Core.src.Helper;
 using Bot.Core.src.Model.Enum;
 using Bot.Siga;
 
-ColetorSiga coletor = new ColetorSiga();
+IniciadorColeta coletor = new IniciadorColeta();
 
 List<EnumTipoDeExecucao> acoes = new List<EnumTipoDeExecucao>() 
 {
-    EnumTipoDeExecucao.COLETAR_NOTA
+    EnumTipoDeExecucao.COLETAR_NOTA,
 };
 
-
-
-
-
-
-//rotina aqui
 try
 {
 

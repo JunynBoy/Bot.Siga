@@ -4,14 +4,12 @@ using Bot.Core.src.Helper;
 using Bot.Siga.src.ColetaModular.Interface;
 using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 using System.Collections.ObjectModel;
 using System.Configuration;
 
 namespace Bot.Siga.src.ColetaModular
 {
-    public class ColetorFaltas : ColetorSiga , IColetaModular
+    public class ColetorFaltas : IniciadorColeta , IColetaModular
     {
         private string? _homeUrl;
         private MateriaService _materiaService;
@@ -23,7 +21,7 @@ namespace Bot.Siga.src.ColetaModular
             this._homeUrl = ConfigurationManager.AppSettings["urlHome"];
         }
 
-        public void ColetarDados(Estudante estudante)
+        public async Task ColetarDados(Estudante estudante)
         {
             StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Iniciando Coleta de Faltas...");
 
@@ -32,10 +30,10 @@ namespace Bot.Siga.src.ColetaModular
 
                     this.ClicarBotaoFaltas();
 
-                    List<Materia> materiaMatriculados = this._materiaService.GetByEstudanteId(estudante.Id);
-                    if (materiaMatriculados.IsNullOrEmpty())
+                    List<Materia> materias = this._materiaService.GetByEstudanteId(estudante.Id);
+                    if (materias.IsNullOrEmpty())
                     {
-                        materiaMatriculados = new List<Materia>();
+                        materias = new List<Materia>();
                     }
 
 
@@ -48,29 +46,36 @@ namespace Bot.Siga.src.ColetaModular
 
                     string codigoMateria = colunas[0].Text.Trim();
                     string nomeMateria = colunas[1].Text.Trim();
-                    string presencas = colunas[2].Text.Trim();
-                    string ausencias = colunas[3].Text.Trim();
+                    Faltas faltas = new Faltas();
+                    faltas.Presencas = int.Parse(colunas[2].Text.Trim());
+                    faltas.Ausencias = int.Parse(colunas[3].Text.Trim());
 
-                    Materia? materia = materiaMatriculados.FirstOrDefault(mm => mm.Codigo == codigoMateria);
+                    Materia? materia = materias.FirstOrDefault(mm => mm.Codigo == codigoMateria);
                     if (materia == null)
                     {
+
                         materia = new Materia
                         {
                             Codigo = codigoMateria,
                             Nome = nomeMateria,
-                            EstudanteId = estudante.Id
+                            EstudanteId = estudante.Id,
+                            Faltas = faltas,
                         };
-                        materiaMatriculados.Add(materia);
+                        materias.Add(materia);
                     }
                     else
                     {
-                        materia.Nome = nomeMateria;
+                        if (materia.Faltas != null)
+                        {
+                            materia.Faltas.Presencas = faltas.Presencas;
+                            materia.Faltas.Ausencias = faltas.Ausencias;
+                        }
+                        else
+                        {
+                            materia.Faltas = faltas;
+                        }
                     }
-
-
-
-                    //materia.Notas.P1 = float.TryParse(presencas, out float p1) ? p1 : 0.0f;
-                    //materia.Notas.P2 = float.TryParse(ausencias, out float p2) ? p2 : 0.0f;
+                    this._materiaService.Save(materia);
                 }
 
             }

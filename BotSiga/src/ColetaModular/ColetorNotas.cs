@@ -1,35 +1,32 @@
-﻿using AngleSharp.Html.Dom;
-using Bot.Core.Model;
+﻿using Bot.Core.Model;
 using Bot.Core.Service;
 using Bot.Core.src.Helper;
+using Bot.Core.src.Service.Http;
 using Bot.Siga.src.ColetaModular.Interface;
 using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.DevTools.V114.Network;
-using OpenQA.Selenium.Support.UI;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Mail;
-using System.Text.RegularExpressions;
 
 namespace Bot.Siga.src.ColetaModular
 {
-    public class ColetorNotas : ColetorSiga, IColetaModular
+    public class ColetorNotas : IniciadorColeta, IColetaModular
     {
         private string _homeUrl;
         private MateriaService _materiaService;
-        private NotasService _notasService;
+        private WhatsapMessageHttpService _messageHttpService;
+        private EmailService _emailService;
+
 
         public ColetorNotas()
         {
+            this._emailService = new EmailService();
             this._materiaService = new MateriaService();
+            this._messageHttpService = new WhatsapMessageHttpService();
             this._homeUrl = ConfigurationManager.AppSettings["urlHome"]!;
         }
 
-        public void ColetarDados(Estudante estudante)
+        public async Task ColetarDados(Estudante estudante)
         {
             string patternCodigoMateria = @"([A-Z]{3}\d{3})";
             string patternNomeMateria = @"^\w+\s+(.+?)\r?\n";
@@ -66,9 +63,11 @@ namespace Bot.Siga.src.ColetaModular
                         IWebElement headerNota = headersNotasElements[i];
 
                         string codigoMateria = RegexHelper.GetText(headerNota.Text, patternCodigoMateria).Trim();
-                        string nomeMateria = RegexHelper.GetText(headerNota.Text, patternNomeMateria ,1).Trim();
-                        Materia? materia = materiaMatriculados.FirstOrDefault(mm => mm.Codigo == codigoMateria);
-                        if(materia == null)
+                        string nomeMateria = RegexHelper.GetText(headerNota.Text, patternNomeMateria ,1)!.Trim();
+
+                        Materia? materia = materiaMatriculados
+                        ?.FirstOrDefault(mm => mm.Codigo?.ToUpper().Equals(codigoMateria?.ToUpper()) == true);
+                        if (materia == null)
                             materia = new Materia();
 
                         materia.Codigo = codigoMateria;
@@ -95,24 +94,52 @@ namespace Bot.Siga.src.ColetaModular
                         int index = 0;
                         foreach (var pattern in patterns)
                         {
-                            if (float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, pattern).Trim(), out notas[index]) && notasBanco[index] != notas[index])
+                            float numeroConvertido;
+                            float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, pattern), out numeroConvertido);
+
+                            if (numeroConvertido != notasBanco[index])
                             {
                                 contemAtributosDiferentesDoBanco = true;
                                 notasBanco[index] = notas[index];
                             }
                             index++;
                         }
-                        //contemAtributosDiferentesDoBanco
 
-                        if (true)
+                        materia.Notas.P1 = notas[0];
+                        materia.Notas.P2 = notas[1];
+                        materia.Notas.P3 = notas[2];
+                        materia.Notas.MediaFinal = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternMediaFinal).Trim(), out float mediaFinal) ? mediaFinal : 0.0f;
+
+                        this._materiaService.Save(materia);
+
+                        if (estudante.Preferencia != null )
                         {
-                            materia.Notas.P1 = notasBanco[0];
-                            materia.Notas.P2 = notasBanco[1];
-                            materia.Notas.P3 = notasBanco[2];
-                            materia.Notas.MediaFinal = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternMediaFinal).Trim(), out float mediaFinal) ? mediaFinal : 0.0f;
-                            this._materiaService.Save(materia);
+                            if (contemAtributosDiferentesDoBanco)
+                            {
+                                if (estudante.Preferencia.IsAtualizarPorEmail)
+                                {
+                                    this.EnviarEmail(estudante, new List<Materia> { materia });
+                                }
 
-                          this.EnviarEmail(estudante, new List<Materia> { materia });
+                                if (estudante.Preferencia.IsAtualizarPorWhatsapp)
+                                {
+                                    string mensagemDeAtualizacao = $"*O Robôzinho do Siga identificou alterações nas suas notas!*\n\n" +
+                                        $"Matéria: {materia.Nome} - {materia.Codigo} - {materia.Professor ?? "Professor Não Definido"}\n" +
+                                        $"P1 -> {materia.Notas.P1}\n" +
+                                        $"P2 -> {materia.Notas.P2}\n" +
+                                        $"P3 -> {materia.Notas.P3}";
+                                    var response = await this._messageHttpService.EnviarMensagem(estudante.Preferencia!.Whatsapp!, mensagemDeAtualizacao);
+                                    if (!response)
+                                    {
+                                        StringHelper.ConsoleColoredLog(ConsoleColor.Red, "Não foi possível enviar mensagem pelo whatsapp");
+                                    }   
+                                }
+                            }
+                            
+                        }
+                        else
+                        {
+                            throw new Exception("Configure as preferencias do estudante!");
                         }
 
                     }
@@ -135,20 +162,23 @@ namespace Bot.Siga.src.ColetaModular
 
         private void EnviarEmail(Estudante estudante, List<Materia> materias)
         {
-            while (true){
-                EmailService emailService = new EmailService("smtp.gmail.com", "robozinhodosiga@gmail.com", "smir wvtd uuee odvl", 587);
-                List<string> emailsTo = new List<string> { "marcos.gasparini13@gmail.com" };
-                var dictionary = emailService.BuildarEnvioDeAutalizacaoDeNotas(estudante, materias);
-                try
-                {
-                    emailService.sendEmail(emailsTo, dictionary["subject"], dictionary["body"], new List<string>());
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
-                }
-            }
+            List<string> emailsTo = new List<string>();
 
+            if (!string.IsNullOrEmpty(estudante.EmailInstitucional))
+                emailsTo.Add(estudante.EmailInstitucional);
+
+            if (estudante.Preferencia != null && !string.IsNullOrEmpty(estudante.Preferencia.Email))
+                emailsTo.Add(estudante.Preferencia.Email);
+
+            var dictionary = _emailService.BuildarEnvioDeAutalizacaoDeNotas(estudante, materias);
+            try
+            {
+                _emailService.sendEmail(emailsTo, dictionary["subject"], dictionary["body"], new List<string>());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
+            }
            
         }
 

@@ -16,7 +16,8 @@ namespace Bot.Siga.src.ColetaModular.Interface
             _estrategias = new Dictionary<EnumTipoDeExecucao, IColetaModular>
             {
                 { EnumTipoDeExecucao.COLETAR_NOTA, new ColetorNotas() },
-                { EnumTipoDeExecucao.COLETAR_FALTA, new ColetorFaltas() }
+                { EnumTipoDeExecucao.COLETAR_FALTA, new ColetorFaltas() },
+                { EnumTipoDeExecucao.COLETAR_MATERIA, new ColetorMaterias() },
 
             };
         }
