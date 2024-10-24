@@ -134,13 +134,13 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(12, 10);
             label1.Name = "label1";
-            label1.Size = new Size(114, 13);
+            label1.Size = new Size(116, 15);
             label1.TabIndex = 35;
-            label1.Text = "Marcos G. Junior TCC";
+            label1.Text = "Mensageiro do SIGA";
             // 
             // btnClose
             // 
@@ -453,6 +453,7 @@
             Controls.Add(panelLogin);
             Controls.Add(panelHeader);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "TelaLogin";
             ShowIcon = false;
