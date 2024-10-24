@@ -8,23 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Siga.Cadastro
+namespace Bot.App.Controls
 {
-    public partial class TelaLogin : Form
+    public partial class CustomComboBox : UserControl
     {
-        public TelaLogin()
+        public CustomComboBox()
         {
             InitializeComponent();
-        }
-
-        private void cbxUserPrincipal_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTitle_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
