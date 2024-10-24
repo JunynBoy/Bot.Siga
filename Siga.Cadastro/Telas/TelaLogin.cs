@@ -37,12 +37,7 @@ namespace Siga.Cadastro
             this.panelPreferencias.Visible = !this.panelPreferencias.Visible;
         }
 
-        private void lblLogin_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPreferencias_Click(object sender, EventArgs e)
+        private void panelPreferencias_Paint(object sender, PaintEventArgs e)
         {
 
         }

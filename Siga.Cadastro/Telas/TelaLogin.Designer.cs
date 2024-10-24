@@ -38,6 +38,7 @@
             btnClose = new Button();
             pbxUser = new PictureBox();
             panelLogin = new Panel();
+            panel1 = new Panel();
             customMaskedTextBox1 = new Bot.App.Controls.CustomMaskedTextBox();
             customTextBox2 = new Bot.App.Controls.CustomTextBox();
             llblPrimeiroAcesso = new LinkLabel();
@@ -51,39 +52,42 @@
             customTextBox3 = new Bot.App.Controls.CustomTextBox();
             customMaskedTextBox2 = new Bot.App.Controls.CustomMaskedTextBox();
             panelPreferencias = new Panel();
-            panelLogos = new Panel();
-            panel1 = new Panel();
+            label5 = new Label();
+            customToggleButton2 = new CustomControls.CustomControls.CustomToggleButton();
+            lblAtualizarPorWhatsapp = new Label();
+            customToggleButton1 = new CustomControls.CustomControls.CustomToggleButton();
             panel2 = new Panel();
+            panelLogos = new Panel();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbxUser).BeginInit();
             panelLogin.SuspendLayout();
+            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbxPassword).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbxLogoFatec).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbWhatsapp).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbEmail).BeginInit();
             panelPreferencias.SuspendLayout();
-            panelLogos.SuspendLayout();
-            panel1.SuspendLayout();
             panel2.SuspendLayout();
+            panelLogos.SuspendLayout();
             SuspendLayout();
             // 
             // lblSenha
             // 
             lblSenha.AutoSize = true;
-            lblSenha.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSenha.Location = new Point(67, 131);
+            lblSenha.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSenha.Location = new Point(67, 123);
             lblSenha.Name = "lblSenha";
-            lblSenha.Size = new Size(37, 13);
+            lblSenha.Size = new Size(47, 19);
             lblSenha.TabIndex = 28;
             lblSenha.Text = "Senha";
             // 
             // lblCpf
             // 
             lblCpf.AutoSize = true;
-            lblCpf.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCpf.Location = new Point(67, 69);
+            lblCpf.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCpf.Location = new Point(68, 63);
             lblCpf.Name = "lblCpf";
-            lblCpf.Size = new Size(26, 13);
+            lblCpf.Size = new Size(33, 19);
             lblCpf.TabIndex = 27;
             lblCpf.Text = "CPF";
             // 
@@ -107,14 +111,13 @@
             // 
             lblLogin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblLogin.AutoSize = true;
-            lblLogin.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLogin.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblLogin.ForeColor = Color.FromArgb(30, 39, 44);
             lblLogin.Location = new Point(115, 13);
             lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(109, 24);
+            lblLogin.Size = new Size(106, 25);
             lblLogin.TabIndex = 32;
             lblLogin.Text = "Login Siga";
-            lblLogin.Click += this.lblLogin_Click_1;
             // 
             // panelHeader
             // 
@@ -180,6 +183,15 @@
             panelLogin.Name = "panelLogin";
             panelLogin.Size = new Size(359, 299);
             panelLogin.TabIndex = 37;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(lblLogin);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(359, 53);
+            panel1.TabIndex = 41;
             // 
             // customMaskedTextBox1
             // 
@@ -257,32 +269,31 @@
             // 
             lblPreferencias.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblPreferencias.AutoSize = true;
-            lblPreferencias.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblPreferencias.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblPreferencias.ForeColor = Color.FromArgb(30, 39, 44);
             lblPreferencias.Location = new Point(123, 13);
             lblPreferencias.Name = "lblPreferencias";
-            lblPreferencias.Size = new Size(127, 24);
+            lblPreferencias.Size = new Size(121, 25);
             lblPreferencias.TabIndex = 40;
             lblPreferencias.Text = "Preferências";
-            lblPreferencias.Click += lblPreferencias_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(63, 132);
+            label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(63, 123);
             label3.Name = "label3";
-            label3.Size = new Size(39, 13);
+            label3.Size = new Size(49, 19);
             label3.TabIndex = 40;
             label3.Text = "E-mail";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(63, 70);
+            label4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(63, 63);
             label4.Name = "label4";
-            label4.Size = new Size(59, 13);
+            label4.Size = new Size(72, 19);
             label4.TabIndex = 40;
             label4.Text = "Whatsapp";
             // 
@@ -331,7 +342,7 @@
             customMaskedTextBox2.BorderSize = 1;
             customMaskedTextBox2.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             customMaskedTextBox2.ForeColor = Color.DimGray;
-            customMaskedTextBox2.Location = new Point(63, 84);
+            customMaskedTextBox2.Location = new Point(63, 86);
             customMaskedTextBox2.Margin = new Padding(4);
             customMaskedTextBox2.Mask = "00 00000-0000";
             customMaskedTextBox2.Multiline = false;
@@ -345,6 +356,10 @@
             // 
             // panelPreferencias
             // 
+            panelPreferencias.Controls.Add(label5);
+            panelPreferencias.Controls.Add(customToggleButton2);
+            panelPreferencias.Controls.Add(lblAtualizarPorWhatsapp);
+            panelPreferencias.Controls.Add(customToggleButton1);
             panelPreferencias.Controls.Add(panel2);
             panelPreferencias.Controls.Add(customMaskedTextBox2);
             panelPreferencias.Controls.Add(customTextBox3);
@@ -359,24 +374,56 @@
             panelPreferencias.Size = new Size(359, 299);
             panelPreferencias.TabIndex = 40;
             panelPreferencias.Visible = false;
+            panelPreferencias.Paint += panelPreferencias_Paint;
             // 
-            // panelLogos
+            // label5
             // 
-            panelLogos.Controls.Add(panelPreferencias);
-            panelLogos.Controls.Add(pbxLogoFatec);
-            panelLogos.Location = new Point(359, 35);
-            panelLogos.Name = "panelLogos";
-            panelLogos.Size = new Size(359, 299);
-            panelLogos.TabIndex = 39;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.FromArgb(30, 39, 44);
+            label5.Location = new Point(82, 237);
+            label5.Name = "label5";
+            label5.Size = new Size(153, 17);
+            label5.TabIndex = 46;
+            label5.Text = "Atualizações por E-mail";
             // 
-            // panel1
+            // customToggleButton2
             // 
-            panel1.Controls.Add(lblLogin);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(359, 53);
-            panel1.TabIndex = 41;
+            customToggleButton2.Location = new Point(31, 237);
+            customToggleButton2.MinimumSize = new Size(45, 22);
+            customToggleButton2.Name = "customToggleButton2";
+            customToggleButton2.OffBackColor = Color.Gray;
+            customToggleButton2.OffToggleColor = Color.Gainsboro;
+            customToggleButton2.OnBackColor = Color.FromArgb(66, 84, 96);
+            customToggleButton2.OnToggleColor = Color.WhiteSmoke;
+            customToggleButton2.Size = new Size(45, 22);
+            customToggleButton2.TabIndex = 45;
+            customToggleButton2.UseVisualStyleBackColor = true;
+            // 
+            // lblAtualizarPorWhatsapp
+            // 
+            lblAtualizarPorWhatsapp.AutoSize = true;
+            lblAtualizarPorWhatsapp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblAtualizarPorWhatsapp.ForeColor = Color.FromArgb(30, 39, 44);
+            lblAtualizarPorWhatsapp.Location = new Point(82, 208);
+            lblAtualizarPorWhatsapp.Name = "lblAtualizarPorWhatsapp";
+            lblAtualizarPorWhatsapp.Size = new Size(176, 17);
+            lblAtualizarPorWhatsapp.TabIndex = 44;
+            lblAtualizarPorWhatsapp.Text = "Atualizações por Whatsapp";
+            lblAtualizarPorWhatsapp.TextAlign = ContentAlignment.TopRight;
+            // 
+            // customToggleButton1
+            // 
+            customToggleButton1.Location = new Point(31, 208);
+            customToggleButton1.MinimumSize = new Size(45, 22);
+            customToggleButton1.Name = "customToggleButton1";
+            customToggleButton1.OffBackColor = Color.Gray;
+            customToggleButton1.OffToggleColor = Color.Gainsboro;
+            customToggleButton1.OnBackColor = Color.FromArgb(66, 84, 96);
+            customToggleButton1.OnToggleColor = Color.WhiteSmoke;
+            customToggleButton1.Size = new Size(45, 22);
+            customToggleButton1.TabIndex = 43;
+            customToggleButton1.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -386,6 +433,15 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(359, 53);
             panel2.TabIndex = 42;
+            // 
+            // panelLogos
+            // 
+            panelLogos.Controls.Add(panelPreferencias);
+            panelLogos.Controls.Add(pbxLogoFatec);
+            panelLogos.Location = new Point(359, 35);
+            panelLogos.Name = "panelLogos";
+            panelLogos.Size = new Size(359, 299);
+            panelLogos.TabIndex = 39;
             // 
             // TelaLogin
             // 
@@ -407,17 +463,17 @@
             ((System.ComponentModel.ISupportInitialize)pbxUser).EndInit();
             panelLogin.ResumeLayout(false);
             panelLogin.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbxPassword).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbxLogoFatec).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbWhatsapp).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbEmail).EndInit();
             panelPreferencias.ResumeLayout(false);
             panelPreferencias.PerformLayout();
-            panelLogos.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            panelLogos.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -447,5 +503,9 @@
         private Panel panelLogos;
         private Panel panel1;
         private Panel panel2;
+        private Label label5;
+        private CustomControls.CustomControls.CustomToggleButton customToggleButton2;
+        private Label lblAtualizarPorWhatsapp;
+        private CustomControls.CustomControls.CustomToggleButton customToggleButton1;
     }
 }
