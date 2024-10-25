@@ -10,8 +10,8 @@ namespace Bot.Core.src.Service
     public abstract class SigaSeleniumBot
     {
 
-        protected static WebDriver _driver;
-        protected static Action _action;
+        protected static WebDriver? _driver;
+        protected static Action? _action;
 
         protected void CreateChromeWithDriverManager(bool headless = false)
         {
@@ -62,7 +62,7 @@ namespace Bot.Core.src.Service
         {
             try
             {
-                IWebElement childElement = _driver.FindElement(By.XPath(xPath));
+                IWebElement childElement = _driver!.FindElement(By.XPath(xPath));
                 return childElement.Text;
             }
             catch (NoSuchElementException)

@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaLogin));
             lblSenha = new Label();
             lblCpf = new Label();
-            btnEntrar = new Button();
             lblLogin = new Label();
             panelHeader = new Panel();
             label1 = new Label();
@@ -58,6 +57,7 @@
             customToggleButton1 = new CustomControls.CustomControls.CustomToggleButton();
             panel2 = new Panel();
             panelLogos = new Panel();
+            btnEntrar = new Bot.App.Controls.CustomButton();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbxUser).BeginInit();
             panelLogin.SuspendLayout();
@@ -90,22 +90,6 @@
             lblCpf.Size = new Size(33, 19);
             lblCpf.TabIndex = 27;
             lblCpf.Text = "CPF";
-            // 
-            // btnEntrar
-            // 
-            btnEntrar.BackColor = Color.FromArgb(66, 84, 96);
-            btnEntrar.FlatAppearance.BorderSize = 0;
-            btnEntrar.FlatStyle = FlatStyle.Flat;
-            btnEntrar.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEntrar.ForeColor = Color.White;
-            btnEntrar.Location = new Point(117, 209);
-            btnEntrar.Margin = new Padding(3, 2, 3, 2);
-            btnEntrar.Name = "btnEntrar";
-            btnEntrar.Size = new Size(121, 23);
-            btnEntrar.TabIndex = 31;
-            btnEntrar.Text = "Entrar";
-            btnEntrar.UseVisualStyleBackColor = false;
-            btnEntrar.Click += btnEntrar_Click;
             // 
             // lblLogin
             // 
@@ -169,6 +153,7 @@
             // 
             // panelLogin
             // 
+            panelLogin.Controls.Add(btnEntrar);
             panelLogin.Controls.Add(panel1);
             panelLogin.Controls.Add(customMaskedTextBox1);
             panelLogin.Controls.Add(customTextBox2);
@@ -177,7 +162,6 @@
             panelLogin.Controls.Add(lblCpf);
             panelLogin.Controls.Add(lblSenha);
             panelLogin.Controls.Add(pbxUser);
-            panelLogin.Controls.Add(btnEntrar);
             panelLogin.Dock = DockStyle.Left;
             panelLogin.Location = new Point(0, 35);
             panelLogin.Name = "panelLogin";
@@ -238,7 +222,7 @@
             llblPrimeiroAcesso.AutoSize = true;
             llblPrimeiroAcesso.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             llblPrimeiroAcesso.LinkColor = Color.Black;
-            llblPrimeiroAcesso.Location = new Point(136, 245);
+            llblPrimeiroAcesso.Location = new Point(133, 246);
             llblPrimeiroAcesso.Name = "llblPrimeiroAcesso";
             llblPrimeiroAcesso.Size = new Size(88, 13);
             llblPrimeiroAcesso.TabIndex = 37;
@@ -443,6 +427,25 @@
             panelLogos.Size = new Size(359, 299);
             panelLogos.TabIndex = 39;
             // 
+            // btnEntrar
+            // 
+            btnEntrar.BackColor = Color.FromArgb(66, 84, 96);
+            btnEntrar.BackgroundColor = Color.FromArgb(66, 84, 96);
+            btnEntrar.BorderColor = Color.FromArgb(64, 64, 64);
+            btnEntrar.BorderRadius = 3;
+            btnEntrar.BorderSize = 1;
+            btnEntrar.FlatAppearance.BorderSize = 0;
+            btnEntrar.FlatStyle = FlatStyle.Flat;
+            btnEntrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnEntrar.ForeColor = Color.White;
+            btnEntrar.Location = new Point(115, 209);
+            btnEntrar.Name = "btnEntrar";
+            btnEntrar.Size = new Size(121, 23);
+            btnEntrar.TabIndex = 42;
+            btnEntrar.Text = "Entrar";
+            btnEntrar.TextColor = Color.White;
+            btnEntrar.UseVisualStyleBackColor = false;
+            // 
             // TelaLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -481,7 +484,6 @@
         #endregion
         private Label lblSenha;
         private Label lblCpf;
-        private Button btnEntrar;
         private Label lblLogin;
         private Panel panelHeader;
         private Button btnClose;
@@ -508,5 +510,6 @@
         private CustomControls.CustomControls.CustomToggleButton customToggleButton2;
         private Label lblAtualizarPorWhatsapp;
         private CustomControls.CustomControls.CustomToggleButton customToggleButton1;
+        private Bot.App.Controls.CustomButton btnEntrar;
     }
 }

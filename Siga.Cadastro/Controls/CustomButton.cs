@@ -12,7 +12,7 @@ namespace Bot.App.Controls
     {
         private int borderSize = 0;
         private int borderRadius = 0;
-        private Color borderColor = Color.PaleVioletRed;
+        private Color borderColor = Color.Gray;
 
         [Category("Custom Code Advance")]
         public int BorderSize

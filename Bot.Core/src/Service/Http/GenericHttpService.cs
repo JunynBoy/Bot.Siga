@@ -13,7 +13,7 @@ namespace Sisc.Core.ServiceHttp
             this._client.Timeout = TimeSpan.FromMinutes(10);
         }
 
-        protected async Task<string> GetAll(string resource)
+        protected async Task<string?> GetAll(string resource)
         {
             try
             {

@@ -15,6 +15,8 @@ namespace Siga.Cadastro
 
         }
 
+
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             btnClose.BackColor = Color.FromArgb(255, 0, 0);
@@ -35,6 +37,14 @@ namespace Siga.Cadastro
         private void llblPrimeiroAcesso_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.panelPreferencias.Visible = !this.panelPreferencias.Visible;
+            if (this.panelPreferencias.Visible)
+            {
+                //configurar cor do llbl
+            }
+            else
+            {
+                //configurar cor do llbl
+            }
         }
 
         private void panelPreferencias_Paint(object sender, PaintEventArgs e)
