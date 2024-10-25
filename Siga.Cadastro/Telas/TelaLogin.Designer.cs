@@ -37,9 +37,10 @@
             btnClose = new Button();
             pbxUser = new PictureBox();
             panelLogin = new Panel();
+            btnEntrar = new Bot.App.Controls.CustomButton();
             panel1 = new Panel();
-            customMaskedTextBox1 = new Bot.App.Controls.CustomMaskedTextBox();
-            customTextBox2 = new Bot.App.Controls.CustomTextBox();
+            txtmCPF = new Bot.App.Controls.CustomMaskedTextBox();
+            txtSenha = new Bot.App.Controls.CustomTextBox();
             llblPrimeiroAcesso = new LinkLabel();
             pbxPassword = new PictureBox();
             pbxLogoFatec = new PictureBox();
@@ -48,16 +49,15 @@
             label4 = new Label();
             pcbWhatsapp = new PictureBox();
             pcbEmail = new PictureBox();
-            customTextBox3 = new Bot.App.Controls.CustomTextBox();
-            customMaskedTextBox2 = new Bot.App.Controls.CustomMaskedTextBox();
+            txtEmail = new Bot.App.Controls.CustomTextBox();
+            txtmWhatsapp = new Bot.App.Controls.CustomMaskedTextBox();
             panelPreferencias = new Panel();
             label5 = new Label();
-            customToggleButton2 = new CustomControls.CustomControls.CustomToggleButton();
+            tbAtualizarPorEmail = new CustomControls.CustomControls.CustomToggleButton();
             lblAtualizarPorWhatsapp = new Label();
-            customToggleButton1 = new CustomControls.CustomControls.CustomToggleButton();
+            tbAtualizarPorWhatsapp = new CustomControls.CustomControls.CustomToggleButton();
             panel2 = new Panel();
             panelLogos = new Panel();
-            btnEntrar = new Bot.App.Controls.CustomButton();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbxUser).BeginInit();
             panelLogin.SuspendLayout();
@@ -78,7 +78,7 @@
             lblSenha.Location = new Point(67, 123);
             lblSenha.Name = "lblSenha";
             lblSenha.Size = new Size(47, 19);
-            lblSenha.TabIndex = 28;
+            lblSenha.TabIndex = 0;
             lblSenha.Text = "Senha";
             // 
             // lblCpf
@@ -88,7 +88,7 @@
             lblCpf.Location = new Point(68, 63);
             lblCpf.Name = "lblCpf";
             lblCpf.Size = new Size(33, 19);
-            lblCpf.TabIndex = 27;
+            lblCpf.TabIndex = 0;
             lblCpf.Text = "CPF";
             // 
             // lblLogin
@@ -155,8 +155,8 @@
             // 
             panelLogin.Controls.Add(btnEntrar);
             panelLogin.Controls.Add(panel1);
-            panelLogin.Controls.Add(customMaskedTextBox1);
-            panelLogin.Controls.Add(customTextBox2);
+            panelLogin.Controls.Add(txtmCPF);
+            panelLogin.Controls.Add(txtSenha);
             panelLogin.Controls.Add(llblPrimeiroAcesso);
             panelLogin.Controls.Add(pbxPassword);
             panelLogin.Controls.Add(lblCpf);
@@ -168,6 +168,26 @@
             panelLogin.Size = new Size(359, 299);
             panelLogin.TabIndex = 37;
             // 
+            // btnEntrar
+            // 
+            btnEntrar.BackColor = Color.FromArgb(66, 84, 96);
+            btnEntrar.BackgroundColor = Color.FromArgb(66, 84, 96);
+            btnEntrar.BorderColor = Color.FromArgb(64, 64, 64);
+            btnEntrar.BorderRadius = 3;
+            btnEntrar.BorderSize = 1;
+            btnEntrar.FlatAppearance.BorderSize = 0;
+            btnEntrar.FlatStyle = FlatStyle.Flat;
+            btnEntrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnEntrar.ForeColor = Color.White;
+            btnEntrar.Location = new Point(115, 209);
+            btnEntrar.Name = "btnEntrar";
+            btnEntrar.Size = new Size(121, 23);
+            btnEntrar.TabIndex = 3;
+            btnEntrar.Text = "Entrar";
+            btnEntrar.TextColor = Color.White;
+            btnEntrar.UseVisualStyleBackColor = false;
+            btnEntrar.Click += btnEntrar_Click;
+            // 
             // panel1
             // 
             panel1.Controls.Add(lblLogin);
@@ -177,44 +197,44 @@
             panel1.Size = new Size(359, 53);
             panel1.TabIndex = 41;
             // 
-            // customMaskedTextBox1
+            // txtmCPF
             // 
-            customMaskedTextBox1.BackColor = SystemColors.Window;
-            customMaskedTextBox1.BorderColor = Color.FromArgb(66, 84, 96);
-            customMaskedTextBox1.BorderFocusColor = Color.FromArgb(176, 0, 0);
-            customMaskedTextBox1.BorderSize = 1;
-            customMaskedTextBox1.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            customMaskedTextBox1.ForeColor = Color.DimGray;
-            customMaskedTextBox1.Location = new Point(68, 86);
-            customMaskedTextBox1.Margin = new Padding(4);
-            customMaskedTextBox1.Mask = "000.000.000-00";
-            customMaskedTextBox1.Multiline = false;
-            customMaskedTextBox1.Name = "customMaskedTextBox1";
-            customMaskedTextBox1.Padding = new Padding(7);
-            customMaskedTextBox1.PasswordChar = false;
-            customMaskedTextBox1.Size = new Size(250, 29);
-            customMaskedTextBox1.TabIndex = 40;
-            customMaskedTextBox1.Texts = "   ,   ,   -";
-            customMaskedTextBox1.UnderlinedStyle = true;
+            txtmCPF.BackColor = SystemColors.Window;
+            txtmCPF.BorderColor = Color.FromArgb(66, 84, 96);
+            txtmCPF.BorderFocusColor = Color.FromArgb(176, 0, 0);
+            txtmCPF.BorderSize = 1;
+            txtmCPF.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtmCPF.ForeColor = Color.DimGray;
+            txtmCPF.Location = new Point(68, 86);
+            txtmCPF.Margin = new Padding(4);
+            txtmCPF.Mask = "000.000.000-00";
+            txtmCPF.Multiline = false;
+            txtmCPF.Name = "txtmCPF";
+            txtmCPF.Padding = new Padding(7);
+            txtmCPF.PasswordChar = false;
+            txtmCPF.Size = new Size(250, 29);
+            txtmCPF.TabIndex = 1;
+            txtmCPF.Texts = "   ,   ,   -";
+            txtmCPF.UnderlinedStyle = true;
             // 
-            // customTextBox2
+            // txtSenha
             // 
-            customTextBox2.BackColor = SystemColors.Window;
-            customTextBox2.BorderColor = Color.FromArgb(66, 84, 96);
-            customTextBox2.BorderFocusColor = Color.FromArgb(176, 0, 0);
-            customTextBox2.BorderSize = 1;
-            customTextBox2.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            customTextBox2.ForeColor = Color.DimGray;
-            customTextBox2.Location = new Point(67, 146);
-            customTextBox2.Margin = new Padding(4);
-            customTextBox2.Multiline = false;
-            customTextBox2.Name = "customTextBox2";
-            customTextBox2.Padding = new Padding(7);
-            customTextBox2.PasswordChar = true;
-            customTextBox2.Size = new Size(250, 29);
-            customTextBox2.TabIndex = 39;
-            customTextBox2.Texts = "";
-            customTextBox2.UnderlinedStyle = true;
+            txtSenha.BackColor = SystemColors.Window;
+            txtSenha.BorderColor = Color.FromArgb(66, 84, 96);
+            txtSenha.BorderFocusColor = Color.FromArgb(176, 0, 0);
+            txtSenha.BorderSize = 1;
+            txtSenha.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtSenha.ForeColor = Color.DimGray;
+            txtSenha.Location = new Point(67, 146);
+            txtSenha.Margin = new Padding(4);
+            txtSenha.Multiline = false;
+            txtSenha.Name = "txtSenha";
+            txtSenha.Padding = new Padding(7);
+            txtSenha.PasswordChar = true;
+            txtSenha.Size = new Size(250, 29);
+            txtSenha.TabIndex = 2;
+            txtSenha.Texts = "";
+            txtSenha.UnderlinedStyle = true;
             // 
             // llblPrimeiroAcesso
             // 
@@ -225,7 +245,7 @@
             llblPrimeiroAcesso.Location = new Point(133, 246);
             llblPrimeiroAcesso.Name = "llblPrimeiroAcesso";
             llblPrimeiroAcesso.Size = new Size(88, 13);
-            llblPrimeiroAcesso.TabIndex = 37;
+            llblPrimeiroAcesso.TabIndex = 4;
             llblPrimeiroAcesso.TabStop = true;
             llblPrimeiroAcesso.Text = "Primeiro Acesso";
             llblPrimeiroAcesso.VisitedLinkColor = Color.FromArgb(178, 0, 0);
@@ -268,7 +288,7 @@
             label3.Location = new Point(63, 123);
             label3.Name = "label3";
             label3.Size = new Size(49, 19);
-            label3.TabIndex = 40;
+            label3.TabIndex = 0;
             label3.Text = "E-mail";
             // 
             // label4
@@ -278,7 +298,7 @@
             label4.Location = new Point(63, 63);
             label4.Name = "label4";
             label4.Size = new Size(72, 19);
-            label4.TabIndex = 40;
+            label4.TabIndex = 0;
             label4.Text = "Whatsapp";
             // 
             // pcbWhatsapp
@@ -299,54 +319,54 @@
             pcbEmail.TabIndex = 40;
             pcbEmail.TabStop = false;
             // 
-            // customTextBox3
+            // txtEmail
             // 
-            customTextBox3.BackColor = SystemColors.Window;
-            customTextBox3.BorderColor = Color.FromArgb(66, 84, 96);
-            customTextBox3.BorderFocusColor = Color.FromArgb(176, 0, 0);
-            customTextBox3.BorderSize = 1;
-            customTextBox3.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            customTextBox3.ForeColor = Color.DimGray;
-            customTextBox3.Location = new Point(63, 146);
-            customTextBox3.Margin = new Padding(4);
-            customTextBox3.Multiline = false;
-            customTextBox3.Name = "customTextBox3";
-            customTextBox3.Padding = new Padding(7);
-            customTextBox3.PasswordChar = false;
-            customTextBox3.Size = new Size(250, 29);
-            customTextBox3.TabIndex = 40;
-            customTextBox3.Texts = "";
-            customTextBox3.UnderlinedStyle = true;
+            txtEmail.BackColor = SystemColors.Window;
+            txtEmail.BorderColor = Color.FromArgb(66, 84, 96);
+            txtEmail.BorderFocusColor = Color.FromArgb(176, 0, 0);
+            txtEmail.BorderSize = 1;
+            txtEmail.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtEmail.ForeColor = Color.DimGray;
+            txtEmail.Location = new Point(63, 146);
+            txtEmail.Margin = new Padding(4);
+            txtEmail.Multiline = false;
+            txtEmail.Name = "txtEmail";
+            txtEmail.Padding = new Padding(7);
+            txtEmail.PasswordChar = false;
+            txtEmail.Size = new Size(250, 29);
+            txtEmail.TabIndex = 6;
+            txtEmail.Texts = "";
+            txtEmail.UnderlinedStyle = true;
             // 
-            // customMaskedTextBox2
+            // txtmWhatsapp
             // 
-            customMaskedTextBox2.BackColor = SystemColors.Window;
-            customMaskedTextBox2.BorderColor = Color.FromArgb(66, 84, 96);
-            customMaskedTextBox2.BorderFocusColor = Color.FromArgb(176, 0, 0);
-            customMaskedTextBox2.BorderSize = 1;
-            customMaskedTextBox2.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            customMaskedTextBox2.ForeColor = Color.DimGray;
-            customMaskedTextBox2.Location = new Point(63, 86);
-            customMaskedTextBox2.Margin = new Padding(4);
-            customMaskedTextBox2.Mask = "00 00000-0000";
-            customMaskedTextBox2.Multiline = false;
-            customMaskedTextBox2.Name = "customMaskedTextBox2";
-            customMaskedTextBox2.Padding = new Padding(7);
-            customMaskedTextBox2.PasswordChar = false;
-            customMaskedTextBox2.Size = new Size(250, 29);
-            customMaskedTextBox2.TabIndex = 41;
-            customMaskedTextBox2.Texts = "        -";
-            customMaskedTextBox2.UnderlinedStyle = true;
+            txtmWhatsapp.BackColor = SystemColors.Window;
+            txtmWhatsapp.BorderColor = Color.FromArgb(66, 84, 96);
+            txtmWhatsapp.BorderFocusColor = Color.FromArgb(176, 0, 0);
+            txtmWhatsapp.BorderSize = 1;
+            txtmWhatsapp.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtmWhatsapp.ForeColor = Color.DimGray;
+            txtmWhatsapp.Location = new Point(63, 86);
+            txtmWhatsapp.Margin = new Padding(4);
+            txtmWhatsapp.Mask = "00 00000-0000";
+            txtmWhatsapp.Multiline = false;
+            txtmWhatsapp.Name = "txtmWhatsapp";
+            txtmWhatsapp.Padding = new Padding(7);
+            txtmWhatsapp.PasswordChar = false;
+            txtmWhatsapp.Size = new Size(250, 29);
+            txtmWhatsapp.TabIndex = 5;
+            txtmWhatsapp.Texts = "        -";
+            txtmWhatsapp.UnderlinedStyle = true;
             // 
             // panelPreferencias
             // 
             panelPreferencias.Controls.Add(label5);
-            panelPreferencias.Controls.Add(customToggleButton2);
+            panelPreferencias.Controls.Add(tbAtualizarPorEmail);
             panelPreferencias.Controls.Add(lblAtualizarPorWhatsapp);
-            panelPreferencias.Controls.Add(customToggleButton1);
+            panelPreferencias.Controls.Add(tbAtualizarPorWhatsapp);
             panelPreferencias.Controls.Add(panel2);
-            panelPreferencias.Controls.Add(customMaskedTextBox2);
-            panelPreferencias.Controls.Add(customTextBox3);
+            panelPreferencias.Controls.Add(txtmWhatsapp);
+            panelPreferencias.Controls.Add(txtEmail);
             panelPreferencias.Controls.Add(pcbEmail);
             panelPreferencias.Controls.Add(pcbWhatsapp);
             panelPreferencias.Controls.Add(label4);
@@ -358,7 +378,6 @@
             panelPreferencias.Size = new Size(359, 299);
             panelPreferencias.TabIndex = 40;
             panelPreferencias.Visible = false;
-            panelPreferencias.Paint += panelPreferencias_Paint;
             // 
             // label5
             // 
@@ -368,21 +387,21 @@
             label5.Location = new Point(82, 237);
             label5.Name = "label5";
             label5.Size = new Size(153, 17);
-            label5.TabIndex = 46;
+            label5.TabIndex = 0;
             label5.Text = "Atualizações por E-mail";
             // 
-            // customToggleButton2
+            // tbAtualizarPorEmail
             // 
-            customToggleButton2.Location = new Point(31, 237);
-            customToggleButton2.MinimumSize = new Size(45, 22);
-            customToggleButton2.Name = "customToggleButton2";
-            customToggleButton2.OffBackColor = Color.Gray;
-            customToggleButton2.OffToggleColor = Color.Gainsboro;
-            customToggleButton2.OnBackColor = Color.FromArgb(66, 84, 96);
-            customToggleButton2.OnToggleColor = Color.WhiteSmoke;
-            customToggleButton2.Size = new Size(45, 22);
-            customToggleButton2.TabIndex = 45;
-            customToggleButton2.UseVisualStyleBackColor = true;
+            tbAtualizarPorEmail.Location = new Point(31, 237);
+            tbAtualizarPorEmail.MinimumSize = new Size(45, 22);
+            tbAtualizarPorEmail.Name = "tbAtualizarPorEmail";
+            tbAtualizarPorEmail.OffBackColor = Color.Gray;
+            tbAtualizarPorEmail.OffToggleColor = Color.Gainsboro;
+            tbAtualizarPorEmail.OnBackColor = Color.FromArgb(66, 84, 96);
+            tbAtualizarPorEmail.OnToggleColor = Color.WhiteSmoke;
+            tbAtualizarPorEmail.Size = new Size(45, 22);
+            tbAtualizarPorEmail.TabIndex = 8;
+            tbAtualizarPorEmail.UseVisualStyleBackColor = true;
             // 
             // lblAtualizarPorWhatsapp
             // 
@@ -392,22 +411,22 @@
             lblAtualizarPorWhatsapp.Location = new Point(82, 208);
             lblAtualizarPorWhatsapp.Name = "lblAtualizarPorWhatsapp";
             lblAtualizarPorWhatsapp.Size = new Size(176, 17);
-            lblAtualizarPorWhatsapp.TabIndex = 44;
+            lblAtualizarPorWhatsapp.TabIndex = 0;
             lblAtualizarPorWhatsapp.Text = "Atualizações por Whatsapp";
             lblAtualizarPorWhatsapp.TextAlign = ContentAlignment.TopRight;
             // 
-            // customToggleButton1
+            // tbAtualizarPorWhatsapp
             // 
-            customToggleButton1.Location = new Point(31, 208);
-            customToggleButton1.MinimumSize = new Size(45, 22);
-            customToggleButton1.Name = "customToggleButton1";
-            customToggleButton1.OffBackColor = Color.Gray;
-            customToggleButton1.OffToggleColor = Color.Gainsboro;
-            customToggleButton1.OnBackColor = Color.FromArgb(66, 84, 96);
-            customToggleButton1.OnToggleColor = Color.WhiteSmoke;
-            customToggleButton1.Size = new Size(45, 22);
-            customToggleButton1.TabIndex = 43;
-            customToggleButton1.UseVisualStyleBackColor = true;
+            tbAtualizarPorWhatsapp.Location = new Point(31, 208);
+            tbAtualizarPorWhatsapp.MinimumSize = new Size(45, 22);
+            tbAtualizarPorWhatsapp.Name = "tbAtualizarPorWhatsapp";
+            tbAtualizarPorWhatsapp.OffBackColor = Color.Gray;
+            tbAtualizarPorWhatsapp.OffToggleColor = Color.Gainsboro;
+            tbAtualizarPorWhatsapp.OnBackColor = Color.FromArgb(66, 84, 96);
+            tbAtualizarPorWhatsapp.OnToggleColor = Color.WhiteSmoke;
+            tbAtualizarPorWhatsapp.Size = new Size(45, 22);
+            tbAtualizarPorWhatsapp.TabIndex = 7;
+            tbAtualizarPorWhatsapp.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -426,25 +445,6 @@
             panelLogos.Name = "panelLogos";
             panelLogos.Size = new Size(359, 299);
             panelLogos.TabIndex = 39;
-            // 
-            // btnEntrar
-            // 
-            btnEntrar.BackColor = Color.FromArgb(66, 84, 96);
-            btnEntrar.BackgroundColor = Color.FromArgb(66, 84, 96);
-            btnEntrar.BorderColor = Color.FromArgb(64, 64, 64);
-            btnEntrar.BorderRadius = 3;
-            btnEntrar.BorderSize = 1;
-            btnEntrar.FlatAppearance.BorderSize = 0;
-            btnEntrar.FlatStyle = FlatStyle.Flat;
-            btnEntrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEntrar.ForeColor = Color.White;
-            btnEntrar.Location = new Point(115, 209);
-            btnEntrar.Name = "btnEntrar";
-            btnEntrar.Size = new Size(121, 23);
-            btnEntrar.TabIndex = 42;
-            btnEntrar.Text = "Entrar";
-            btnEntrar.TextColor = Color.White;
-            btnEntrar.UseVisualStyleBackColor = false;
             // 
             // TelaLogin
             // 
@@ -492,24 +492,24 @@
         private Panel panelLogin;
         private LinkLabel llblPrimeiroAcesso;
         private PictureBox pbxPassword;
-        private Bot.App.Controls.CustomTextBox customTextBox2;
-        private Bot.App.Controls.CustomMaskedTextBox customMaskedTextBox1;
+        private Bot.App.Controls.CustomTextBox txtSenha;
+        private Bot.App.Controls.CustomMaskedTextBox txtmCPF;
         private PictureBox pbxLogoFatec;
         private Label lblPreferencias;
         private Label label3;
         private Label label4;
         private PictureBox pcbWhatsapp;
         private PictureBox pcbEmail;
-        private Bot.App.Controls.CustomTextBox customTextBox3;
-        private Bot.App.Controls.CustomMaskedTextBox customMaskedTextBox2;
+        private Bot.App.Controls.CustomTextBox txtEmail;
+        private Bot.App.Controls.CustomMaskedTextBox txtmWhatsapp;
         private Panel panelPreferencias;
         private Panel panelLogos;
         private Panel panel1;
         private Panel panel2;
         private Label label5;
-        private CustomControls.CustomControls.CustomToggleButton customToggleButton2;
+        private CustomControls.CustomControls.CustomToggleButton tbAtualizarPorEmail;
         private Label lblAtualizarPorWhatsapp;
-        private CustomControls.CustomControls.CustomToggleButton customToggleButton1;
+        private CustomControls.CustomControls.CustomToggleButton tbAtualizarPorWhatsapp;
         private Bot.App.Controls.CustomButton btnEntrar;
     }
 }

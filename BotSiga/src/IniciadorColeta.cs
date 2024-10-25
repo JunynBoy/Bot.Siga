@@ -32,7 +32,7 @@ namespace Bot.Siga
             this._urlLogin = ConfigurationManager.AppSettings["urlLogin"];
         }
 
-        public void IniciarColeta(Estudante estudante, List<EnumTipoDeExecucao> tipoExecucao, bool headless = false)
+        public void IniciarColeta(Estudante estudante, List<EnumTipoDeExecucao> tipoExecucao, bool headless = true)
         {
 
             if (estudante != null)
@@ -41,6 +41,32 @@ namespace Bot.Siga
                 this.statusAtualDoBot = "Criando Navegador...";
                 this.Executar(tipoExecucao, estudante);
 
+            }
+            else
+            {
+                this.FecharNavegador();
+                throw new Exception("Usuário não encontrado");
+            }
+        }
+
+
+        public bool ValidarLoginSiga(Estudante estudante,bool headless = true)
+        {
+
+            if (estudante != null)
+            {
+                this.CreateChromeWithDriverManager(headless);
+                this.statusAtualDoBot = "Criando Navegador...";
+                if (this.FazerLogin(estudante))
+                {
+                    this.FecharNavegador();
+                    return true;
+                }
+                else
+                {
+                    this.FecharNavegador();
+                    return false;
+                }
             }
             else
             {
