@@ -136,6 +136,9 @@
   <data name="logosiga" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logosiga.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="logosiga_124x26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logosiga-124x26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="question" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\question.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

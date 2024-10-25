@@ -19,20 +19,8 @@ namespace Bot.App.Telas
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void customButton1_Click(object sender, EventArgs e)
-        {
-            DialogResult result = CustomMessageBox.CustomMessageBox.Show("Teste de mensagem, será que a fonte ta boa ?");
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
+      
+       
 
         private void panelHeader_MouseDown(object sender, MouseEventArgs e)
         {
@@ -42,6 +30,16 @@ namespace Bot.App.Telas
 
                 NativeMethods.SendMessage(this.Handle, NativeMethods.WM_NCLBUTTONDOWN, NativeMethods.HTCAPTION, 0);
             }
+        }
+
+        private void btnSigaImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
