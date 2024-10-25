@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             panelHeader = new Panel();
+            pictureBox1 = new PictureBox();
             label1 = new Label();
             btnClose = new Button();
-            pictureBox1 = new PictureBox();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -48,6 +48,16 @@
             panelHeader.Name = "panelHeader";
             panelHeader.Size = new Size(800, 35);
             panelHeader.TabIndex = 35;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = DockStyle.Left;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(30, 35);
+            pictureBox1.TabIndex = 36;
+            pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -75,16 +85,6 @@
             btnClose.Size = new Size(35, 35);
             btnClose.TabIndex = 0;
             btnClose.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Dock = DockStyle.Left;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(30, 35);
-            pictureBox1.TabIndex = 36;
-            pictureBox1.TabStop = false;
             // 
             // TelaPrincipal
             // 

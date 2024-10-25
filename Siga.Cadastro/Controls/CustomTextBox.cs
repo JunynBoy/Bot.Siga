@@ -13,23 +13,19 @@ namespace Bot.App.Controls
     [DefaultEvent("_TextChanged")]
     public partial class CustomTextBox : UserControl
     {
-        //Fields
         private Color borderColor = Color.MediumSlateBlue;
         private int borderSize = 1;
         private bool underlinedStyle = false;
         private Color borderFocusColor = Color.HotPink;
         private bool isFocused = false;
 
-        //Constructor
         public CustomTextBox()
         {
             InitializeComponent();
         }
 
-        //Events
         public event EventHandler _TextChanged;
 
-        //Properties
         [Category("Custom Code Advance")]
         public Color BorderColor
         {
@@ -125,14 +121,12 @@ namespace Bot.App.Controls
             set { borderFocusColor = value; }
         }
 
-        //Overridden methods
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
             Graphics graph = e.Graphics;
 
-            //Draw border
             using (Pen penBorder = new Pen(borderColor, borderSize))
             {
                 penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
@@ -158,7 +152,6 @@ namespace Bot.App.Controls
             UpdateControlHeight();
         }
 
-        //Private methods
         private void UpdateControlHeight()
         {
             if (textBox1.Multiline == false)
@@ -172,7 +165,6 @@ namespace Bot.App.Controls
             }
         }
 
-        //TextBox events
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (_TextChanged != null)
@@ -211,6 +203,5 @@ namespace Bot.App.Controls
             this.Invalidate();
         }
 
-        ///::::+
     }
 }

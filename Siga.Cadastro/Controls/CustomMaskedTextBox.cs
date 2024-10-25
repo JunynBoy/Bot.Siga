@@ -13,23 +13,19 @@ namespace Bot.App.Controls
     [DefaultEvent("_TextChanged")]
     public partial class CustomMaskedTextBox : UserControl
     {
-        //Fields
         private Color borderColor = Color.MediumSlateBlue;
         private int borderSize = 1;
         private bool underlinedStyle = false;
         private Color borderFocusColor = Color.HotPink;
         private bool isFocused = false;
 
-        //Constructor
         public CustomMaskedTextBox()
         {
             InitializeComponent();
         }
 
-        //Events
         public event EventHandler _TextChanged;
 
-        //Properties
         [Category("Custom Code Advance")]
         public Color BorderColor
         {
@@ -133,14 +129,12 @@ namespace Bot.App.Controls
             set { maskedTextBox1.Mask = value; }
         }
 
-        //Overridden methods
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
             Graphics graph = e.Graphics;
 
-            //Draw border
             using (Pen penBorder = new Pen(borderColor, borderSize))
             {
                 penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
@@ -166,7 +160,6 @@ namespace Bot.App.Controls
             UpdateControlHeight();
         }
 
-        //Private methods
         private void UpdateControlHeight()
         {
             if (maskedTextBox1.Multiline == false)

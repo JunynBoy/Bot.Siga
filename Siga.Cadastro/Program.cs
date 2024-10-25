@@ -1,3 +1,5 @@
+using Bot.App.Telas;
+
 namespace Siga.Cadastro
 {
     internal static class Program
