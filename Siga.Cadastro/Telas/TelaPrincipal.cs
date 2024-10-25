@@ -1,4 +1,5 @@
-﻿using Bot.App.Shared;
+﻿using Bot.App.Controls;
+using Bot.App.Shared;
 using CustomMessageBox;
 using System;
 using System.Drawing;
@@ -8,26 +9,100 @@ namespace Bot.App.Telas
 {
     public partial class TelaPrincipal : Form
     {
-        private NotifyIcon trayIcon;
-        private ContextMenuStrip trayMenu;
+
+        private NotifyIcon? trayIcon;
+        private ContextMenuStrip? trayMenu;
+        private UserControl? currentControl;
+        private HomeControl homeControl;
+
 
         public TelaPrincipal()
         {
             InitializeComponent();
+            ConfigureTrayMenu();
+            InitializeControlsAsync();
+        }
 
+        private async void InitializeControlsAsync()
+        {
+            LoadingControl loadingControl = new LoadingControl();
+            loadingControl.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(loadingControl);
+            loadingControl.BringToFront();
+            await Task.Delay(500);
+
+            homeControl = new HomeControl();
+            homeControl.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(homeControl);
+
+            ChangeButtonColor(btnHome, btnHome.FlatAppearance.MouseOverBackColor); 
+
+            panelContainer.Controls.Remove(loadingControl);
+        }
+
+        private void ConfigureTrayMenu()
+        {
             trayMenu = new ContextMenuStrip();
-            trayMenu.Items.Add("Voltar",Properties.Resources._return, OnRestore!);
-            trayMenu.Items.Add("Sair",Properties.Resources.CloseRed, OnExit!);
-
+            trayMenu.Items.Add("Voltar", Properties.Resources._return, OnRestore!);
+            trayMenu.Items.Add("Sair", Properties.Resources.CloseRed, OnExit!);
             trayIcon = new NotifyIcon
             {
                 Text = "Robôzinho do Siga",
-                Icon = Properties.Resources.BotIco, 
-                ContextMenuStrip = trayMenu, 
+                Icon = Properties.Resources.BotIco,
+                ContextMenuStrip = trayMenu,
                 Visible = true
             };
+            trayIcon.DoubleClick += OnRestore!;
+        }
 
-            trayIcon.DoubleClick += OnRestore;
+        private async Task SwitchTo(UserControl newControl)
+        {
+            LoadingControl loadingControl = new LoadingControl();
+            loadingControl.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(loadingControl);
+            loadingControl.BringToFront();
+
+            await Task.Delay(500);
+
+            if (currentControl != null && currentControl != homeControl)
+            {
+                panelContainer.Controls.Remove(currentControl);
+                currentControl.Dispose();
+            }
+
+            configureBtnColors();
+
+            currentControl = newControl;
+            currentControl.Dock = DockStyle.Fill;
+
+            panelContainer.Controls.Add(currentControl);
+            currentControl.BringToFront();
+
+            panelContainer.Controls.Remove(loadingControl);
+        }
+
+        private void configureBtnColors()
+        {
+            if (currentControl is PerfilControl)
+            {
+                ChangeButtonColor(btnPerfil, DefaultButtonColor());
+            }
+
+            if (currentControl is MateriasNotasFaltasControl)
+            {
+                ChangeButtonColor(btnMateriasNotas, DefaultButtonColor());
+            }
+
+            if (currentControl is PreferenciasControl)
+            {
+                ChangeButtonColor(btnPreferencias, DefaultButtonColor());
+            }
+
+            if (currentControl is HomeControl)
+            {
+                ChangeButtonColor(btnHome, DefaultButtonColor());
+            }
+
         }
 
         private void panelHeader_MouseDown(object sender, MouseEventArgs e)
@@ -39,10 +114,7 @@ namespace Bot.App.Telas
             }
         }
 
-        private void btnSigaImage_Click(object sender, EventArgs e)
-        {
-            // Ação ao clicar no botão btnSigaImage
-        }
+        
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -54,7 +126,7 @@ namespace Bot.App.Telas
 
             if (result == DialogResult.Yes || result == DialogResult.None)
             {
-                trayIcon.Visible = true;
+                trayIcon!.Visible = true;
                 this.Hide();
             }
             else
@@ -65,16 +137,14 @@ namespace Bot.App.Telas
 
         private void OnRestore(object sender, EventArgs e)
         {
-            // Restaura a janela
             this.Show();
             this.WindowState = FormWindowState.Normal;
-            trayIcon.Visible = false;
+            trayIcon!.Visible = false;
         }
 
         private void OnExit(object sender, EventArgs e)
         {
-            // Sai do aplicativo
-            trayIcon.Dispose();
+            trayIcon!.Dispose();
             Application.Exit();
         }
 
@@ -82,12 +152,83 @@ namespace Bot.App.Telas
         {
             base.OnResize(e);
 
-            // Minimiza para a bandeja se for minimizado
             if (this.WindowState == FormWindowState.Minimized)
             {
-                trayIcon.Visible = true;
+                trayIcon!.Visible = true;
                 this.Hide();
             }
+        }
+        
+
+        private async void btnHome_Click(object sender, EventArgs e)
+        {
+            await this.SwitchTo(homeControl);
+            ChangeButtonColor(btnHome, btnHome.FlatAppearance.MouseOverBackColor);
+        }
+
+        private async void btnPreferencias_Click(object sender, EventArgs e)
+        {
+            if (currentControl is PreferenciasControl)
+            {
+                return;
+            }
+
+            await SwitchTo(new PreferenciasControl());
+            ChangeButtonColor(btnPreferencias, btnPreferencias.FlatAppearance.MouseOverBackColor);
+            ChangeButtonColor(btnHome, DefaultButtonColor());
+        }
+
+        private void btnSigaImage_Click(object sender, EventArgs e)
+        {
+            string url = "https://siga.cps.sp.gov.br/aluno/login.aspx?"; 
+
+            if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true 
+                });
+            }
+            else
+            {
+                MessageBox.Show("URL inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private async void btnPerfil_Click(object sender, EventArgs e)
+        {
+            if (currentControl is PerfilControl)
+            {
+                return;
+            }
+
+            await this.SwitchTo(new PerfilControl());
+            ChangeButtonColor(btnPerfil, btnPerfil.FlatAppearance.MouseOverBackColor);
+            ChangeButtonColor(btnHome, DefaultButtonColor());
+        }
+
+        private async void btnMateriasNotas_Click(object sender, EventArgs e)
+        {
+            if (currentControl is MateriasNotasFaltasControl)
+            {
+                return;
+            }
+
+            await SwitchTo(new MateriasNotasFaltasControl());
+            ChangeButtonColor(btnMateriasNotas, btnMateriasNotas.FlatAppearance.MouseOverBackColor);
+            ChangeButtonColor(btnHome, DefaultButtonColor());
+        }
+
+        private void ChangeButtonColor(Button button, Color color)
+        {
+            button.BackColor = color;
+        }
+
+        private Color DefaultButtonColor()
+        {
+            return Color.FromArgb(176, 0, 0);
         }
     }
 }
