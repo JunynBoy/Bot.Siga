@@ -36,12 +36,12 @@
             btnClose = new Button();
             contextMenuStrip1 = new ContextMenuStrip(components);
             panelHeaderOptions = new Panel();
-            btnPreferencias = new Controls.CustomButton();
-            this.btnMateriaNotasFaltas = new Controls.CustomButton();
-            this.btnPerfil = new Controls.CustomButton();
+            btnSigaImage = new Controls.CustomButton();
+            btnPerfil = new Controls.CustomButton();
             btnHome = new Controls.CustomButton();
             panelContainer = new Panel();
-            btnSigaImage = new Controls.CustomButton();
+            btnMateriasNotas = new Controls.CustomButton();
+            customButton4 = new Controls.CustomButton();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelHeaderOptions.SuspendLayout();
@@ -80,7 +80,6 @@
             label1.Size = new Size(82, 15);
             label1.TabIndex = 35;
             label1.Text = "Nome usuário";
-            label1.Click += label1_Click;
             // 
             // btnClose
             // 
@@ -106,10 +105,10 @@
             // panelHeaderOptions
             // 
             panelHeaderOptions.BackColor = Color.FromArgb(176, 0, 0);
+            panelHeaderOptions.Controls.Add(customButton4);
+            panelHeaderOptions.Controls.Add(btnMateriasNotas);
             panelHeaderOptions.Controls.Add(btnSigaImage);
-            panelHeaderOptions.Controls.Add(btnPreferencias);
-            panelHeaderOptions.Controls.Add(this.btnMateriaNotasFaltas);
-            panelHeaderOptions.Controls.Add(this.btnPerfil);
+            panelHeaderOptions.Controls.Add(btnPerfil);
             panelHeaderOptions.Controls.Add(btnHome);
             panelHeaderOptions.Dock = DockStyle.Top;
             panelHeaderOptions.Location = new Point(0, 35);
@@ -117,65 +116,46 @@
             panelHeaderOptions.Size = new Size(800, 26);
             panelHeaderOptions.TabIndex = 36;
             // 
-            // btnPreferencias
+            // btnSigaImage
             // 
-            btnPreferencias.BackColor = Color.FromArgb(176, 0, 0);
-            btnPreferencias.BackgroundColor = Color.FromArgb(176, 0, 0);
-            btnPreferencias.BorderColor = Color.Black;
-            btnPreferencias.BorderRadius = 0;
-            btnPreferencias.BorderSize = 1;
-            btnPreferencias.Dock = DockStyle.Left;
-            btnPreferencias.FlatAppearance.BorderSize = 0;
-            btnPreferencias.FlatStyle = FlatStyle.Flat;
-            btnPreferencias.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnPreferencias.ForeColor = Color.White;
-            btnPreferencias.Location = new Point(497, 0);
-            btnPreferencias.Name = "btnPreferencias";
-            btnPreferencias.Size = new Size(177, 26);
-            btnPreferencias.TabIndex = 5;
-            btnPreferencias.Text = "Preferências";
-            btnPreferencias.TextColor = Color.White;
-            btnPreferencias.UseVisualStyleBackColor = false;
-            // 
-            // btnMateriaNotasFaltas
-            // 
-            this.btnMateriaNotasFaltas.BackColor = Color.FromArgb(176, 0, 0);
-            this.btnMateriaNotasFaltas.BackgroundColor = Color.FromArgb(176, 0, 0);
-            this.btnMateriaNotasFaltas.BorderColor = Color.Black;
-            this.btnMateriaNotasFaltas.BorderRadius = 0;
-            this.btnMateriaNotasFaltas.BorderSize = 1;
-            this.btnMateriaNotasFaltas.Dock = DockStyle.Left;
-            this.btnMateriaNotasFaltas.FlatAppearance.BorderSize = 0;
-            this.btnMateriaNotasFaltas.FlatStyle = FlatStyle.Flat;
-            this.btnMateriaNotasFaltas.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            this.btnMateriaNotasFaltas.ForeColor = Color.White;
-            this.btnMateriaNotasFaltas.Location = new Point(236, 0);
-            this.btnMateriaNotasFaltas.Name = "btnMateriaNotasFaltas";
-            this.btnMateriaNotasFaltas.Size = new Size(261, 26);
-            this.btnMateriaNotasFaltas.TabIndex = 2;
-            this.btnMateriaNotasFaltas.Text = "Matérias / Notas / Faltas";
-            this.btnMateriaNotasFaltas.TextColor = Color.White;
-            this.btnMateriaNotasFaltas.UseVisualStyleBackColor = false;
+            btnSigaImage.BackColor = Color.FromArgb(176, 0, 0);
+            btnSigaImage.BackgroundColor = Color.FromArgb(176, 0, 0);
+            btnSigaImage.BackgroundImage = Properties.Resources.logosiga_124x26;
+            btnSigaImage.BorderColor = Color.Black;
+            btnSigaImage.BorderRadius = 0;
+            btnSigaImage.BorderSize = 1;
+            btnSigaImage.Dock = DockStyle.Right;
+            btnSigaImage.FlatAppearance.BorderSize = 0;
+            btnSigaImage.FlatStyle = FlatStyle.Flat;
+            btnSigaImage.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnSigaImage.ForeColor = Color.White;
+            btnSigaImage.Location = new Point(674, 0);
+            btnSigaImage.Name = "btnSigaImage";
+            btnSigaImage.Size = new Size(126, 26);
+            btnSigaImage.TabIndex = 6;
+            btnSigaImage.TextColor = Color.White;
+            btnSigaImage.UseVisualStyleBackColor = false;
+            btnSigaImage.Click += btnSigaImage_Click;
             // 
             // btnPerfil
             // 
-            this.btnPerfil.BackColor = Color.FromArgb(176, 0, 0);
-            this.btnPerfil.BackgroundColor = Color.FromArgb(176, 0, 0);
-            this.btnPerfil.BorderColor = Color.Black;
-            this.btnPerfil.BorderRadius = 0;
-            this.btnPerfil.BorderSize = 1;
-            this.btnPerfil.Dock = DockStyle.Left;
-            this.btnPerfil.FlatAppearance.BorderSize = 0;
-            this.btnPerfil.FlatStyle = FlatStyle.Flat;
-            this.btnPerfil.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            this.btnPerfil.ForeColor = Color.White;
-            this.btnPerfil.Location = new Point(118, 0);
-            this.btnPerfil.Name = "btnPerfil";
-            this.btnPerfil.Size = new Size(118, 26);
-            this.btnPerfil.TabIndex = 1;
-            this.btnPerfil.Text = "Perfil";
-            this.btnPerfil.TextColor = Color.White;
-            this.btnPerfil.UseVisualStyleBackColor = false;
+            btnPerfil.BackColor = Color.FromArgb(176, 0, 0);
+            btnPerfil.BackgroundColor = Color.FromArgb(176, 0, 0);
+            btnPerfil.BorderColor = Color.Black;
+            btnPerfil.BorderRadius = 0;
+            btnPerfil.BorderSize = 1;
+            btnPerfil.Dock = DockStyle.Left;
+            btnPerfil.FlatAppearance.BorderSize = 0;
+            btnPerfil.FlatStyle = FlatStyle.Flat;
+            btnPerfil.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnPerfil.ForeColor = Color.White;
+            btnPerfil.Location = new Point(118, 0);
+            btnPerfil.Name = "btnPerfil";
+            btnPerfil.Size = new Size(124, 26);
+            btnPerfil.TabIndex = 5;
+            btnPerfil.Text = "Perfil";
+            btnPerfil.TextColor = Color.White;
+            btnPerfil.UseVisualStyleBackColor = false;
             // 
             // btnHome
             // 
@@ -205,26 +185,46 @@
             panelContainer.Size = new Size(800, 389);
             panelContainer.TabIndex = 37;
             // 
-            // btnSigaImage
+            // btnMateriasNotas
             // 
-            btnSigaImage.BackColor = Color.FromArgb(176, 0, 0);
-            btnSigaImage.BackgroundColor = Color.FromArgb(176, 0, 0);
-            btnSigaImage.BackgroundImage = Properties.Resources.logosiga_124x26;
-            btnSigaImage.BorderColor = Color.Black;
-            btnSigaImage.BorderRadius = 0;
-            btnSigaImage.BorderSize = 1;
-            btnSigaImage.Dock = DockStyle.Fill;
-            btnSigaImage.FlatAppearance.BorderSize = 0;
-            btnSigaImage.FlatStyle = FlatStyle.Flat;
-            btnSigaImage.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSigaImage.ForeColor = Color.White;
-            btnSigaImage.Location = new Point(674, 0);
-            btnSigaImage.Name = "btnSigaImage";
-            btnSigaImage.Size = new Size(126, 26);
-            btnSigaImage.TabIndex = 6;
-            btnSigaImage.TextColor = Color.White;
-            btnSigaImage.UseVisualStyleBackColor = false;
-            btnSigaImage.Click += btnSigaImage_Click;
+            btnMateriasNotas.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnMateriasNotas.BackColor = Color.FromArgb(176, 0, 0);
+            btnMateriasNotas.BackgroundColor = Color.FromArgb(176, 0, 0);
+            btnMateriasNotas.BorderColor = Color.Black;
+            btnMateriasNotas.BorderRadius = 0;
+            btnMateriasNotas.BorderSize = 1;
+            btnMateriasNotas.Dock = DockStyle.Left;
+            btnMateriasNotas.FlatAppearance.BorderSize = 0;
+            btnMateriasNotas.FlatStyle = FlatStyle.Flat;
+            btnMateriasNotas.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnMateriasNotas.ForeColor = Color.White;
+            btnMateriasNotas.Location = new Point(242, 0);
+            btnMateriasNotas.Name = "btnMateriasNotas";
+            btnMateriasNotas.Size = new Size(249, 26);
+            btnMateriasNotas.TabIndex = 7;
+            btnMateriasNotas.Text = "Materias / Notas / Faltas";
+            btnMateriasNotas.TextColor = Color.White;
+            btnMateriasNotas.UseVisualStyleBackColor = false;
+            // 
+            // customButton4
+            // 
+            customButton4.BackColor = Color.FromArgb(176, 0, 0);
+            customButton4.BackgroundColor = Color.FromArgb(176, 0, 0);
+            customButton4.BorderColor = Color.Black;
+            customButton4.BorderRadius = 0;
+            customButton4.BorderSize = 1;
+            customButton4.Dock = DockStyle.Fill;
+            customButton4.FlatAppearance.BorderSize = 0;
+            customButton4.FlatStyle = FlatStyle.Flat;
+            customButton4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            customButton4.ForeColor = Color.White;
+            customButton4.Location = new Point(491, 0);
+            customButton4.Name = "customButton4";
+            customButton4.Size = new Size(183, 26);
+            customButton4.TabIndex = 8;
+            customButton4.Text = "Preferências";
+            customButton4.TextColor = Color.White;
+            customButton4.UseVisualStyleBackColor = false;
             // 
             // TelaPrincipal
             // 
@@ -258,7 +258,9 @@
         private Controls.CustomButton customButton1;
         private Panel panelContainer;
         private PictureBox pictureBox2;
-        private Controls.CustomButton btnPreferencias;
+        private Controls.CustomButton btnPerfil;
         private Controls.CustomButton btnSigaImage;
+        private Controls.CustomButton customButton4;
+        private Controls.CustomButton btnMateriasNotas;
     }
 }
