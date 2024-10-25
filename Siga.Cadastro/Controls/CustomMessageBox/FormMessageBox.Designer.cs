@@ -55,7 +55,7 @@ namespace CustomMessageBox.Private
             panelTitleBar.Location = new Point(2, 2);
             panelTitleBar.Margin = new Padding(4, 3, 4, 3);
             panelTitleBar.Name = "panelTitleBar";
-            panelTitleBar.Size = new Size(404, 40);
+            panelTitleBar.Size = new Size(386, 40);
             panelTitleBar.TabIndex = 0;
             panelTitleBar.MouseDown += panelTitleBar_MouseDown;
             // 
@@ -81,7 +81,7 @@ namespace CustomMessageBox.Private
             btnClose.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Regular, GraphicsUnit.Point);
             btnClose.ForeColor = Color.White;
             btnClose.Image = (Image)resources.GetObject("btnClose.Image");
-            btnClose.Location = new Point(357, 0);
+            btnClose.Location = new Point(339, 0);
             btnClose.Margin = new Padding(4, 3, 4, 3);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(47, 40);
@@ -96,10 +96,10 @@ namespace CustomMessageBox.Private
             panelButtons.Controls.Add(button2);
             panelButtons.Controls.Add(button1);
             panelButtons.Dock = DockStyle.Bottom;
-            panelButtons.Location = new Point(2, 102);
+            panelButtons.Location = new Point(2, 108);
             panelButtons.Margin = new Padding(4, 3, 4, 3);
             panelButtons.Name = "panelButtons";
-            panelButtons.Size = new Size(404, 69);
+            panelButtons.Size = new Size(386, 63);
             panelButtons.TabIndex = 1;
             // 
             // button3
@@ -113,9 +113,9 @@ namespace CustomMessageBox.Private
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(268, 15);
+            button3.Location = new Point(12, 24);
             button3.Name = "button3";
-            button3.Size = new Size(117, 40);
+            button3.Size = new Size(102, 22);
             button3.TabIndex = 45;
             button3.Text = "button3";
             button3.TextColor = Color.White;
@@ -132,9 +132,9 @@ namespace CustomMessageBox.Private
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(145, 15);
+            button2.Location = new Point(271, 24);
             button2.Name = "button2";
-            button2.Size = new Size(117, 40);
+            button2.Size = new Size(102, 22);
             button2.TabIndex = 44;
             button2.Text = "button2";
             button2.TextColor = Color.White;
@@ -151,9 +151,9 @@ namespace CustomMessageBox.Private
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(22, 15);
+            button1.Location = new Point(138, 24);
             button1.Name = "button1";
-            button1.Size = new Size(117, 40);
+            button1.Size = new Size(102, 22);
             button1.TabIndex = 43;
             button1.Text = "button1";
             button1.TextColor = Color.White;
@@ -169,7 +169,7 @@ namespace CustomMessageBox.Private
             panelBody.Margin = new Padding(4, 3, 4, 3);
             panelBody.Name = "panelBody";
             panelBody.Padding = new Padding(12, 12, 0, 0);
-            panelBody.Size = new Size(404, 60);
+            panelBody.Size = new Size(386, 66);
             panelBody.TabIndex = 2;
             // 
             // labelMessage
@@ -195,7 +195,7 @@ namespace CustomMessageBox.Private
             pictureBoxIcon.Location = new Point(12, 12);
             pictureBoxIcon.Margin = new Padding(4, 3, 4, 3);
             pictureBoxIcon.Name = "pictureBoxIcon";
-            pictureBoxIcon.Size = new Size(47, 48);
+            pictureBoxIcon.Size = new Size(47, 54);
             pictureBoxIcon.TabIndex = 0;
             pictureBoxIcon.TabStop = false;
             // 
@@ -204,7 +204,7 @@ namespace CustomMessageBox.Private
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(66, 84, 96);
-            ClientSize = new Size(408, 173);
+            ClientSize = new Size(390, 173);
             Controls.Add(panelBody);
             Controls.Add(panelButtons);
             Controls.Add(panelTitleBar);

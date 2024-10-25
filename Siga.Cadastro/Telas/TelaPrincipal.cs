@@ -15,21 +15,18 @@ namespace Bot.App.Telas
         {
             InitializeComponent();
 
-            // Configura o menu de contexto do ícone na bandeja
             trayMenu = new ContextMenuStrip();
-            trayMenu.Items.Add("Restaurar", null, OnRestore);
-            trayMenu.Items.Add("Sair", null, OnExit);
+            trayMenu.Items.Add("Voltar",Properties.Resources._return, OnRestore!);
+            trayMenu.Items.Add("Sair",Properties.Resources.CloseRed, OnExit!);
 
-            // Configura o ícone da bandeja
             trayIcon = new NotifyIcon
             {
-                Text = "Meu Aplicativo",
-                Icon = SystemIcons.Application,
+                Text = "Robôzinho do Siga",
+                Icon = Properties.Resources.BotIco, 
                 ContextMenuStrip = trayMenu, 
-                Visible = false
+                Visible = true
             };
 
-            // Evento de duplo clique para restaurar a janela
             trayIcon.DoubleClick += OnRestore;
         }
 
@@ -55,7 +52,7 @@ namespace Bot.App.Telas
                 MessageBoxButtons.YesNo);
 
 
-            if (result == DialogResult.Yes)
+            if (result == DialogResult.Yes || result == DialogResult.None)
             {
                 trayIcon.Visible = true;
                 this.Hide();
