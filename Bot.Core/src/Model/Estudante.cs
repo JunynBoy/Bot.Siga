@@ -52,5 +52,10 @@ namespace Bot.Core.Model
 
         public Estudante() { }
 
+        public Estudante(string cpf, string senha) {
+            this.Cpf = cpf;
+            this.Senha = senha;
+        }
+
     }
 }

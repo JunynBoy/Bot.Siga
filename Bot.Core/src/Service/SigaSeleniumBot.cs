@@ -19,7 +19,12 @@ namespace Bot.Core.src.Service
             ChromeOptions options = new ChromeOptions();
 
             if (headless)
-                options.AddArguments("--headless");
+            {
+                options.AddArgument("--headless");
+                options.AddArgument("--no-sandbox");
+                options.AddArgument("--disable-dev-shm-usage");
+                options.AddArgument("--disable-gpu"); // Opcional no Linux
+            }
 
             options.AddArguments("--start-maximized");
 

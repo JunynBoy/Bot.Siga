@@ -75,9 +75,9 @@
             // 
             lblSenha.AutoSize = true;
             lblSenha.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSenha.Location = new Point(67, 123);
+            lblSenha.Location = new Point(77, 164);
             lblSenha.Name = "lblSenha";
-            lblSenha.Size = new Size(47, 19);
+            lblSenha.Size = new Size(57, 23);
             lblSenha.TabIndex = 0;
             lblSenha.Text = "Senha";
             // 
@@ -85,9 +85,9 @@
             // 
             lblCpf.AutoSize = true;
             lblCpf.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCpf.Location = new Point(68, 63);
+            lblCpf.Location = new Point(78, 84);
             lblCpf.Name = "lblCpf";
-            lblCpf.Size = new Size(33, 19);
+            lblCpf.Size = new Size(40, 23);
             lblCpf.TabIndex = 0;
             lblCpf.Text = "CPF";
             // 
@@ -97,9 +97,9 @@
             lblLogin.AutoSize = true;
             lblLogin.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblLogin.ForeColor = Color.FromArgb(30, 39, 44);
-            lblLogin.Location = new Point(115, 13);
+            lblLogin.Location = new Point(131, 17);
             lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(106, 25);
+            lblLogin.Size = new Size(133, 32);
             lblLogin.TabIndex = 32;
             lblLogin.Text = "Login Siga";
             // 
@@ -110,8 +110,9 @@
             panelHeader.Controls.Add(btnClose);
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
+            panelHeader.Margin = new Padding(3, 4, 3, 4);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(718, 35);
+            panelHeader.Size = new Size(821, 47);
             panelHeader.TabIndex = 34;
             panelHeader.MouseDown += panelHeader_MouseDown;
             // 
@@ -120,9 +121,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 10);
+            label1.Location = new Point(14, 13);
             label1.Name = "label1";
-            label1.Size = new Size(116, 15);
+            label1.Size = new Size(148, 20);
             label1.TabIndex = 35;
             label1.Text = "Mensageiro do SIGA";
             // 
@@ -135,9 +136,10 @@
             btnClose.FlatAppearance.MouseOverBackColor = Color.FromArgb(216, 0, 0);
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Image = (Image)resources.GetObject("btnClose.Image");
-            btnClose.Location = new Point(683, 0);
+            btnClose.Location = new Point(781, 0);
+            btnClose.Margin = new Padding(3, 4, 3, 4);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(35, 35);
+            btnClose.Size = new Size(40, 47);
             btnClose.TabIndex = 0;
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
@@ -145,9 +147,10 @@
             // pbxUser
             // 
             pbxUser.Image = (Image)resources.GetObject("pbxUser.Image");
-            pbxUser.Location = new Point(36, 90);
+            pbxUser.Location = new Point(41, 120);
+            pbxUser.Margin = new Padding(3, 4, 3, 4);
             pbxUser.Name = "pbxUser";
-            pbxUser.Size = new Size(25, 25);
+            pbxUser.Size = new Size(29, 33);
             pbxUser.TabIndex = 35;
             pbxUser.TabStop = false;
             // 
@@ -163,9 +166,10 @@
             panelLogin.Controls.Add(lblSenha);
             panelLogin.Controls.Add(pbxUser);
             panelLogin.Dock = DockStyle.Left;
-            panelLogin.Location = new Point(0, 35);
+            panelLogin.Location = new Point(0, 47);
+            panelLogin.Margin = new Padding(3, 4, 3, 4);
             panelLogin.Name = "panelLogin";
-            panelLogin.Size = new Size(359, 299);
+            panelLogin.Size = new Size(410, 398);
             panelLogin.TabIndex = 37;
             // 
             // btnEntrar
@@ -179,9 +183,10 @@
             btnEntrar.FlatStyle = FlatStyle.Flat;
             btnEntrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnEntrar.ForeColor = Color.White;
-            btnEntrar.Location = new Point(115, 209);
+            btnEntrar.Location = new Point(131, 279);
+            btnEntrar.Margin = new Padding(3, 4, 3, 4);
             btnEntrar.Name = "btnEntrar";
-            btnEntrar.Size = new Size(121, 23);
+            btnEntrar.Size = new Size(138, 31);
             btnEntrar.TabIndex = 3;
             btnEntrar.Text = "Entrar";
             btnEntrar.TextColor = Color.White;
@@ -193,8 +198,9 @@
             panel1.Controls.Add(lblLogin);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(359, 53);
+            panel1.Size = new Size(410, 71);
             panel1.TabIndex = 41;
             // 
             // txtmCPF
@@ -205,14 +211,14 @@
             txtmCPF.BorderSize = 1;
             txtmCPF.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtmCPF.ForeColor = Color.DimGray;
-            txtmCPF.Location = new Point(68, 86);
-            txtmCPF.Margin = new Padding(4);
+            txtmCPF.Location = new Point(78, 115);
+            txtmCPF.Margin = new Padding(5);
             txtmCPF.Mask = "000.000.000-00";
             txtmCPF.Multiline = false;
             txtmCPF.Name = "txtmCPF";
-            txtmCPF.Padding = new Padding(7);
+            txtmCPF.Padding = new Padding(8, 9, 8, 9);
             txtmCPF.PasswordChar = false;
-            txtmCPF.Size = new Size(250, 29);
+            txtmCPF.Size = new Size(286, 38);
             txtmCPF.TabIndex = 1;
             txtmCPF.Texts = "   ,   ,   -";
             txtmCPF.UnderlinedStyle = true;
@@ -225,13 +231,13 @@
             txtSenha.BorderSize = 1;
             txtSenha.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtSenha.ForeColor = Color.DimGray;
-            txtSenha.Location = new Point(67, 146);
-            txtSenha.Margin = new Padding(4);
+            txtSenha.Location = new Point(77, 195);
+            txtSenha.Margin = new Padding(5);
             txtSenha.Multiline = false;
             txtSenha.Name = "txtSenha";
-            txtSenha.Padding = new Padding(7);
+            txtSenha.Padding = new Padding(8, 9, 8, 9);
             txtSenha.PasswordChar = true;
-            txtSenha.Size = new Size(250, 29);
+            txtSenha.Size = new Size(286, 38);
             txtSenha.TabIndex = 2;
             txtSenha.Texts = "";
             txtSenha.UnderlinedStyle = true;
@@ -242,9 +248,9 @@
             llblPrimeiroAcesso.AutoSize = true;
             llblPrimeiroAcesso.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             llblPrimeiroAcesso.LinkColor = Color.Black;
-            llblPrimeiroAcesso.Location = new Point(133, 246);
+            llblPrimeiroAcesso.Location = new Point(152, 328);
             llblPrimeiroAcesso.Name = "llblPrimeiroAcesso";
-            llblPrimeiroAcesso.Size = new Size(88, 13);
+            llblPrimeiroAcesso.Size = new Size(109, 19);
             llblPrimeiroAcesso.TabIndex = 4;
             llblPrimeiroAcesso.TabStop = true;
             llblPrimeiroAcesso.Text = "Primeiro Acesso";
@@ -254,18 +260,20 @@
             // pbxPassword
             // 
             pbxPassword.Image = (Image)resources.GetObject("pbxPassword.Image");
-            pbxPassword.Location = new Point(36, 146);
+            pbxPassword.Location = new Point(41, 195);
+            pbxPassword.Margin = new Padding(3, 4, 3, 4);
             pbxPassword.Name = "pbxPassword";
-            pbxPassword.Size = new Size(25, 25);
+            pbxPassword.Size = new Size(29, 33);
             pbxPassword.TabIndex = 36;
             pbxPassword.TabStop = false;
             // 
             // pbxLogoFatec
             // 
             pbxLogoFatec.Image = (Image)resources.GetObject("pbxLogoFatec.Image");
-            pbxLogoFatec.Location = new Point(0, 70);
+            pbxLogoFatec.Location = new Point(0, 93);
+            pbxLogoFatec.Margin = new Padding(3, 4, 3, 4);
             pbxLogoFatec.Name = "pbxLogoFatec";
-            pbxLogoFatec.Size = new Size(319, 147);
+            pbxLogoFatec.Size = new Size(365, 196);
             pbxLogoFatec.TabIndex = 38;
             pbxLogoFatec.TabStop = false;
             // 
@@ -275,9 +283,9 @@
             lblPreferencias.AutoSize = true;
             lblPreferencias.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblPreferencias.ForeColor = Color.FromArgb(30, 39, 44);
-            lblPreferencias.Location = new Point(123, 13);
+            lblPreferencias.Location = new Point(141, 17);
             lblPreferencias.Name = "lblPreferencias";
-            lblPreferencias.Size = new Size(121, 25);
+            lblPreferencias.Size = new Size(155, 32);
             lblPreferencias.TabIndex = 40;
             lblPreferencias.Text = "Preferências";
             // 
@@ -285,9 +293,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(63, 123);
+            label3.Location = new Point(72, 164);
             label3.Name = "label3";
-            label3.Size = new Size(49, 19);
+            label3.Size = new Size(58, 23);
             label3.TabIndex = 0;
             label3.Text = "E-mail";
             // 
@@ -295,27 +303,29 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(63, 63);
+            label4.Location = new Point(72, 84);
             label4.Name = "label4";
-            label4.Size = new Size(72, 19);
+            label4.Size = new Size(87, 23);
             label4.TabIndex = 0;
             label4.Text = "Whatsapp";
             // 
             // pcbWhatsapp
             // 
             pcbWhatsapp.Image = (Image)resources.GetObject("pcbWhatsapp.Image");
-            pcbWhatsapp.Location = new Point(31, 90);
+            pcbWhatsapp.Location = new Point(35, 120);
+            pcbWhatsapp.Margin = new Padding(3, 4, 3, 4);
             pcbWhatsapp.Name = "pcbWhatsapp";
-            pcbWhatsapp.Size = new Size(25, 25);
+            pcbWhatsapp.Size = new Size(29, 33);
             pcbWhatsapp.TabIndex = 40;
             pcbWhatsapp.TabStop = false;
             // 
             // pcbEmail
             // 
             pcbEmail.Image = (Image)resources.GetObject("pcbEmail.Image");
-            pcbEmail.Location = new Point(31, 146);
+            pcbEmail.Location = new Point(35, 195);
+            pcbEmail.Margin = new Padding(3, 4, 3, 4);
             pcbEmail.Name = "pcbEmail";
-            pcbEmail.Size = new Size(25, 25);
+            pcbEmail.Size = new Size(29, 33);
             pcbEmail.TabIndex = 40;
             pcbEmail.TabStop = false;
             // 
@@ -327,13 +337,13 @@
             txtEmail.BorderSize = 1;
             txtEmail.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtEmail.ForeColor = Color.DimGray;
-            txtEmail.Location = new Point(63, 146);
-            txtEmail.Margin = new Padding(4);
+            txtEmail.Location = new Point(72, 195);
+            txtEmail.Margin = new Padding(5);
             txtEmail.Multiline = false;
             txtEmail.Name = "txtEmail";
-            txtEmail.Padding = new Padding(7);
+            txtEmail.Padding = new Padding(8, 9, 8, 9);
             txtEmail.PasswordChar = false;
-            txtEmail.Size = new Size(250, 29);
+            txtEmail.Size = new Size(286, 38);
             txtEmail.TabIndex = 6;
             txtEmail.Texts = "";
             txtEmail.UnderlinedStyle = true;
@@ -346,14 +356,14 @@
             txtmWhatsapp.BorderSize = 1;
             txtmWhatsapp.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtmWhatsapp.ForeColor = Color.DimGray;
-            txtmWhatsapp.Location = new Point(63, 86);
-            txtmWhatsapp.Margin = new Padding(4);
+            txtmWhatsapp.Location = new Point(72, 115);
+            txtmWhatsapp.Margin = new Padding(5);
             txtmWhatsapp.Mask = "00 00000-0000";
             txtmWhatsapp.Multiline = false;
             txtmWhatsapp.Name = "txtmWhatsapp";
-            txtmWhatsapp.Padding = new Padding(7);
+            txtmWhatsapp.Padding = new Padding(8, 9, 8, 9);
             txtmWhatsapp.PasswordChar = false;
-            txtmWhatsapp.Size = new Size(250, 29);
+            txtmWhatsapp.Size = new Size(286, 38);
             txtmWhatsapp.TabIndex = 5;
             txtmWhatsapp.Texts = "        -";
             txtmWhatsapp.UnderlinedStyle = true;
@@ -374,8 +384,9 @@
             panelPreferencias.Dock = DockStyle.Right;
             panelPreferencias.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             panelPreferencias.Location = new Point(0, 0);
+            panelPreferencias.Margin = new Padding(3, 4, 3, 4);
             panelPreferencias.Name = "panelPreferencias";
-            panelPreferencias.Size = new Size(359, 299);
+            panelPreferencias.Size = new Size(410, 399);
             panelPreferencias.TabIndex = 40;
             panelPreferencias.Visible = false;
             // 
@@ -384,22 +395,23 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.FromArgb(30, 39, 44);
-            label5.Location = new Point(82, 237);
+            label5.Location = new Point(94, 316);
             label5.Name = "label5";
-            label5.Size = new Size(153, 17);
+            label5.Size = new Size(198, 23);
             label5.TabIndex = 0;
             label5.Text = "Atualizações por E-mail";
             // 
             // tbAtualizarPorEmail
             // 
-            tbAtualizarPorEmail.Location = new Point(31, 237);
-            tbAtualizarPorEmail.MinimumSize = new Size(45, 22);
+            tbAtualizarPorEmail.Location = new Point(35, 316);
+            tbAtualizarPorEmail.Margin = new Padding(3, 4, 3, 4);
+            tbAtualizarPorEmail.MinimumSize = new Size(51, 29);
             tbAtualizarPorEmail.Name = "tbAtualizarPorEmail";
             tbAtualizarPorEmail.OffBackColor = Color.Gray;
             tbAtualizarPorEmail.OffToggleColor = Color.Gainsboro;
             tbAtualizarPorEmail.OnBackColor = Color.FromArgb(66, 84, 96);
             tbAtualizarPorEmail.OnToggleColor = Color.WhiteSmoke;
-            tbAtualizarPorEmail.Size = new Size(45, 22);
+            tbAtualizarPorEmail.Size = new Size(51, 29);
             tbAtualizarPorEmail.TabIndex = 8;
             tbAtualizarPorEmail.UseVisualStyleBackColor = true;
             // 
@@ -408,23 +420,24 @@
             lblAtualizarPorWhatsapp.AutoSize = true;
             lblAtualizarPorWhatsapp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblAtualizarPorWhatsapp.ForeColor = Color.FromArgb(30, 39, 44);
-            lblAtualizarPorWhatsapp.Location = new Point(82, 208);
+            lblAtualizarPorWhatsapp.Location = new Point(94, 277);
             lblAtualizarPorWhatsapp.Name = "lblAtualizarPorWhatsapp";
-            lblAtualizarPorWhatsapp.Size = new Size(176, 17);
+            lblAtualizarPorWhatsapp.Size = new Size(228, 23);
             lblAtualizarPorWhatsapp.TabIndex = 0;
             lblAtualizarPorWhatsapp.Text = "Atualizações por Whatsapp";
             lblAtualizarPorWhatsapp.TextAlign = ContentAlignment.TopRight;
             // 
             // tbAtualizarPorWhatsapp
             // 
-            tbAtualizarPorWhatsapp.Location = new Point(31, 208);
-            tbAtualizarPorWhatsapp.MinimumSize = new Size(45, 22);
+            tbAtualizarPorWhatsapp.Location = new Point(35, 277);
+            tbAtualizarPorWhatsapp.Margin = new Padding(3, 4, 3, 4);
+            tbAtualizarPorWhatsapp.MinimumSize = new Size(51, 29);
             tbAtualizarPorWhatsapp.Name = "tbAtualizarPorWhatsapp";
             tbAtualizarPorWhatsapp.OffBackColor = Color.Gray;
             tbAtualizarPorWhatsapp.OffToggleColor = Color.Gainsboro;
             tbAtualizarPorWhatsapp.OnBackColor = Color.FromArgb(66, 84, 96);
             tbAtualizarPorWhatsapp.OnToggleColor = Color.WhiteSmoke;
-            tbAtualizarPorWhatsapp.Size = new Size(45, 22);
+            tbAtualizarPorWhatsapp.Size = new Size(51, 29);
             tbAtualizarPorWhatsapp.TabIndex = 7;
             tbAtualizarPorWhatsapp.UseVisualStyleBackColor = true;
             // 
@@ -433,31 +446,32 @@
             panel2.Controls.Add(lblPreferencias);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(359, 53);
+            panel2.Size = new Size(410, 71);
             panel2.TabIndex = 42;
             // 
             // panelLogos
             // 
             panelLogos.Controls.Add(panelPreferencias);
             panelLogos.Controls.Add(pbxLogoFatec);
-            panelLogos.Location = new Point(359, 35);
+            panelLogos.Location = new Point(410, 47);
+            panelLogos.Margin = new Padding(3, 4, 3, 4);
             panelLogos.Name = "panelLogos";
-            panelLogos.Size = new Size(359, 299);
+            panelLogos.Size = new Size(410, 399);
             panelLogos.TabIndex = 39;
             // 
             // TelaLogin
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(718, 334);
+            ClientSize = new Size(821, 445);
             Controls.Add(panelLogos);
             Controls.Add(panelLogin);
             Controls.Add(panelHeader);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
             Name = "TelaLogin";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

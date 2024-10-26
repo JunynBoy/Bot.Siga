@@ -1,8 +1,10 @@
 ﻿using AngleSharp.Html;
 using Bot.App.Shared;
+using Bot.App.Telas;
 using Bot.Core.Model;
 using Bot.Core.Service;
 using Bot.Core.src.Helper;
+using Bot.Core.src.Model;
 using Bot.Core.src.Model.Enum;
 using Bot.Siga;
 using System.Windows.Forms;
@@ -57,39 +59,79 @@ namespace Siga.Cadastro
                 this.llblPrimeiroAcesso.ForeColor = Color.FromArgb(66, 84, 96);
             }
 
-            llblPrimeiroAcesso.Refresh(); // Adicione isso
+            llblPrimeiroAcesso.Refresh(); 
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
+
+            this.btnEntrar.Enabled = false;
 
             List<string> erros = this.isValidLogin();
             if (erros.Any())
             {
                 var result = CustomMessageBox.CustomMessageBox.Show(string.Join("\n", erros),
                 "Atenção, Erros de validação",
-                MessageBoxButtons.RetryCancel,
+                MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                if (result == DialogResult.Cancel)
-                {
-                    this.Close();
-                }
             }
             else
             {
-                Estudante estudante = new Estudante();
-                if (this.coletor.ValidarLoginSiga(estudante))
+                try
                 {
-                    //liberar acesso
+                    Estudante? estudante = this._estudanteService.GetByCpf(this.txtmCPF.Texts.Replace(",","").Replace("-","").Replace(".", ""));
+                    if (estudante == null)
+                        estudante = new Estudante(this.txtmCPF.Texts.Replace(",", "").Replace("-", "").Replace(".", ""), this.txtSenha.Texts);
+
+                    if (this.panelPreferencias.Visible)
+                    {
+                        Preferencia preferencia = new Preferencia();
+                        preferencia.Whatsapp = this.txtmWhatsapp.Texts;
+                        preferencia.Email = this.txtEmail.Texts;
+                        preferencia.IsAtualizarPorEmail = this.tbAtualizarPorEmail.Checked;
+                        preferencia.IsAtualizarPorWhatsapp = this.tbAtualizarPorWhatsapp.Checked;
+
+                        estudante.Preferencia = preferencia;
+                    }
+
+
+                    if (estudante.Id != 0 && estudante.Autenticado)
+                    {
+                        if (estudante.Senha!.Equals(txtSenha.Texts))
+                        {
+                            this.IniciarTelaPrincipal();
+                        }
+                    }
+                    else
+                    {
+                        if (this.coletor.ValidarLoginSiga(estudante))
+                            this.IniciarTelaPrincipal();
+                        else
+                            CustomMessageBox.CustomMessageBox.Show("Usuario ou senha inválidos, preencha com seu Login do SIGA e tente novamente!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                   
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    //siga consta como usuário inválido, tente novamente
+                    CustomMessageBox.CustomMessageBox.Show($"Não foi possível efetuar login devido a um erro inesperado:\n\nMensagem: {ex.Message}", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+               
             }
-           
+            this.btnEntrar.Enabled = true;
         }
 
+
+
+        private void IniciarTelaPrincipal()
+        {
+            TelaPrincipal telaPrincipal = new TelaPrincipal();
+            telaPrincipal.Show();
+
+            this.Hide();
+            telaPrincipal.FormClosed += (s, args) => Application.Exit();
+        }
 
         private bool IsCpfValid(string cpf)
         {
@@ -133,33 +175,32 @@ namespace Siga.Cadastro
         {
             List<string> erros = new List<string>();
 
-            if (IsCpfValid(txtmCPF.Text))
+            if (IsCpfValid(txtmCPF.Texts)) 
             {
                erros.Add("CPF inserido é inválido");
             }
 
-            if (String.IsNullOrEmpty(txtSenha.Text))
+            if (String.IsNullOrEmpty(txtSenha.Texts))
             {
                 erros.Add("O Campo Senha Não foi preenchido");
             }
 
             if (this.panelPreferencias.Visible)
             {
-                if (this.tbAtualizarPorEmail.Checked && String.IsNullOrEmpty(txtEmail.Text))
+                if (this.tbAtualizarPorEmail.Checked && String.IsNullOrEmpty(txtEmail.Texts))
                 {
                     erros.Add("Preencha o campo e-mail");
                 }
 
-                if (this.tbAtualizarPorEmail.Checked && !String.IsNullOrEmpty(txtEmail.Text))
+                if (this.tbAtualizarPorEmail.Checked && !String.IsNullOrEmpty(txtEmail.Texts))
                 {
-                    if (!StringHelper.IsValidEmail(txtEmail.Text))
+                    if (!StringHelper.IsValidEmail(txtEmail.Texts))
                     {
                         erros.Add("O Formato do E-mail que você digitou é inválido");
                     }
                 }
 
-                //TODO VERIFICAR SE O ESPAÇO CONTA COMO CARACTER NO LENGTH SE SIM AUMENTAR 1
-                if (this.tbAtualizarPorWhatsapp.Checked && String.IsNullOrEmpty(txtmWhatsapp.Text) && txtmWhatsapp.Text.Length != 13)
+                if (this.tbAtualizarPorWhatsapp.Checked && String.IsNullOrEmpty(txtmWhatsapp.Texts) && txtmWhatsapp.Text.Length != 13)
                 {
                     erros.Add("Preencha o número do whatsapp corretamente para receber atualizações");
                 }

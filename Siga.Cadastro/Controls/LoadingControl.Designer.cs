@@ -35,20 +35,22 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.Loading_icon;
-            pictureBox1.Location = new Point(165, 36);
+            pictureBox1.Location = new Point(217, 115);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(445, 294);
+            pictureBox1.Size = new Size(441, 291);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
             // LoadingControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             Controls.Add(pictureBox1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "LoadingControl";
-            Size = new Size(800, 389);
+            Size = new Size(914, 519);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
