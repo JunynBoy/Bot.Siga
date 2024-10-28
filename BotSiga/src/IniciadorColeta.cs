@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.Configuration;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace Bot.Siga
@@ -56,7 +57,7 @@ namespace Bot.Siga
             if (estudante != null)
             {
                 this.CreateChromeWithDriverManager(headless);
-                this.statusAtualDoBot = "Criando Navegador...";
+                StringHelper.ConsoleColoredLog(ConsoleColor.Blue,"Iniciando sistema do SIGA para validar o usuário inserido......");
                 if (this.FazerLogin(estudante))
                 {
                     this.FecharNavegador();

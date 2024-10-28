@@ -3,11 +3,11 @@ using Bot.App.Shared;
 using Bot.App.Telas;
 using Bot.Core.Model;
 using Bot.Core.Service;
+using Bot.Core.src.Exceptions;
 using Bot.Core.src.Helper;
 using Bot.Core.src.Model;
 using Bot.Core.src.Model.Enum;
 using Bot.Siga;
-using System.Windows.Forms;
 
 namespace Siga.Cadastro
 {
@@ -17,6 +17,8 @@ namespace Siga.Cadastro
 
         EstudanteService _estudanteService;
         LoadingService _loadingService;
+        private Panel controlTempLoading;
+        private bool primeiroAcesso = false;
 
         IniciadorColeta coletor = new IniciadorColeta();
         List<EnumTipoDeExecucao> acoes = new List<EnumTipoDeExecucao>()
@@ -52,20 +54,24 @@ namespace Siga.Cadastro
             this.panelPreferencias.Visible = !this.panelPreferencias.Visible;
             if (this.panelPreferencias.Visible)
             {
+                primeiroAcesso = true;
                 this.llblPrimeiroAcesso.ForeColor = Color.FromArgb(176, 0, 0);
             }
             else
             {
+                primeiroAcesso = false;
                 this.llblPrimeiroAcesso.ForeColor = Color.FromArgb(66, 84, 96);
             }
 
             llblPrimeiroAcesso.Refresh(); 
         }
 
-        private void btnEntrar_Click(object sender, EventArgs e)
+        private async void btnEntrar_Click(object sender, EventArgs e)
         {
 
             this.btnEntrar.Enabled = false;
+
+            bool estudanteValidado = false;
 
             List<string> erros = this.isValidLogin();
             if (erros.Any())
@@ -77,65 +83,111 @@ namespace Siga.Cadastro
             }
             else
             {
+                Estudante? estudante = null;
+
+
                 try
                 {
-                    _loadingService.StartLoading(this.panelLoading);
-                    Estudante? estudante = this._estudanteService.GetByCpf(this.txtmCPF.Texts.Replace(",","").Replace("-","").Replace(".", ""));
-                    if (estudante == null)
-                        estudante = new Estudante(this.txtmCPF.Texts.Replace(",", "").Replace("-", "").Replace(".", ""), this.txtSenha.Texts);
-
-                    if (this.panelPreferencias.Visible)
+                    this.prepararTelaParaLoading();
+                    Func<Task> longRunningTask = async () =>
                     {
-                        Preferencia preferencia = new Preferencia();
-                        preferencia.Whatsapp = this.txtmWhatsapp.Texts;
-                        preferencia.Email = this.txtEmail.Texts;
-                        preferencia.IsAtualizarPorEmail = this.tbAtualizarPorEmail.Checked;
-                        preferencia.IsAtualizarPorWhatsapp = this.tbAtualizarPorWhatsapp.Checked;
+                        estudante = null;
+                        estudante = this._estudanteService.GetByCpf(this.txtmCPF.Texts.Replace(",", "").Replace("-", "").Replace(".", ""));
+                        if (primeiroAcesso && estudante != null)
+                            throw new CustomException("Esse CPF Já está cadastrado, basta logar!");
 
-                        estudante.Preferencia = preferencia;
-                    }
+                        if (primeiroAcesso && estudante == null)
+                            estudante = new Estudante(this.txtmCPF.Texts.Replace(",", "").Replace("-", "").Replace(".", ""), this.txtSenha.Texts);
 
-
-                    if (estudante.Id != 0 && estudante.Autenticado)
-                    {
-                        if (estudante.Senha!.Equals(txtSenha.Texts))
+                        if (!primeiroAcesso && estudante == null)
+                            throw new CustomException("Não existe nenhum usuário cadastrado nesse sistema com este CPF");
+                        
+                        if (this.primeiroAcesso)
                         {
-                            this.IniciarTelaPrincipal();
+                            Preferencia preferencia = new Preferencia();
+                            preferencia.Whatsapp = this.txtmWhatsapp.Texts;
+                            preferencia.Email = this.txtEmail.Texts;
+                            preferencia.IsAtualizarPorEmail = this.tbAtualizarPorEmail.Checked;
+                            preferencia.IsAtualizarPorWhatsapp = this.tbAtualizarPorWhatsapp.Checked;
+                            estudante.Preferencia = preferencia;
                         }
-                    }
-                    else
-                    {
-                        if (this.coletor.ValidarLoginSiga(estudante))
+
+                        if (primeiroAcesso)
                         {
-                            this.IniciarTelaPrincipal();
+                            IniciadorColeta iniciadorColeta = new IniciadorColeta();
+                            if (iniciadorColeta.ValidarLoginSiga(estudante, true))
+                            {
+                                estudanteValidado = true;
+                            }
+                            else
+                            {
+                                throw new CustomException("Usuario ou senha inválidos, preencha seu login e senha e tente novamente");
+                            }
+                        }
+                        else if(estudante.Id == 0 && estudante.Autenticado == false && !estudante.Senha!.Equals(txtSenha.Texts.ToString()))
+                        {
+                            throw new CustomException("Usuario ou senha inválidos, preencha seu login e senha e tente novamente");
                         }
                         else
                         {
-                            CustomMessageBox.CustomMessageBox.Show("Usuario ou senha inválidos, preencha com seu Login do SIGA e tente novamente!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            estudanteValidado = true;
                         }
-                    }
+                    };
 
-                    _loadingService.StopLoading(this.panelLoading);
+                    await _loadingService.StartLoadingAsync(controlTempLoading, longRunningTask);
+                    this.removerLoadingTela();
+                }
+                catch (CustomException ex)
+                {
+                    this.removerLoadingTela();
+                    CustomMessageBox.CustomMessageBox.Show(ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 catch (Exception ex)
                 {
-                    CustomMessageBox.CustomMessageBox.Show($"Não foi possível efetuar login devido a um erro inesperado:\n\nMensagem: {ex.Message}", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    _loadingService.StopLoading(this.panelLoading);
+                    this.removerLoadingTela();
+                    CustomMessageBox.CustomMessageBox.Show($"Não foi possível efetuar login\n\nMensagem: {ex.Message}", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-               
+
+                if (estudanteValidado)
+                {
+                    this.IniciarTelaPrincipal();
+                }
+
             }
             this.btnEntrar.Enabled = true;
         }
 
+        private async void prepararTelaParaLoading()
+        {
+            this.panelContainer.Visible = false;
+            controlTempLoading = new Panel
+            {
+                Size = this.panelContainer.Size,
+                Location = this.panelContainer.Location,
+                Dock = DockStyle.Fill
+            };
+
+            this.Controls.Add(controlTempLoading);
+        }
+
+        private void removerLoadingTela()
+        {
+
+            if (controlTempLoading != null)
+            {
+                this.Controls.Remove(controlTempLoading);
+                controlTempLoading = null;
+            }
+
+            this.panelContainer.Visible = true;
+        }
 
 
         private void IniciarTelaPrincipal()
         {
             TelaPrincipal telaPrincipal = new TelaPrincipal();
             telaPrincipal.Show();
-
             this.Hide();
-            telaPrincipal.FormClosed += (s, args) => Application.Exit();
         }
 
         private bool IsCpfValid(string cpf)
@@ -190,7 +242,7 @@ namespace Siga.Cadastro
                 erros.Add("O Campo Senha Não foi preenchido");
             }
 
-            if (this.panelPreferencias.Visible)
+            if (this.primeiroAcesso)
             {
                 if (this.tbAtualizarPorEmail.Checked && String.IsNullOrEmpty(txtEmail.Texts))
                 {

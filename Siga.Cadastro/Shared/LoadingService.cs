@@ -17,12 +17,33 @@ namespace Bot.App.Shared
             loadingControl.Dock = DockStyle.Fill;
         }
 
-        public void StartLoading(Panel panel)
+        public async Task StartLoadingAsync(Panel panel, Func<Task> longRunningTask)
         {
             if (!panel.Controls.Contains(loadingControl))
             {
                 panel.Controls.Add(loadingControl);
                 loadingControl.BringToFront();
+            }
+
+            loadingControl.Start();
+
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        await longRunningTask();
+                    }
+                    finally
+                    {
+                        panel.Invoke((Action)(() => loadingControl.Stop()));
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
@@ -30,7 +51,8 @@ namespace Bot.App.Shared
         {
             if (panel.Controls.Contains(loadingControl))
             {
-                panel.Controls.Remove(loadingControl);
+                panel.Invoke((Action)(() => loadingControl.Stop())); 
+                panel.Controls.Remove(loadingControl); 
             }
         }
     }

@@ -15,6 +15,11 @@ namespace Bot.Core.src.Service
 
         protected void CreateChromeWithDriverManager(bool headless = false)
         {
+            if (_driver != null)
+            {
+                return;
+            }
+
             new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
             ChromeOptions options = new ChromeOptions();
 
@@ -23,7 +28,7 @@ namespace Bot.Core.src.Service
                 options.AddArgument("--headless");
                 options.AddArgument("--no-sandbox");
                 options.AddArgument("--disable-dev-shm-usage");
-                options.AddArgument("--disable-gpu"); // Opcional no Linux
+                options.AddArgument("--disable-gpu"); 
             }
 
             options.AddArguments("--start-maximized");

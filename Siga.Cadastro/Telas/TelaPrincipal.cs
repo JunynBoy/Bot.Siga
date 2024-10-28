@@ -29,7 +29,7 @@ namespace Bot.App.Telas
 
         private async void InitializeControlsAsync()
         {
-            loadingService.StartLoading(panelContainer);
+            //loadingService.StartLoading(panelContainer);
 
             await Task.Delay(500); 
 
@@ -57,9 +57,7 @@ namespace Bot.App.Telas
 
         private async Task SwitchTo(UserControl newControl)
         {
-            loadingService.StartLoading(panelContainer);
-
-            await Task.Delay(500);
+            //loadingService.StartLoading(panelContainer);
 
             if (currentControl != null && currentControl != homeControl)
             {

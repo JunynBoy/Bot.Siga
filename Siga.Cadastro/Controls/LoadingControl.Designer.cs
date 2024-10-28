@@ -35,6 +35,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.Loading_icon;
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage; // Centraliza o GIF dentro do PictureBox
             pictureBox1.Location = new Point(217, 115);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
