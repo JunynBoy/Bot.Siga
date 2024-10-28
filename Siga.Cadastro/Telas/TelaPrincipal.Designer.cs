@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             panelHeader = new Panel();
-            pictureBox1 = new PictureBox();
+            pbxLogo = new PictureBox();
             label1 = new Label();
             btnClose = new Button();
             contextMenuStrip1 = new ContextMenuStrip(components);
@@ -43,14 +43,14 @@
             btnHome = new Controls.CustomButton();
             panelContainer = new Panel();
             panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbxLogo).BeginInit();
             panelHeaderOptions.SuspendLayout();
             SuspendLayout();
             // 
             // panelHeader
             // 
             panelHeader.BackColor = Color.FromArgb(66, 84, 96);
-            panelHeader.Controls.Add(pictureBox1);
+            panelHeader.Controls.Add(pbxLogo);
             panelHeader.Controls.Add(label1);
             panelHeader.Controls.Add(btnClose);
             panelHeader.Dock = DockStyle.Top;
@@ -60,17 +60,19 @@
             panelHeader.TabIndex = 35;
             panelHeader.MouseDown += panelHeader_MouseDown;
             // 
-            // pictureBox1
+            // pbxLogo
             // 
-            pictureBox1.Dock = DockStyle.Left;
-            pictureBox1.Image = Properties.Resources.BotWhite30;
-            pictureBox1.ImageLocation = "Center";
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(41, 35);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox1.TabIndex = 36;
-            pictureBox1.TabStop = false;
+            pbxLogo.Dock = DockStyle.Left;
+            pbxLogo.ErrorImage = Properties.Resources.BotWhite30;
+            pbxLogo.Image = Properties.Resources.BotWhite30;
+            pbxLogo.ImageLocation = "Center";
+            pbxLogo.InitialImage = Properties.Resources.BotWhite25;
+            pbxLogo.Location = new Point(0, 0);
+            pbxLogo.Name = "pbxLogo";
+            pbxLogo.Size = new Size(41, 35);
+            pbxLogo.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbxLogo.TabIndex = 36;
+            pbxLogo.TabStop = false;
             // 
             // label1
             // 
@@ -259,7 +261,7 @@
             Text = "TelaPrincipal";
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbxLogo).EndInit();
             panelHeaderOptions.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -269,7 +271,7 @@
         private Panel panelHeader;
         private Label label1;
         private Button btnClose;
-        private PictureBox pictureBox1;
+        private PictureBox pbxLogo;
         private ContextMenuStrip contextMenuStrip1;
         private Panel panelHeaderOptions;
         private Controls.CustomButton btnHome;

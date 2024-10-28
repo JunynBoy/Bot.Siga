@@ -17,11 +17,11 @@ namespace Bot.App.Shared
             loadingControl.Dock = DockStyle.Fill;
         }
 
-        public async Task StartLoadingAsync(Panel panel, Func<Task> longRunningTask)
+        public async Task StartLoadingAsync(Panel panelToDock, Func<Task> longRunningTask)
         {
-            if (!panel.Controls.Contains(loadingControl))
+            if (!panelToDock.Controls.Contains(loadingControl))
             {
-                panel.Controls.Add(loadingControl);
+                panelToDock.Controls.Add(loadingControl);
                 loadingControl.BringToFront();
             }
 
@@ -37,7 +37,7 @@ namespace Bot.App.Shared
                     }
                     finally
                     {
-                        panel.Invoke((Action)(() => loadingControl.Stop()));
+                        panelToDock.Invoke((Action)(() => loadingControl.Stop()));
                     }
                 });
             }
@@ -46,13 +46,48 @@ namespace Bot.App.Shared
                 throw ex;
             }
         }
-
-        public void StopLoading(Panel panel)
+        public async Task StopLoadingAsync(Panel panelToUndock)
         {
-            if (panel.Controls.Contains(loadingControl))
+            if (panelToUndock.Controls.Contains(loadingControl))
             {
-                panel.Invoke((Action)(() => loadingControl.Stop())); 
-                panel.Controls.Remove(loadingControl); 
+                while (!loadingControl.IsHandleCreated)
+                {
+                    await Task.Delay(50);
+                }
+
+                panelToUndock.Invoke((Action)(() => loadingControl.Stop()));
+                panelToUndock.Controls.Remove(loadingControl);
+            }
+        }
+
+        public void StartLoading(Panel panelToDock)
+        {
+            if (!panelToDock.Controls.Contains(loadingControl))
+            {
+                panelToDock.Controls.Add(loadingControl);
+                loadingControl.BringToFront();
+            }
+
+            loadingControl.Start();
+        }
+
+        public void StopLoading(Panel panelToUndock)
+        {
+            if (panelToUndock.Controls.Contains(loadingControl))
+            {
+                // Verifica se o controle possui identificador de janela criado
+                if (loadingControl.IsHandleCreated)
+                {
+                    panelToUndock.Invoke((Action)(() => loadingControl.Stop()));
+                }
+                else
+                {
+                    // Cria o controle para garantir que o identificador seja criado
+                    loadingControl.CreateControl();
+                    panelToUndock.Invoke((Action)(() => loadingControl.Stop()));
+                }
+
+                panelToUndock.Controls.Remove(loadingControl);
             }
         }
     }

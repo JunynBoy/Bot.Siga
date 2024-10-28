@@ -27,21 +27,19 @@ namespace Bot.App.Telas
 
             InitializeComponent();
             ConfigureTrayMenu();
-            InitializeControlsAsync();
+            InitComponents();
 
         }
 
-        private async void InitializeControlsAsync()
+        private void InitComponents()
         {
-            Func<Task> longRunningTask = async () =>
-            {
-                homeControl = new HomeControl();
-                homeControl.Dock = DockStyle.Fill;
-                panelContainer.Controls.Add(homeControl);
-            };
+            this._loadingService.StartLoading(panelContainer);
 
-            await this._loadingService.StartLoadingAsync(panelContainer, longRunningTask);
-            this._loadingService.StopLoading(panelContainer);
+            homeControl = new HomeControl();
+            homeControl.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(homeControl);
+
+            this._loadingService.StopLoadingAsync(panelContainer);
         }
 
         private void ConfigureTrayMenu()
@@ -61,23 +59,21 @@ namespace Bot.App.Telas
 
         private async Task SwitchTo(UserControl newControl)
         {
-            Func<Task> longRunningTask = async () =>
+            this._loadingService.StartLoading(panelContainer);
+
+            if (currentControl != null && currentControl != homeControl)
             {
-                if (currentControl != null && currentControl != homeControl)
-                {
-                    panelContainer.Controls.Remove(currentControl);
-                    currentControl.Dispose();
-                }
+                panelContainer.Controls.Remove(currentControl);
+                currentControl.Dispose();
+            }
 
-                configureBtnColors();
+            configureBtnColors();
 
-                currentControl = newControl;
-                currentControl.Dock = DockStyle.Fill;
-                panelContainer.Controls.Add(currentControl);
-                currentControl.BringToFront();
-            };
+            currentControl = newControl;
+            currentControl.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(currentControl);
+            currentControl.BringToFront();
 
-            await this._loadingService.StartLoadingAsync(panelContainer, longRunningTask);
             this._loadingService.StopLoading(panelContainer);
         }
 
