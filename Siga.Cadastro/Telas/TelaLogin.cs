@@ -150,7 +150,7 @@ namespace Siga.Cadastro
 
                 if (estudanteValidado)
                 {
-                    this.IniciarTelaPrincipal();
+                    this.IniciarTelaPrincipal(estudante);
                 }
 
             }
@@ -183,9 +183,9 @@ namespace Siga.Cadastro
         }
 
 
-        private void IniciarTelaPrincipal()
+        private void IniciarTelaPrincipal(Estudante estudante)
         {
-            TelaPrincipal telaPrincipal = new TelaPrincipal();
+            TelaPrincipal telaPrincipal = new TelaPrincipal(estudante);
             telaPrincipal.Show();
             this.Hide();
         }

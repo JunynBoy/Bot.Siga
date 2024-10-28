@@ -1,5 +1,6 @@
 ﻿using Bot.App.Controls;
 using Bot.App.Shared;
+using Bot.Core.Model;
 using CustomMessageBox;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
@@ -15,29 +16,32 @@ namespace Bot.App.Telas
         private ContextMenuStrip? trayMenu;
         private UserControl? currentControl;
         private HomeControl homeControl;
-        private LoadingService loadingService;
+        private LoadingService _loadingService;
+        private Estudante estudante;
 
 
-        public TelaPrincipal()
+        public TelaPrincipal(Estudante estudante)
         {
-            loadingService = new LoadingService();
+            this._loadingService = new LoadingService();
+            this.estudante = estudante;
 
             InitializeComponent();
             ConfigureTrayMenu();
             InitializeControlsAsync();
+
         }
 
         private async void InitializeControlsAsync()
         {
-            //loadingService.StartLoading(panelContainer);
+            Func<Task> longRunningTask = async () =>
+            {
+                homeControl = new HomeControl();
+                homeControl.Dock = DockStyle.Fill;
+                panelContainer.Controls.Add(homeControl);
+            };
 
-            await Task.Delay(500); 
-
-            homeControl = new HomeControl();
-            homeControl.Dock = DockStyle.Fill;
-            panelContainer.Controls.Add(homeControl);
-
-            loadingService.StopLoading(panelContainer);
+            await this._loadingService.StartLoadingAsync(panelContainer, longRunningTask);
+            this._loadingService.StopLoading(panelContainer);
         }
 
         private void ConfigureTrayMenu()
@@ -57,22 +61,24 @@ namespace Bot.App.Telas
 
         private async Task SwitchTo(UserControl newControl)
         {
-            //loadingService.StartLoading(panelContainer);
-
-            if (currentControl != null && currentControl != homeControl)
+            Func<Task> longRunningTask = async () =>
             {
-                panelContainer.Controls.Remove(currentControl);
-                currentControl.Dispose();
-            }
+                if (currentControl != null && currentControl != homeControl)
+                {
+                    panelContainer.Controls.Remove(currentControl);
+                    currentControl.Dispose();
+                }
 
-            configureBtnColors();
+                configureBtnColors();
 
-            currentControl = newControl;
-            currentControl.Dock = DockStyle.Fill;
-            panelContainer.Controls.Add(currentControl);
-            currentControl.BringToFront();
+                currentControl = newControl;
+                currentControl.Dock = DockStyle.Fill;
+                panelContainer.Controls.Add(currentControl);
+                currentControl.BringToFront();
+            };
 
-            loadingService.StopLoading(panelContainer);
+            await this._loadingService.StartLoadingAsync(panelContainer, longRunningTask);
+            this._loadingService.StopLoading(panelContainer);
         }
 
         private void configureBtnColors()
