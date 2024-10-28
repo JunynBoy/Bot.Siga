@@ -16,7 +16,7 @@ namespace Siga.Cadastro
 
 
         EstudanteService _estudanteService;
-        PreferenciaService _preferenciaService; //TODO TIRAR ??
+        LoadingService _loadingService;
 
         IniciadorColeta coletor = new IniciadorColeta();
         List<EnumTipoDeExecucao> acoes = new List<EnumTipoDeExecucao>()
@@ -27,7 +27,7 @@ namespace Siga.Cadastro
         public TelaLogin()
         {
             InitializeComponent();
-
+            this._loadingService = new LoadingService();
             this._estudanteService =  new EstudanteService();
         }
 
@@ -79,6 +79,7 @@ namespace Siga.Cadastro
             {
                 try
                 {
+                    _loadingService.StartLoading(this.panelLoading);
                     Estudante? estudante = this._estudanteService.GetByCpf(this.txtmCPF.Texts.Replace(",","").Replace("-","").Replace(".", ""));
                     if (estudante == null)
                         estudante = new Estudante(this.txtmCPF.Texts.Replace(",", "").Replace("-", "").Replace(".", ""), this.txtSenha.Texts);
@@ -105,17 +106,21 @@ namespace Siga.Cadastro
                     else
                     {
                         if (this.coletor.ValidarLoginSiga(estudante))
+                        {
                             this.IniciarTelaPrincipal();
+                        }
                         else
+                        {
                             CustomMessageBox.CustomMessageBox.Show("Usuario ou senha inválidos, preencha com seu Login do SIGA e tente novamente!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
 
-                   
-
+                    _loadingService.StopLoading(this.panelLoading);
                 }
                 catch (Exception ex)
                 {
                     CustomMessageBox.CustomMessageBox.Show($"Não foi possível efetuar login devido a um erro inesperado:\n\nMensagem: {ex.Message}", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _loadingService.StopLoading(this.panelLoading);
                 }
                
             }

@@ -58,6 +58,7 @@
             tbAtualizarPorWhatsapp = new CustomControls.CustomControls.CustomToggleButton();
             panel2 = new Panel();
             panelLogos = new Panel();
+            panelLoading = new Panel();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbxUser).BeginInit();
             panelLogin.SuspendLayout();
@@ -69,6 +70,7 @@
             panelPreferencias.SuspendLayout();
             panel2.SuspendLayout();
             panelLogos.SuspendLayout();
+            panelLoading.SuspendLayout();
             SuspendLayout();
             // 
             // lblSenha
@@ -112,7 +114,7 @@
             panelHeader.Location = new Point(0, 0);
             panelHeader.Margin = new Padding(3, 4, 3, 4);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(821, 47);
+            panelHeader.Size = new Size(828, 47);
             panelHeader.TabIndex = 34;
             panelHeader.MouseDown += panelHeader_MouseDown;
             // 
@@ -136,7 +138,7 @@
             btnClose.FlatAppearance.MouseOverBackColor = Color.FromArgb(216, 0, 0);
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Image = (Image)resources.GetObject("btnClose.Image");
-            btnClose.Location = new Point(781, 0);
+            btnClose.Location = new Point(788, 0);
             btnClose.Margin = new Padding(3, 4, 3, 4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(40, 47);
@@ -165,11 +167,11 @@
             panelLogin.Controls.Add(lblCpf);
             panelLogin.Controls.Add(lblSenha);
             panelLogin.Controls.Add(pbxUser);
-            panelLogin.Dock = DockStyle.Left;
-            panelLogin.Location = new Point(0, 47);
+            panelLogin.Dock = DockStyle.Fill;
+            panelLogin.Location = new Point(0, 0);
             panelLogin.Margin = new Padding(3, 4, 3, 4);
             panelLogin.Name = "panelLogin";
-            panelLogin.Size = new Size(410, 398);
+            panelLogin.Size = new Size(828, 402);
             panelLogin.TabIndex = 37;
             // 
             // btnEntrar
@@ -200,7 +202,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(410, 71);
+            panel1.Size = new Size(828, 71);
             panel1.TabIndex = 41;
             // 
             // txtmCPF
@@ -381,7 +383,7 @@
             panelPreferencias.Controls.Add(pcbWhatsapp);
             panelPreferencias.Controls.Add(label4);
             panelPreferencias.Controls.Add(label3);
-            panelPreferencias.Dock = DockStyle.Right;
+            panelPreferencias.Dock = DockStyle.Fill;
             panelPreferencias.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             panelPreferencias.Location = new Point(0, 0);
             panelPreferencias.Margin = new Padding(3, 4, 3, 4);
@@ -455,20 +457,29 @@
             // 
             panelLogos.Controls.Add(panelPreferencias);
             panelLogos.Controls.Add(pbxLogoFatec);
-            panelLogos.Location = new Point(410, 47);
+            panelLogos.Location = new Point(416, 0);
             panelLogos.Margin = new Padding(3, 4, 3, 4);
             panelLogos.Name = "panelLogos";
             panelLogos.Size = new Size(410, 399);
             panelLogos.TabIndex = 39;
+            // 
+            // panelLoading
+            // 
+            panelLoading.Controls.Add(panelLogos);
+            panelLoading.Controls.Add(panelLogin);
+            panelLoading.Dock = DockStyle.Fill;
+            panelLoading.Location = new Point(0, 47);
+            panelLoading.Name = "panelLoading";
+            panelLoading.Size = new Size(828, 402);
+            panelLoading.TabIndex = 40;
             // 
             // TelaLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(821, 445);
-            Controls.Add(panelLogos);
-            Controls.Add(panelLogin);
+            ClientSize = new Size(828, 449);
+            Controls.Add(panelLoading);
             Controls.Add(panelHeader);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -492,6 +503,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panelLogos.ResumeLayout(false);
+            panelLoading.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -525,5 +537,6 @@
         private Label lblAtualizarPorWhatsapp;
         private CustomControls.CustomControls.CustomToggleButton tbAtualizarPorWhatsapp;
         private Bot.App.Controls.CustomButton btnEntrar;
+        private Panel panelLoading;
     }
 }

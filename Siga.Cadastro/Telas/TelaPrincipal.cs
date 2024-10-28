@@ -1,6 +1,7 @@
 ﻿using Bot.App.Controls;
 using Bot.App.Shared;
 using CustomMessageBox;
+using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,10 +15,13 @@ namespace Bot.App.Telas
         private ContextMenuStrip? trayMenu;
         private UserControl? currentControl;
         private HomeControl homeControl;
+        private LoadingService loadingService;
 
 
         public TelaPrincipal()
         {
+            loadingService = new LoadingService();
+
             InitializeComponent();
             ConfigureTrayMenu();
             InitializeControlsAsync();
@@ -25,19 +29,15 @@ namespace Bot.App.Telas
 
         private async void InitializeControlsAsync()
         {
-            LoadingControl loadingControl = new LoadingControl();
-            loadingControl.Dock = DockStyle.Fill;
-            panelContainer.Controls.Add(loadingControl);
-            loadingControl.BringToFront();
-            await Task.Delay(500);
+            loadingService.StartLoading(panelContainer);
+
+            await Task.Delay(500); 
 
             homeControl = new HomeControl();
             homeControl.Dock = DockStyle.Fill;
             panelContainer.Controls.Add(homeControl);
 
-            ChangeButtonColor(btnHome, btnHome.FlatAppearance.MouseOverBackColor); 
-
-            panelContainer.Controls.Remove(loadingControl);
+            loadingService.StopLoading(panelContainer);
         }
 
         private void ConfigureTrayMenu()
@@ -57,10 +57,7 @@ namespace Bot.App.Telas
 
         private async Task SwitchTo(UserControl newControl)
         {
-            LoadingControl loadingControl = new LoadingControl();
-            loadingControl.Dock = DockStyle.Fill;
-            panelContainer.Controls.Add(loadingControl);
-            loadingControl.BringToFront();
+            loadingService.StartLoading(panelContainer);
 
             await Task.Delay(500);
 
@@ -74,11 +71,10 @@ namespace Bot.App.Telas
 
             currentControl = newControl;
             currentControl.Dock = DockStyle.Fill;
-
             panelContainer.Controls.Add(currentControl);
             currentControl.BringToFront();
 
-            panelContainer.Controls.Remove(loadingControl);
+            loadingService.StopLoading(panelContainer);
         }
 
         private void configureBtnColors()
