@@ -39,7 +39,7 @@ namespace Bot.Siga.src.ColetaModular
             try
             {
 
-                Log( "Iniciando Coleta de Notas...");
+                this.Log( "Iniciando Coleta de Notas");
 
                 this.ClicarNoBotaoNotas();
 

@@ -1,5 +1,6 @@
 ﻿using Bot.Core.src.DAO;
 using Bot.Core.src.DAO.Interface;
+using Bot.Core.src.Model.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -17,12 +18,23 @@ namespace Bot.Core.DAO
 
         public void Insert(T entity)
         {
+            if (entity is IOrdinaryEntity ordinaryEntity)
+            {
+                ordinaryEntity.CreatedAt = DateTime.Now; 
+                ordinaryEntity.UpdatedAt = DateTime.Now; 
+            }
+
             context.Set<T>().Add(entity);
             context.SaveChanges();
         }
 
         public void Update(T entity)
         {
+            if (entity is IOrdinaryEntity ordinaryEntity)
+            {
+                ordinaryEntity.UpdatedAt = DateTime.Now; 
+            }
+
             context.Attach(entity);
             context.SaveChanges();
         }

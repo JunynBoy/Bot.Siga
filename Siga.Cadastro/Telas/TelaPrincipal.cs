@@ -128,12 +128,12 @@ namespace Bot.App.Telas
                 }
                 else
                 {
-                    this.Dispose();
+                    this.Close();
                 }
             }
             else
             {
-                this.Dispose();
+                this.Close();
             }
 
         }

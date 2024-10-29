@@ -30,256 +30,347 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeControl));
             panel1 = new Panel();
-            panel5 = new Panel();
-            label9 = new Label();
-            label8 = new Label();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
+            panelInfoConfig = new Panel();
+            lblLoopingtime = new Label();
             label1 = new Label();
-            customToggleButton1 = new CustomControls.CustomControls.CustomToggleButton();
-            label2 = new Label();
-            lblAtualizarPorEmail = new Label();
-            tbAtualizarPorEmail = new CustomControls.CustomControls.CustomToggleButton();
-            lblAtualizarPorWhatsapp = new Label();
-            tbAtualizarPorWhatsapp = new CustomControls.CustomControls.CustomToggleButton();
-            panel6 = new Panel();
-            btnStop = new CustomButton();
-            btnStartStop = new CustomButton();
-            panel4 = new Panel();
+            btnMoreTime = new CustomButton();
+            lblContador = new Label();
+            btnLessTime = new CustomButton();
+            lblUltimaModificacao = new Label();
             lblStatus = new Label();
+            lblContadorTitle = new Label();
+            lblUltimaModificacaoTitle = new Label();
+            lblStatusTitle = new Label();
+            lblInformacoes = new Label();
+            lblColetarNotas = new Label();
+            tbColetarNotas = new CustomControls.CustomControls.CustomToggleButton();
+            lblItensParaAtualizar = new Label();
+            lblColetarFaltas = new Label();
+            tbColetarMaterias = new CustomControls.CustomControls.CustomToggleButton();
+            lblColetarMaterias = new Label();
+            tbColetarFaltas = new CustomControls.CustomControls.CustomToggleButton();
+            panelFooter = new Panel();
+            btnLooping = new CustomButton();
+            btnStop = new CustomButton();
+            btnStart = new CustomButton();
+            panelInfoConfigTab = new Panel();
+            lblColetorDeDados = new Label();
             panel2 = new Panel();
             panelConsoleContainer = new Panel();
+            fileSystemWatcher1 = new FileSystemWatcher();
             panel1.SuspendLayout();
-            panel5.SuspendLayout();
-            panel6.SuspendLayout();
-            panel4.SuspendLayout();
+            panelInfoConfig.SuspendLayout();
+            panelFooter.SuspendLayout();
+            panelInfoConfigTab.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel1.Controls.Add(panel5);
-            panel1.Controls.Add(panel4);
+            panel1.Controls.Add(panelInfoConfig);
+            panel1.Controls.Add(panelInfoConfigTab);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(300, 389);
             panel1.TabIndex = 0;
             // 
-            // panel5
+            // panelInfoConfig
             // 
-            panel5.BackColor = Color.White;
-            panel5.Controls.Add(label9);
-            panel5.Controls.Add(label8);
-            panel5.Controls.Add(label7);
-            panel5.Controls.Add(label6);
-            panel5.Controls.Add(label5);
-            panel5.Controls.Add(label4);
-            panel5.Controls.Add(label3);
-            panel5.Controls.Add(label1);
-            panel5.Controls.Add(customToggleButton1);
-            panel5.Controls.Add(label2);
-            panel5.Controls.Add(lblAtualizarPorEmail);
-            panel5.Controls.Add(tbAtualizarPorEmail);
-            panel5.Controls.Add(lblAtualizarPorWhatsapp);
-            panel5.Controls.Add(tbAtualizarPorWhatsapp);
-            panel5.Controls.Add(panel6);
-            panel5.Location = new Point(0, 53);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(300, 336);
-            panel5.TabIndex = 35;
+            panelInfoConfig.BackColor = Color.White;
+            panelInfoConfig.Controls.Add(lblLoopingtime);
+            panelInfoConfig.Controls.Add(label1);
+            panelInfoConfig.Controls.Add(btnMoreTime);
+            panelInfoConfig.Controls.Add(lblContador);
+            panelInfoConfig.Controls.Add(btnLessTime);
+            panelInfoConfig.Controls.Add(lblUltimaModificacao);
+            panelInfoConfig.Controls.Add(lblStatus);
+            panelInfoConfig.Controls.Add(lblContadorTitle);
+            panelInfoConfig.Controls.Add(lblUltimaModificacaoTitle);
+            panelInfoConfig.Controls.Add(lblStatusTitle);
+            panelInfoConfig.Controls.Add(lblInformacoes);
+            panelInfoConfig.Controls.Add(lblColetarNotas);
+            panelInfoConfig.Controls.Add(tbColetarNotas);
+            panelInfoConfig.Controls.Add(lblItensParaAtualizar);
+            panelInfoConfig.Controls.Add(lblColetarFaltas);
+            panelInfoConfig.Controls.Add(tbColetarMaterias);
+            panelInfoConfig.Controls.Add(lblColetarMaterias);
+            panelInfoConfig.Controls.Add(tbColetarFaltas);
+            panelInfoConfig.Controls.Add(panelFooter);
+            panelInfoConfig.Location = new Point(0, 53);
+            panelInfoConfig.Name = "panelInfoConfig";
+            panelInfoConfig.Size = new Size(300, 336);
+            panelInfoConfig.TabIndex = 35;
             // 
-            // label9
+            // lblLoopingtime
             // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.ForeColor = Color.FromArgb(30, 39, 44);
-            label9.Location = new Point(75, 85);
-            label9.Name = "label9";
-            label9.Size = new Size(48, 15);
-            label9.TabIndex = 23;
-            label9.Text = "Status :";
-            label9.TextAlign = ContentAlignment.TopRight;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.ForeColor = Color.FromArgb(30, 39, 44);
-            label8.Location = new Point(75, 57);
-            label8.Name = "label8";
-            label8.Size = new Size(48, 15);
-            label8.TabIndex = 22;
-            label8.Text = "Status :";
-            label8.TextAlign = ContentAlignment.TopRight;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.ForeColor = Color.FromArgb(30, 39, 44);
-            label7.Location = new Point(75, 31);
-            label7.Name = "label7";
-            label7.Size = new Size(48, 15);
-            label7.TabIndex = 21;
-            label7.Text = "Status :";
-            label7.TextAlign = ContentAlignment.TopRight;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.ForeColor = Color.FromArgb(30, 39, 44);
-            label6.Location = new Point(20, 85);
-            label6.Name = "label6";
-            label6.Size = new Size(48, 15);
-            label6.TabIndex = 20;
-            label6.Text = "Status :";
-            label6.TextAlign = ContentAlignment.TopRight;
-            label6.Click += label6_Click;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.FromArgb(30, 39, 44);
-            label5.Location = new Point(20, 57);
-            label5.Name = "label5";
-            label5.Size = new Size(48, 15);
-            label5.TabIndex = 19;
-            label5.Text = "Status :";
-            label5.TextAlign = ContentAlignment.TopRight;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.FromArgb(30, 39, 44);
-            label4.Location = new Point(20, 31);
-            label4.Name = "label4";
-            label4.Size = new Size(48, 15);
-            label4.TabIndex = 18;
-            label4.Text = "Status :";
-            label4.TextAlign = ContentAlignment.TopRight;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.FromArgb(30, 39, 44);
-            label3.Location = new Point(17, 3);
-            label3.Name = "label3";
-            label3.Size = new Size(84, 17);
-            label3.TabIndex = 17;
-            label3.Text = "Informações";
-            label3.TextAlign = ContentAlignment.TopRight;
+            lblLoopingtime.AutoSize = true;
+            lblLoopingtime.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLoopingtime.ForeColor = Color.FromArgb(30, 39, 44);
+            lblLoopingtime.Location = new Point(45, 245);
+            lblLoopingtime.Name = "lblLoopingtime";
+            lblLoopingtime.Size = new Size(25, 15);
+            lblLoopingtime.TabIndex = 28;
+            lblLoopingtime.Text = "1m";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(30, 39, 44);
-            label1.Location = new Point(68, 188);
+            label1.Location = new Point(23, 218);
             label1.Name = "label1";
-            label1.Size = new Size(39, 15);
-            label1.TabIndex = 13;
-            label1.Text = "Notas";
+            label1.Size = new Size(92, 15);
+            label1.TabIndex = 27;
+            label1.Text = "Tempo Looping";
             // 
-            // customToggleButton1
+            // btnMoreTime
             // 
-            customToggleButton1.Checked = true;
-            customToggleButton1.CheckState = CheckState.Checked;
-            customToggleButton1.Location = new Point(17, 187);
-            customToggleButton1.MinimumSize = new Size(45, 22);
-            customToggleButton1.Name = "customToggleButton1";
-            customToggleButton1.OffBackColor = Color.Gray;
-            customToggleButton1.OffToggleColor = Color.Gainsboro;
-            customToggleButton1.OnBackColor = Color.FromArgb(66, 84, 96);
-            customToggleButton1.OnToggleColor = Color.WhiteSmoke;
-            customToggleButton1.Size = new Size(45, 22);
-            customToggleButton1.TabIndex = 16;
-            customToggleButton1.UseVisualStyleBackColor = true;
-            customToggleButton1.CheckedChanged += customToggleButton1_CheckedChanged;
+            btnMoreTime.BackColor = Color.FromArgb(66, 84, 96);
+            btnMoreTime.BackgroundColor = Color.FromArgb(66, 84, 96);
+            btnMoreTime.BorderColor = Color.Gray;
+            btnMoreTime.BorderRadius = 0;
+            btnMoreTime.BorderSize = 0;
+            btnMoreTime.FlatAppearance.BorderSize = 0;
+            btnMoreTime.FlatStyle = FlatStyle.Flat;
+            btnMoreTime.ForeColor = Color.White;
+            btnMoreTime.Image = (Image)resources.GetObject("btnMoreTime.Image");
+            btnMoreTime.Location = new Point(81, 235);
+            btnMoreTime.Name = "btnMoreTime";
+            btnMoreTime.Size = new Size(20, 15);
+            btnMoreTime.TabIndex = 25;
+            btnMoreTime.TextColor = Color.White;
+            btnMoreTime.UseVisualStyleBackColor = false;
+            btnMoreTime.Click += btnMoreTime_Click;
             // 
-            // label2
+            // lblContador
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.FromArgb(30, 39, 44);
-            label2.Location = new Point(17, 157);
-            label2.Name = "label2";
-            label2.Size = new Size(128, 17);
-            label2.TabIndex = 14;
-            label2.Text = "Itens Para Atualizar";
-            label2.TextAlign = ContentAlignment.TopRight;
+            lblContador.AutoSize = true;
+            lblContador.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblContador.ForeColor = Color.FromArgb(30, 39, 44);
+            lblContador.Location = new Point(124, 85);
+            lblContador.Name = "lblContador";
+            lblContador.Size = new Size(14, 15);
+            lblContador.TabIndex = 23;
+            lblContador.Text = "0";
+            lblContador.TextAlign = ContentAlignment.TopRight;
             // 
-            // lblAtualizarPorEmail
+            // btnLessTime
             // 
-            lblAtualizarPorEmail.AutoSize = true;
-            lblAtualizarPorEmail.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblAtualizarPorEmail.ForeColor = Color.FromArgb(30, 39, 44);
-            lblAtualizarPorEmail.Location = new Point(68, 216);
-            lblAtualizarPorEmail.Name = "lblAtualizarPorEmail";
-            lblAtualizarPorEmail.Size = new Size(38, 15);
-            lblAtualizarPorEmail.TabIndex = 9;
-            lblAtualizarPorEmail.Text = "Faltas";
+            btnLessTime.BackColor = Color.FromArgb(66, 84, 96);
+            btnLessTime.BackgroundColor = Color.FromArgb(66, 84, 96);
+            btnLessTime.BorderColor = Color.Gray;
+            btnLessTime.BorderRadius = 0;
+            btnLessTime.BorderSize = 0;
+            btnLessTime.FlatAppearance.BorderSize = 0;
+            btnLessTime.FlatStyle = FlatStyle.Flat;
+            btnLessTime.ForeColor = Color.White;
+            btnLessTime.Image = (Image)resources.GetObject("btnLessTime.Image");
+            btnLessTime.Location = new Point(81, 251);
+            btnLessTime.Name = "btnLessTime";
+            btnLessTime.Size = new Size(20, 15);
+            btnLessTime.TabIndex = 26;
+            btnLessTime.TextColor = Color.White;
+            btnLessTime.UseVisualStyleBackColor = false;
+            btnLessTime.Click += btnLessTime_Click;
             // 
-            // tbAtualizarPorEmail
+            // lblUltimaModificacao
             // 
-            tbAtualizarPorEmail.Checked = true;
-            tbAtualizarPorEmail.CheckState = CheckState.Checked;
-            tbAtualizarPorEmail.Location = new Point(17, 244);
-            tbAtualizarPorEmail.MinimumSize = new Size(45, 22);
-            tbAtualizarPorEmail.Name = "tbAtualizarPorEmail";
-            tbAtualizarPorEmail.OffBackColor = Color.Gray;
-            tbAtualizarPorEmail.OffToggleColor = Color.Gainsboro;
-            tbAtualizarPorEmail.OnBackColor = Color.FromArgb(66, 84, 96);
-            tbAtualizarPorEmail.OnToggleColor = Color.WhiteSmoke;
-            tbAtualizarPorEmail.Size = new Size(45, 22);
-            tbAtualizarPorEmail.TabIndex = 12;
-            tbAtualizarPorEmail.UseVisualStyleBackColor = true;
+            lblUltimaModificacao.AutoSize = true;
+            lblUltimaModificacao.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblUltimaModificacao.ForeColor = Color.FromArgb(30, 39, 44);
+            lblUltimaModificacao.Location = new Point(140, 57);
+            lblUltimaModificacao.Name = "lblUltimaModificacao";
+            lblUltimaModificacao.Size = new Size(92, 15);
+            lblUltimaModificacao.TabIndex = 22;
+            lblUltimaModificacao.Text = "dd/mm hh/MM";
+            lblUltimaModificacao.TextAlign = ContentAlignment.TopRight;
             // 
-            // lblAtualizarPorWhatsapp
+            // lblStatus
             // 
-            lblAtualizarPorWhatsapp.AutoSize = true;
-            lblAtualizarPorWhatsapp.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblAtualizarPorWhatsapp.ForeColor = Color.FromArgb(30, 39, 44);
-            lblAtualizarPorWhatsapp.Location = new Point(68, 245);
-            lblAtualizarPorWhatsapp.Name = "lblAtualizarPorWhatsapp";
-            lblAtualizarPorWhatsapp.Size = new Size(55, 15);
-            lblAtualizarPorWhatsapp.TabIndex = 10;
-            lblAtualizarPorWhatsapp.Text = "Matérias";
-            lblAtualizarPorWhatsapp.TextAlign = ContentAlignment.TopRight;
+            lblStatus.AutoSize = true;
+            lblStatus.BackColor = Color.FromArgb(176, 0, 0);
+            lblStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblStatus.ForeColor = Color.White;
+            lblStatus.Location = new Point(75, 31);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(45, 15);
+            lblStatus.TabIndex = 21;
+            lblStatus.Text = "Parado";
+            lblStatus.TextAlign = ContentAlignment.TopRight;
             // 
-            // tbAtualizarPorWhatsapp
+            // lblContadorTitle
             // 
-            tbAtualizarPorWhatsapp.Checked = true;
-            tbAtualizarPorWhatsapp.CheckState = CheckState.Checked;
-            tbAtualizarPorWhatsapp.Location = new Point(17, 215);
-            tbAtualizarPorWhatsapp.MinimumSize = new Size(45, 22);
-            tbAtualizarPorWhatsapp.Name = "tbAtualizarPorWhatsapp";
-            tbAtualizarPorWhatsapp.OffBackColor = Color.Gray;
-            tbAtualizarPorWhatsapp.OffToggleColor = Color.Gainsboro;
-            tbAtualizarPorWhatsapp.OnBackColor = Color.FromArgb(66, 84, 96);
-            tbAtualizarPorWhatsapp.OnToggleColor = Color.WhiteSmoke;
-            tbAtualizarPorWhatsapp.Size = new Size(45, 22);
-            tbAtualizarPorWhatsapp.TabIndex = 11;
-            tbAtualizarPorWhatsapp.UseVisualStyleBackColor = true;
+            lblContadorTitle.AutoSize = true;
+            lblContadorTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblContadorTitle.ForeColor = Color.FromArgb(30, 39, 44);
+            lblContadorTitle.Location = new Point(20, 85);
+            lblContadorTitle.Name = "lblContadorTitle";
+            lblContadorTitle.Size = new Size(98, 15);
+            lblContadorTitle.TabIndex = 20;
+            lblContadorTitle.Text = "Qtd. Execuções :";
+            lblContadorTitle.TextAlign = ContentAlignment.TopRight;
             // 
-            // panel6
+            // lblUltimaModificacaoTitle
             // 
-            panel6.BackColor = SystemColors.Control;
-            panel6.Controls.Add(btnStop);
-            panel6.Controls.Add(btnStartStop);
-            panel6.Dock = DockStyle.Bottom;
-            panel6.Location = new Point(0, 272);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(300, 64);
-            panel6.TabIndex = 1;
+            lblUltimaModificacaoTitle.AutoSize = true;
+            lblUltimaModificacaoTitle.BackColor = Color.White;
+            lblUltimaModificacaoTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblUltimaModificacaoTitle.ForeColor = Color.FromArgb(30, 39, 44);
+            lblUltimaModificacaoTitle.Location = new Point(20, 57);
+            lblUltimaModificacaoTitle.Name = "lblUltimaModificacaoTitle";
+            lblUltimaModificacaoTitle.Size = new Size(114, 15);
+            lblUltimaModificacaoTitle.TabIndex = 19;
+            lblUltimaModificacaoTitle.Text = "Última Modificação";
+            lblUltimaModificacaoTitle.TextAlign = ContentAlignment.TopRight;
+            // 
+            // lblStatusTitle
+            // 
+            lblStatusTitle.AutoSize = true;
+            lblStatusTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblStatusTitle.ForeColor = Color.FromArgb(30, 39, 44);
+            lblStatusTitle.Location = new Point(20, 31);
+            lblStatusTitle.Name = "lblStatusTitle";
+            lblStatusTitle.Size = new Size(48, 15);
+            lblStatusTitle.TabIndex = 18;
+            lblStatusTitle.Text = "Status :";
+            lblStatusTitle.TextAlign = ContentAlignment.TopRight;
+            // 
+            // lblInformacoes
+            // 
+            lblInformacoes.AutoSize = true;
+            lblInformacoes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblInformacoes.ForeColor = Color.FromArgb(30, 39, 44);
+            lblInformacoes.Location = new Point(17, 3);
+            lblInformacoes.Name = "lblInformacoes";
+            lblInformacoes.Size = new Size(84, 17);
+            lblInformacoes.TabIndex = 17;
+            lblInformacoes.Text = "Informações";
+            lblInformacoes.TextAlign = ContentAlignment.TopRight;
+            // 
+            // lblColetarNotas
+            // 
+            lblColetarNotas.AutoSize = true;
+            lblColetarNotas.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblColetarNotas.ForeColor = Color.FromArgb(30, 39, 44);
+            lblColetarNotas.Location = new Point(23, 166);
+            lblColetarNotas.Name = "lblColetarNotas";
+            lblColetarNotas.Size = new Size(39, 15);
+            lblColetarNotas.TabIndex = 13;
+            lblColetarNotas.Text = "Notas";
+            // 
+            // tbColetarNotas
+            // 
+            tbColetarNotas.Checked = true;
+            tbColetarNotas.CheckState = CheckState.Checked;
+            tbColetarNotas.Location = new Point(23, 184);
+            tbColetarNotas.MinimumSize = new Size(45, 22);
+            tbColetarNotas.Name = "tbColetarNotas";
+            tbColetarNotas.OffBackColor = Color.Gray;
+            tbColetarNotas.OffToggleColor = Color.Gainsboro;
+            tbColetarNotas.OnBackColor = Color.FromArgb(66, 84, 96);
+            tbColetarNotas.OnToggleColor = Color.WhiteSmoke;
+            tbColetarNotas.Size = new Size(45, 22);
+            tbColetarNotas.TabIndex = 16;
+            tbColetarNotas.UseVisualStyleBackColor = true;
+            // 
+            // lblItensParaAtualizar
+            // 
+            lblItensParaAtualizar.AutoSize = true;
+            lblItensParaAtualizar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblItensParaAtualizar.ForeColor = Color.FromArgb(30, 39, 44);
+            lblItensParaAtualizar.Location = new Point(17, 142);
+            lblItensParaAtualizar.Name = "lblItensParaAtualizar";
+            lblItensParaAtualizar.Size = new Size(128, 17);
+            lblItensParaAtualizar.TabIndex = 14;
+            lblItensParaAtualizar.Text = "Itens Para Atualizar";
+            lblItensParaAtualizar.TextAlign = ContentAlignment.TopRight;
+            // 
+            // lblColetarFaltas
+            // 
+            lblColetarFaltas.AutoSize = true;
+            lblColetarFaltas.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblColetarFaltas.ForeColor = Color.FromArgb(30, 39, 44);
+            lblColetarFaltas.Location = new Point(136, 166);
+            lblColetarFaltas.Name = "lblColetarFaltas";
+            lblColetarFaltas.Size = new Size(38, 15);
+            lblColetarFaltas.TabIndex = 9;
+            lblColetarFaltas.Text = "Faltas";
+            // 
+            // tbColetarMaterias
+            // 
+            tbColetarMaterias.Checked = true;
+            tbColetarMaterias.CheckState = CheckState.Checked;
+            tbColetarMaterias.Location = new Point(76, 184);
+            tbColetarMaterias.MinimumSize = new Size(45, 22);
+            tbColetarMaterias.Name = "tbColetarMaterias";
+            tbColetarMaterias.OffBackColor = Color.Gray;
+            tbColetarMaterias.OffToggleColor = Color.Gainsboro;
+            tbColetarMaterias.OnBackColor = Color.FromArgb(66, 84, 96);
+            tbColetarMaterias.OnToggleColor = Color.WhiteSmoke;
+            tbColetarMaterias.Size = new Size(45, 22);
+            tbColetarMaterias.TabIndex = 12;
+            tbColetarMaterias.UseVisualStyleBackColor = true;
+            // 
+            // lblColetarMaterias
+            // 
+            lblColetarMaterias.AutoSize = true;
+            lblColetarMaterias.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblColetarMaterias.ForeColor = Color.FromArgb(30, 39, 44);
+            lblColetarMaterias.Location = new Point(75, 166);
+            lblColetarMaterias.Name = "lblColetarMaterias";
+            lblColetarMaterias.Size = new Size(55, 15);
+            lblColetarMaterias.TabIndex = 10;
+            lblColetarMaterias.Text = "Matérias";
+            lblColetarMaterias.TextAlign = ContentAlignment.TopRight;
+            // 
+            // tbColetarFaltas
+            // 
+            tbColetarFaltas.Checked = true;
+            tbColetarFaltas.CheckState = CheckState.Checked;
+            tbColetarFaltas.Location = new Point(135, 184);
+            tbColetarFaltas.MinimumSize = new Size(45, 22);
+            tbColetarFaltas.Name = "tbColetarFaltas";
+            tbColetarFaltas.OffBackColor = Color.Gray;
+            tbColetarFaltas.OffToggleColor = Color.Gainsboro;
+            tbColetarFaltas.OnBackColor = Color.FromArgb(66, 84, 96);
+            tbColetarFaltas.OnToggleColor = Color.WhiteSmoke;
+            tbColetarFaltas.Size = new Size(45, 22);
+            tbColetarFaltas.TabIndex = 11;
+            tbColetarFaltas.UseVisualStyleBackColor = true;
+            // 
+            // panelFooter
+            // 
+            panelFooter.BackColor = SystemColors.Control;
+            panelFooter.Controls.Add(btnLooping);
+            panelFooter.Controls.Add(btnStop);
+            panelFooter.Controls.Add(btnStart);
+            panelFooter.Dock = DockStyle.Bottom;
+            panelFooter.Location = new Point(0, 272);
+            panelFooter.Name = "panelFooter";
+            panelFooter.Size = new Size(300, 64);
+            panelFooter.TabIndex = 1;
+            // 
+            // btnLooping
+            // 
+            btnLooping.BackColor = Color.White;
+            btnLooping.BackgroundColor = Color.White;
+            btnLooping.BorderColor = Color.Black;
+            btnLooping.BorderRadius = 15;
+            btnLooping.BorderSize = 1;
+            btnLooping.FlatAppearance.BorderSize = 0;
+            btnLooping.FlatStyle = FlatStyle.Flat;
+            btnLooping.ForeColor = Color.White;
+            btnLooping.Image = (Image)resources.GetObject("btnLooping.Image");
+            btnLooping.Location = new Point(180, 19);
+            btnLooping.Name = "btnLooping";
+            btnLooping.Size = new Size(30, 30);
+            btnLooping.TabIndex = 2;
+            btnLooping.TextColor = Color.White;
+            btnLooping.UseVisualStyleBackColor = false;
+            btnLooping.Click += btnLooping_Click;
             // 
             // btnStop
             // 
@@ -292,7 +383,7 @@
             btnStop.FlatStyle = FlatStyle.Flat;
             btnStop.ForeColor = Color.White;
             btnStop.Image = (Image)resources.GetObject("btnStop.Image");
-            btnStop.Location = new Point(98, 19);
+            btnStop.Location = new Point(85, 19);
             btnStop.Name = "btnStop";
             btnStop.Size = new Size(30, 30);
             btnStop.TabIndex = 1;
@@ -300,45 +391,45 @@
             btnStop.UseVisualStyleBackColor = false;
             btnStop.Click += btnStop_Click;
             // 
-            // btnStartStop
+            // btnStart
             // 
-            btnStartStop.BackColor = Color.White;
-            btnStartStop.BackgroundColor = Color.White;
-            btnStartStop.BorderColor = Color.Black;
-            btnStartStop.BorderRadius = 29;
-            btnStartStop.BorderSize = 1;
-            btnStartStop.FlatAppearance.BorderSize = 0;
-            btnStartStop.FlatStyle = FlatStyle.Flat;
-            btnStartStop.ForeColor = Color.White;
-            btnStartStop.Image = (Image)resources.GetObject("btnStartStop.Image");
-            btnStartStop.Location = new Point(134, 3);
-            btnStartStop.Name = "btnStartStop";
-            btnStartStop.Size = new Size(53, 53);
-            btnStartStop.TabIndex = 0;
-            btnStartStop.TextColor = Color.White;
-            btnStartStop.UseVisualStyleBackColor = false;
-            btnStartStop.Click += btnStartStop_Click;
+            btnStart.BackColor = Color.White;
+            btnStart.BackgroundColor = Color.White;
+            btnStart.BorderColor = Color.Black;
+            btnStart.BorderRadius = 29;
+            btnStart.BorderSize = 1;
+            btnStart.FlatAppearance.BorderSize = 0;
+            btnStart.FlatStyle = FlatStyle.Flat;
+            btnStart.ForeColor = Color.White;
+            btnStart.Image = (Image)resources.GetObject("btnStart.Image");
+            btnStart.Location = new Point(121, 3);
+            btnStart.Name = "btnStart";
+            btnStart.Size = new Size(53, 53);
+            btnStart.TabIndex = 0;
+            btnStart.TextColor = Color.White;
+            btnStart.UseVisualStyleBackColor = false;
+            btnStart.Click += btnStart_Click;
             // 
-            // panel4
+            // panelInfoConfigTab
             // 
-            panel4.Controls.Add(lblStatus);
-            panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(300, 53);
-            panel4.TabIndex = 34;
+            panelInfoConfigTab.Controls.Add(lblColetorDeDados);
+            panelInfoConfigTab.Dock = DockStyle.Top;
+            panelInfoConfigTab.Location = new Point(0, 0);
+            panelInfoConfigTab.Name = "panelInfoConfigTab";
+            panelInfoConfigTab.Size = new Size(300, 53);
+            panelInfoConfigTab.TabIndex = 34;
             // 
-            // lblStatus
+            // lblColetorDeDados
             // 
-            lblStatus.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lblStatus.AutoSize = true;
-            lblStatus.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblStatus.ForeColor = Color.FromArgb(30, 39, 44);
-            lblStatus.Location = new Point(20, 15);
-            lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(164, 25);
-            lblStatus.TabIndex = 33;
-            lblStatus.Text = "Coletor de dados";
+            lblColetorDeDados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lblColetorDeDados.AutoSize = true;
+            lblColetorDeDados.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblColetorDeDados.ForeColor = Color.FromArgb(30, 39, 44);
+            lblColetorDeDados.Location = new Point(20, 15);
+            lblColetorDeDados.Name = "lblColetorDeDados";
+            lblColetorDeDados.Size = new Size(164, 25);
+            lblColetorDeDados.TabIndex = 33;
+            lblColetorDeDados.Text = "Coletor de dados";
             // 
             // panel2
             // 
@@ -357,6 +448,11 @@
             panelConsoleContainer.Size = new Size(500, 389);
             panelConsoleContainer.TabIndex = 2;
             // 
+            // fileSystemWatcher1
+            // 
+            fileSystemWatcher1.EnableRaisingEvents = true;
+            fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // HomeControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -366,12 +462,13 @@
             Name = "HomeControl";
             Size = new Size(800, 389);
             panel1.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
+            panelInfoConfig.ResumeLayout(false);
+            panelInfoConfig.PerformLayout();
+            panelFooter.ResumeLayout(false);
+            panelInfoConfigTab.ResumeLayout(false);
+            panelInfoConfigTab.PerformLayout();
             panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
         }
 
@@ -379,26 +476,32 @@
 
         private Panel panel1;
         private Panel panel2;
-        private CustomButton btnStartStop;
-        private Panel panel4;
-        private Label lblStatus;
-        private Panel panel5;
+        private CustomButton btnStart;
+        private Panel panelInfoConfigTab;
+        private Label lblColetorDeDados;
+        private Panel panelInfoConfig;
         private Panel panelConsoleContainer;
-        private Panel panel6;
-        private Label label1;
-        private CustomControls.CustomControls.CustomToggleButton customToggleButton1;
-        private Label label2;
-        private Label lblAtualizarPorEmail;
-        private CustomControls.CustomControls.CustomToggleButton tbAtualizarPorEmail;
-        private Label lblAtualizarPorWhatsapp;
-        private CustomControls.CustomControls.CustomToggleButton tbAtualizarPorWhatsapp;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label9;
-        private Label label8;
-        private Label label7;
+        private Panel panelFooter;
+        private Label lblColetarNotas;
+        private CustomControls.CustomControls.CustomToggleButton tbColetarNotas;
+        private Label lblItensParaAtualizar;
+        private Label lblColetarFaltas;
+        private CustomControls.CustomControls.CustomToggleButton tbColetarMaterias;
+        private Label lblColetarMaterias;
+        private CustomControls.CustomControls.CustomToggleButton tbColetarFaltas;
+        private Label lblContadorTitle;
+        private Label lblUltimaModificacaoTitle;
+        private Label lblStatusTitle;
+        private Label lblInformacoes;
+        private Label lblContador;
+        private Label lblUltimaModificacao;
+        private Label lblStatus;
         private CustomButton btnStop;
+        private CustomButton btnLooping;
+        private FileSystemWatcher fileSystemWatcher1;
+        private CustomButton btnMoreTime;
+        private CustomButton btnLessTime;
+        private Label label1;
+        private Label lblLoopingtime;
     }
 }

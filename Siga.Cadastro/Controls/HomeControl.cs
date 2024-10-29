@@ -20,16 +20,23 @@ namespace Bot.App.Controls
 
         private Estudante estudante;
         private IniciadorColeta iniciadorColeta;
-        public bool isBotEmExecucao = false;
         private TextBox consoleOutput;
         private CancellationTokenSource? _cancellationTokenSource;
+        private int loopingTime = 1;
+        private int execucoesCompletas = 0;
+        public bool isBotEmExecucao = false;
+        public event EventHandler? IsBotEmExecucaoChanged;
 
 
         public HomeControl(Estudante estudante)
         {
-            this.estudante = estudante;
-            iniciadorColeta = new IniciadorColeta();
             InitializeComponent();
+
+            
+            this.estudante = estudante;
+            this.iniciadorColeta = new IniciadorColeta();
+            this.loopingTime = 1;
+            this.lblLoopingtime.Text = loopingTime + "m";
 
             this.consoleOutput = new TextBox()
             {
@@ -46,12 +53,65 @@ namespace Bot.App.Controls
 
             iniciadorColeta = new IniciadorColeta();
             iniciadorColeta.SetLogAction(WriteToConsoleOutput);
+            this.DisplayAsciiArt();
+            this.VerificarMateriaMaisRecente();
+        }
+
+        private void VerificarMateriaMaisRecente()
+        {
+            DateTime? materiaMaisAtualizada = null;
+
+            if (this.estudante.Materias != null && this.estudante.Materias.Any())
+            {
+                foreach (Materia materia in this.estudante.Materias)
+                {
+                    if (materiaMaisAtualizada == null || materia.UpdatedAt > materiaMaisAtualizada)
+                    {
+                        materiaMaisAtualizada = materia.UpdatedAt;
+                    }
+                }
+
+                if (materiaMaisAtualizada.HasValue)
+                {
+                    this.lblUltimaModificacao.Text = materiaMaisAtualizada.Value.ToString("dd/MM HH:mm");
+                    WriteToConsoleOutput("Matéria mais recentemente atualizada em: " + materiaMaisAtualizada.Value.ToString("dd/MM/yyyy HH:mm:ss"));
+                }
+            }
+            else
+            {
+                WriteToConsoleOutput("Nenhuma matéria encontrada para o estudante. Ative a busca por matérias");
+            }
         }
 
 
-        private void btnStartStop_Click(object sender, EventArgs e)
+
+        private void DisplayAsciiArt()
         {
-            this.btnStartStop.Enabled = false;
+            string asciiArt = @"
+  ___          _            _____  _               
+ / _ \        | |          /  ___|(_)              
+/ /_\ \ _   _ | |_   ___   \ `--.  _   __ _   __ _ 
+|  _  || | | || __| / _ \   `--. \| | / _` | / _` |
+| | | || |_| || |_ | (_) | /\__/ /| || (_| || (_| |
+\_| |_/ \__,_| \__| \___/  \____/ |_| \__, | \__,_|
+                                       __/ |       
+                                      |___/        
+ ______                 _     _ _           _       
+(____  \               (_)   (_|_)         | |      
+ ____)  )_____ ____     _     _ _ ____   __| | ___  
+|  __  (| ___ |    \   | |   | | |  _ \ / _  |/ _ \ 
+| |__)  ) ____| | | |   \ \ / /| | | | ( (_| | |_| |
+|______/|_____)_|_|_|    \___/ |_|_| |_|\____|\___/   
+
+Bem-vindo ao sistema de coleta de dados do siga automatizado
+            ";
+            WriteToConsoleOutput(asciiArt);
+        }
+
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            this.btnStart.Enabled = false;
             this.isBotEmExecucao = true;
             this.btnStop.Enabled = true;
             _cancellationTokenSource = new CancellationTokenSource();
@@ -63,7 +123,7 @@ namespace Bot.App.Controls
             {
                 try
                 {
-                    this.iniciadorColeta.IniciarColeta(estudante, new List<EnumTipoDeExecucao>() { EnumTipoDeExecucao.COLETAR_NOTA });
+                    this.iniciadorColeta.IniciarColeta(estudante, getExecucoesHabilitadas());
                 }
                 catch (OperationCanceledException)
                 {
@@ -78,10 +138,54 @@ namespace Bot.App.Controls
                     isBotEmExecucao = false;
                     this.Invoke((Action)(() =>
                     {
-                        this.btnStartStop.Enabled = true; 
+                        this.btnStart.Enabled = true;
                     }));
                 }
             }, token);
+        }
+
+        private void btnLooping_Click(object sender, EventArgs e)
+        {
+            this.btnStart.Enabled = false;
+            this.btnStop.Enabled = true;
+
+            _cancellationTokenSource = new CancellationTokenSource();
+            var token = _cancellationTokenSource.Token;
+
+            this.WriteToConsoleOutput("Iniciando Robô...");
+
+            Task.Run(() =>
+            {
+                bool primeiraExec = true;
+                while (true)
+                {
+                    if (!primeiraExec)
+                        Task.Delay(loopingTime * 60 * 1000);
+                    try
+                    {
+                        primeiraExec = false;
+                        this.iniciadorColeta.IniciarColeta(estudante, getExecucoesHabilitadas());
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        CustomMessageBox.CustomMessageBox.Show("A coleta foi cancelada.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.CustomMessageBox.Show($"Um erro inesperado aconteceu\n\nMensagem: {ex.Message}", "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        isBotEmExecucao = false;
+                        this.Invoke((Action)(() =>
+                        {
+                            this.btnStart.Enabled = true;
+                        }));
+                    }
+                }
+
+            }, token);
+
         }
 
 
@@ -104,17 +208,51 @@ namespace Bot.App.Controls
             }
         }
 
-
-        private void customToggleButton1_CheckedChanged(object sender, EventArgs e)
+        private List<EnumTipoDeExecucao> getExecucoesHabilitadas()
         {
+            List<EnumTipoDeExecucao> tiposExecList = new List<EnumTipoDeExecucao>();
+            if (this.tbColetarMaterias.Checked)
+                tiposExecList.Add(EnumTipoDeExecucao.COLETAR_MATERIA);
 
+            if (this.tbColetarFaltas.Checked)
+                tiposExecList.Add(EnumTipoDeExecucao.COLETAR_FALTA);
+
+            if (this.tbColetarNotas.Checked)
+                tiposExecList.Add(EnumTipoDeExecucao.COLETAR_NOTA);
+
+            return tiposExecList;
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void btnMoreTime_Click(object sender, EventArgs e)
         {
-
+            this.loopingTime++;
+            this.lblLoopingtime.Text = loopingTime + "m";
         }
 
-      
+        private void btnLessTime_Click(object sender, EventArgs e)
+        {
+            if (this.loopingTime > 1) 
+            {
+                this.loopingTime--;
+                this.lblLoopingtime.Text = loopingTime + "m";
+            }
+        }
+
+        private void atualizarLabelStatus()
+        {
+            if (isBotEmExecucao)
+            {
+                this.lblStatus.Text = "Em Execução";
+                this.lblStatus.BackColor = Color.FromArgb(118, 209, 118);
+                this.lblStatus.ForeColor = Color.White;
+            }
+            else
+            {
+                this.lblStatus.Text = "Parado";
+                this.lblStatus.BackColor = Color.FromArgb(176, 0, 0);
+                this.lblStatus.ForeColor = Color.White;
+            }
+
+        }
     }
 }
