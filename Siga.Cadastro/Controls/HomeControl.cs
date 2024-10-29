@@ -26,7 +26,30 @@ namespace Bot.App.Controls
         private int execucoesCompletas = 0;
         public bool isBotEmExecucao = false;
         public event EventHandler? IsBotEmExecucaoChanged;
+        private Thread executionThread;
 
+        private void DisplayAsciiArt()
+        {
+            string asciiArt = @"
+  ___          _            _____  _               
+ / _ \        | |          /  ___|(_)              
+/ /_\ \ _   _ | |_   ___   \ `--.  _   __ _   __ _ 
+|  _  || | | || __| / _ \   `--. \| | / _` | / _` |
+| | | || |_| || |_ | (_) | /\__/ /| || (_| || (_| |
+\_| |_/ \__,_| \__| \___/  \____/ |_| \__, | \__,_|
+                                       __/ |       
+                                      |___/        
+ ______                 _     _ _           _       
+(____  \               (_)   (_|_)         | |      
+ ____)  )_____ ____     _     _ _ ____   __| | ___  
+|  __  (| ___ |    \   | |   | | |  _ \ / _  |/ _ \ 
+| |__)  ) ____| | | |   \ \ / /| | | | ( (_| | |_| |
+|______/|_____)_|_|_|    \___/ |_|_| |_|\____|\___/   
+
+Bem-vindo ao sistema de coleta de dados do siga automatizado
+            ";
+            WriteToConsoleOutput(asciiArt);
+        }
 
         public HomeControl(Estudante estudante)
         {
@@ -73,6 +96,8 @@ namespace Bot.App.Controls
 
                 if (materiaMaisAtualizada.HasValue)
                 {
+                    this.lblUltimaModificacaoTitle.Visible = true;
+                    this.lblUltimaModificacao.Visible = true;
                     this.lblUltimaModificacao.Text = materiaMaisAtualizada.Value.ToString("dd/MM HH:mm");
                     WriteToConsoleOutput("Matéria mais recentemente atualizada em: " + materiaMaisAtualizada.Value.ToString("dd/MM/yyyy HH:mm:ss"));
                 }
@@ -83,55 +108,48 @@ namespace Bot.App.Controls
             }
         }
 
-
-
-        private void DisplayAsciiArt()
-        {
-            string asciiArt = @"
-  ___          _            _____  _               
- / _ \        | |          /  ___|(_)              
-/ /_\ \ _   _ | |_   ___   \ `--.  _   __ _   __ _ 
-|  _  || | | || __| / _ \   `--. \| | / _` | / _` |
-| | | || |_| || |_ | (_) | /\__/ /| || (_| || (_| |
-\_| |_/ \__,_| \__| \___/  \____/ |_| \__, | \__,_|
-                                       __/ |       
-                                      |___/        
- ______                 _     _ _           _       
-(____  \               (_)   (_|_)         | |      
- ____)  )_____ ____     _     _ _ ____   __| | ___  
-|  __  (| ___ |    \   | |   | | |  _ \ / _  |/ _ \ 
-| |__)  ) ____| | | |   \ \ / /| | | | ( (_| | |_| |
-|______/|_____)_|_|_|    \___/ |_|_| |_|\____|\___/   
-
-Bem-vindo ao sistema de coleta de dados do siga automatizado
-            ";
-            WriteToConsoleOutput(asciiArt);
-        }
-
-
         private void btnStart_Click(object sender, EventArgs e)
         {
             this.btnStart.Enabled = false;
-            this.isBotEmExecucao = true;
+            this.btnLooping.Enabled = false;
             this.btnStop.Enabled = true;
+
+            this.isBotEmExecucao = true;
             _cancellationTokenSource = new CancellationTokenSource();
             var token = _cancellationTokenSource.Token;
 
-            this.WriteToConsoleOutput("Iniciando Robô...");
+            this.WriteToConsoleOutput("Iniciando Looping de execução...\n");
+            this.atualizarLabelStatus();
 
-            Task.Run(() =>
+            Task.Run(async () =>
             {
+                bool primeiraExec = true;
+
                 try
                 {
-                    this.iniciadorColeta.IniciarColeta(estudante, getExecucoesHabilitadas());
+                    token.ThrowIfCancellationRequested();
+
+                    if (!primeiraExec)
+                    {
+                        this.WriteToConsoleOutput($"Esperando {loopingTime} minuto para reiniciar - {DateTime.Now:dd/MM HH:mm}\n");
+                        await Task.Delay(loopingTime * 60 * 1000, token);
+                    }
+
+                    primeiraExec = false;
+
+                    try
+                    {
+                        this.iniciadorColeta.IniciarColeta(estudante, getExecucoesHabilitadas());
+                    }
+                    catch (Exception ex)
+                    {
+                        this.WriteToConsoleOutput($"Esperando {loopingTime} minuto para reiniciar - {DateTime.Now:dd/MM HH:mm}\n");
+                        CustomMessageBox.CustomMessageBox.Show($"Um erro inesperado aconteceu\n\nMensagem: {ex.Message}", "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch (OperationCanceledException)
                 {
-                    CustomMessageBox.CustomMessageBox.Show("A coleta foi cancelada.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    CustomMessageBox.CustomMessageBox.Show($"Um erro inesperado aconteceu\n\nMensagem: {ex.Message}", "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CustomMessageBox.CustomMessageBox.Show("A coleta foi cancelada.", "Cancelada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 finally
                 {
@@ -139,60 +157,85 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
                     this.Invoke((Action)(() =>
                     {
                         this.btnStart.Enabled = true;
+                        this.btnLooping.Enabled = true;
+                        this.btnStop.Enabled = false;
+                        execucoesCompletas++;
+                        this.lblContador.Text = execucoesCompletas.ToString();
+                        this.atualizarLabelStatus();
+                    }));
+                }
+
+            }, token);
+        }
+
+        private async void btnLooping_Click(object sender, EventArgs e)
+        {
+            this.btnLooping.Enabled = false;
+            this.btnStart.Enabled = false;
+            this.btnStop.Enabled = true;
+            this.isBotEmExecucao = true;
+
+            _cancellationTokenSource = new CancellationTokenSource();
+            var token = _cancellationTokenSource.Token;
+
+            this.WriteToConsoleOutput("Iniciando Looping de execução...\n");
+            this.atualizarLabelStatus();
+
+            await Task.Run(async () =>
+            {
+                bool primeiraExec = true;
+
+                try
+                {
+                    while (!token.IsCancellationRequested)  
+                    {
+                        token.ThrowIfCancellationRequested();
+
+                        if (!primeiraExec)
+                        {
+                            this.WriteToConsoleOutput($"Esperando {loopingTime} minuto para reiniciar - {DateTime.Now:dd/MM HH:mm}\n");
+                            await Task.Delay(loopingTime * 60 * 1000, token); 
+                        }
+
+                        primeiraExec = false;
+
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            this.iniciadorColeta.IniciarColeta(estudante, getExecucoesHabilitadas());
+                        }
+                        catch (Exception ex)
+                        {
+                            this.WriteToConsoleOutput($"Esperando {loopingTime} minuto para reiniciar - {DateTime.Now:dd/MM HH:mm}\n");
+                            CustomMessageBox.CustomMessageBox.Show($"Um erro inesperado aconteceu\n\nMensagem: {ex.Message}", "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                    }
+                }
+                catch (OperationCanceledException)
+                {
+                    CustomMessageBox.CustomMessageBox.Show("A coleta foi cancelada.", "Cancelada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                finally
+                {
+                    isBotEmExecucao = false;
+                    this.Invoke((Action)(() =>
+                    {
+                        this.btnStart.Enabled = true;
+                        this.btnLooping.Enabled = true;
+                        this.btnStop.Enabled = false;
+                        execucoesCompletas++;
+                        this.lblContador.Text = execucoesCompletas.ToString();
+                        this.atualizarLabelStatus();
                     }));
                 }
             }, token);
         }
 
-        private void btnLooping_Click(object sender, EventArgs e)
-        {
-            this.btnStart.Enabled = false;
-            this.btnStop.Enabled = true;
-
-            _cancellationTokenSource = new CancellationTokenSource();
-            var token = _cancellationTokenSource.Token;
-
-            this.WriteToConsoleOutput("Iniciando Robô...");
-
-            Task.Run(() =>
-            {
-                bool primeiraExec = true;
-                while (true)
-                {
-                    if (!primeiraExec)
-                        Task.Delay(loopingTime * 60 * 1000);
-                    try
-                    {
-                        primeiraExec = false;
-                        this.iniciadorColeta.IniciarColeta(estudante, getExecucoesHabilitadas());
-                    }
-                    catch (OperationCanceledException)
-                    {
-                        CustomMessageBox.CustomMessageBox.Show("A coleta foi cancelada.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        CustomMessageBox.CustomMessageBox.Show($"Um erro inesperado aconteceu\n\nMensagem: {ex.Message}", "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        isBotEmExecucao = false;
-                        this.Invoke((Action)(() =>
-                        {
-                            this.btnStart.Enabled = true;
-                        }));
-                    }
-                }
-
-            }, token);
-
-        }
-
-
         private void btnStop_Click(object sender, EventArgs e)
         {
             this.WriteToConsoleOutput("Solicitando cancelamento...");
-            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Cancel(); // Solicita o cancelamento pelo token
             this.btnStop.Enabled = false;
         }
 

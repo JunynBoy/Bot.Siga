@@ -1,17 +1,10 @@
 ﻿using Bot.Core.Model;
 using Bot.Core.Service;
-using Bot.Core.src.Helper;
 using Bot.Core.src.Model.Enum;
 using Bot.Core.src.Service;
-using Bot.Siga.src.ColetaModular;
 using Bot.Siga.src.ColetaModular.Interface;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 using System.Configuration;
-using System.Drawing;
-using static System.Net.Mime.MediaTypeNames;
 
 
 namespace Bot.Siga
@@ -56,14 +49,14 @@ namespace Bot.Siga
             if (estudante != null)
             {
                 Log("Iniciando coleta para o estudante " + estudante.Nome);
-                Log("Criando Navegador..." + estudante.Nome);
+                Log("Criando Navegador...");
                 this.CreateChromeWithDriverManager(headless);
                 this.Executar(tipoExecucao, estudante);
 
             }
             else
             {
-                Log("Estudante não encontrado" + estudante.Nome);
+                Log("Estudante não encontrado");
                 this.FecharNavegador();
                 throw new Exception("Usuário não encontrado");
             }
@@ -113,6 +106,7 @@ namespace Bot.Siga
                 {
                     var rotina =  this._estrategiaColeta!.ObterEstrategia(tipoExecucao);
                     await rotina.ColetarDados(estudante);
+                    Log("Coleta Finalizada!");
                 }
 
                 this.FecharNavegador();

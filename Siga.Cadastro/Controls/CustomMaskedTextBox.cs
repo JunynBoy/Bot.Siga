@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace Bot.App.Controls
 {
@@ -22,6 +23,7 @@ namespace Bot.App.Controls
         public CustomMaskedTextBox()
         {
             InitializeComponent();
+            maskedTextBox1.Culture = CultureInfo.InvariantCulture;
         }
 
         public event EventHandler _TextChanged;
@@ -173,6 +175,18 @@ namespace Bot.App.Controls
             }
         }
 
+        private int GetFirstEmptyPosition()
+        {
+            for (int i = 0; i < maskedTextBox1.Text.Length; i++)
+            {
+                if (maskedTextBox1.Text[i] == ' ' || maskedTextBox1.Text[i] == maskedTextBox1.PromptChar)
+                {
+                    return i; 
+                }
+            }
+            return maskedTextBox1.Text.Length; 
+        }
+
         private void maskedTextBox1_TextChanged(object sender, EventArgs e)
         {
             if (_TextChanged != null)
@@ -181,6 +195,8 @@ namespace Bot.App.Controls
 
         private void maskedTextBox1_Click(object sender, EventArgs e)
         {
+            int position = GetFirstEmptyPosition();
+            maskedTextBox1.Select(position, 0);
             this.OnClick(e);
         }
 

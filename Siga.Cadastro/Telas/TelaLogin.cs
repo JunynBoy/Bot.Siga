@@ -199,40 +199,15 @@ namespace Siga.Cadastro
                 return false;
             }
 
-            return ValidateCpfDigits(cpf);
+            return true;
         }
 
-        private bool ValidateCpfDigits(string cpf)
-        {
-            int[] weights1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int[] weights2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-
-            int sum = 0;
-            for (int i = 0; i < 9; i++)
-            {
-                sum += (cpf[i] - '0') * weights1[i];
-            }
-
-            int remainder = sum % 11;
-            int firstDigit = remainder < 2 ? 0 : 11 - remainder;
-
-            sum = 0;
-            for (int i = 0; i < 10; i++)
-            {
-                sum += (cpf[i] - '0') * weights2[i];
-            }
-
-            remainder = sum % 11;
-            int secondDigit = remainder < 2 ? 0 : 11 - remainder;
-
-            return cpf[9] - '0' == firstDigit && cpf[10] - '0' == secondDigit;
-        }
 
         private List<string> isValidLogin()
         {
             List<string> erros = new List<string>();
 
-            if (IsCpfValid(txtmCPF.Texts)) 
+            if (!IsCpfValid(txtmCPF.Texts)) 
             {
                erros.Add("CPF inserido é inválido");
             }

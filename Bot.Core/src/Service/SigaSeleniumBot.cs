@@ -15,11 +15,6 @@ namespace Bot.Core.src.Service
 
         protected void CreateChromeWithDriverManager(bool headless = false)
         {
-            if (_driver != null)
-            {
-                return;
-            }
-
             var chromeDriverService = ChromeDriverService.CreateDefaultService();
             chromeDriverService.HideCommandPromptWindow = headless;
 

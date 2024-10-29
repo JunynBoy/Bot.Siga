@@ -44,33 +44,33 @@
             llblPrimeiroAcesso = new LinkLabel();
             pbxPassword = new PictureBox();
             panelContainer = new Panel();
-            pbxLogoFatec = new PictureBox();
+            panelLogos = new Panel();
             panelPreferencias = new Panel();
-            lblEmail = new Label();
-            lblWhatsapp = new Label();
-            pcbWhatsapp = new PictureBox();
-            pcbEmail = new PictureBox();
-            txtEmail = new Bot.App.Controls.CustomTextBox();
-            txtmWhatsapp = new Bot.App.Controls.CustomMaskedTextBox();
+            lblAtualizarPorEmail = new Label();
+            tbAtualizarPorEmail = new CustomControls.CustomControls.CustomToggleButton();
+            lblAtualizarPorWhatsapp = new Label();
+            tbAtualizarPorWhatsapp = new CustomControls.CustomControls.CustomToggleButton();
             panelSubHeaderPreferencias = new Panel();
             lblPreferencias = new Label();
-            tbAtualizarPorWhatsapp = new CustomControls.CustomControls.CustomToggleButton();
-            lblAtualizarPorWhatsapp = new Label();
-            tbAtualizarPorEmail = new CustomControls.CustomControls.CustomToggleButton();
-            lblAtualizarPorEmail = new Label();
-            panelLogos = new Panel();
+            txtmWhatsapp = new Bot.App.Controls.CustomMaskedTextBox();
+            txtEmail = new Bot.App.Controls.CustomTextBox();
+            pcbEmail = new PictureBox();
+            pcbWhatsapp = new PictureBox();
+            lblWhatsapp = new Label();
+            lblEmail = new Label();
+            pbxLogoFatec = new PictureBox();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbxUser).BeginInit();
             panelLogin.SuspendLayout();
             panelSubHeaderLoginSiga.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbxPassword).BeginInit();
             panelContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbxLogoFatec).BeginInit();
-            panelPreferencias.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pcbWhatsapp).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pcbEmail).BeginInit();
-            panelSubHeaderPreferencias.SuspendLayout();
             panelLogos.SuspendLayout();
+            panelPreferencias.SuspendLayout();
+            panelSubHeaderPreferencias.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbEmail).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcbWhatsapp).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbxLogoFatec).BeginInit();
             SuspendLayout();
             // 
             // lblSenha
@@ -208,11 +208,11 @@
             txtmCPF.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtmCPF.ForeColor = Color.DimGray;
             txtmCPF.Location = new Point(68, 86);
-            txtmCPF.Margin = new Padding(4, 4, 4, 4);
+            txtmCPF.Margin = new Padding(4);
             txtmCPF.Mask = "000.000.000-00";
             txtmCPF.Multiline = false;
             txtmCPF.Name = "txtmCPF";
-            txtmCPF.Padding = new Padding(7, 7, 7, 7);
+            txtmCPF.Padding = new Padding(7);
             txtmCPF.PasswordChar = false;
             txtmCPF.Size = new Size(250, 29);
             txtmCPF.TabIndex = 1;
@@ -228,10 +228,10 @@
             txtSenha.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtSenha.ForeColor = Color.DimGray;
             txtSenha.Location = new Point(67, 146);
-            txtSenha.Margin = new Padding(4, 4, 4, 4);
+            txtSenha.Margin = new Padding(4);
             txtSenha.Multiline = false;
             txtSenha.Name = "txtSenha";
-            txtSenha.Padding = new Padding(7, 7, 7, 7);
+            txtSenha.Padding = new Padding(7);
             txtSenha.PasswordChar = true;
             txtSenha.Size = new Size(250, 29);
             txtSenha.TabIndex = 2;
@@ -273,15 +273,15 @@
             panelContainer.Size = new Size(724, 302);
             panelContainer.TabIndex = 40;
             // 
-            // pbxLogoFatec
+            // panelLogos
             // 
-            pbxLogoFatec.Dock = DockStyle.Fill;
-            pbxLogoFatec.Image = (Image)resources.GetObject("pbxLogoFatec.Image");
-            pbxLogoFatec.Location = new Point(0, 0);
-            pbxLogoFatec.Name = "pbxLogoFatec";
-            pbxLogoFatec.Size = new Size(366, 302);
-            pbxLogoFatec.TabIndex = 38;
-            pbxLogoFatec.TabStop = false;
+            panelLogos.Controls.Add(panelPreferencias);
+            panelLogos.Controls.Add(pbxLogoFatec);
+            panelLogos.Dock = DockStyle.Fill;
+            panelLogos.Location = new Point(358, 0);
+            panelLogos.Name = "panelLogos";
+            panelLogos.Size = new Size(366, 302);
+            panelLogos.TabIndex = 39;
             // 
             // panelPreferencias
             // 
@@ -304,82 +304,54 @@
             panelPreferencias.TabIndex = 40;
             panelPreferencias.Visible = false;
             // 
-            // lblEmail
+            // lblAtualizarPorEmail
             // 
-            lblEmail.AutoSize = true;
-            lblEmail.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEmail.Location = new Point(63, 123);
-            lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(49, 19);
-            lblEmail.TabIndex = 0;
-            lblEmail.Text = "E-mail";
+            lblAtualizarPorEmail.AutoSize = true;
+            lblAtualizarPorEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblAtualizarPorEmail.ForeColor = Color.FromArgb(30, 39, 44);
+            lblAtualizarPorEmail.Location = new Point(82, 237);
+            lblAtualizarPorEmail.Name = "lblAtualizarPorEmail";
+            lblAtualizarPorEmail.Size = new Size(153, 17);
+            lblAtualizarPorEmail.TabIndex = 0;
+            lblAtualizarPorEmail.Text = "Atualizações por E-mail";
             // 
-            // lblWhatsapp
+            // tbAtualizarPorEmail
             // 
-            lblWhatsapp.AutoSize = true;
-            lblWhatsapp.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblWhatsapp.Location = new Point(63, 63);
-            lblWhatsapp.Name = "lblWhatsapp";
-            lblWhatsapp.Size = new Size(72, 19);
-            lblWhatsapp.TabIndex = 0;
-            lblWhatsapp.Text = "Whatsapp";
+            tbAtualizarPorEmail.Location = new Point(31, 237);
+            tbAtualizarPorEmail.MinimumSize = new Size(45, 22);
+            tbAtualizarPorEmail.Name = "tbAtualizarPorEmail";
+            tbAtualizarPorEmail.OffBackColor = Color.Gray;
+            tbAtualizarPorEmail.OffToggleColor = Color.Gainsboro;
+            tbAtualizarPorEmail.OnBackColor = Color.FromArgb(66, 84, 96);
+            tbAtualizarPorEmail.OnToggleColor = Color.WhiteSmoke;
+            tbAtualizarPorEmail.Size = new Size(45, 22);
+            tbAtualizarPorEmail.TabIndex = 8;
+            tbAtualizarPorEmail.UseVisualStyleBackColor = true;
             // 
-            // pcbWhatsapp
+            // lblAtualizarPorWhatsapp
             // 
-            pcbWhatsapp.Image = (Image)resources.GetObject("pcbWhatsapp.Image");
-            pcbWhatsapp.Location = new Point(31, 90);
-            pcbWhatsapp.Name = "pcbWhatsapp";
-            pcbWhatsapp.Size = new Size(25, 25);
-            pcbWhatsapp.TabIndex = 40;
-            pcbWhatsapp.TabStop = false;
+            lblAtualizarPorWhatsapp.AutoSize = true;
+            lblAtualizarPorWhatsapp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblAtualizarPorWhatsapp.ForeColor = Color.FromArgb(30, 39, 44);
+            lblAtualizarPorWhatsapp.Location = new Point(82, 208);
+            lblAtualizarPorWhatsapp.Name = "lblAtualizarPorWhatsapp";
+            lblAtualizarPorWhatsapp.Size = new Size(176, 17);
+            lblAtualizarPorWhatsapp.TabIndex = 0;
+            lblAtualizarPorWhatsapp.Text = "Atualizações por Whatsapp";
+            lblAtualizarPorWhatsapp.TextAlign = ContentAlignment.TopRight;
             // 
-            // pcbEmail
+            // tbAtualizarPorWhatsapp
             // 
-            pcbEmail.Image = (Image)resources.GetObject("pcbEmail.Image");
-            pcbEmail.Location = new Point(31, 146);
-            pcbEmail.Name = "pcbEmail";
-            pcbEmail.Size = new Size(25, 25);
-            pcbEmail.TabIndex = 40;
-            pcbEmail.TabStop = false;
-            // 
-            // txtEmail
-            // 
-            txtEmail.BackColor = SystemColors.Window;
-            txtEmail.BorderColor = Color.FromArgb(66, 84, 96);
-            txtEmail.BorderFocusColor = Color.FromArgb(176, 0, 0);
-            txtEmail.BorderSize = 1;
-            txtEmail.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            txtEmail.ForeColor = Color.DimGray;
-            txtEmail.Location = new Point(63, 146);
-            txtEmail.Margin = new Padding(4);
-            txtEmail.Multiline = false;
-            txtEmail.Name = "txtEmail";
-            txtEmail.Padding = new Padding(7);
-            txtEmail.PasswordChar = false;
-            txtEmail.Size = new Size(250, 29);
-            txtEmail.TabIndex = 6;
-            txtEmail.Texts = "";
-            txtEmail.UnderlinedStyle = true;
-            // 
-            // txtmWhatsapp
-            // 
-            txtmWhatsapp.BackColor = SystemColors.Window;
-            txtmWhatsapp.BorderColor = Color.FromArgb(66, 84, 96);
-            txtmWhatsapp.BorderFocusColor = Color.FromArgb(176, 0, 0);
-            txtmWhatsapp.BorderSize = 1;
-            txtmWhatsapp.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            txtmWhatsapp.ForeColor = Color.DimGray;
-            txtmWhatsapp.Location = new Point(63, 86);
-            txtmWhatsapp.Margin = new Padding(4);
-            txtmWhatsapp.Mask = "00 00000-0000";
-            txtmWhatsapp.Multiline = false;
-            txtmWhatsapp.Name = "txtmWhatsapp";
-            txtmWhatsapp.Padding = new Padding(7);
-            txtmWhatsapp.PasswordChar = false;
-            txtmWhatsapp.Size = new Size(250, 29);
-            txtmWhatsapp.TabIndex = 5;
-            txtmWhatsapp.Texts = "        -";
-            txtmWhatsapp.UnderlinedStyle = true;
+            tbAtualizarPorWhatsapp.Location = new Point(31, 208);
+            tbAtualizarPorWhatsapp.MinimumSize = new Size(45, 22);
+            tbAtualizarPorWhatsapp.Name = "tbAtualizarPorWhatsapp";
+            tbAtualizarPorWhatsapp.OffBackColor = Color.Gray;
+            tbAtualizarPorWhatsapp.OffToggleColor = Color.Gainsboro;
+            tbAtualizarPorWhatsapp.OnBackColor = Color.FromArgb(66, 84, 96);
+            tbAtualizarPorWhatsapp.OnToggleColor = Color.WhiteSmoke;
+            tbAtualizarPorWhatsapp.Size = new Size(45, 22);
+            tbAtualizarPorWhatsapp.TabIndex = 7;
+            tbAtualizarPorWhatsapp.UseVisualStyleBackColor = true;
             // 
             // panelSubHeaderPreferencias
             // 
@@ -402,64 +374,92 @@
             lblPreferencias.TabIndex = 40;
             lblPreferencias.Text = "Preferências";
             // 
-            // tbAtualizarPorWhatsapp
+            // txtmWhatsapp
             // 
-            tbAtualizarPorWhatsapp.Location = new Point(31, 208);
-            tbAtualizarPorWhatsapp.MinimumSize = new Size(45, 22);
-            tbAtualizarPorWhatsapp.Name = "tbAtualizarPorWhatsapp";
-            tbAtualizarPorWhatsapp.OffBackColor = Color.Gray;
-            tbAtualizarPorWhatsapp.OffToggleColor = Color.Gainsboro;
-            tbAtualizarPorWhatsapp.OnBackColor = Color.FromArgb(66, 84, 96);
-            tbAtualizarPorWhatsapp.OnToggleColor = Color.WhiteSmoke;
-            tbAtualizarPorWhatsapp.Size = new Size(45, 22);
-            tbAtualizarPorWhatsapp.TabIndex = 7;
-            tbAtualizarPorWhatsapp.UseVisualStyleBackColor = true;
+            txtmWhatsapp.BackColor = SystemColors.Window;
+            txtmWhatsapp.BorderColor = Color.FromArgb(66, 84, 96);
+            txtmWhatsapp.BorderFocusColor = Color.FromArgb(176, 0, 0);
+            txtmWhatsapp.BorderSize = 1;
+            txtmWhatsapp.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtmWhatsapp.ForeColor = Color.DimGray;
+            txtmWhatsapp.Location = new Point(63, 86);
+            txtmWhatsapp.Margin = new Padding(4);
+            txtmWhatsapp.Mask = "00 00000-0000";
+            txtmWhatsapp.Multiline = false;
+            txtmWhatsapp.Name = "txtmWhatsapp";
+            txtmWhatsapp.Padding = new Padding(7);
+            txtmWhatsapp.PasswordChar = false;
+            txtmWhatsapp.Size = new Size(250, 29);
+            txtmWhatsapp.TabIndex = 5;
+            txtmWhatsapp.Texts = "        -";
+            txtmWhatsapp.UnderlinedStyle = true;
             // 
-            // lblAtualizarPorWhatsapp
+            // txtEmail
             // 
-            lblAtualizarPorWhatsapp.AutoSize = true;
-            lblAtualizarPorWhatsapp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblAtualizarPorWhatsapp.ForeColor = Color.FromArgb(30, 39, 44);
-            lblAtualizarPorWhatsapp.Location = new Point(82, 208);
-            lblAtualizarPorWhatsapp.Name = "lblAtualizarPorWhatsapp";
-            lblAtualizarPorWhatsapp.Size = new Size(176, 17);
-            lblAtualizarPorWhatsapp.TabIndex = 0;
-            lblAtualizarPorWhatsapp.Text = "Atualizações por Whatsapp";
-            lblAtualizarPorWhatsapp.TextAlign = ContentAlignment.TopRight;
+            txtEmail.BackColor = SystemColors.Window;
+            txtEmail.BorderColor = Color.FromArgb(66, 84, 96);
+            txtEmail.BorderFocusColor = Color.FromArgb(176, 0, 0);
+            txtEmail.BorderSize = 1;
+            txtEmail.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtEmail.ForeColor = Color.DimGray;
+            txtEmail.Location = new Point(63, 146);
+            txtEmail.Margin = new Padding(4);
+            txtEmail.Multiline = false;
+            txtEmail.Name = "txtEmail";
+            txtEmail.Padding = new Padding(7);
+            txtEmail.PasswordChar = false;
+            txtEmail.Size = new Size(250, 29);
+            txtEmail.TabIndex = 6;
+            txtEmail.Texts = "";
+            txtEmail.UnderlinedStyle = true;
             // 
-            // tbAtualizarPorEmail
+            // pcbEmail
             // 
-            tbAtualizarPorEmail.Location = new Point(31, 237);
-            tbAtualizarPorEmail.MinimumSize = new Size(45, 22);
-            tbAtualizarPorEmail.Name = "tbAtualizarPorEmail";
-            tbAtualizarPorEmail.OffBackColor = Color.Gray;
-            tbAtualizarPorEmail.OffToggleColor = Color.Gainsboro;
-            tbAtualizarPorEmail.OnBackColor = Color.FromArgb(66, 84, 96);
-            tbAtualizarPorEmail.OnToggleColor = Color.WhiteSmoke;
-            tbAtualizarPorEmail.Size = new Size(45, 22);
-            tbAtualizarPorEmail.TabIndex = 8;
-            tbAtualizarPorEmail.UseVisualStyleBackColor = true;
+            pcbEmail.Image = (Image)resources.GetObject("pcbEmail.Image");
+            pcbEmail.Location = new Point(31, 146);
+            pcbEmail.Name = "pcbEmail";
+            pcbEmail.Size = new Size(25, 25);
+            pcbEmail.TabIndex = 40;
+            pcbEmail.TabStop = false;
             // 
-            // lblAtualizarPorEmail
+            // pcbWhatsapp
             // 
-            lblAtualizarPorEmail.AutoSize = true;
-            lblAtualizarPorEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblAtualizarPorEmail.ForeColor = Color.FromArgb(30, 39, 44);
-            lblAtualizarPorEmail.Location = new Point(82, 237);
-            lblAtualizarPorEmail.Name = "lblAtualizarPorEmail";
-            lblAtualizarPorEmail.Size = new Size(153, 17);
-            lblAtualizarPorEmail.TabIndex = 0;
-            lblAtualizarPorEmail.Text = "Atualizações por E-mail";
+            pcbWhatsapp.Image = (Image)resources.GetObject("pcbWhatsapp.Image");
+            pcbWhatsapp.Location = new Point(31, 90);
+            pcbWhatsapp.Name = "pcbWhatsapp";
+            pcbWhatsapp.Size = new Size(25, 25);
+            pcbWhatsapp.TabIndex = 40;
+            pcbWhatsapp.TabStop = false;
             // 
-            // panelLogos
+            // lblWhatsapp
             // 
-            panelLogos.Controls.Add(panelPreferencias);
-            panelLogos.Controls.Add(pbxLogoFatec);
-            panelLogos.Dock = DockStyle.Fill;
-            panelLogos.Location = new Point(358, 0);
-            panelLogos.Name = "panelLogos";
-            panelLogos.Size = new Size(366, 302);
-            panelLogos.TabIndex = 39;
+            lblWhatsapp.AutoSize = true;
+            lblWhatsapp.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblWhatsapp.Location = new Point(63, 63);
+            lblWhatsapp.Name = "lblWhatsapp";
+            lblWhatsapp.Size = new Size(72, 19);
+            lblWhatsapp.TabIndex = 0;
+            lblWhatsapp.Text = "Whatsapp";
+            // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = true;
+            lblEmail.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEmail.Location = new Point(63, 123);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(49, 19);
+            lblEmail.TabIndex = 0;
+            lblEmail.Text = "E-mail";
+            // 
+            // pbxLogoFatec
+            // 
+            pbxLogoFatec.Dock = DockStyle.Fill;
+            pbxLogoFatec.Image = (Image)resources.GetObject("pbxLogoFatec.Image");
+            pbxLogoFatec.Location = new Point(0, 0);
+            pbxLogoFatec.Name = "pbxLogoFatec";
+            pbxLogoFatec.Size = new Size(366, 302);
+            pbxLogoFatec.TabIndex = 38;
+            pbxLogoFatec.TabStop = false;
             // 
             // TelaLogin
             // 
@@ -485,14 +485,14 @@
             panelSubHeaderLoginSiga.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbxPassword).EndInit();
             panelContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pbxLogoFatec).EndInit();
+            panelLogos.ResumeLayout(false);
             panelPreferencias.ResumeLayout(false);
             panelPreferencias.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pcbWhatsapp).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pcbEmail).EndInit();
             panelSubHeaderPreferencias.ResumeLayout(false);
             panelSubHeaderPreferencias.PerformLayout();
-            panelLogos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pcbEmail).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcbWhatsapp).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbxLogoFatec).EndInit();
             ResumeLayout(false);
         }
 

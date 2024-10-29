@@ -150,7 +150,7 @@
             lblContador.AutoSize = true;
             lblContador.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblContador.ForeColor = Color.FromArgb(30, 39, 44);
-            lblContador.Location = new Point(124, 85);
+            lblContador.Location = new Point(124, 59);
             lblContador.Name = "lblContador";
             lblContador.Size = new Size(14, 15);
             lblContador.TabIndex = 23;
@@ -181,12 +181,13 @@
             lblUltimaModificacao.AutoSize = true;
             lblUltimaModificacao.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblUltimaModificacao.ForeColor = Color.FromArgb(30, 39, 44);
-            lblUltimaModificacao.Location = new Point(140, 57);
+            lblUltimaModificacao.Location = new Point(140, 89);
             lblUltimaModificacao.Name = "lblUltimaModificacao";
             lblUltimaModificacao.Size = new Size(92, 15);
             lblUltimaModificacao.TabIndex = 22;
             lblUltimaModificacao.Text = "dd/mm hh/MM";
             lblUltimaModificacao.TextAlign = ContentAlignment.TopRight;
+            lblUltimaModificacao.Visible = false;
             // 
             // lblStatus
             // 
@@ -206,7 +207,7 @@
             lblContadorTitle.AutoSize = true;
             lblContadorTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblContadorTitle.ForeColor = Color.FromArgb(30, 39, 44);
-            lblContadorTitle.Location = new Point(20, 85);
+            lblContadorTitle.Location = new Point(20, 59);
             lblContadorTitle.Name = "lblContadorTitle";
             lblContadorTitle.Size = new Size(98, 15);
             lblContadorTitle.TabIndex = 20;
@@ -219,12 +220,13 @@
             lblUltimaModificacaoTitle.BackColor = Color.White;
             lblUltimaModificacaoTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblUltimaModificacaoTitle.ForeColor = Color.FromArgb(30, 39, 44);
-            lblUltimaModificacaoTitle.Location = new Point(20, 57);
+            lblUltimaModificacaoTitle.Location = new Point(20, 89);
             lblUltimaModificacaoTitle.Name = "lblUltimaModificacaoTitle";
             lblUltimaModificacaoTitle.Size = new Size(114, 15);
             lblUltimaModificacaoTitle.TabIndex = 19;
             lblUltimaModificacaoTitle.Text = "Última Modificação";
             lblUltimaModificacaoTitle.TextAlign = ContentAlignment.TopRight;
+            lblUltimaModificacaoTitle.Visible = false;
             // 
             // lblStatusTitle
             // 
