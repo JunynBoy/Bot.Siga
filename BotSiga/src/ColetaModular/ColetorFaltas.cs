@@ -23,7 +23,7 @@ namespace Bot.Siga.src.ColetaModular
 
         public async Task ColetarDados(Estudante estudante)
         {
-            StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Iniciando Coleta de Faltas...");
+            Log( "Iniciando Coleta de Faltas...");
 
                 try
                 {
@@ -81,10 +81,10 @@ namespace Bot.Siga.src.ColetaModular
             }
                 catch (Exception e)
                 {
-                    StringHelper.ConsoleColoredLog(ConsoleColor.Yellow, $"Não foi encontrado nada:{e.Message}");
+                    Log( $"Não foi encontrado nada:{e.Message}");
                 }
 
-            StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Finalizando Coleta de Faltas...");
+            Log( "Finalizando Coleta de Faltas...");
         }
 
         private void ClicarBotaoFaltas()

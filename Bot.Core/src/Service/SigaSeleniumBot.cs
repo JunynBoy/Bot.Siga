@@ -20,6 +20,9 @@ namespace Bot.Core.src.Service
                 return;
             }
 
+            var chromeDriverService = ChromeDriverService.CreateDefaultService();
+            chromeDriverService.HideCommandPromptWindow = headless;
+
             new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
             ChromeOptions options = new ChromeOptions();
 
@@ -33,7 +36,7 @@ namespace Bot.Core.src.Service
 
             options.AddArguments("--start-maximized");
 
-            _driver = new ChromeDriver(options);
+            _driver = new ChromeDriver(chromeDriverService, options);
         }
 
         protected void ClickOnElementByXpath(string xpath)
@@ -68,7 +71,7 @@ namespace Bot.Core.src.Service
             }
         }
 
-        protected String? GetTextEçementByXpath(string xPath)
+        protected String? GetTextElementByXpath(string xPath)
         {
             try
             {

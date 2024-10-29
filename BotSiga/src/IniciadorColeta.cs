@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.Configuration;
+using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
 
 
@@ -22,10 +23,9 @@ namespace Bot.Siga
         public String? statusAtualDoBot;
         protected Dictionary<EnumTipoDeExecucao, IColetaModular>? _estrategias;
         private EstrategiaColeta? _estrategiaColeta;
-
         private EstudanteService _estudanteService;
 
-
+        private Action<string> logAction;
 
         public IniciadorColeta()
         {
@@ -33,18 +33,37 @@ namespace Bot.Siga
             this._urlLogin = ConfigurationManager.AppSettings["urlLogin"];
         }
 
+        public void SetLogAction(Action<string> log)
+        {
+            this.logAction = log;
+        }
+
+        public void Log(params string[] args)
+        {
+            foreach(var message in args )
+                logAction?.Invoke($"{message} - {DateTime.Now:dd/MM HH:mm}\n");
+        }
+
+        public void Log(string message)
+        {
+            logAction?.Invoke($"{message} - {DateTime.Now:dd/MM HH:mm}\n");
+        }
+
+
         public void IniciarColeta(Estudante estudante, List<EnumTipoDeExecucao> tipoExecucao, bool headless = true)
         {
 
             if (estudante != null)
             {
+                Log("Iniciando coleta para o estudante " + estudante.Nome);
+                Log("Criando Navegador..." + estudante.Nome);
                 this.CreateChromeWithDriverManager(headless);
-                this.statusAtualDoBot = "Criando Navegador...";
                 this.Executar(tipoExecucao, estudante);
 
             }
             else
             {
+                Log("Estudante não encontrado" + estudante.Nome);
                 this.FecharNavegador();
                 throw new Exception("Usuário não encontrado");
             }
@@ -57,7 +76,7 @@ namespace Bot.Siga
             if (estudante != null)
             {
                 this.CreateChromeWithDriverManager(headless);
-                StringHelper.ConsoleColoredLog(ConsoleColor.Blue,"Iniciando sistema do SIGA para validar o usuário inserido......");
+                Log("Iniciando sistema do SIGA para validar o usuário inserido......");
                 if (this.FazerLogin(estudante))
                 {
                     this.FecharNavegador();
@@ -79,7 +98,7 @@ namespace Bot.Siga
         private async void Executar(List<EnumTipoDeExecucao> TiposExecucao, Estudante estudante)
         {
 
-            this.statusAtualDoBot = "Coletando Dados...";
+            Log("Iniciando Coleta");
 
             try
             {
@@ -100,8 +119,7 @@ namespace Bot.Siga
             }
             catch (Exception ex)
             {
-                StringHelper.ConsoleColoredLog(ConsoleColor.Red,
-                    "Um erro inesperado ocorreu",
+                Log("Um erro inesperado ocorreu",
                     $"Detalhes do ERRO:{ex.Message}");
                 this.FecharNavegador();
             }
@@ -135,7 +153,7 @@ namespace Bot.Siga
             if (this.VerificarElementoPresente(xpathLoginInvalido))
             {
                 this.statusAtualDoBot = _driver!.FindElement(By.XPath(xpathLoginInvalido)).Text;
-                StringHelper.ConsoleColoredLog(ConsoleColor.Red,
+                Log(
                     $"ERRO: {statusAtualDoBot}",
                     "Fechando o programa...");
                 return false;
@@ -154,17 +172,17 @@ namespace Bot.Siga
 
         private void ValidarAtributosDoEstudante(Estudante estudante)
         {
-            estudante.Nome = this.GetTextEçementByXpath("(//span[contains(@id, 'PESSOALNOME')])[1]")?.Replace("-", "").Trim();
+            estudante.Nome = this.GetTextElementByXpath("(//span[contains(@id, 'PESSOALNOME')])[1]")?.Replace("-", "").Trim();
 
-            estudante.PP = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPP')])[1]") + "%";
+            estudante.PP = this.GetTextElementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPP')])[1]") + "%";
 
-            estudante.PR = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPR')])[1]");
+            estudante.PR = this.GetTextElementByXpath("(//span[contains(@id, 'ALUNOCURSOINDICEPR')])[1]");
 
-            estudante.Ciclo = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOCICLOATUAL')])[1]");
+            estudante.Ciclo = this.GetTextElementByXpath("(//span[contains(@id, 'ALUNOCURSOCICLOATUAL')])[1]");
 
-            estudante.Ra = this.GetTextEçementByXpath("(//span[contains(@id, 'ALUNOCURSOREGISTROACADEMICOCURSO')])[1]");
+            estudante.Ra = this.GetTextElementByXpath("(//span[contains(@id, 'ALUNOCURSOREGISTROACADEMICOCURSO')])[1]");
 
-            estudante.EmailInstitucional = this.GetTextEçementByXpath("(//span[contains(@id, 'INSTITUCIONALFATEC')])[2]");
+            estudante.EmailInstitucional = this.GetTextElementByXpath("(//span[contains(@id, 'INSTITUCIONALFATEC')])[2]");
 
             if (estudante.Autenticado == false)
                 estudante.Autenticado = true;

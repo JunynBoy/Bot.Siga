@@ -35,7 +35,7 @@ namespace Bot.App.Telas
         {
             this._loadingService.StartLoading(panelContainer);
 
-            homeControl = new HomeControl();
+            homeControl = new HomeControl(estudante);
             homeControl.Dock = DockStyle.Fill;
             panelContainer.Controls.Add(homeControl);
 
@@ -114,21 +114,28 @@ namespace Bot.App.Telas
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-
-            DialogResult result = CustomMessageBox.CustomMessageBox.Show("O Robô está em execução, gostaria de minimizar a aplicação para a barra de tarefas?",
-                "Atenção",
-                MessageBoxButtons.YesNo);
-
-
-            if (result == DialogResult.Yes || result == DialogResult.None)
+            if (this.homeControl.isBotEmExecucao)
             {
-                trayIcon!.Visible = true;
-                this.Hide();
+                DialogResult result = CustomMessageBox.CustomMessageBox.Show("O Robô está em execução, gostaria de minimizar a aplicação para a barra de tarefas?",
+                                "Atenção",
+                                MessageBoxButtons.YesNo);
+
+
+                if (result == DialogResult.Yes)
+                {
+                    trayIcon!.Visible = true;
+                    this.Hide();
+                }
+                else
+                {
+                    this.Dispose();
+                }
             }
             else
             {
                 this.Dispose();
             }
+
         }
 
         private void OnRestore(object sender, EventArgs e)

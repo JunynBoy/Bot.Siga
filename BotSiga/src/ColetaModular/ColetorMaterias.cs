@@ -25,7 +25,7 @@ namespace Bot.Siga.src.ColetaModular
 
         public async Task ColetarDados(Estudante estudante)
         {
-            StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Iniciando Coleta de Matérias...");
+           Log( "Iniciando Coleta de Matérias...");
 
             try
             {
@@ -86,21 +86,21 @@ namespace Bot.Siga.src.ColetaModular
                     this._materiaService.Save(materia);
 
 
-                    StringHelper.ConsoleColoredLog(ConsoleColor.Yellow, $"Coletaado dados da materia: {materia.Nome}");
+                    Log($"Coletaado dados da materia: {materia.Nome}");
 
 
                 }
 
-                StringHelper.ConsoleColoredLog(ConsoleColor.Green, $"Coleta de dados completa");
+                Log( $"Coleta de dados completa");
 
 
             }
             catch (Exception e)
             {
-                StringHelper.ConsoleColoredLog(ConsoleColor.Yellow, $"Não foi encontrado nada:{e.Message}");
+                Log( $"Não foi encontrado nada:{e.Message}");
             }
 
-            StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Finalizando Coleta de Faltas...");
+           Log( "Finalizando Coleta de Faltas...");
         }
 
         private void ClicarBotaoHorarios()

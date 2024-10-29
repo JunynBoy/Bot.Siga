@@ -39,7 +39,7 @@ namespace Bot.Siga.src.ColetaModular
             try
             {
 
-                StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Iniciando Coleta de Notas...");
+                Log( "Iniciando Coleta de Notas...");
 
                 this.ClicarNoBotaoNotas();
 
@@ -131,7 +131,7 @@ namespace Bot.Siga.src.ColetaModular
                                     var response = await this._messageHttpService.EnviarMensagem(estudante.Preferencia!.Whatsapp!, mensagemDeAtualizacao);
                                     if (!response)
                                     {
-                                        StringHelper.ConsoleColoredLog(ConsoleColor.Red, "Não foi possível enviar mensagem pelo whatsapp");
+                                        Log( "Não foi possível enviar mensagem pelo whatsapp");
                                     }   
                                 }
                             }
@@ -154,10 +154,10 @@ namespace Bot.Siga.src.ColetaModular
             }
             catch (Exception e)
             {
-                StringHelper.ConsoleColoredLog(ConsoleColor.Yellow, $"ERRO: {e.Message}");
+                Log($"ERRO: {e.Message}");
             }
 
-            StringHelper.ConsoleColoredLog(ConsoleColor.Cyan, "Finalizando Coleta de Notas...");
+            Log( "Finalizando Coleta de Notas...");
         }
 
         private void EnviarEmail(Estudante estudante, List<Materia> materias)
@@ -177,7 +177,7 @@ namespace Bot.Siga.src.ColetaModular
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao enviar o e-mail: " + ex.Message);
+                Log("Erro ao enviar o e-mail: " + ex.Message);
             }
            
         }
