@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             panelHeader = new Panel();
             pbxLogo = new PictureBox();
-            label1 = new Label();
+            lblNomeUsuario = new Label();
             btnClose = new Button();
             contextMenuStrip1 = new ContextMenuStrip(components);
             panelHeaderOptions = new Panel();
@@ -51,7 +51,7 @@
             // 
             panelHeader.BackColor = Color.FromArgb(66, 84, 96);
             panelHeader.Controls.Add(pbxLogo);
-            panelHeader.Controls.Add(label1);
+            panelHeader.Controls.Add(lblNomeUsuario);
             panelHeader.Controls.Add(btnClose);
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
@@ -64,7 +64,6 @@
             // 
             pbxLogo.Dock = DockStyle.Left;
             pbxLogo.ErrorImage = Properties.Resources.BotWhite30;
-            pbxLogo.Image = Properties.Resources.BotWhite30;
             pbxLogo.ImageLocation = "Center";
             pbxLogo.InitialImage = Properties.Resources.BotWhite25;
             pbxLogo.Location = new Point(0, 0);
@@ -74,16 +73,16 @@
             pbxLogo.TabIndex = 36;
             pbxLogo.TabStop = false;
             // 
-            // label1
+            // lblNomeUsuario
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(46, 10);
-            label1.Name = "label1";
-            label1.Size = new Size(97, 19);
-            label1.TabIndex = 35;
-            label1.Text = "Nome usuário";
+            lblNomeUsuario.AutoSize = true;
+            lblNomeUsuario.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNomeUsuario.ForeColor = Color.White;
+            lblNomeUsuario.Location = new Point(46, 10);
+            lblNomeUsuario.Name = "lblNomeUsuario";
+            lblNomeUsuario.Size = new Size(97, 19);
+            lblNomeUsuario.TabIndex = 35;
+            lblNomeUsuario.Text = "Nome usuário";
             // 
             // btnClose
             // 
@@ -269,7 +268,7 @@
         #endregion
 
         private Panel panelHeader;
-        private Label label1;
+        private Label lblNomeUsuario;
         private Button btnClose;
         private PictureBox pbxLogo;
         private ContextMenuStrip contextMenuStrip1;

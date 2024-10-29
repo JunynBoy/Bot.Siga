@@ -29,7 +29,11 @@ namespace Bot.App.Telas
             ConfigureTrayMenu();
             InitComponents();
 
+            UpdatelblEstudateNome(estudante);
+
         }
+
+
 
         private void InitComponents()
         {
@@ -111,7 +115,6 @@ namespace Bot.App.Telas
         }
 
         
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             if (this.homeControl.isBotEmExecucao)
@@ -128,12 +131,12 @@ namespace Bot.App.Telas
                 }
                 else
                 {
-                    this.Close();
+                    Application.Exit(); 
                 }
             }
             else
             {
-                this.Close();
+                Application.Exit();
             }
 
         }
@@ -232,6 +235,20 @@ namespace Bot.App.Telas
         private Color DefaultButtonColor()
         {
             return Color.FromArgb(176, 0, 0);
+        }
+
+
+        private void UpdatelblEstudateNome(Estudante estudante)
+        {
+            if (estudante.Nome != null)
+            {
+                this.lblNomeUsuario.Text = estudante.Nome;
+            }
+            else
+            {
+                this.lblNomeUsuario.Text = "";
+
+            }
         }
     }
 }

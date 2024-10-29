@@ -131,7 +131,7 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
 
                     if (!primeiraExec)
                     {
-                        this.WriteToConsoleOutput($"Esperando {loopingTime} minuto para reiniciar - {DateTime.Now:dd/MM HH:mm}\n");
+                        this.WriteToConsoleOutput($"Esperando {loopingTime} minuto(s) para reiniciar - {DateTime.Now:dd/MM HH:mm}\n");
                         await Task.Delay(loopingTime * 60 * 1000, token);
                     }
 
