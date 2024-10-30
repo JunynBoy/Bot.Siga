@@ -210,7 +210,7 @@ namespace Bot.App.Telas
                 return;
             }
 
-            await this.SwitchTo(new PerfilControl());
+            await this.SwitchTo(new PerfilControl(estudante));
             ChangeButtonColor(btnPerfil, btnPerfil.FlatAppearance.MouseOverBackColor);
             ChangeButtonColor(btnHome, DefaultButtonColor());
         }

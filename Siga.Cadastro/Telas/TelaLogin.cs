@@ -115,7 +115,7 @@ namespace Siga.Cadastro
 
                             IniciadorColeta iniciadorColeta = new IniciadorColeta();
                             
-                            estudanteValidado = iniciadorColeta.ValidarLoginSiga(estudante, false);
+                            estudanteValidado = iniciadorColeta.ValidarLoginSiga(estudante, true);
                           
                             if (!estudanteValidado)
                                 throw new CustomException("Usuario ou senha inválidos, preencha seu login e senha e tente novamente");
