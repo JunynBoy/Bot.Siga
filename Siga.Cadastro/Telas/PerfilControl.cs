@@ -16,5 +16,10 @@ namespace Bot.App.Controls
         {
             InitializeComponent();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
