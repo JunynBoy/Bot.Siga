@@ -257,7 +257,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "TelaPrincipal";
-            Text = "TelaPrincipal";
+            Text = " ";
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbxLogo).EndInit();

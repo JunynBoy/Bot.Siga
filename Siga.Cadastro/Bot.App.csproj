@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OxyPlot.WindowsForms" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Bot.Core\Bot.Core.csproj" />
     <ProjectReference Include="..\BotSiga\Bot.Siga.csproj" />
   </ItemGroup>
