@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PerfilControl));
             panelContainer = new Panel();
+            lblEmailInstitucional = new Label();
+            lblEmailInstitucionaltitle = new Label();
+            lblMaximo = new Label();
+            lblMaximoTitle = new Label();
             pvPieChart = new OxyPlot.WindowsForms.PlotView();
             lblPrazoDeIntegralizaçãoTitle = new Label();
             pbPercentualRendimento = new ProgressBar();
@@ -47,10 +51,6 @@
             lblNome = new Label();
             lblNomeTitle = new Label();
             pcbUser = new PictureBox();
-            lbMaximoValue = new Label();
-            lblMaximoTitle = new Label();
-            lblEmailInstitucional = new Label();
-            lblEmailInstitucionaltitle = new Label();
             panelContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbUser).BeginInit();
             SuspendLayout();
@@ -59,7 +59,7 @@
             // 
             panelContainer.Controls.Add(lblEmailInstitucional);
             panelContainer.Controls.Add(lblEmailInstitucionaltitle);
-            panelContainer.Controls.Add(lbMaximoValue);
+            panelContainer.Controls.Add(lblMaximo);
             panelContainer.Controls.Add(lblMaximoTitle);
             panelContainer.Controls.Add(pvPieChart);
             panelContainer.Controls.Add(lblPrazoDeIntegralizaçãoTitle);
@@ -85,9 +85,55 @@
             panelContainer.TabIndex = 0;
             panelContainer.Paint += panel1_Paint;
             // 
+            // lblEmailInstitucional
+            // 
+            lblEmailInstitucional.AutoSize = true;
+            lblEmailInstitucional.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEmailInstitucional.ForeColor = Color.FromArgb(30, 39, 44);
+            lblEmailInstitucional.Location = new Point(191, 78);
+            lblEmailInstitucional.Name = "lblEmailInstitucional";
+            lblEmailInstitucional.Size = new Size(187, 15);
+            lblEmailInstitucional.TabIndex = 44;
+            lblEmailInstitucional.Text = "marcos.gaparini@fatec.sp.gov.br";
+            lblEmailInstitucional.TextAlign = ContentAlignment.TopRight;
+            // 
+            // lblEmailInstitucionaltitle
+            // 
+            lblEmailInstitucionaltitle.AutoSize = true;
+            lblEmailInstitucionaltitle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEmailInstitucionaltitle.Location = new Point(191, 59);
+            lblEmailInstitucionaltitle.Name = "lblEmailInstitucionaltitle";
+            lblEmailInstitucionaltitle.Size = new Size(131, 19);
+            lblEmailInstitucionaltitle.TabIndex = 43;
+            lblEmailInstitucionaltitle.Text = "E-mail Institucional";
+            // 
+            // lblMaximo
+            // 
+            lblMaximo.AutoSize = true;
+            lblMaximo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMaximo.ForeColor = Color.FromArgb(30, 39, 44);
+            lblMaximo.Location = new Point(734, 335);
+            lblMaximo.Name = "lblMaximo";
+            lblMaximo.Size = new Size(21, 15);
+            lblMaximo.TabIndex = 42;
+            lblMaximo.Text = "10";
+            lblMaximo.TextAlign = ContentAlignment.TopRight;
+            // 
+            // lblMaximoTitle
+            // 
+            lblMaximoTitle.AutoSize = true;
+            lblMaximoTitle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMaximoTitle.Location = new Point(471, 331);
+            lblMaximoTitle.Name = "lblMaximoTitle";
+            lblMaximoTitle.Size = new Size(60, 19);
+            lblMaximoTitle.TabIndex = 41;
+            lblMaximoTitle.Text = "Máximo";
+            // 
             // pvPieChart
             // 
             pvPieChart.BackColor = SystemColors.ControlLightLight;
+            pvPieChart.BackgroundImage = Properties.Resources.question3;
+            pvPieChart.BackgroundImageLayout = ImageLayout.Center;
             pvPieChart.Location = new Point(471, 59);
             pvPieChart.Name = "pvPieChart";
             pvPieChart.PanCursor = Cursors.Hand;
@@ -271,50 +317,6 @@
             pcbUser.TabIndex = 0;
             pcbUser.TabStop = false;
             // 
-            // lbMaximoValue
-            // 
-            lbMaximoValue.AutoSize = true;
-            lbMaximoValue.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lbMaximoValue.ForeColor = Color.FromArgb(30, 39, 44);
-            lbMaximoValue.Location = new Point(734, 335);
-            lbMaximoValue.Name = "lbMaximoValue";
-            lbMaximoValue.Size = new Size(21, 15);
-            lbMaximoValue.TabIndex = 42;
-            lbMaximoValue.Text = "10";
-            lbMaximoValue.TextAlign = ContentAlignment.TopRight;
-            // 
-            // lblMaximoTitle
-            // 
-            lblMaximoTitle.AutoSize = true;
-            lblMaximoTitle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblMaximoTitle.Location = new Point(471, 331);
-            lblMaximoTitle.Name = "lblMaximoTitle";
-            lblMaximoTitle.Size = new Size(60, 19);
-            lblMaximoTitle.TabIndex = 41;
-            lblMaximoTitle.Text = "Máximo";
-            // 
-            // lblEmailInstitucional
-            // 
-            lblEmailInstitucional.AutoSize = true;
-            lblEmailInstitucional.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEmailInstitucional.ForeColor = Color.FromArgb(30, 39, 44);
-            lblEmailInstitucional.Location = new Point(191, 78);
-            lblEmailInstitucional.Name = "lblEmailInstitucional";
-            lblEmailInstitucional.Size = new Size(187, 15);
-            lblEmailInstitucional.TabIndex = 44;
-            lblEmailInstitucional.Text = "marcos.gaparini@fatec.sp.gov.br";
-            lblEmailInstitucional.TextAlign = ContentAlignment.TopRight;
-            // 
-            // lblEmailInstitucionaltitle
-            // 
-            lblEmailInstitucionaltitle.AutoSize = true;
-            lblEmailInstitucionaltitle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEmailInstitucionaltitle.Location = new Point(191, 59);
-            lblEmailInstitucionaltitle.Name = "lblEmailInstitucionaltitle";
-            lblEmailInstitucionaltitle.Size = new Size(131, 19);
-            lblEmailInstitucionaltitle.TabIndex = 43;
-            lblEmailInstitucionaltitle.Text = "E-mail Institucional";
-            // 
             // PerfilControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -350,7 +352,7 @@
         private OxyPlot.WindowsForms.PlotView pvPieChart;
         private Label lblEmailInstitucional;
         private Label lblEmailInstitucionaltitle;
-        private Label lbMaximoValue;
+        private Label lblMaximo;
         private Label lblMaximoTitle;
     }
 }

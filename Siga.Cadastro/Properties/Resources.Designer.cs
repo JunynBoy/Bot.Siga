@@ -573,6 +573,16 @@ namespace Bot.App.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap question3 {
+            get {
+                object obj = ResourceManager.GetObject("question3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Stop30 {
             get {
                 object obj = ResourceManager.GetObject("Stop30", resourceCulture);

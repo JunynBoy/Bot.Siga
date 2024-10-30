@@ -10,21 +10,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Bot.Core.Model;
+using Bot.Core.Service;
 
 namespace Bot.App.Controls
 {
     public partial class PerfilControl : UserControl
     {
 
-        Estudante estudante;
+        Estudante? estudante;
+        EstudanteService _estudanteService;
 
-        public PerfilControl(Estudante estudante)
+        public PerfilControl(int idEstudante)
         {
-            this.estudante = estudante;
-
             InitializeComponent();
-            InitChart();
-            
+            this._estudanteService = new EstudanteService();
+            Init(idEstudante);
+        }
+
+        private void Init(int idEstudante)
+        {
+            try
+            {
+                this.estudante = this._estudanteService!.GetById(idEstudante);
+                if (estudante != null)
+                {
+                    ConfigurarParametros();
+                    ConfigurarBarraPorcentagem();
+                    InitChart();
+                }
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.CustomMessageBox.Show(this, $"Não foi possível concluir a execução do aplicativo devido a um erro não esperado: \n\nMensagem:{ex.Message}", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void InitChart()
@@ -41,13 +59,75 @@ namespace Bot.App.Controls
                 InsideLabelColor = OxyColors.White,  
                 OutsideLabelFormat = "{1}: {0:0}", 
             };
-            
-            pieSeries.Slices.Add(new PieSlice("Cursado", 6) { IsExploded = true, Fill = OxyColors.Red });
-            pieSeries.Slices.Add(new PieSlice("Faltam", 4) { Fill = OxyColors.Gold });
+
+            Double valueCursado = 0D;
+            Double valueFaltam = 0D;
+            if (estudante!.Cursado != null && estudante.Faltam != null) 
+            {
+                valueCursado = Double.Parse(estudante.Cursado);
+                valueFaltam = Double.Parse(estudante.Faltam);
+            }
+
+            pieSeries.Slices.Add(new PieSlice("Cursado", valueCursado) { IsExploded = true, Fill = OxyColors.Red });
+            pieSeries.Slices.Add(new PieSlice("Faltam", valueFaltam) { Fill = OxyColors.Gold });
 
             myModel.Series.Add(pieSeries);
 
             this.pvPieChart.Model = myModel;
+        }
+
+        private void ConfigurarParametros()
+        {
+            this.lblNome.Text = this.GetLabelValue(estudante.Nome);
+            this.lblEmailInstitucional.Text = this.GetLabelValue(estudante.EmailInstitucional);
+            this.lblMaximo.Text = this.GetLabelValue(estudante.Maximo);
+            this.lblCiclo.Text = this.GetLabelValue(estudante.Ciclo);
+            this.lblPercentualProgressao.Text = this.GetLabelValue(estudante.PP!.Replace("%"," %").Trim() ?? "0 %");
+            this.lblPercentualRendimento.Text = this.GetLabelValue(estudante.PP!.Replace("%", " %").Trim() ?? "0 %");
+        }
+
+        private void ConfigurarBarraPorcentagem()
+        {
+            if (estudante.PP != null && estudante.PR != null)
+            {
+                this.pbPercentualProgressao.Maximum = 100;
+                this.pbPercentualRendimento.Maximum = 100;
+
+                int LimitarValor(double valor)
+                {
+                    if (valor < 0) return 0;
+                    if (valor > 100) return 100;
+                    return (int)Math.Round(valor);
+                }
+
+                this.pbPercentualProgressao.Value = LimitarValor(Double.Parse(estudante.PP.Replace("%", "").Trim()!));
+                this.pbPercentualRendimento.Value = LimitarValor(Double.Parse(estudante.PR.Replace("%", "").Trim()!));
+            }
+        }
+            
+
+        private string GetLabelValue(string? value)
+        {
+            if (String.IsNullOrEmpty(value))
+            {
+                return "???";
+            }
+            else
+            {
+                return value;
+            }
+        }
+
+        private string GetLabelValue(Double? value)
+        {
+            if (value == null || value == 0)
+            {
+                return "???";
+            }
+            else
+            {
+                return value.ToString()!;
+            }
         }
 
 

@@ -5,6 +5,7 @@ using CustomMessageBox;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Drawing;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace Bot.App.Telas
@@ -42,6 +43,7 @@ namespace Bot.App.Telas
             homeControl = new HomeControl(estudante);
             homeControl.Dock = DockStyle.Fill;
             panelContainer.Controls.Add(homeControl);
+            this.configureBtnColors();
 
             this._loadingService.StopLoadingAsync(panelContainer);
         }
@@ -61,9 +63,11 @@ namespace Bot.App.Telas
             trayIcon.DoubleClick += OnRestore!;
         }
 
-        private async Task SwitchTo(UserControl newControl)
+        private async void SwitchTo(EnumTelaPrincipalControls enumControls)
         {
             this._loadingService.StartLoading(panelContainer);
+
+            await Task.Delay(100);
 
             if (currentControl != null && currentControl != homeControl)
             {
@@ -73,13 +77,31 @@ namespace Bot.App.Telas
 
             configureBtnColors();
 
-            currentControl = newControl;
+            currentControl = GetNewControl(enumControls);
             currentControl.Dock = DockStyle.Fill;
             panelContainer.Controls.Add(currentControl);
             currentControl.BringToFront();
 
             this._loadingService.StopLoading(panelContainer);
         }
+
+        private UserControl GetNewControl(EnumTelaPrincipalControls enumControls)
+        {
+            switch (enumControls)
+            {
+                case EnumTelaPrincipalControls.PERFIL:
+                    return new PerfilControl(estudante.Id);
+                case EnumTelaPrincipalControls.MATERIASNOTASFALTAS:
+                    return new MateriasNotasFaltasControl();
+                case EnumTelaPrincipalControls.PREFERENCIAS:
+                    return new PreferenciasControl();
+                case EnumTelaPrincipalControls.HOME:
+                    return this.homeControl;
+                default:
+                    return this.homeControl;
+            }
+        }
+
 
         private void configureBtnColors()
         {
@@ -166,20 +188,20 @@ namespace Bot.App.Telas
         }
         
 
-        private async void btnHome_Click(object sender, EventArgs e)
+        private void btnHome_Click(object sender, EventArgs e)
         {
-            await this.SwitchTo(homeControl);
+            SwitchTo(EnumTelaPrincipalControls.HOME);
             ChangeButtonColor(btnHome, btnHome.FlatAppearance.MouseOverBackColor);
         }
 
-        private async void btnPreferencias_Click(object sender, EventArgs e)
+        private void btnPreferencias_Click(object sender, EventArgs e)
         {
             if (currentControl is PreferenciasControl)
             {
                 return;
             }
 
-            await SwitchTo(new PreferenciasControl());
+            SwitchTo(EnumTelaPrincipalControls.PREFERENCIAS);
             ChangeButtonColor(btnPreferencias, btnPreferencias.FlatAppearance.MouseOverBackColor);
             ChangeButtonColor(btnHome, DefaultButtonColor());
         }
@@ -203,26 +225,26 @@ namespace Bot.App.Telas
         }
 
 
-        private async void btnPerfil_Click(object sender, EventArgs e)
+        private void btnPerfil_Click(object sender, EventArgs e)
         {
             if (currentControl is PerfilControl)
             {
                 return;
             }
 
-            await this.SwitchTo(new PerfilControl(estudante));
+            SwitchTo(EnumTelaPrincipalControls.PERFIL);
             ChangeButtonColor(btnPerfil, btnPerfil.FlatAppearance.MouseOverBackColor);
             ChangeButtonColor(btnHome, DefaultButtonColor());
         }
 
-        private async void btnMateriasNotas_Click(object sender, EventArgs e)
+        private void btnMateriasNotas_Click(object sender, EventArgs e)
         {
             if (currentControl is MateriasNotasFaltasControl)
             {
                 return;
             }
 
-            await SwitchTo(new MateriasNotasFaltasControl());
+            SwitchTo(EnumTelaPrincipalControls.MATERIASNOTASFALTAS);
             ChangeButtonColor(btnMateriasNotas, btnMateriasNotas.FlatAppearance.MouseOverBackColor);
             ChangeButtonColor(btnHome, DefaultButtonColor());
         }

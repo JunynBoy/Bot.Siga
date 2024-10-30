@@ -43,7 +43,7 @@ namespace Bot.App.Shared
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw ex; //Cross-thread operation not valid: Control 'panelContainer' accessed from a thread other than the thread it was created on
             }
         }
         public async Task StopLoadingAsync(Panel panelToUndock)

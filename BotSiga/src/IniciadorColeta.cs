@@ -183,6 +183,10 @@ namespace Bot.Siga
             estudante.Ra = this.GetTextElementByXpath("(//span[contains(@id, 'ALUNOCURSOREGISTROACADEMICOCURSO')])[1]");
 
             estudante.EmailInstitucional = this.GetTextElementByXpath("(//span[contains(@id, 'INSTITUCIONALFATEC')])[2]");
+            
+            estudante.Cursado = this.GetTextElementByXpath("(//span[contains(@title, 'Numero de semestres efetivamente cursados')])[2]");
+            estudante.Faltam = this.GetTextElementByXpath("(//span[contains(@title, 'Numero de semestres efetivamente cursados')])[2]");
+            estudante.Maximo = this.GetTextElementByXpath("(//span[contains(@title, 'Numero de semestres que faltam para o estudante completar seu curso sem estourar o prazo de integralização, incluindo o corrente caso esteja matriculado.')])[2]");
 
             if (estudante.Autenticado == false)
                 estudante.Autenticado = true;
