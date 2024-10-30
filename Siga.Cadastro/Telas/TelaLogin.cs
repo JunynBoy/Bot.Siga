@@ -84,13 +84,13 @@ namespace Siga.Cadastro
             else
             {
                 Estudante? estudante = null;
+                this.prepararTelaParaLoading();
 
-
-                try
+                Func<Task> longRunningTask = async () =>
                 {
-                    this.prepararTelaParaLoading();
-                    Func<Task> longRunningTask = async () =>
+                    try
                     {
+
                         estudante = null;
                         estudante = this._estudanteService.GetByCpf(this.txtmCPF.Texts.Replace(",", "").Replace("-", "").Replace(".", ""));
                         if (primeiroAcesso && estudante != null)
@@ -101,8 +101,9 @@ namespace Siga.Cadastro
 
                         if (!primeiroAcesso && estudante == null)
                             throw new CustomException("Não existe nenhum usuário cadastrado nesse sistema com este CPF");
-                        
-                        if (this.primeiroAcesso)
+
+
+                        if (primeiroAcesso)
                         {
                             Preferencia preferencia = new Preferencia();
                             preferencia.Whatsapp = this.txtmWhatsapp.Texts;
@@ -110,21 +111,16 @@ namespace Siga.Cadastro
                             preferencia.IsAtualizarPorEmail = this.tbAtualizarPorEmail.Checked;
                             preferencia.IsAtualizarPorWhatsapp = this.tbAtualizarPorWhatsapp.Checked;
                             estudante.Preferencia = preferencia;
-                        }
 
-                        if (primeiroAcesso)
-                        {
+
                             IniciadorColeta iniciadorColeta = new IniciadorColeta();
-                            if (iniciadorColeta.ValidarLoginSiga(estudante, true))
-                            {
-                                estudanteValidado = true;
-                            }
-                            else
-                            {
+                            
+                            estudanteValidado = iniciadorColeta.ValidarLoginSiga(estudante, false);
+                          
+                            if (!estudanteValidado)
                                 throw new CustomException("Usuario ou senha inválidos, preencha seu login e senha e tente novamente");
-                            }
                         }
-                        else if(estudante.Id == 0 && estudante.Autenticado == false && !estudante.Senha!.Equals(txtSenha.Texts.ToString()))
+                        else if (estudante.Id == 0 && estudante.Autenticado == false && !estudante.Senha!.Equals(txtSenha.Texts.ToString()))
                         {
                             throw new CustomException("Usuario ou senha inválidos, preencha seu login e senha e tente novamente");
                         }
@@ -132,21 +128,22 @@ namespace Siga.Cadastro
                         {
                             estudanteValidado = true;
                         }
-                    };
 
-                    await _loadingService.StartLoadingAsync(controlTempLoading, longRunningTask);
-                    this.removerLoadingTela();
-                }
-                catch (CustomException ex)
-                {
-                    this.removerLoadingTela();
-                    CustomMessageBox.CustomMessageBox.Show(ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                catch (Exception ex)
-                {
-                    this.removerLoadingTela();
-                    CustomMessageBox.CustomMessageBox.Show($"Não foi possível efetuar login\n\nMensagem: {ex.Message}", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                        
+                    }
+                    catch (CustomException ex)
+                    {
+                        CustomMessageBox.CustomMessageBox.Show(ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.CustomMessageBox.Show($"Não foi possível efetuar login\n\nMensagem: {ex.Message}", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                };
+
+                await this._loadingService.StartLoadingAsync(controlTempLoading, longRunningTask);
+                this.removerLoadingTela();
 
                 if (estudanteValidado)
                 {
@@ -219,12 +216,12 @@ namespace Siga.Cadastro
 
             if (this.primeiroAcesso)
             {
-                if (this.tbAtualizarPorEmail.Checked && String.IsNullOrEmpty(txtEmail.Texts))
+                if (String.IsNullOrEmpty(txtEmail.Texts))
                 {
                     erros.Add("Preencha o campo e-mail");
                 }
 
-                if (this.tbAtualizarPorEmail.Checked && !String.IsNullOrEmpty(txtEmail.Texts))
+                if (!String.IsNullOrEmpty(txtEmail.Texts))
                 {
                     if (!StringHelper.IsValidEmail(txtEmail.Texts))
                     {
@@ -232,7 +229,7 @@ namespace Siga.Cadastro
                     }
                 }
 
-                if (this.tbAtualizarPorWhatsapp.Checked && String.IsNullOrEmpty(txtmWhatsapp.Texts) && txtmWhatsapp.Text.Length != 13)
+                if (String.IsNullOrEmpty(txtmWhatsapp.Texts) && txtmWhatsapp.Text.Length != 13)
                 {
                     erros.Add("Preencha o número do whatsapp corretamente para receber atualizações");
                 }

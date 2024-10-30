@@ -4,6 +4,7 @@ using Bot.Core.src.Model.Enum;
 using Bot.Core.src.Service;
 using Bot.Siga.src.ColetaModular.Interface;
 using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools;
 using System.Configuration;
 
 
@@ -28,13 +29,18 @@ namespace Bot.Siga
 
         public void SetLogAction(Action<string> log)
         {
+
+            Console.WriteLine(log.ToString());
             this.logAction = log;
         }
 
         public void Log(params string[] args)
         {
-            foreach(var message in args )
+            foreach(var message in args)
+            {
                 logAction?.Invoke($"{message} - {DateTime.Now:dd/MM HH:mm}\n");
+                Console.WriteLine(message);
+            }
         }
 
         public void Log(string message)

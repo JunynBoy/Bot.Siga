@@ -18,7 +18,7 @@ try
     Estudante? estudante = _estudanteService.GetById(1);
     if (estudante != null)
     {
-        coletor.IniciarColeta(estudante, acoes);
+        coletor.IniciarColeta(estudante, acoes, false);
     }
     else
     {
