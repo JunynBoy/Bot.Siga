@@ -42,6 +42,10 @@ namespace Bot.Core.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("created_at");
 
+                    b.Property<string>("Cursado")
+                        .HasColumnType("longtext")
+                        .HasColumnName("cursado");
+
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("deleted_at");
@@ -49,6 +53,14 @@ namespace Bot.Core.Migrations
                     b.Property<string>("EmailInstitucional")
                         .HasColumnType("longtext")
                         .HasColumnName("email_institucional");
+
+                    b.Property<string>("Faltam")
+                        .HasColumnType("longtext")
+                        .HasColumnName("faltam");
+
+                    b.Property<string>("Maximo")
+                        .HasColumnType("longtext")
+                        .HasColumnName("maximo");
 
                     b.Property<string>("Nome")
                         .HasColumnType("longtext")
@@ -80,7 +92,8 @@ namespace Bot.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PreferenciaId");
+                    b.HasIndex("PreferenciaId")
+                        .IsUnique();
 
                     b.ToTable("estudante");
                 });
@@ -274,8 +287,8 @@ namespace Bot.Core.Migrations
             modelBuilder.Entity("Bot.Core.Model.Estudante", b =>
                 {
                     b.HasOne("Bot.Core.src.Model.Preferencia", "Preferencia")
-                        .WithMany()
-                        .HasForeignKey("PreferenciaId");
+                        .WithOne()
+                        .HasForeignKey("Bot.Core.Model.Estudante", "PreferenciaId");
 
                     b.Navigation("Preferencia");
                 });

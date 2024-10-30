@@ -67,6 +67,7 @@ namespace Bot.Core.Migrations
                     email = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     is_atualizar_por_email = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    is_atualizar_por_whatsapp = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     whatsapp = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -101,6 +102,12 @@ namespace Bot.Core.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     pr = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    cursado = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    faltam = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    maximo = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     autenticado = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     preferencia_id = table.Column<int>(type: "int", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -130,6 +137,7 @@ namespace Bot.Core.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     professor = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    hrs_aula = table.Column<int>(type: "int", nullable: true),
                     notas_id = table.Column<int>(type: "int", nullable: true),
                     faltas_id = table.Column<int>(type: "int", nullable: true),
                     estudante_id = table.Column<int>(type: "int", nullable: true),
@@ -163,7 +171,8 @@ namespace Bot.Core.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_estudante_preferencia_id",
                 table: "estudante",
-                column: "preferencia_id");
+                column: "preferencia_id",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_materia_estudante_id",

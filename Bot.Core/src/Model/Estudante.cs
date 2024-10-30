@@ -38,6 +38,15 @@ namespace Bot.Core.Model
         [Column("pr")]
         public string? PR { get; set; }
 
+        [Column("cursado")]
+        public string? Cursado{ get; set; }
+
+        [Column("faltam")]
+        public string? Faltam { get; set; }
+
+        [Column("maximo")]
+        public string? Maximo { get; set; }
+
         [Column("autenticado")]
         public bool Autenticado { get; set; } = false;
 
