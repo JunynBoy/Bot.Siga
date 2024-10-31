@@ -92,7 +92,7 @@ namespace Bot.App.Telas
                 case EnumTelaPrincipalControls.PERFIL:
                     return new PerfilControl(estudante.Id);
                 case EnumTelaPrincipalControls.MATERIASNOTASFALTAS:
-                    return new MateriasNotasFaltasControl();
+                    return new MateriasNotasFaltasControl(estudante.Id);
                 case EnumTelaPrincipalControls.PREFERENCIAS:
                     return new PreferenciasControl();
                 case EnumTelaPrincipalControls.HOME:

@@ -21,7 +21,7 @@ namespace Bot.Siga.src.ColetaModular
             this._homeUrl = ConfigurationManager.AppSettings["urlHome"];
         }
 
-        public async Task ColetarDados(Estudante estudante)
+        public void ColetarDados(Estudante estudante)
         {
             Log( "Iniciando Coleta de Faltas...");
 

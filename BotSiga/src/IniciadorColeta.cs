@@ -94,7 +94,7 @@ namespace Bot.Siga
             }
         }
 
-        private async void Executar(List<EnumTipoDeExecucao> TiposExecucao, Estudante estudante)
+        private void Executar(List<EnumTipoDeExecucao> TiposExecucao, Estudante estudante)
         {
 
             Log("Iniciando Coleta");
@@ -111,7 +111,7 @@ namespace Bot.Siga
                 foreach (EnumTipoDeExecucao tipoExecucao in TiposExecucao)
                 {
                     var rotina =  this._estrategiaColeta!.ObterEstrategia(tipoExecucao);
-                    await rotina.ColetarDados(estudante);
+                    rotina.ColetarDados(estudante);
                     Log("Coleta Finalizada!");
                 }
 
@@ -185,8 +185,8 @@ namespace Bot.Siga
             estudante.EmailInstitucional = this.GetTextElementByXpath("(//span[contains(@id, 'INSTITUCIONALFATEC')])[2]");
             
             estudante.Cursado = this.GetTextElementByXpath("(//span[contains(@title, 'Numero de semestres efetivamente cursados')])[2]");
-            estudante.Faltam = this.GetTextElementByXpath("(//span[contains(@title, 'Numero de semestres efetivamente cursados')])[2]");
-            estudante.Maximo = this.GetTextElementByXpath("(//span[contains(@title, 'Numero de semestres que faltam para o estudante completar seu curso sem estourar o prazo de integralização, incluindo o corrente caso esteja matriculado.')])[2]");
+            estudante.Faltam = this.GetTextElementByXpath("(//span[contains(@title, 'Numero de semestres que faltam para o estudante completar seu curso sem estourar o prazo de integralização, incluindo o corrente caso esteja matriculado.')])[2]");
+            estudante.Maximo = this.GetTextElementByXpath("//span[contains(@class, 'ReadonlyAttribute') and contains(@title, 'Prazo máximo') and contains(@id, 'INTEGRALIZACAOMAX')]");
 
             if (estudante.Autenticado == false)
                 estudante.Autenticado = true;

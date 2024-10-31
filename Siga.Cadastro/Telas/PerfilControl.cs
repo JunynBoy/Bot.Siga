@@ -53,23 +53,31 @@ namespace Bot.App.Controls
             {
                 StrokeThickness = 2.0,
                 InsideLabelPosition = 0.5,
-                AngleSpan = 360,  
-                StartAngle = 0,   
+                AngleSpan = 360,
+                StartAngle = 0,
 
-                InsideLabelColor = OxyColors.White,  
-                OutsideLabelFormat = "{1}: {0:0}", 
+                InsideLabelColor = OxyColors.White,
+                InsideLabelFormat = "{1}: {0:0}", 
+                OutsideLabelFormat = null,
             };
 
             Double valueCursado = 0D;
             Double valueFaltam = 0D;
-            if (estudante!.Cursado != null && estudante.Faltam != null) 
+            if (estudante!.Cursado != null && estudante.Faltam != null)
             {
                 valueCursado = Double.Parse(estudante.Cursado);
                 valueFaltam = Double.Parse(estudante.Faltam);
             }
 
-            pieSeries.Slices.Add(new PieSlice("Cursado", valueCursado) { IsExploded = true, Fill = OxyColors.Red });
-            pieSeries.Slices.Add(new PieSlice("Faltam", valueFaltam) { Fill = OxyColors.Gold });
+            pieSeries.Slices.Add(new PieSlice("Cursado", valueCursado)
+            {
+                IsExploded = true,
+                Fill = OxyColors.Red
+            });
+            pieSeries.Slices.Add(new PieSlice("Faltam", valueFaltam)
+            {
+                Fill = OxyColors.Gold
+            });
 
             myModel.Series.Add(pieSeries);
 
@@ -81,17 +89,18 @@ namespace Bot.App.Controls
             this.lblNome.Text = this.GetLabelValue(estudante.Nome);
             this.lblEmailInstitucional.Text = this.GetLabelValue(estudante.EmailInstitucional);
             this.lblMaximo.Text = this.GetLabelValue(estudante.Maximo);
+            this.lblRA.Text = this.GetLabelValue(estudante.Ra);
             this.lblCiclo.Text = this.GetLabelValue(estudante.Ciclo);
             this.lblPercentualProgressao.Text = this.GetLabelValue(estudante.PP!.Replace("%"," %").Trim() ?? "0 %");
-            this.lblPercentualRendimento.Text = this.GetLabelValue(estudante.PP!.Replace("%", " %").Trim() ?? "0 %");
+            this.lblPercentualRendimento.Text = $"{this.GetLabelValue(estudante.PR!.Replace("%", " %").Trim() ?? "?")}/10";
         }
 
         private void ConfigurarBarraPorcentagem()
         {
-            if (estudante.PP != null && estudante.PR != null)
+            if (estudante!.PP != null && estudante!.PR != null)
             {
                 this.pbPercentualProgressao.Maximum = 100;
-                this.pbPercentualRendimento.Maximum = 100;
+                this.pbPercentualRendimento.Maximum = 10;
 
                 int LimitarValor(double valor)
                 {

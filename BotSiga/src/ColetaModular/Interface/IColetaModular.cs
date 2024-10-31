@@ -9,6 +9,6 @@ namespace Bot.Siga.src.ColetaModular.Interface
 {
     public interface IColetaModular
     {
-        public Task ColetarDados(Estudante estudante);
+        public void ColetarDados(Estudante estudante);
     }
 }

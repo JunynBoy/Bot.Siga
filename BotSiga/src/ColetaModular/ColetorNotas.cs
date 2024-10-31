@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Globalization;
 
 namespace Bot.Siga.src.ColetaModular
 {
@@ -26,14 +27,14 @@ namespace Bot.Siga.src.ColetaModular
             this._homeUrl = ConfigurationManager.AppSettings["urlHome"]!;
         }
 
-        public async Task ColetarDados(Estudante estudante)
+        public void ColetarDados(Estudante estudante)
         {
             string patternCodigoMateria = @"([A-Z]{3}\d{3})";
             string patternNomeMateria = @"^\w+\s+(.+?)\r?\n";
-            string patternP1 = @"P1 / / (\d+\.\d+)";
-            string patternP2 = @"P2 / / (\d+\.\d+)";
-            string patternP3 = @"P3 / / (\d+\.\d+)";
-            string patternMediaFinal = @"Média Final\(\*\*\) (\d+\.\d+)";
+            string patternP1 = @"P1\s.*?\s*(\d+,\d+)";
+            string patternP2 = @"P2\s.*?\s*(\d+,\d+)";
+            string patternP3 = @"P3\s.*?\s*(\d+,\d+)";
+            string patternMediaFinal = @"Média Final\(\*\*\)\s+(\d+,\d+)";
             bool contemAtributosDiferentesDoBanco = false;
 
             try
@@ -63,7 +64,16 @@ namespace Bot.Siga.src.ColetaModular
                         IWebElement headerNota = headersNotasElements[i];
 
                         string codigoMateria = RegexHelper.GetText(headerNota.Text, patternCodigoMateria).Trim();
-                        string nomeMateria = RegexHelper.GetText(headerNota.Text, patternNomeMateria ,1)!.Trim();
+                        string nomeMateria = RegexHelper.GetText(headerNota.Text, patternNomeMateria, 1)!.Trim();
+
+                        string mediaFinalText = RegexHelper.GetText(headerNota.Text, patternMediaFinal, 1)!;
+                        float mediaFinal = 0.0f;
+
+                        if (!string.IsNullOrEmpty(mediaFinalText))
+                        {
+                            mediaFinalText = mediaFinalText.Replace(',', '.'); 
+                            float.TryParse(mediaFinalText, NumberStyles.Float, CultureInfo.InvariantCulture, out mediaFinal);
+                        }
 
                         Materia? materia = materiaMatriculados
                         ?.FirstOrDefault(mm => mm.Codigo?.ToUpper().Equals(codigoMateria?.ToUpper()) == true);
@@ -94,13 +104,15 @@ namespace Bot.Siga.src.ColetaModular
                         int index = 0;
                         foreach (var pattern in patterns)
                         {
-                            float numeroConvertido;
-                            float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, pattern), out numeroConvertido);
+                            float numeroConvertido = 0.0f;
+                            string numeroString = RegexHelper.GetText(notaCorrespondente.Text, pattern, 1)!.Replace(",", ".");
+                            float.TryParse(numeroString, NumberStyles.Float, CultureInfo.InvariantCulture, out numeroConvertido);
+
+                            notas[index] = numeroConvertido;
 
                             if (numeroConvertido != notasBanco[index])
                             {
                                 contemAtributosDiferentesDoBanco = true;
-                                notasBanco[index] = notas[index];
                             }
                             index++;
                         }
@@ -108,7 +120,7 @@ namespace Bot.Siga.src.ColetaModular
                         materia.Notas.P1 = notas[0];
                         materia.Notas.P2 = notas[1];
                         materia.Notas.P3 = notas[2];
-                        materia.Notas.MediaFinal = float.TryParse(RegexHelper.GetText(notaCorrespondente.Text, patternMediaFinal).Trim(), out float mediaFinal) ? mediaFinal : 0.0f;
+                        materia.Notas.MediaFinal = mediaFinal;
 
                         this._materiaService.Save(materia);
 
@@ -116,24 +128,31 @@ namespace Bot.Siga.src.ColetaModular
                         {
                             if (contemAtributosDiferentesDoBanco)
                             {
-                                if (estudante.Preferencia.IsAtualizarPorEmail)
-                                {
-                                    this.EnviarEmail(estudante, new List<Materia> { materia });
-                                }
-
-                                if (estudante.Preferencia.IsAtualizarPorWhatsapp)
-                                {
-                                    string mensagemDeAtualizacao = $"*O Robôzinho do Siga identificou alterações nas suas notas!*\n\n" +
-                                        $"Matéria: {materia.Nome} - {materia.Codigo} - {materia.Professor ?? "Professor Não Definido"}\n" +
-                                        $"P1 -> {materia.Notas.P1}\n" +
-                                        $"P2 -> {materia.Notas.P2}\n" +
-                                        $"P3 -> {materia.Notas.P3}";
-                                    var response = await this._messageHttpService.EnviarMensagem(estudante.Preferencia!.Whatsapp!, mensagemDeAtualizacao);
-                                    if (!response)
+                                try{
+                                    if (estudante.Preferencia.IsAtualizarPorEmail)
                                     {
-                                        Log( "Não foi possível enviar mensagem pelo whatsapp");
-                                    }   
+                                        this.EnviarEmail(estudante, new List<Materia> { materia });
+                                    }
+
+                                    if (estudante.Preferencia.IsAtualizarPorWhatsapp)
+                                    {
+                                        string mensagemDeAtualizacao = $"*O Robôzinho do Siga identificou alterações nas suas notas!*\n\n" +
+                                            $"Matéria: {materia.Nome} - {materia.Codigo} - {materia.Professor ?? "Professor Não Definido"}\n" +
+                                            $"P1 -> {materia.Notas.P1}\n" +
+                                            $"P2 -> {materia.Notas.P2}\n" +
+                                            $"P3 -> {materia.Notas.P3}";
+                                        var response = this._messageHttpService.EnviarMensagem(estudante.Preferencia!.Whatsapp!, mensagemDeAtualizacao);
+                                        if (!response)
+                                        {
+                                            Log("Não foi possível enviar mensagem pelo whatsapp");
+                                        }
+                                    }
                                 }
+                                catch (Exception ex)
+                                {
+                                    throw new Exception($"Não foi possível notificar corretamente\n Message:{ex.Message}");
+                                }
+                                
                             }
                             
                         }
@@ -155,6 +174,7 @@ namespace Bot.Siga.src.ColetaModular
             catch (Exception e)
             {
                 Log($"ERRO: {e.Message}");
+                Console.WriteLine(e.Message.ToString());
             }
 
             Log( "Finalizando Coleta de Notas...");

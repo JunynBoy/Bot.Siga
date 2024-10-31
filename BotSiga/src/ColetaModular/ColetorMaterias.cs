@@ -23,7 +23,7 @@ namespace Bot.Siga.src.ColetaModular
             this._homeUrl = ConfigurationManager.AppSettings["urlHome"];
         }
 
-        public async Task ColetarDados(Estudante estudante)
+        public void ColetarDados(Estudante estudante)
         {
            Log( "Iniciando Coleta de Matérias...");
 
@@ -39,7 +39,7 @@ namespace Bot.Siga.src.ColetaModular
                 }
 
 
-                ReadOnlyCollection<IWebElement> linhasElement = _driver.FindElements(By.XPath("//tr[contains(@id,'Grid1ContainerRow_')]"));
+                ReadOnlyCollection<IWebElement> linhasElement = _driver!.FindElements(By.XPath("//tr[contains(@id,'Grid1ContainerRow_')]"));
 
 
                 foreach (IWebElement linha in linhasElement)

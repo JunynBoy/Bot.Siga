@@ -9,8 +9,10 @@ namespace Sisc.Core.ServiceHttp
 
         public GenericHttpService()
         {
-            this._client = new HttpClient();
-            this._client.Timeout = TimeSpan.FromMinutes(10);
+            this._client = new HttpClient
+            {
+                Timeout = TimeSpan.FromMinutes(10)
+            };
         }
 
         protected async Task<string?> GetAll(string resource)

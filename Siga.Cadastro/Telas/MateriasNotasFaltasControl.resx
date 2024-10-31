@@ -117,4 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnSearch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAYZJREFUSEvt
+        l4FNwzAQRTMCI3SEbkBH6AZ0g3YENoAR2IBu0G7QbgAbwAbm/eQOnULkOm4TgcSTTpHO9313rmOnzZ8g
+        pXSH3etprukgyQZ7xT6wPvI/WOhtYMIldtDsBbxha5PWwyTqMnb4jj1jq2A77IxFtjbFeBCrU+cT29jQ
+        IIyrCBXmZOMHQaTN450q6dKGshAnXex+YUNlIHjsdC0rcxdB/AJTseJg7jIQuPDFXKNAFwsv65rAdRff
+        UrTEfdBpyZ2dufMQ+F2tuapAfuxmSXtz5SHQE5/NVQX6fTdNOporD4Ge+GSuKtBXJ559qXUQOPNtLkHw
+        /K+TIDgKaw4QP/XKltlBoKXyrjXJmCPzJJEx7sgUiOIloeTZ+5Zx7Y14kxUX/AOEOsW8c6H79gnT14fb
+        FotdRq5Krs791biErsVYqKhPLhDro0CHQn9iocLa+5enCr1tcodJtIn0mw5uHiXBpkl+CSXB/pM7ZRfH
+        tZAoJtc32fR/BBySKbl2/3xJfyFN8wUHpHyGIrTBNAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnClear.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAARhJREFUSEvt
+        lYENgjAQRRmBERyBERjBDWQEN5AR3EBGYAPZAEZwA90A/7WfpDattDSYqLzkUqT3/0G5nNnXMY5jg7jw
+        52dAwRIxUfL2+kgxXVOxFV4PKaZrKrbC6yHFdE3FjxWGcYW4WtEjJuTa3j9QvgwY1Iil1LSJB+JBeyyi
+        p008EKcUHmiz8R4cVYE4JUZBu3Agkj/6VBrahQNRp7VJdLQLB6KH1iZxp10YEORaF4XvQXPazoNkcxaH
+        cuZqEz7LkSzzORYZr66+qGg7D5J9M/rG1YU8rEsXPrOR7OvoI1cX8nlcnyi8s5Hcas0L0jwyVHzsENKU
+        dpO1tJ0HyWIix2aGahKs05GasVdCgGt5a3Nvx62/Jsue8r2Y9aoo6G4AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="pcbEmail.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAPlJREFUSEvt
+        ls0NwjAMRj0CIzACI6ACEkcOrcTRI7ABHYUR2IAVGKUbgA02ShsD/XEKQjzpu1TW95QcnMJHWW9xusjx
+        NEbYJVqAZY7zLMfLGGGXaAFWBc6soRRhl2jv0DUcrEHPsEN0dVLKn0qVFPK3UoUGj1ZBn7SWMhvESVbg
+        2SrqFOrgLqltx2B5H6nSWz5EqnSWe0gVWTBVJIlT1VaiBy3kVbSVvODTkKC04n7SEHlM9lZqy98bEvDp
+        rGvmlDLmD5c3ZGH+Yj+4vCEL8xf7weUNWZgfFPOr8+LXKJ1Yua3O+KlML1ZItqPoizWemHlcf4Eon74Z
+        gCsel6xim6xaawAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="mySqlDataAdapter1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
