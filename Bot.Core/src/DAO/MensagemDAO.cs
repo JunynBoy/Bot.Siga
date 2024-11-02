@@ -1,23 +1,24 @@
 ﻿using Bot.Core.Model;
 using Bot.Core.src.DAO.Interface;
+using Bot.Core.src.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bot.Core.DAO
 {
-    public class MateriaDAO : GenericDAO<Materia>, IMateriaDAO
+    public class MensagemDAO : GenericDAO<Mensagem>, IMensagemDAO
     {
 
         private readonly ApplicationDbContext _context;
 
-        public MateriaDAO(ApplicationDbContext context)
+        public MensagemDAO(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public List<Materia> GetByEstudanteId(int estudanteId)
+        public List<Mensagem> GetByPreferenciaId(int preferenciaId)
         {
-            return _context.Set<Materia>().Include(mm => mm.Faltas).Include(mm => mm.Notas)
-                          .Where(m => m.EstudanteId == estudanteId)
+            return _context.Set<Mensagem>().Include(mm => mm.Preferencia)
+                          .Where(m => m.PreferenciaId == preferenciaId)
                           .ToList();
         }
     }

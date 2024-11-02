@@ -44,6 +44,9 @@ namespace Bot.Core.Model
         [Column("observacoes")]
         public String? Observacoes { get; set; }
 
+        [Column("is_finalizada")]
+        public bool? IsFinalizada { get; set; } = false;
+
         public Materia() { }
 
         public Materia(string? nome, string? codigo, string? professor, Notas? nota)

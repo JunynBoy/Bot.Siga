@@ -54,7 +54,6 @@ namespace Bot.App.Controls
             {
                 this.dgvMateriasNotasFaltas.Visible = false;
                 this.lblNenhumResultado.Visible = true;
-                this.updateTable();
             }
         }
 

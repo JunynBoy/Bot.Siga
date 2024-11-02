@@ -1,47 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bot.Core.Model;
 
 namespace Bot.Core.src.Model
 {
-    [Table("materia")]
+    [Table("mensagem")]
     public class Mensagem : OrdinaryEntity
     {
         [Key]
         [Column("id")]
         public int Id { get; set; }
 
-        [Column("id")]
-        private String? Nome { get; set; }
+        [Column("nome")]
+        public string? Nome { get; set; }
 
-        [Column("id")]
-        private String? Numero { get; set; }
+        [Column("email")]
+        public string? Email { get; set; }
 
-        [Column("id")]
-        private String? Texto { get; set; }
+        [Column("whatsapp")]
+        public string? Whatsapp { get; set; }
+
+        [Column("is_atualizar_por_email")]
+        public bool IsAtualizarPorEmail { get; set; } = false;
+
+        [Column("is_atualizar_por_whatsapp")]
+        public bool IsAtualizarPorWhatsapp { get; set; } = false;
+
+        [Column("texto")]
+        public string? Texto { get; set; }
 
         [ForeignKey("Preferencia")]
         [Column("preferencia_id")]
-        private int? preferenciaId;
+        public int? PreferenciaId { get; set; }
 
-        public virtual Preferencia? preferencia { get; set; }
+        public virtual Preferencia? Preferencia { get; set; }
 
+        public Mensagem(){}
 
-        public Mensagem() 
+        public Mensagem(string? nome, string? email, string? whatsapp, bool isAtualizarPorEmail, bool isAtualizarPorWhatsapp, string? texto, int? preferenciaId)
         {
-
-        }
-
-        public Mensagem(string nome, string numero, string texto)
-        {
-            this.Nome = nome;
-            this.Texto = texto;
-            this.Numero = numero;
+            Nome = nome;
+            Email = email;
+            Whatsapp = whatsapp;
+            IsAtualizarPorEmail = isAtualizarPorEmail;
+            IsAtualizarPorWhatsapp = isAtualizarPorWhatsapp;
+            Texto = texto;
+            PreferenciaId = preferenciaId;
         }
     }
 }

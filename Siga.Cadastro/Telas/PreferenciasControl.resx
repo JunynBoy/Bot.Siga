@@ -118,14 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="customButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnAdicionarMensagem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAFNJREFUOE9j
         GAX0Ac6hCRNAGMqlHDiFJBwAYSiXcjDMDQRHQEjCfmQMNOw9CKOLExVRIEUwFyHhD1CMIk52zMMMgHIp
         ByPQQHDMkxsBo4BEwMAAAPIrSpcZjSmFAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="customButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnEditarMensagem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAKtJREFUOE9j
         GJ4gICFBwDkkYb9TSMJ7p9CEBKgweQBq2HmgYf/hmBJDQQYCDbiAYiDQpVBp4gHYoJCEejgb1dADYEXE
@@ -134,7 +134,7 @@
         rkJggg==
 </value>
   </data>
-  <data name="customButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnExcluirMensagem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAANpJREFUOE+9
         lNENgkAMhjuCL5w8MoIbyAiO4AhuICO4gaswAk+ivjiKtuEH5Wh7YIx/8iXk0q+kx3H099wp27SUbwV5
@@ -156,13 +156,22 @@
         J0v+bWAWZ0EsN+QsyCUNKdMTK5FIJCJks/kBu0NJi4FQtykAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btnEdit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnEditarUsuario.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAKtJREFUOE9j
         GJ4gICFBwDkkYb9TSMJ7p9CEBKgweQBq2HmgYf/hmBJDQQYCDbiAYiDQpVBp4gHYoJCEejgb1dADYEXE
         AhRvhibMh4mBDQViEBuskBiAYhgMIxlKuWEI3ABVRhzAaxhVvDn8DAMBj4gEBaCBG6hiGAwADWigimEu
         IQkOII2uoQkGIEOBLl1AqcsOgMIPZgDI+2QbBgJAAz+Awg/kUqjQsAQMDAC+wrgiGpMIawAAAABJRU5E
         rkJggg==
+</value>
+  </data>
+  <data name="pcbNome.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAOJJREFUSEvl
+        lMENwjAMRTMCozACInDvIeHsDegGsEE7AhuwCpvABsUu9qERSZw0tz7pq5Ll+CmpErNt7AW6o4NbGOvh
+        evaw57Z6rIMHDpyS8QDcXk5C8KHBJwcH/L6oVrWj1A7wmEZuM7PoV++5pCN3RCh5cquhHXH9zqU8qn+A
+        IRF+B8ybazqJVhBJXrJSQElLGggocUkjwUQXlkcuaSbAOTxyCT8VfxeVJCogsKEPF5QmKSA6gJ08CTXJ
+        CoRakVoglIqKBYJWVC0QcqLVAiEmaiYQQlFzgTCL8B5Fn4qNYMwXTFH4cpVYHz0AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="pcbEmail.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

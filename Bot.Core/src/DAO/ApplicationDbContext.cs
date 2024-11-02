@@ -11,6 +11,8 @@ namespace Bot.Core.DAO
         public DbSet<Notas>? Notas { get; set; }
         public DbSet<Faltas>? Faltas { get; set; }
         public DbSet<Preferencia>? Preferencias { get; set; }
+        public DbSet<Mensagem>? Mensagem { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,11 +30,13 @@ namespace Bot.Core.DAO
             modelBuilder.Entity<Notas>().HasQueryFilter(n => n.DeletedAt == null);
             modelBuilder.Entity<Faltas>().HasQueryFilter(f => f.DeletedAt == null);
             modelBuilder.Entity<Preferencia>().HasQueryFilter(p => p.DeletedAt == null);
+            modelBuilder.Entity<Mensagem>().HasQueryFilter(p => p.DeletedAt == null);
 
             modelBuilder.Entity<Estudante>()
               .HasOne(e => e.Preferencia)    
               .WithOne()                     
               .HasForeignKey<Estudante>(e => e.PreferenciaId); 
+
 
         }
     }

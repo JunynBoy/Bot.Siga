@@ -30,58 +30,64 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PreferenciasControl));
             panel1 = new Panel();
+            lblNenhumResultado = new Label();
+            dgvMensagens = new DataGridView();
+            panelHeaderMensagem = new Panel();
+            lblEnviarMensagemAoAtualizarNotaTitle = new Label();
+            btnAdicionarMensagem = new CustomButton();
+            btnEditarMensagem = new CustomButton();
+            btnExcluirMensagem = new CustomButton();
             panel3 = new Panel();
-            lblLogin = new Label();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            panel4 = new Panel();
-            panel5 = new Panel();
+            panelPerfilConfigurado = new Panel();
             label4 = new Label();
-            label5 = new Label();
+            pcbUser = new PictureBox();
             label8 = new Label();
             label9 = new Label();
-            pcbUser = new PictureBox();
-            btnEdit = new CustomButton();
-            panelPreferencias = new Panel();
+            panelSubHeaderSuasPreferencias = new Panel();
+            btnEditarUsuario = new CustomButton();
+            lblSuasPreferenciasTitle = new Label();
+            label5 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label1 = new Label();
+            panelCRUD = new Panel();
+            txtNome = new CustomTextBox();
+            pcbNome = new PictureBox();
+            lblNome = new Label();
             btnSalvarAtualizar = new CustomButton();
-            label6 = new Label();
-            richTextBox1 = new RichTextBox();
+            lblMensagemTitle = new Label();
+            rtxtMensagemCustomizada = new RichTextBox();
             lblAtualizarPorEmail = new Label();
             tbAtualizarPorEmail = new CustomControls.CustomControls.CustomToggleButton();
             lblAtualizarPorWhatsapp = new Label();
             tbAtualizarPorWhatsapp = new CustomControls.CustomControls.CustomToggleButton();
             panelSubHeaderPreferencias = new Panel();
-            lblPreferencias = new Label();
+            lblCRUDTitle = new Label();
             txtmWhatsapp = new CustomMaskedTextBox();
             txtEmail = new CustomTextBox();
             pcbEmail = new PictureBox();
             pcbWhatsapp = new PictureBox();
             lblWhatsapp = new Label();
             lblEmail = new Label();
-            panel2 = new Panel();
-            label7 = new Label();
-            customButton3 = new CustomButton();
-            customButton2 = new CustomButton();
-            customButton1 = new CustomButton();
-            dataGridView1 = new DataGridView();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvMensagens).BeginInit();
+            panelHeaderMensagem.SuspendLayout();
             panel3.SuspendLayout();
-            panel4.SuspendLayout();
-            panel5.SuspendLayout();
+            panelPerfilConfigurado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbUser).BeginInit();
-            panelPreferencias.SuspendLayout();
+            panelSubHeaderSuasPreferencias.SuspendLayout();
+            panelCRUD.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbNome).BeginInit();
             panelSubHeaderPreferencias.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbEmail).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbWhatsapp).BeginInit();
-            panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Controls.Add(dataGridView1);
-            panel1.Controls.Add(panel2);
+            panel1.Controls.Add(lblNenhumResultado);
+            panel1.Controls.Add(dgvMensagens);
+            panel1.Controls.Add(panelHeaderMensagem);
             panel1.Controls.Add(panel3);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
@@ -89,9 +95,110 @@
             panel1.Size = new Size(368, 389);
             panel1.TabIndex = 0;
             // 
+            // lblNenhumResultado
+            // 
+            lblNenhumResultado.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lblNenhumResultado.AutoSize = true;
+            lblNenhumResultado.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNenhumResultado.ForeColor = Color.FromArgb(30, 39, 44);
+            lblNenhumResultado.Location = new Point(34, 262);
+            lblNenhumResultado.Name = "lblNenhumResultado";
+            lblNenhumResultado.Size = new Size(292, 25);
+            lblNenhumResultado.TabIndex = 51;
+            lblNenhumResultado.Text = "Nenhum resultado encontrado.";
+            lblNenhumResultado.Visible = false;
+            // 
+            // dgvMensagens
+            // 
+            dgvMensagens.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvMensagens.Dock = DockStyle.Fill;
+            dgvMensagens.Location = new Point(0, 162);
+            dgvMensagens.Name = "dgvMensagens";
+            dgvMensagens.RowTemplate.Height = 25;
+            dgvMensagens.Size = new Size(368, 227);
+            dgvMensagens.TabIndex = 5;
+            // 
+            // panelHeaderMensagem
+            // 
+            panelHeaderMensagem.BackColor = SystemColors.Control;
+            panelHeaderMensagem.Controls.Add(lblEnviarMensagemAoAtualizarNotaTitle);
+            panelHeaderMensagem.Controls.Add(btnAdicionarMensagem);
+            panelHeaderMensagem.Controls.Add(btnEditarMensagem);
+            panelHeaderMensagem.Controls.Add(btnExcluirMensagem);
+            panelHeaderMensagem.Dock = DockStyle.Top;
+            panelHeaderMensagem.Location = new Point(0, 121);
+            panelHeaderMensagem.Name = "panelHeaderMensagem";
+            panelHeaderMensagem.Size = new Size(368, 41);
+            panelHeaderMensagem.TabIndex = 4;
+            // 
+            // lblEnviarMensagemAoAtualizarNotaTitle
+            // 
+            lblEnviarMensagemAoAtualizarNotaTitle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            lblEnviarMensagemAoAtualizarNotaTitle.AutoSize = true;
+            lblEnviarMensagemAoAtualizarNotaTitle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEnviarMensagemAoAtualizarNotaTitle.Location = new Point(3, 12);
+            lblEnviarMensagemAoAtualizarNotaTitle.Name = "lblEnviarMensagemAoAtualizarNotaTitle";
+            lblEnviarMensagemAoAtualizarNotaTitle.Size = new Size(233, 19);
+            lblEnviarMensagemAoAtualizarNotaTitle.TabIndex = 71;
+            lblEnviarMensagemAoAtualizarNotaTitle.Text = "Enviar Mensagem ao Atualizar Nota";
+            // 
+            // btnAdicionarMensagem
+            // 
+            btnAdicionarMensagem.BackColor = Color.White;
+            btnAdicionarMensagem.BackgroundColor = Color.White;
+            btnAdicionarMensagem.BorderColor = Color.Black;
+            btnAdicionarMensagem.BorderRadius = 15;
+            btnAdicionarMensagem.BorderSize = 1;
+            btnAdicionarMensagem.FlatAppearance.BorderSize = 0;
+            btnAdicionarMensagem.FlatStyle = FlatStyle.Flat;
+            btnAdicionarMensagem.ForeColor = Color.White;
+            btnAdicionarMensagem.Image = (Image)resources.GetObject("btnAdicionarMensagem.Image");
+            btnAdicionarMensagem.Location = new Point(260, 6);
+            btnAdicionarMensagem.Name = "btnAdicionarMensagem";
+            btnAdicionarMensagem.Size = new Size(30, 30);
+            btnAdicionarMensagem.TabIndex = 70;
+            btnAdicionarMensagem.TextColor = Color.White;
+            btnAdicionarMensagem.UseVisualStyleBackColor = false;
+            // 
+            // btnEditarMensagem
+            // 
+            btnEditarMensagem.BackColor = Color.White;
+            btnEditarMensagem.BackgroundColor = Color.White;
+            btnEditarMensagem.BorderColor = Color.Black;
+            btnEditarMensagem.BorderRadius = 15;
+            btnEditarMensagem.BorderSize = 1;
+            btnEditarMensagem.FlatAppearance.BorderSize = 0;
+            btnEditarMensagem.FlatStyle = FlatStyle.Flat;
+            btnEditarMensagem.ForeColor = Color.White;
+            btnEditarMensagem.Image = (Image)resources.GetObject("btnEditarMensagem.Image");
+            btnEditarMensagem.Location = new Point(296, 6);
+            btnEditarMensagem.Name = "btnEditarMensagem";
+            btnEditarMensagem.Size = new Size(30, 30);
+            btnEditarMensagem.TabIndex = 69;
+            btnEditarMensagem.TextColor = Color.White;
+            btnEditarMensagem.UseVisualStyleBackColor = false;
+            // 
+            // btnExcluirMensagem
+            // 
+            btnExcluirMensagem.BackColor = Color.White;
+            btnExcluirMensagem.BackgroundColor = Color.White;
+            btnExcluirMensagem.BorderColor = Color.Black;
+            btnExcluirMensagem.BorderRadius = 15;
+            btnExcluirMensagem.BorderSize = 1;
+            btnExcluirMensagem.FlatAppearance.BorderSize = 0;
+            btnExcluirMensagem.FlatStyle = FlatStyle.Flat;
+            btnExcluirMensagem.ForeColor = Color.White;
+            btnExcluirMensagem.Image = (Image)resources.GetObject("btnExcluirMensagem.Image");
+            btnExcluirMensagem.Location = new Point(332, 6);
+            btnExcluirMensagem.Name = "btnExcluirMensagem";
+            btnExcluirMensagem.Size = new Size(30, 30);
+            btnExcluirMensagem.TabIndex = 68;
+            btnExcluirMensagem.TextColor = Color.White;
+            btnExcluirMensagem.UseVisualStyleBackColor = false;
+            // 
             // panel3
             // 
-            panel3.Controls.Add(panel4);
+            panel3.Controls.Add(panelPerfilConfigurado);
             panel3.Controls.Add(label2);
             panel3.Controls.Add(label3);
             panel3.Controls.Add(label1);
@@ -101,77 +208,20 @@
             panel3.Size = new Size(368, 121);
             panel3.TabIndex = 0;
             // 
-            // lblLogin
+            // panelPerfilConfigurado
             // 
-            lblLogin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lblLogin.AutoSize = true;
-            lblLogin.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblLogin.ForeColor = Color.FromArgb(30, 39, 44);
-            lblLogin.Location = new Point(3, 7);
-            lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(167, 25);
-            lblLogin.TabIndex = 62;
-            lblLogin.Text = "Suas preferencias";
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.FromArgb(30, 39, 44);
-            label1.Location = new Point(3, 3);
-            label1.Name = "label1";
-            label1.Size = new Size(213, 25);
-            label1.TabIndex = 65;
-            label1.Text = "Informações Essenciais";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.FromArgb(30, 39, 44);
-            label2.Location = new Point(3, 51);
-            label2.Name = "label2";
-            label2.Size = new Size(187, 15);
-            label2.TabIndex = 66;
-            label2.Text = "marcos.gaparini@fatec.sp.gov.br";
-            label2.TextAlign = ContentAlignment.TopRight;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(3, 32);
-            label3.Name = "label3";
-            label3.Size = new Size(131, 19);
-            label3.TabIndex = 65;
-            label3.Text = "E-mail Institucional";
-            // 
-            // panel4
-            // 
-            panel4.BackColor = Color.White;
-            panel4.Controls.Add(label4);
-            panel4.Controls.Add(pcbUser);
-            panel4.Controls.Add(label8);
-            panel4.Controls.Add(label9);
-            panel4.Controls.Add(panel5);
-            panel4.Controls.Add(label5);
-            panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(368, 121);
-            panel4.TabIndex = 67;
-            // 
-            // panel5
-            // 
-            panel5.BackColor = SystemColors.Control;
-            panel5.Controls.Add(btnEdit);
-            panel5.Controls.Add(lblLogin);
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(368, 41);
-            panel5.TabIndex = 0;
+            panelPerfilConfigurado.BackColor = Color.White;
+            panelPerfilConfigurado.Controls.Add(label4);
+            panelPerfilConfigurado.Controls.Add(pcbUser);
+            panelPerfilConfigurado.Controls.Add(label8);
+            panelPerfilConfigurado.Controls.Add(label9);
+            panelPerfilConfigurado.Controls.Add(panelSubHeaderSuasPreferencias);
+            panelPerfilConfigurado.Controls.Add(label5);
+            panelPerfilConfigurado.Dock = DockStyle.Top;
+            panelPerfilConfigurado.Location = new Point(0, 0);
+            panelPerfilConfigurado.Name = "panelPerfilConfigurado";
+            panelPerfilConfigurado.Size = new Size(368, 121);
+            panelPerfilConfigurado.TabIndex = 67;
             // 
             // label4
             // 
@@ -185,15 +235,16 @@
             label4.Text = "marcos.gaparini@fatec.sp.gov.br";
             label4.TextAlign = ContentAlignment.TopRight;
             // 
-            // label5
+            // pcbUser
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(109, 42);
-            label5.Name = "label5";
-            label5.Size = new Size(49, 19);
-            label5.TabIndex = 65;
-            label5.Text = "E-mail";
+            pcbUser.BackColor = Color.FromArgb(224, 224, 224);
+            pcbUser.Image = (Image)resources.GetObject("pcbUser.Image");
+            pcbUser.Location = new Point(3, 47);
+            pcbUser.Name = "pcbUser";
+            pcbUser.Size = new Size(100, 68);
+            pcbUser.SizeMode = PictureBoxSizeMode.CenterImage;
+            pcbUser.TabIndex = 67;
+            pcbUser.TabStop = false;
             // 
             // label8
             // 
@@ -217,59 +268,155 @@
             label9.TabIndex = 65;
             label9.Text = "Whatsapp";
             // 
-            // pcbUser
+            // panelSubHeaderSuasPreferencias
             // 
-            pcbUser.BackColor = Color.FromArgb(224, 224, 224);
-            pcbUser.Image = (Image)resources.GetObject("pcbUser.Image");
-            pcbUser.Location = new Point(3, 47);
-            pcbUser.Name = "pcbUser";
-            pcbUser.Size = new Size(100, 68);
-            pcbUser.SizeMode = PictureBoxSizeMode.CenterImage;
-            pcbUser.TabIndex = 67;
-            pcbUser.TabStop = false;
+            panelSubHeaderSuasPreferencias.BackColor = SystemColors.Control;
+            panelSubHeaderSuasPreferencias.Controls.Add(btnEditarUsuario);
+            panelSubHeaderSuasPreferencias.Controls.Add(lblSuasPreferenciasTitle);
+            panelSubHeaderSuasPreferencias.Dock = DockStyle.Top;
+            panelSubHeaderSuasPreferencias.Location = new Point(0, 0);
+            panelSubHeaderSuasPreferencias.Name = "panelSubHeaderSuasPreferencias";
+            panelSubHeaderSuasPreferencias.Size = new Size(368, 41);
+            panelSubHeaderSuasPreferencias.TabIndex = 0;
             // 
-            // btnEdit
+            // btnEditarUsuario
             // 
-            btnEdit.BackColor = Color.White;
-            btnEdit.BackgroundColor = Color.White;
-            btnEdit.BorderColor = Color.Black;
-            btnEdit.BorderRadius = 15;
-            btnEdit.BorderSize = 1;
-            btnEdit.FlatAppearance.BorderSize = 0;
-            btnEdit.FlatStyle = FlatStyle.Flat;
-            btnEdit.ForeColor = Color.White;
-            btnEdit.Image = (Image)resources.GetObject("btnEdit.Image");
-            btnEdit.Location = new Point(332, 7);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(30, 30);
-            btnEdit.TabIndex = 68;
-            btnEdit.TextColor = Color.White;
-            btnEdit.UseVisualStyleBackColor = false;
+            btnEditarUsuario.BackColor = Color.White;
+            btnEditarUsuario.BackgroundColor = Color.White;
+            btnEditarUsuario.BorderColor = Color.Black;
+            btnEditarUsuario.BorderRadius = 15;
+            btnEditarUsuario.BorderSize = 1;
+            btnEditarUsuario.FlatAppearance.BorderSize = 0;
+            btnEditarUsuario.FlatStyle = FlatStyle.Flat;
+            btnEditarUsuario.ForeColor = Color.White;
+            btnEditarUsuario.Image = (Image)resources.GetObject("btnEditarUsuario.Image");
+            btnEditarUsuario.Location = new Point(332, 7);
+            btnEditarUsuario.Name = "btnEditarUsuario";
+            btnEditarUsuario.Size = new Size(30, 30);
+            btnEditarUsuario.TabIndex = 68;
+            btnEditarUsuario.TextColor = Color.White;
+            btnEditarUsuario.UseVisualStyleBackColor = false;
             // 
-            // panelPreferencias
+            // lblSuasPreferenciasTitle
             // 
-            panelPreferencias.BackColor = Color.White;
-            panelPreferencias.Controls.Add(btnSalvarAtualizar);
-            panelPreferencias.Controls.Add(label6);
-            panelPreferencias.Controls.Add(richTextBox1);
-            panelPreferencias.Controls.Add(lblAtualizarPorEmail);
-            panelPreferencias.Controls.Add(tbAtualizarPorEmail);
-            panelPreferencias.Controls.Add(lblAtualizarPorWhatsapp);
-            panelPreferencias.Controls.Add(tbAtualizarPorWhatsapp);
-            panelPreferencias.Controls.Add(panelSubHeaderPreferencias);
-            panelPreferencias.Controls.Add(txtmWhatsapp);
-            panelPreferencias.Controls.Add(txtEmail);
-            panelPreferencias.Controls.Add(pcbEmail);
-            panelPreferencias.Controls.Add(pcbWhatsapp);
-            panelPreferencias.Controls.Add(lblWhatsapp);
-            panelPreferencias.Controls.Add(lblEmail);
-            panelPreferencias.Dock = DockStyle.Fill;
-            panelPreferencias.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            panelPreferencias.Location = new Point(368, 0);
-            panelPreferencias.Name = "panelPreferencias";
-            panelPreferencias.Size = new Size(432, 389);
-            panelPreferencias.TabIndex = 70;
-            panelPreferencias.Visible = false;
+            lblSuasPreferenciasTitle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            lblSuasPreferenciasTitle.AutoSize = true;
+            lblSuasPreferenciasTitle.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSuasPreferenciasTitle.ForeColor = Color.FromArgb(30, 39, 44);
+            lblSuasPreferenciasTitle.Location = new Point(3, 7);
+            lblSuasPreferenciasTitle.Name = "lblSuasPreferenciasTitle";
+            lblSuasPreferenciasTitle.Size = new Size(167, 25);
+            lblSuasPreferenciasTitle.TabIndex = 62;
+            lblSuasPreferenciasTitle.Text = "Suas preferencias";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Location = new Point(109, 42);
+            label5.Name = "label5";
+            label5.Size = new Size(49, 19);
+            label5.TabIndex = 65;
+            label5.Text = "E-mail";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.FromArgb(30, 39, 44);
+            label2.Location = new Point(3, 51);
+            label2.Name = "label2";
+            label2.Size = new Size(187, 15);
+            label2.TabIndex = 66;
+            label2.Text = "marcos.gaparini@fatec.sp.gov.br";
+            label2.TextAlign = ContentAlignment.TopRight;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(3, 32);
+            label3.Name = "label3";
+            label3.Size = new Size(131, 19);
+            label3.TabIndex = 65;
+            label3.Text = "E-mail Institucional";
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.FromArgb(30, 39, 44);
+            label1.Location = new Point(3, 3);
+            label1.Name = "label1";
+            label1.Size = new Size(213, 25);
+            label1.TabIndex = 65;
+            label1.Text = "Informações Essenciais";
+            // 
+            // panelCRUD
+            // 
+            panelCRUD.BackColor = Color.White;
+            panelCRUD.Controls.Add(txtNome);
+            panelCRUD.Controls.Add(pcbNome);
+            panelCRUD.Controls.Add(lblNome);
+            panelCRUD.Controls.Add(btnSalvarAtualizar);
+            panelCRUD.Controls.Add(lblMensagemTitle);
+            panelCRUD.Controls.Add(rtxtMensagemCustomizada);
+            panelCRUD.Controls.Add(lblAtualizarPorEmail);
+            panelCRUD.Controls.Add(tbAtualizarPorEmail);
+            panelCRUD.Controls.Add(lblAtualizarPorWhatsapp);
+            panelCRUD.Controls.Add(tbAtualizarPorWhatsapp);
+            panelCRUD.Controls.Add(panelSubHeaderPreferencias);
+            panelCRUD.Controls.Add(txtmWhatsapp);
+            panelCRUD.Controls.Add(txtEmail);
+            panelCRUD.Controls.Add(pcbEmail);
+            panelCRUD.Controls.Add(pcbWhatsapp);
+            panelCRUD.Controls.Add(lblWhatsapp);
+            panelCRUD.Controls.Add(lblEmail);
+            panelCRUD.Dock = DockStyle.Fill;
+            panelCRUD.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            panelCRUD.Location = new Point(368, 0);
+            panelCRUD.Name = "panelCRUD";
+            panelCRUD.Size = new Size(432, 389);
+            panelCRUD.TabIndex = 70;
+            // 
+            // txtNome
+            // 
+            txtNome.BackColor = SystemColors.Window;
+            txtNome.BorderColor = Color.FromArgb(66, 84, 96);
+            txtNome.BorderFocusColor = Color.FromArgb(176, 0, 0);
+            txtNome.BorderSize = 1;
+            txtNome.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtNome.ForeColor = Color.DimGray;
+            txtNome.Location = new Point(83, 65);
+            txtNome.Margin = new Padding(4);
+            txtNome.Multiline = false;
+            txtNome.Name = "txtNome";
+            txtNome.Padding = new Padding(7);
+            txtNome.PasswordChar = false;
+            txtNome.Size = new Size(300, 29);
+            txtNome.TabIndex = 74;
+            txtNome.Texts = "";
+            txtNome.UnderlinedStyle = true;
+            // 
+            // pcbNome
+            // 
+            pcbNome.Image = (Image)resources.GetObject("pcbNome.Image");
+            pcbNome.Location = new Point(51, 69);
+            pcbNome.Name = "pcbNome";
+            pcbNome.Size = new Size(25, 25);
+            pcbNome.TabIndex = 75;
+            pcbNome.TabStop = false;
+            // 
+            // lblNome
+            // 
+            lblNome.AutoSize = true;
+            lblNome.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNome.Location = new Point(83, 42);
+            lblNome.Name = "lblNome";
+            lblNome.Size = new Size(47, 19);
+            lblNome.TabIndex = 73;
+            lblNome.Text = "Nome";
             // 
             // btnSalvarAtualizar
             // 
@@ -282,40 +429,41 @@
             btnSalvarAtualizar.FlatStyle = FlatStyle.Flat;
             btnSalvarAtualizar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSalvarAtualizar.ForeColor = Color.White;
-            btnSalvarAtualizar.Location = new Point(262, 344);
+            btnSalvarAtualizar.Location = new Point(262, 363);
             btnSalvarAtualizar.Name = "btnSalvarAtualizar";
             btnSalvarAtualizar.Size = new Size(121, 23);
             btnSalvarAtualizar.TabIndex = 72;
             btnSalvarAtualizar.Text = "Salvar";
             btnSalvarAtualizar.TextColor = Color.White;
             btnSalvarAtualizar.UseVisualStyleBackColor = false;
+            btnSalvarAtualizar.Click += btnSalvarAtualizar_Click;
             // 
-            // label6
+            // lblMensagemTitle
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(51, 240);
-            label6.Name = "label6";
-            label6.Size = new Size(162, 19);
-            label6.TabIndex = 70;
-            label6.Text = "Mensagem Customizada";
+            lblMensagemTitle.AutoSize = true;
+            lblMensagemTitle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMensagemTitle.Location = new Point(50, 270);
+            lblMensagemTitle.Name = "lblMensagemTitle";
+            lblMensagemTitle.Size = new Size(162, 19);
+            lblMensagemTitle.TabIndex = 70;
+            lblMensagemTitle.Text = "Mensagem Customizada";
             // 
-            // richTextBox1
+            // rtxtMensagemCustomizada
             // 
-            richTextBox1.BorderStyle = BorderStyle.FixedSingle;
-            richTextBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            richTextBox1.Location = new Point(51, 262);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(332, 76);
-            richTextBox1.TabIndex = 69;
-            richTextBox1.Text = "Olá! aqui é o robozinho do SIGA, estou te enviando essa mensagem por que houve atualizações de notas no siga... da uma conferida lá!";
+            rtxtMensagemCustomizada.BorderStyle = BorderStyle.FixedSingle;
+            rtxtMensagemCustomizada.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            rtxtMensagemCustomizada.Location = new Point(51, 292);
+            rtxtMensagemCustomizada.Name = "rtxtMensagemCustomizada";
+            rtxtMensagemCustomizada.Size = new Size(332, 65);
+            rtxtMensagemCustomizada.TabIndex = 69;
+            rtxtMensagemCustomizada.Text = "Olá! aqui é o robozinho do SIGA, estou te enviando essa mensagem por que houve atualizações de notas no siga... da uma conferida lá!";
             // 
             // lblAtualizarPorEmail
             // 
             lblAtualizarPorEmail.AutoSize = true;
             lblAtualizarPorEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblAtualizarPorEmail.ForeColor = Color.FromArgb(30, 39, 44);
-            lblAtualizarPorEmail.Location = new Point(102, 215);
+            lblAtualizarPorEmail.Location = new Point(101, 248);
             lblAtualizarPorEmail.Name = "lblAtualizarPorEmail";
             lblAtualizarPorEmail.Size = new Size(153, 17);
             lblAtualizarPorEmail.TabIndex = 0;
@@ -323,7 +471,7 @@
             // 
             // tbAtualizarPorEmail
             // 
-            tbAtualizarPorEmail.Location = new Point(51, 215);
+            tbAtualizarPorEmail.Location = new Point(50, 248);
             tbAtualizarPorEmail.MinimumSize = new Size(45, 22);
             tbAtualizarPorEmail.Name = "tbAtualizarPorEmail";
             tbAtualizarPorEmail.OffBackColor = Color.Gray;
@@ -339,7 +487,7 @@
             lblAtualizarPorWhatsapp.AutoSize = true;
             lblAtualizarPorWhatsapp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblAtualizarPorWhatsapp.ForeColor = Color.FromArgb(30, 39, 44);
-            lblAtualizarPorWhatsapp.Location = new Point(102, 186);
+            lblAtualizarPorWhatsapp.Location = new Point(101, 220);
             lblAtualizarPorWhatsapp.Name = "lblAtualizarPorWhatsapp";
             lblAtualizarPorWhatsapp.Size = new Size(176, 17);
             lblAtualizarPorWhatsapp.TabIndex = 0;
@@ -348,7 +496,7 @@
             // 
             // tbAtualizarPorWhatsapp
             // 
-            tbAtualizarPorWhatsapp.Location = new Point(51, 186);
+            tbAtualizarPorWhatsapp.Location = new Point(50, 220);
             tbAtualizarPorWhatsapp.MinimumSize = new Size(45, 22);
             tbAtualizarPorWhatsapp.Name = "tbAtualizarPorWhatsapp";
             tbAtualizarPorWhatsapp.OffBackColor = Color.Gray;
@@ -362,24 +510,24 @@
             // panelSubHeaderPreferencias
             // 
             panelSubHeaderPreferencias.BackColor = SystemColors.Control;
-            panelSubHeaderPreferencias.Controls.Add(lblPreferencias);
+            panelSubHeaderPreferencias.Controls.Add(lblCRUDTitle);
             panelSubHeaderPreferencias.Dock = DockStyle.Top;
             panelSubHeaderPreferencias.Location = new Point(0, 0);
             panelSubHeaderPreferencias.Name = "panelSubHeaderPreferencias";
             panelSubHeaderPreferencias.Size = new Size(432, 41);
             panelSubHeaderPreferencias.TabIndex = 42;
             // 
-            // lblPreferencias
+            // lblCRUDTitle
             // 
-            lblPreferencias.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lblPreferencias.AutoSize = true;
-            lblPreferencias.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblPreferencias.ForeColor = Color.FromArgb(30, 39, 44);
-            lblPreferencias.Location = new Point(157, 7);
-            lblPreferencias.Name = "lblPreferencias";
-            lblPreferencias.Size = new Size(121, 25);
-            lblPreferencias.TabIndex = 40;
-            lblPreferencias.Text = "Preferências";
+            lblCRUDTitle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lblCRUDTitle.AutoSize = true;
+            lblCRUDTitle.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCRUDTitle.ForeColor = Color.FromArgb(30, 39, 44);
+            lblCRUDTitle.Location = new Point(137, 7);
+            lblCRUDTitle.Name = "lblCRUDTitle";
+            lblCRUDTitle.Size = new Size(167, 25);
+            lblCRUDTitle.TabIndex = 40;
+            lblCRUDTitle.Text = "Suas Preferências";
             // 
             // txtmWhatsapp
             // 
@@ -389,7 +537,7 @@
             txtmWhatsapp.BorderSize = 1;
             txtmWhatsapp.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtmWhatsapp.ForeColor = Color.DimGray;
-            txtmWhatsapp.Location = new Point(83, 81);
+            txtmWhatsapp.Location = new Point(83, 128);
             txtmWhatsapp.Margin = new Padding(4);
             txtmWhatsapp.Mask = "00 00000-0000";
             txtmWhatsapp.Multiline = false;
@@ -409,7 +557,7 @@
             txtEmail.BorderSize = 1;
             txtEmail.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtEmail.ForeColor = Color.DimGray;
-            txtEmail.Location = new Point(83, 141);
+            txtEmail.Location = new Point(83, 187);
             txtEmail.Margin = new Padding(4);
             txtEmail.Multiline = false;
             txtEmail.Name = "txtEmail";
@@ -423,7 +571,7 @@
             // pcbEmail
             // 
             pcbEmail.Image = (Image)resources.GetObject("pcbEmail.Image");
-            pcbEmail.Location = new Point(51, 141);
+            pcbEmail.Location = new Point(51, 191);
             pcbEmail.Name = "pcbEmail";
             pcbEmail.Size = new Size(25, 25);
             pcbEmail.TabIndex = 40;
@@ -432,7 +580,7 @@
             // pcbWhatsapp
             // 
             pcbWhatsapp.Image = (Image)resources.GetObject("pcbWhatsapp.Image");
-            pcbWhatsapp.Location = new Point(51, 85);
+            pcbWhatsapp.Location = new Point(51, 132);
             pcbWhatsapp.Name = "pcbWhatsapp";
             pcbWhatsapp.Size = new Size(25, 25);
             pcbWhatsapp.TabIndex = 40;
@@ -442,7 +590,7 @@
             // 
             lblWhatsapp.AutoSize = true;
             lblWhatsapp.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblWhatsapp.Location = new Point(83, 58);
+            lblWhatsapp.Location = new Point(83, 104);
             lblWhatsapp.Name = "lblWhatsapp";
             lblWhatsapp.Size = new Size(72, 19);
             lblWhatsapp.TabIndex = 0;
@@ -452,124 +600,39 @@
             // 
             lblEmail.AutoSize = true;
             lblEmail.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEmail.Location = new Point(83, 118);
+            lblEmail.Location = new Point(83, 164);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(49, 19);
             lblEmail.TabIndex = 0;
             lblEmail.Text = "E-mail";
             // 
-            // panel2
-            // 
-            panel2.BackColor = SystemColors.Control;
-            panel2.Controls.Add(label7);
-            panel2.Controls.Add(customButton3);
-            panel2.Controls.Add(customButton2);
-            panel2.Controls.Add(customButton1);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 121);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(368, 41);
-            panel2.TabIndex = 4;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(3, 12);
-            label7.Name = "label7";
-            label7.Size = new Size(233, 19);
-            label7.TabIndex = 71;
-            label7.Text = "Enviar Mensagem ao Atualizar Nota";
-            // 
-            // customButton3
-            // 
-            customButton3.BackColor = Color.White;
-            customButton3.BackgroundColor = Color.White;
-            customButton3.BorderColor = Color.Black;
-            customButton3.BorderRadius = 15;
-            customButton3.BorderSize = 1;
-            customButton3.FlatAppearance.BorderSize = 0;
-            customButton3.FlatStyle = FlatStyle.Flat;
-            customButton3.ForeColor = Color.White;
-            customButton3.Image = (Image)resources.GetObject("customButton3.Image");
-            customButton3.Location = new Point(260, 6);
-            customButton3.Name = "customButton3";
-            customButton3.Size = new Size(30, 30);
-            customButton3.TabIndex = 70;
-            customButton3.TextColor = Color.White;
-            customButton3.UseVisualStyleBackColor = false;
-            // 
-            // customButton2
-            // 
-            customButton2.BackColor = Color.White;
-            customButton2.BackgroundColor = Color.White;
-            customButton2.BorderColor = Color.Black;
-            customButton2.BorderRadius = 15;
-            customButton2.BorderSize = 1;
-            customButton2.FlatAppearance.BorderSize = 0;
-            customButton2.FlatStyle = FlatStyle.Flat;
-            customButton2.ForeColor = Color.White;
-            customButton2.Image = (Image)resources.GetObject("customButton2.Image");
-            customButton2.Location = new Point(296, 6);
-            customButton2.Name = "customButton2";
-            customButton2.Size = new Size(30, 30);
-            customButton2.TabIndex = 69;
-            customButton2.TextColor = Color.White;
-            customButton2.UseVisualStyleBackColor = false;
-            // 
-            // customButton1
-            // 
-            customButton1.BackColor = Color.White;
-            customButton1.BackgroundColor = Color.White;
-            customButton1.BorderColor = Color.Black;
-            customButton1.BorderRadius = 15;
-            customButton1.BorderSize = 1;
-            customButton1.FlatAppearance.BorderSize = 0;
-            customButton1.FlatStyle = FlatStyle.Flat;
-            customButton1.ForeColor = Color.White;
-            customButton1.Image = (Image)resources.GetObject("customButton1.Image");
-            customButton1.Location = new Point(332, 6);
-            customButton1.Name = "customButton1";
-            customButton1.Size = new Size(30, 30);
-            customButton1.TabIndex = 68;
-            customButton1.TextColor = Color.White;
-            customButton1.UseVisualStyleBackColor = false;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 162);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(368, 227);
-            dataGridView1.TabIndex = 5;
-            // 
             // PreferenciasControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(panelPreferencias);
+            Controls.Add(panelCRUD);
             Controls.Add(panel1);
             Name = "PreferenciasControl";
             Size = new Size(800, 389);
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvMensagens).EndInit();
+            panelHeaderMensagem.ResumeLayout(false);
+            panelHeaderMensagem.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
+            panelPerfilConfigurado.ResumeLayout(false);
+            panelPerfilConfigurado.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbUser).EndInit();
-            panelPreferencias.ResumeLayout(false);
-            panelPreferencias.PerformLayout();
+            panelSubHeaderSuasPreferencias.ResumeLayout(false);
+            panelSubHeaderSuasPreferencias.PerformLayout();
+            panelCRUD.ResumeLayout(false);
+            panelCRUD.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbNome).EndInit();
             panelSubHeaderPreferencias.ResumeLayout(false);
             panelSubHeaderPreferencias.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbEmail).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbWhatsapp).EndInit();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -577,39 +640,43 @@
 
         private Panel panel1;
         private Panel panel3;
-        private Label lblLogin;
-        private Panel panel4;
+        private Label lblSuasPreferenciasTitle;
+        private Panel panelPerfilConfigurado;
         private Label label8;
         private Label label4;
         private Label label9;
-        private Panel panel5;
+        private Panel panelSubHeaderSuasPreferencias;
         private Label label5;
         private Label label2;
         private Label label3;
         private Label label1;
         private PictureBox pcbUser;
-        private CustomButton btnEdit;
-        private DataGridView dataGridView1;
-        private Panel panel2;
-        private Label label7;
-        private CustomButton customButton3;
-        private CustomButton customButton2;
-        private CustomButton customButton1;
-        private Panel panelPreferencias;
+        private CustomButton btnEditarUsuario;
+        private DataGridView dgvMensagens;
+        private Panel panelHeaderMensagem;
+        private Label lblEnviarMensagemAoAtualizarNotaTitle;
+        private CustomButton btnAdicionarMensagem;
+        private CustomButton btnEditarMensagem;
+        private CustomButton btnExcluirMensagem;
+        private Panel panelCRUD;
         private CustomButton btnSalvarAtualizar;
-        private Label label6;
-        private RichTextBox richTextBox1;
+        private Label lblMensagemTitle;
+        private RichTextBox rtxtMensagemCustomizada;
         private Label lblAtualizarPorEmail;
         private CustomControls.CustomControls.CustomToggleButton tbAtualizarPorEmail;
         private Label lblAtualizarPorWhatsapp;
         private CustomControls.CustomControls.CustomToggleButton tbAtualizarPorWhatsapp;
         private Panel panelSubHeaderPreferencias;
-        private Label lblPreferencias;
+        private Label lblCRUDTitle;
         private CustomMaskedTextBox txtmWhatsapp;
         private CustomTextBox txtEmail;
         private PictureBox pcbEmail;
         private PictureBox pcbWhatsapp;
         private Label lblWhatsapp;
         private Label lblEmail;
+        private Label lblNenhumResultado;
+        private CustomTextBox txtNome;
+        private PictureBox pcbNome;
+        private Label lblNome;
     }
 }

@@ -162,6 +162,7 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
                         execucoesCompletas++;
                         this.lblContador.Text = execucoesCompletas.ToString();
                         this.atualizarLabelStatus();
+
                     }));
                 }
 
@@ -254,14 +255,14 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
         private List<EnumTipoDeExecucao> getExecucoesHabilitadas()
         {
             List<EnumTipoDeExecucao> tiposExecList = new List<EnumTipoDeExecucao>();
-            if (this.tbColetarMaterias.Checked)
-                tiposExecList.Add(EnumTipoDeExecucao.COLETAR_MATERIA);
+            if (this.tbColetarNotas.Checked)
+                tiposExecList.Add(EnumTipoDeExecucao.COLETAR_NOTA);
 
             if (this.tbColetarFaltas.Checked)
                 tiposExecList.Add(EnumTipoDeExecucao.COLETAR_FALTA);
 
-            if (this.tbColetarNotas.Checked)
-                tiposExecList.Add(EnumTipoDeExecucao.COLETAR_NOTA);
+            if (this.tbColetarMaterias.Checked)
+                tiposExecList.Add(EnumTipoDeExecucao.COLETAR_MATERIA);
 
             return tiposExecList;
         }
@@ -296,6 +297,8 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
                 this.lblStatus.ForeColor = Color.White;
             }
 
+
+            this.VerificarMateriaMaisRecente();
         }
     }
 }

@@ -94,7 +94,7 @@ namespace Bot.App.Telas
                 case EnumTelaPrincipalControls.MATERIASNOTASFALTAS:
                     return new MateriasNotasFaltasControl(estudante.Id);
                 case EnumTelaPrincipalControls.PREFERENCIAS:
-                    return new PreferenciasControl();
+                    return new PreferenciasControl(estudante.Id);
                 case EnumTelaPrincipalControls.HOME:
                     return this.homeControl;
                 default:
