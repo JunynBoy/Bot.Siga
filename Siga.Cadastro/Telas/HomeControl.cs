@@ -99,7 +99,6 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
                     this.lblUltimaModificacaoTitle.Visible = true;
                     this.lblUltimaModificacao.Visible = true;
                     this.lblUltimaModificacao.Text = materiaMaisAtualizada.Value.ToString("dd/MM HH:mm");
-                    WriteToConsoleOutput("Matéria mais recentemente atualizada em: " + materiaMaisAtualizada.Value.ToString("dd/MM/yyyy HH:mm:ss"));
                 }
             }
         }

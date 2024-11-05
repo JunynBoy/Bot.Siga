@@ -71,7 +71,6 @@ namespace Bot.Siga
 
         public bool ValidarLoginSiga(Estudante estudante,bool headless = true)
         {
-
             if (estudante != null)
             {
                 this.CreateChromeWithDriverManager(headless);
@@ -101,8 +100,10 @@ namespace Bot.Siga
 
             try
             {
-                if (!this.FazerLogin(estudante))
-                    throw new Exception("O não foi validado no siga corretamente! Usuário ou senha podem estar incorretos");
+
+                bool logado = this.FazerLogin(estudante);
+                if (!logado)
+                  throw new Exception("Não foi possível efetuar o login corretamente ");
 
                 this.Aguardar(2);
 
@@ -174,20 +175,14 @@ namespace Bot.Siga
 
             if (this.VerificarElementoPresente(xpathInternalServerError))
             {
-                Log(
-                    $"Sistema do SIGA se encontra fora do ar no momento, tente novamente mais tarde",
-                    "Fechando o programa..."
-                    );
-                return false;
+                throw new Exception ("Sistema do SIGA se encontra fora do ar no momento, tente novamente mais tarde");
             }
 
 
             if (this.VerificarElementoPresente(xpathLoginInvalido))
             {
                 this.statusAtualDoBot = _driver!.FindElement(By.XPath(xpathLoginInvalido)).Text;
-                Log(
-                    $"ERRO: {statusAtualDoBot}",
-                    "Fechando o programa...");
+                Log($"ERRO: {statusAtualDoBot}");
                 return false;
             }
 
