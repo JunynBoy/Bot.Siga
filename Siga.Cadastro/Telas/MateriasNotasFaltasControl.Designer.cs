@@ -166,7 +166,7 @@
             btnEncerrarCiclo.Name = "btnEncerrarCiclo";
             btnEncerrarCiclo.Size = new Size(100, 29);
             btnEncerrarCiclo.TabIndex = 47;
-            btnEncerrarCiclo.Text = "Encerrar Ciclo";
+            btnEncerrarCiclo.Text = "Limpar Dados";
             btnEncerrarCiclo.TextColor = Color.White;
             btnEncerrarCiclo.UseVisualStyleBackColor = false;
             btnEncerrarCiclo.Click += btnEncerrarCiclo_Click;

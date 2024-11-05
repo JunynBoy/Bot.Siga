@@ -29,8 +29,19 @@ namespace Siga.Cadastro
         public TelaLogin()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             this._loadingService = new LoadingService();
             this._estudanteService =  new EstudanteService();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                this.btnEntrar.PerformClick(); 
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

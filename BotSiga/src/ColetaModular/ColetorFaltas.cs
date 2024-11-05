@@ -25,19 +25,18 @@ namespace Bot.Siga.src.ColetaModular
         {
             Log( "Iniciando Coleta de Faltas...");
 
-                try
+            try
+            {
+                this.ClicarBotaoFaltas();
+
+                List<Materia> materias = this._materiaService.GetByEstudanteId(estudante.Id);
+                if (materias.IsNullOrEmpty())
                 {
-
-                    this.ClicarBotaoFaltas();
-
-                    List<Materia> materias = this._materiaService.GetByEstudanteId(estudante.Id);
-                    if (materias.IsNullOrEmpty())
-                    {
-                        materias = new List<Materia>();
-                    }
+                    materias = new List<Materia>();
+                }
 
 
-                    ReadOnlyCollection<IWebElement> linhasElement = _driver.FindElements(By.XPath("//tr[contains(@id,'Grid1ContainerRow_')]"));
+                ReadOnlyCollection<IWebElement> linhasElement = _driver.FindElements(By.XPath("//tr[contains(@id,'Grid1ContainerRow_')]"));
 
 
                 foreach (IWebElement linha in linhasElement)

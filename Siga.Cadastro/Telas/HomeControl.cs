@@ -102,10 +102,6 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
                     WriteToConsoleOutput("Matéria mais recentemente atualizada em: " + materiaMaisAtualizada.Value.ToString("dd/MM/yyyy HH:mm:ss"));
                 }
             }
-            else
-            {
-                WriteToConsoleOutput("Nenhuma matéria encontrada para o estudante. Ative a busca por matérias");
-            }
         }
 
         private void btnStart_Click(object sender, EventArgs e)

@@ -14,7 +14,6 @@ namespace Bot.Siga.src.ColetaModular
     {
         private string? _homeUrl;
         private MateriaService _materiaService;
-        private WhatsapMessageHttpService _messageService;
 
 
         public ColetorMaterias()

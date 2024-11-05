@@ -111,8 +111,9 @@ namespace Bot.Siga
                 foreach (EnumTipoDeExecucao tipoExecucao in TiposExecucao)
                 {
                     var rotina =  this._estrategiaColeta!.ObterEstrategia(tipoExecucao);
+                    Log($"Coletando {this.GetTipoExecucaoLabel(tipoExecucao)}!");
                     rotina.ColetarDados(estudante);
-                    Log("Coleta Finalizada!");
+                    Log($"Coleta de {this.GetTipoExecucaoLabel(tipoExecucao)} Finalizada!");
                 }
 
                 this.FecharNavegador();
@@ -125,10 +126,32 @@ namespace Bot.Siga
             }
         }
 
+        private string GetTipoExecucaoLabel(EnumTipoDeExecucao tipoExecucao)
+        {
+            string label = "Desconhecido..";
+            if (tipoExecucao == EnumTipoDeExecucao.COLETAR_FALTA)
+            {
+                label = "Faltas";
+            }
+
+            if (tipoExecucao == EnumTipoDeExecucao.COLETAR_NOTA)
+            {
+                label = "Notas";
+            }
+
+            if (tipoExecucao == EnumTipoDeExecucao.COLETAR_MATERIA)
+            {
+                label = "Matérias";
+            }
+
+            return label;
+        }
+
         private bool FazerLogin(Estudante estudante)
         {
             string xpathConfirmarLogin = "//input [@value='Confirmar']";
             string xpathLoginInvalido = "//span[@class='ReadonlyAttribute']/text";
+            string xpathInternalServerError = "//h1[contains(text(), 'Server Error')]";
             string xpathPopUp = "//div[@class='PopupBorder' and contains(@style, 'visibility: visible')]";
             string xpathFecharPopUp = "//span[@class='PopupHeaderButton']";
 
@@ -148,6 +171,15 @@ namespace Bot.Siga
             Confirmar.Click();
 
             this.Aguardar(3);
+
+            if (this.VerificarElementoPresente(xpathInternalServerError))
+            {
+                Log(
+                    $"Sistema do SIGA se encontra fora do ar no momento, tente novamente mais tarde",
+                    "Fechando o programa..."
+                    );
+                return false;
+            }
 
 
             if (this.VerificarElementoPresente(xpathLoginInvalido))

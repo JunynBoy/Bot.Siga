@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,16 +16,26 @@ namespace Bot.App.Controls
 {
     public partial class MateriasNotasFaltasControl : UserControl
     {
+        private Estudante? _estudante;
+        private List<Materia>? _materias;
+        private List<Materia> _materiasCompletaAux;
 
         private DataTableMateriasNotasFaltas _dataTable;
         private MateriaService _materiaService;
-        private List<Materia> _materias;
-        private List<Materia> _materiasCompletaAux;
+        private EstudanteService _estudanteService;
+     
         public MateriasNotasFaltasControl(int estudanteId)
         {
             InitializeComponent();
+
             this._materiaService = new MateriaService();
-            this._materiasCompletaAux = this._materiaService.GetByEstudanteId(estudanteId);
+            this._estudanteService = new EstudanteService();
+
+            this._estudante = this._estudanteService.GetById(estudanteId);
+
+            this.UpdateLblCiclo();
+
+            this._materiasCompletaAux = this._materiaService.GetByEstudanteId(estudanteId)!;
             if (_materiasCompletaAux != null)
             {
                 this._materias = new List<Materia>(this._materiasCompletaAux); ;
@@ -37,6 +48,18 @@ namespace Bot.App.Controls
             this._dataTable = new DataTableMateriasNotasFaltas();
 
             this.UpdateDados();
+        }
+
+        private void UpdateLblCiclo()
+        {
+            if (this._estudante != null)
+            {
+                this.lblCiclo.Text = $"Ciclo {this._estudante.Ciclo}";
+            }
+            else
+            {
+                this.lblCiclo.Text = $"Ciclo ??";
+            }
         }
 
         private void UpdateDados()
@@ -89,6 +112,12 @@ namespace Bot.App.Controls
 
         private void updateTable()
         {
+
+            dgvMateriasNotasFaltas.RowHeadersVisible = false;
+            dgvMateriasNotasFaltas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMateriasNotasFaltas.MultiSelect = false;
+            dgvMateriasNotasFaltas.AllowUserToAddRows = false;
+
             dgvMateriasNotasFaltas.Columns[0].Visible = false; 
 
             dgvMateriasNotasFaltas.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -120,6 +149,30 @@ namespace Bot.App.Controls
 
         private void btnEncerrarCiclo_Click(object sender, EventArgs e)
         {
+            if (this._materias != null)
+            {
+                DialogResult resultado = CustomMessageBox.CustomMessageBox.Show("Tem certeza que deseja limpar todas as matérias?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    foreach (Materia materia in this._materias)
+                    {
+                        try
+                        {
+                            this._materiaService.Remove(materia);
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomMessageBox.CustomMessageBox.Show($"Não foi possível deletar a matéria '{materia.Codigo}': {ex.Message}", "Erro ao Deletar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    CustomMessageBox.CustomMessageBox.Show("Processo de encerramento do ciclo concluído.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this._materias = null;
+                    this.UpdateDados();
+                }
+            }
+            else{
+                CustomMessageBox.CustomMessageBox.Show($"Você ainda não possui nenhuma matéri cadastrada.\nExperimente buscar por novas matérias na tela principal.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
     }

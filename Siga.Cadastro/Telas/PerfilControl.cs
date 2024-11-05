@@ -91,8 +91,8 @@ namespace Bot.App.Controls
             this.lblMaximo.Text = this.GetLabelValue(estudante.Maximo);
             this.lblRA.Text = this.GetLabelValue(estudante.Ra);
             this.lblCiclo.Text = this.GetLabelValue(estudante.Ciclo);
-            this.lblPercentualProgressao.Text = this.GetLabelValue(estudante.PP!.Replace("%"," %").Trim() ?? "0 %");
-            this.lblPercentualRendimento.Text = $"{this.GetLabelValue(estudante.PR!.Replace("%", " %").Trim() ?? "?")}/10";
+            this.lblPercentualProgressao.Text = this.GetLabelValue(estudante.PP?.Replace("%"," %").Trim() ?? "0 %");
+            this.lblPercentualRendimento.Text = $"{this.GetLabelValue(estudante.PR?.Replace("%", " %").Trim() ?? "?")}/10";
         }
 
         private void ConfigurarBarraPorcentagem()

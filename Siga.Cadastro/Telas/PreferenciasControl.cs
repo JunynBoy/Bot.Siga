@@ -51,10 +51,17 @@ namespace Bot.App.Controls
             }
 
             this.ConfigurarCrud(true);
-            this.UpdateDGVMessage();
+            this.UpdateDGVValues();
+            this.UpdateUserLabels();
         }
 
-        public void UpdateDGVMessage()
+        public void UpdateUserLabels()
+        {
+            this.lblEstudanteEmail.Text = this._estudante?.Preferencia?.Email ?? "Não definido";
+            this.lblEstudanteWhatsapp.Text = this._estudante?.Preferencia?.Whatsapp ?? "Não definido";
+        }
+
+        public void UpdateDGVValues()
         {
             if (this._mensagens != null && this._mensagens.Count > 0)
             {
@@ -84,7 +91,7 @@ namespace Bot.App.Controls
                 this.rtxtMensagemCustomizada.Visible = false;
                 this.lblMensagemTitle.Visible = false;
 
-                this.txtmWhatsapp.Texts = this._preferencia?.Whatsapp ?? ""; //meu input está assim 14 98102-2302, e o masked Text box naao está sendo preenchido por algum motivo só aparece o 13 
+                this.txtmWhatsapp.Texts = this._preferencia?.Whatsapp ?? "";
                 this.txtEmail.Texts = this._preferencia?.Email ?? "";
                 this.tbAtualizarPorEmail.Checked = this._preferencia?.IsAtualizarPorEmail ?? false;
                 this.tbAtualizarPorWhatsapp.Checked = this._preferencia?.IsAtualizarPorWhatsapp ?? false;
@@ -100,7 +107,8 @@ namespace Bot.App.Controls
                 this.lblMensagemTitle.Visible = true;
 
                 this.txtmWhatsapp.Texts = this._mensagemSelecionada?.Whatsapp ?? "";
-                this.txtmWhatsapp.Texts = this._mensagemSelecionada?.Email ?? "";
+                this.txtEmail.Texts = this._mensagemSelecionada?.Email ?? "";
+                this.txtNome.Texts = this._mensagemSelecionada?.Nome ?? "";
                 this.tbAtualizarPorEmail.Checked = this._mensagemSelecionada?.IsAtualizarPorEmail ?? false;
                 this.tbAtualizarPorWhatsapp.Checked = this._mensagemSelecionada?.IsAtualizarPorWhatsapp ?? false;
                 this.rtxtMensagemCustomizada.Text = this._mensagemSelecionada?.Texto ?? "Olá tudo bem? minhas notas no siga foram atualizadas, dê uma conferida se foi atualizada para você também!";
@@ -110,15 +118,16 @@ namespace Bot.App.Controls
 
         private void UpdateTable()
         {
+
+            dgvMensagens.RowHeadersVisible = false;
+            dgvMensagens.SelectionMode = DataGridViewSelectionMode.FullRowSelect; 
+            dgvMensagens.MultiSelect = false;
+
             dgvMensagens.Columns[0].Visible = false;
-
-            dgvMensagens.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvMensagens.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvMensagens.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
+            dgvMensagens.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvMensagens.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgvMensagens.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgvMensagens.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dgvMensagens.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             dgvMensagens.Refresh();
         }
@@ -152,7 +161,8 @@ namespace Bot.App.Controls
                     {
                         this._estudante.Preferencia = preferencia;
                         this._estudanteService.Save(this._estudante);
-                        CustomMessageBox.CustomMessageBox.Show("Preferência salva com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CustomMessageBox.CustomMessageBox.Show("Preferência  com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.UpdateUserLabels();
                     }
                 }
                 catch (Exception ex)
@@ -177,25 +187,25 @@ namespace Bot.App.Controls
                 {
                     if (_preferencia != null)
                     {
-                        var mensagem = new Mensagem
-                        {
-                            Nome = this.txtNome.Texts,
-                            Email = this.txtEmail.Texts,
-                            Whatsapp = this.txtmWhatsapp.Texts,
-                            IsAtualizarPorEmail = this.tbAtualizarPorEmail.Checked,
-                            IsAtualizarPorWhatsapp = this.tbAtualizarPorWhatsapp.Checked,
-                            Texto = this.rtxtMensagemCustomizada.Text,
-                            PreferenciaId = this._preferencia.Id
-                        };
+                        Mensagem mensagem = new Mensagem();
+                        if (this._mensagemSelecionada != null)
+                            mensagem = this._mensagemSelecionada;
+
+                        mensagem.Nome = this.txtNome.Texts;
+                        mensagem.Email = this.txtEmail.Texts;
+                        mensagem.Whatsapp = this.txtmWhatsapp.Texts;
+                        mensagem.IsAtualizarPorEmail = this.tbAtualizarPorEmail.Checked;
+                        mensagem.IsAtualizarPorWhatsapp = this.tbAtualizarPorWhatsapp.Checked;
+                        mensagem.Texto = this.rtxtMensagemCustomizada.Text;
+                        mensagem.PreferenciaId = this._preferencia.Id;
 
                         this._mensagemService.Save(mensagem);
-                        MessageBox.Show("Mensagem salva com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this._mensagens?.Add(mensagem);
-                        UpdateDGVMessage();
+                        CustomMessageBox.CustomMessageBox.Show("Mensagem salva com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UpdateScreenAfterSaveMensagem(mensagem);
                     }
                     else
                     {
-                        MessageBox.Show("É necessário configurar a sua preferencia antes de salvar uma mensagem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        CustomMessageBox.CustomMessageBox.Show("É necessário configurar a sua preferencia antes de salvar uma mensagem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 catch (Exception ex)
@@ -203,6 +213,24 @@ namespace Bot.App.Controls
                     CustomMessageBox.CustomMessageBox.Show($"Um erro inesperado aconteceu e não foi possível salvar a mensagem\n Mensagem:{ex.Message}", "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void UpdateScreenAfterSaveMensagem(Mensagem mensagem)
+        {
+            this._mensagemSelecionada = null;
+
+            var mensagemExistente = this._mensagens?.FirstOrDefault(m => m.Id == mensagem.Id);
+            if (mensagemExistente != null && this._mensagens != null)
+            {
+                int index = this._mensagens.IndexOf(mensagemExistente);
+                this._mensagens[index] = mensagem;
+            }
+            else
+            {
+                this._mensagens?.Add(mensagem);
+            }
+            UpdateDGVValues();
+            ConfigurarCrud(true);
         }
 
         public List<string> IsPreferenciaValid()
@@ -265,19 +293,22 @@ namespace Bot.App.Controls
             }
         }
 
-        private void btnAdicionarMensagem_Click(object sender, EventArgs e)
+
+        private void btnAdicionarMensagem_Click_1(object sender, EventArgs e)
         {
             this._mensagemSelecionada = null;
             this.ConfigurarCrud(false);
         }
 
-        private void btnEditarMensagem_Click(object sender, EventArgs e)
+        private void btnEditarMensagem_Click_1(object sender, EventArgs e)
         {
             if (this.dgvMensagens != null && this.dgvMensagens.SelectedRows.Count > 0)
             {
                 var linhaSelecionada = this.dgvMensagens.SelectedRows[0];
+                int idSelecionado = Convert.ToInt32(linhaSelecionada.Cells[0].Value);
+                Mensagem? mensagemSelecionada = this._mensagens!.FirstOrDefault(mm => mm.Id == idSelecionado);
 
-                if (linhaSelecionada.DataBoundItem is Mensagem mensagemSelecionada)
+                if (mensagemSelecionada != null)
                 {
                     this._mensagemSelecionada = mensagemSelecionada;
                     ConfigurarCrud(false);
@@ -293,21 +324,35 @@ namespace Bot.App.Controls
             }
         }
 
-        private void btnExcluirMensagem_Click(object sender, EventArgs e)
+        private void btnExcluirMensagem_Click_1(object sender, EventArgs e)
         {
-            if (this._mensagemSelecionada != null)
+            if (this.dgvMensagens != null && this.dgvMensagens.SelectedRows.Count > 0)
             {
-                DialogResult resultado = CustomMessageBox.CustomMessageBox.Show("Tem certeza que deseja excluir esta mensagem?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (resultado == DialogResult.Yes)
+                var linhaSelecionada = this.dgvMensagens.SelectedRows[0];
+                int idSelecionado = Convert.ToInt32(linhaSelecionada.Cells[0].Value);
+                Mensagem? mensagemSelecionada = this._mensagens!.FirstOrDefault(mm => mm.Id == idSelecionado);
+                if (mensagemSelecionada != null && this._mensagens != null)
                 {
-                    this._mensagemService.Remove(this._mensagemSelecionada);
+                    DialogResult resultado = CustomMessageBox.CustomMessageBox.Show("Tem certeza que deseja excluir esta mensagem?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    this._mensagens!.Remove(this._mensagemSelecionada);
-                    this.UpdateTable();
+                    if (resultado == DialogResult.Yes)
+                    {
+                        this._mensagemService.Remove(mensagemSelecionada);
 
-                    this._mensagemSelecionada = null;
-                    CustomMessageBox.CustomMessageBox.Show("Mensagem excluída com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var mensagemParaRemover = this._mensagens!.FirstOrDefault(m => m.Id == mensagemSelecionada.Id);
+                        if (mensagemParaRemover != null)
+                        {
+                            this._mensagens.Remove(mensagemParaRemover);
+                        }
+                        this.UpdateDGVValues();
+                        this.UpdateTable();
+                        this._mensagemSelecionada = null;
+                        CustomMessageBox.CustomMessageBox.Show("Mensagem excluída com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    CustomMessageBox.CustomMessageBox.Show("Nenhuma mensagem selecionada. Selecione uma mensagem para excluir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
@@ -316,5 +361,26 @@ namespace Bot.App.Controls
             }
         }
 
+        private void btnEditarUsuario_Click(object sender, EventArgs e)
+        {
+            this._mensagemSelecionada = null;
+            this.ConfigurarCrud(true);
+        }
+
+        private void dgvMensagens_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.dgvMensagens != null && this.dgvMensagens.SelectedRows.Count > 0)
+            {
+                var linhaSelecionada = this.dgvMensagens.SelectedRows[0]; 
+                int idSelecionado = Convert.ToInt32(linhaSelecionada.Cells[0].Value);
+                Mensagem? mensagemSelecionada = this._mensagens!.FirstOrDefault(mm => mm.Id == idSelecionado);
+
+                if (mensagemSelecionada != null)
+                {
+                    this._mensagemSelecionada = mensagemSelecionada;
+                    ConfigurarCrud(false);
+                }
+            }
+        }
     }
 }

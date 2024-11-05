@@ -18,10 +18,8 @@ namespace Bot.App.DataTables
         {
             Columns.Add("Id", typeof(int));
             Columns.Add("Nome", typeof(string));
-            Columns.Add("Email", typeof(string));
-            Columns.Add("Whatsapp", typeof(string));
-            Columns.Add("Atualizar por Email", typeof(bool));
-            Columns.Add("Atualizar por Whatsapp", typeof(bool));
+            Columns.Add("Atualizar por Email", typeof(string));
+            Columns.Add("Atualizar por Whatsapp", typeof(string));
             Columns.Add("Texto", typeof(string));
 
             foreach (DataColumn column in Columns)
@@ -54,10 +52,8 @@ namespace Bot.App.DataTables
                     Rows.Add(new object[] {
                         item.Id,
                         item.Nome ?? "-",
-                        item.Email ?? "-",
-                        item.Whatsapp ?? "-",
-                        item.IsAtualizarPorEmail,
-                        item.IsAtualizarPorWhatsapp,
+                        item.IsAtualizarPorEmail == true ? "Sim" : "Não", 
+                        item.IsAtualizarPorWhatsapp == true ? "Sim" : "Não",
                         item.Texto ?? "-",
                     });
                 }

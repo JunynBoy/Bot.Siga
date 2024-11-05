@@ -39,14 +39,14 @@
             btnExcluirMensagem = new CustomButton();
             panel3 = new Panel();
             panelPerfilConfigurado = new Panel();
-            label4 = new Label();
+            lblEstudanteEmail = new Label();
             pcbUser = new PictureBox();
-            label8 = new Label();
-            label9 = new Label();
+            lblEstudanteWhatsapp = new Label();
+            lblEstudanteWhatsappTitle = new Label();
             panelSubHeaderSuasPreferencias = new Panel();
             btnEditarUsuario = new CustomButton();
             lblSuasPreferenciasTitle = new Label();
-            label5 = new Label();
+            lblEstudanteEmailTitle = new Label();
             label2 = new Label();
             label3 = new Label();
             label1 = new Label();
@@ -110,13 +110,20 @@
             // 
             // dgvMensagens
             // 
+            dgvMensagens.AllowUserToAddRows = false;
+            dgvMensagens.AllowUserToDeleteRows = false;
+            dgvMensagens.AllowUserToResizeColumns = false;
+            dgvMensagens.BorderStyle = BorderStyle.None;
             dgvMensagens.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvMensagens.Dock = DockStyle.Fill;
             dgvMensagens.Location = new Point(0, 162);
+            dgvMensagens.MultiSelect = false;
             dgvMensagens.Name = "dgvMensagens";
             dgvMensagens.RowTemplate.Height = 25;
+            dgvMensagens.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMensagens.Size = new Size(368, 227);
             dgvMensagens.TabIndex = 5;
+            dgvMensagens.MouseDoubleClick += dgvMensagens_MouseDoubleClick;
             // 
             // panelHeaderMensagem
             // 
@@ -159,6 +166,7 @@
             btnAdicionarMensagem.TabIndex = 70;
             btnAdicionarMensagem.TextColor = Color.White;
             btnAdicionarMensagem.UseVisualStyleBackColor = false;
+            btnAdicionarMensagem.Click += btnAdicionarMensagem_Click_1;
             // 
             // btnEditarMensagem
             // 
@@ -177,6 +185,7 @@
             btnEditarMensagem.TabIndex = 69;
             btnEditarMensagem.TextColor = Color.White;
             btnEditarMensagem.UseVisualStyleBackColor = false;
+            btnEditarMensagem.Click += btnEditarMensagem_Click_1;
             // 
             // btnExcluirMensagem
             // 
@@ -195,6 +204,7 @@
             btnExcluirMensagem.TabIndex = 68;
             btnExcluirMensagem.TextColor = Color.White;
             btnExcluirMensagem.UseVisualStyleBackColor = false;
+            btnExcluirMensagem.Click += btnExcluirMensagem_Click_1;
             // 
             // panel3
             // 
@@ -211,29 +221,29 @@
             // panelPerfilConfigurado
             // 
             panelPerfilConfigurado.BackColor = Color.White;
-            panelPerfilConfigurado.Controls.Add(label4);
+            panelPerfilConfigurado.Controls.Add(lblEstudanteEmail);
             panelPerfilConfigurado.Controls.Add(pcbUser);
-            panelPerfilConfigurado.Controls.Add(label8);
-            panelPerfilConfigurado.Controls.Add(label9);
+            panelPerfilConfigurado.Controls.Add(lblEstudanteWhatsapp);
+            panelPerfilConfigurado.Controls.Add(lblEstudanteWhatsappTitle);
             panelPerfilConfigurado.Controls.Add(panelSubHeaderSuasPreferencias);
-            panelPerfilConfigurado.Controls.Add(label5);
+            panelPerfilConfigurado.Controls.Add(lblEstudanteEmailTitle);
             panelPerfilConfigurado.Dock = DockStyle.Top;
             panelPerfilConfigurado.Location = new Point(0, 0);
             panelPerfilConfigurado.Name = "panelPerfilConfigurado";
             panelPerfilConfigurado.Size = new Size(368, 121);
             panelPerfilConfigurado.TabIndex = 67;
             // 
-            // label4
+            // lblEstudanteEmail
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.FromArgb(30, 39, 44);
-            label4.Location = new Point(109, 61);
-            label4.Name = "label4";
-            label4.Size = new Size(187, 15);
-            label4.TabIndex = 66;
-            label4.Text = "marcos.gaparini@fatec.sp.gov.br";
-            label4.TextAlign = ContentAlignment.TopRight;
+            lblEstudanteEmail.AutoSize = true;
+            lblEstudanteEmail.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEstudanteEmail.ForeColor = Color.FromArgb(30, 39, 44);
+            lblEstudanteEmail.Location = new Point(109, 61);
+            lblEstudanteEmail.Name = "lblEstudanteEmail";
+            lblEstudanteEmail.Size = new Size(187, 15);
+            lblEstudanteEmail.TabIndex = 66;
+            lblEstudanteEmail.Text = "marcos.gaparini@fatec.sp.gov.br";
+            lblEstudanteEmail.TextAlign = ContentAlignment.TopRight;
             // 
             // pcbUser
             // 
@@ -246,27 +256,27 @@
             pcbUser.TabIndex = 67;
             pcbUser.TabStop = false;
             // 
-            // label8
+            // lblEstudanteWhatsapp
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.ForeColor = Color.FromArgb(30, 39, 44);
-            label8.Location = new Point(109, 100);
-            label8.Name = "label8";
-            label8.Size = new Size(93, 15);
-            label8.TabIndex = 66;
-            label8.Text = "(00) 0000-0000";
-            label8.TextAlign = ContentAlignment.TopRight;
+            lblEstudanteWhatsapp.AutoSize = true;
+            lblEstudanteWhatsapp.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEstudanteWhatsapp.ForeColor = Color.FromArgb(30, 39, 44);
+            lblEstudanteWhatsapp.Location = new Point(109, 100);
+            lblEstudanteWhatsapp.Name = "lblEstudanteWhatsapp";
+            lblEstudanteWhatsapp.Size = new Size(93, 15);
+            lblEstudanteWhatsapp.TabIndex = 66;
+            lblEstudanteWhatsapp.Text = "(00) 0000-0000";
+            lblEstudanteWhatsapp.TextAlign = ContentAlignment.TopRight;
             // 
-            // label9
+            // lblEstudanteWhatsappTitle
             // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.Location = new Point(109, 81);
-            label9.Name = "label9";
-            label9.Size = new Size(72, 19);
-            label9.TabIndex = 65;
-            label9.Text = "Whatsapp";
+            lblEstudanteWhatsappTitle.AutoSize = true;
+            lblEstudanteWhatsappTitle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEstudanteWhatsappTitle.Location = new Point(109, 81);
+            lblEstudanteWhatsappTitle.Name = "lblEstudanteWhatsappTitle";
+            lblEstudanteWhatsappTitle.Size = new Size(72, 19);
+            lblEstudanteWhatsappTitle.TabIndex = 65;
+            lblEstudanteWhatsappTitle.Text = "Whatsapp";
             // 
             // panelSubHeaderSuasPreferencias
             // 
@@ -296,6 +306,7 @@
             btnEditarUsuario.TabIndex = 68;
             btnEditarUsuario.TextColor = Color.White;
             btnEditarUsuario.UseVisualStyleBackColor = false;
+            btnEditarUsuario.Click += btnEditarUsuario_Click;
             // 
             // lblSuasPreferenciasTitle
             // 
@@ -309,15 +320,15 @@
             lblSuasPreferenciasTitle.TabIndex = 62;
             lblSuasPreferenciasTitle.Text = "Suas preferencias";
             // 
-            // label5
+            // lblEstudanteEmailTitle
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(109, 42);
-            label5.Name = "label5";
-            label5.Size = new Size(49, 19);
-            label5.TabIndex = 65;
-            label5.Text = "E-mail";
+            lblEstudanteEmailTitle.AutoSize = true;
+            lblEstudanteEmailTitle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEstudanteEmailTitle.Location = new Point(109, 42);
+            lblEstudanteEmailTitle.Name = "lblEstudanteEmailTitle";
+            lblEstudanteEmailTitle.Size = new Size(49, 19);
+            lblEstudanteEmailTitle.TabIndex = 65;
+            lblEstudanteEmailTitle.Text = "E-mail";
             // 
             // label2
             // 
@@ -373,11 +384,10 @@
             panelCRUD.Controls.Add(pcbWhatsapp);
             panelCRUD.Controls.Add(lblWhatsapp);
             panelCRUD.Controls.Add(lblEmail);
-            panelCRUD.Dock = DockStyle.Fill;
             panelCRUD.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            panelCRUD.Location = new Point(368, 0);
+            panelCRUD.Location = new Point(374, 0);
             panelCRUD.Name = "panelCRUD";
-            panelCRUD.Size = new Size(432, 389);
+            panelCRUD.Size = new Size(426, 389);
             panelCRUD.TabIndex = 70;
             // 
             // txtNome
@@ -388,7 +398,7 @@
             txtNome.BorderSize = 1;
             txtNome.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtNome.ForeColor = Color.DimGray;
-            txtNome.Location = new Point(83, 65);
+            txtNome.Location = new Point(77, 73);
             txtNome.Margin = new Padding(4);
             txtNome.Multiline = false;
             txtNome.Name = "txtNome";
@@ -402,7 +412,7 @@
             // pcbNome
             // 
             pcbNome.Image = (Image)resources.GetObject("pcbNome.Image");
-            pcbNome.Location = new Point(51, 69);
+            pcbNome.Location = new Point(45, 77);
             pcbNome.Name = "pcbNome";
             pcbNome.Size = new Size(25, 25);
             pcbNome.TabIndex = 75;
@@ -412,7 +422,7 @@
             // 
             lblNome.AutoSize = true;
             lblNome.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblNome.Location = new Point(83, 42);
+            lblNome.Location = new Point(77, 50);
             lblNome.Name = "lblNome";
             lblNome.Size = new Size(47, 19);
             lblNome.TabIndex = 73;
@@ -429,7 +439,7 @@
             btnSalvarAtualizar.FlatStyle = FlatStyle.Flat;
             btnSalvarAtualizar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSalvarAtualizar.ForeColor = Color.White;
-            btnSalvarAtualizar.Location = new Point(262, 363);
+            btnSalvarAtualizar.Location = new Point(256, 361);
             btnSalvarAtualizar.Name = "btnSalvarAtualizar";
             btnSalvarAtualizar.Size = new Size(121, 23);
             btnSalvarAtualizar.TabIndex = 72;
@@ -442,7 +452,7 @@
             // 
             lblMensagemTitle.AutoSize = true;
             lblMensagemTitle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblMensagemTitle.Location = new Point(50, 270);
+            lblMensagemTitle.Location = new Point(44, 268);
             lblMensagemTitle.Name = "lblMensagemTitle";
             lblMensagemTitle.Size = new Size(162, 19);
             lblMensagemTitle.TabIndex = 70;
@@ -452,7 +462,7 @@
             // 
             rtxtMensagemCustomizada.BorderStyle = BorderStyle.FixedSingle;
             rtxtMensagemCustomizada.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            rtxtMensagemCustomizada.Location = new Point(51, 292);
+            rtxtMensagemCustomizada.Location = new Point(45, 290);
             rtxtMensagemCustomizada.Name = "rtxtMensagemCustomizada";
             rtxtMensagemCustomizada.Size = new Size(332, 65);
             rtxtMensagemCustomizada.TabIndex = 69;
@@ -463,7 +473,7 @@
             lblAtualizarPorEmail.AutoSize = true;
             lblAtualizarPorEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblAtualizarPorEmail.ForeColor = Color.FromArgb(30, 39, 44);
-            lblAtualizarPorEmail.Location = new Point(101, 248);
+            lblAtualizarPorEmail.Location = new Point(95, 246);
             lblAtualizarPorEmail.Name = "lblAtualizarPorEmail";
             lblAtualizarPorEmail.Size = new Size(153, 17);
             lblAtualizarPorEmail.TabIndex = 0;
@@ -471,7 +481,7 @@
             // 
             // tbAtualizarPorEmail
             // 
-            tbAtualizarPorEmail.Location = new Point(50, 248);
+            tbAtualizarPorEmail.Location = new Point(44, 246);
             tbAtualizarPorEmail.MinimumSize = new Size(45, 22);
             tbAtualizarPorEmail.Name = "tbAtualizarPorEmail";
             tbAtualizarPorEmail.OffBackColor = Color.Gray;
@@ -487,7 +497,7 @@
             lblAtualizarPorWhatsapp.AutoSize = true;
             lblAtualizarPorWhatsapp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblAtualizarPorWhatsapp.ForeColor = Color.FromArgb(30, 39, 44);
-            lblAtualizarPorWhatsapp.Location = new Point(101, 220);
+            lblAtualizarPorWhatsapp.Location = new Point(95, 218);
             lblAtualizarPorWhatsapp.Name = "lblAtualizarPorWhatsapp";
             lblAtualizarPorWhatsapp.Size = new Size(176, 17);
             lblAtualizarPorWhatsapp.TabIndex = 0;
@@ -496,7 +506,7 @@
             // 
             // tbAtualizarPorWhatsapp
             // 
-            tbAtualizarPorWhatsapp.Location = new Point(50, 220);
+            tbAtualizarPorWhatsapp.Location = new Point(44, 218);
             tbAtualizarPorWhatsapp.MinimumSize = new Size(45, 22);
             tbAtualizarPorWhatsapp.Name = "tbAtualizarPorWhatsapp";
             tbAtualizarPorWhatsapp.OffBackColor = Color.Gray;
@@ -514,7 +524,7 @@
             panelSubHeaderPreferencias.Dock = DockStyle.Top;
             panelSubHeaderPreferencias.Location = new Point(0, 0);
             panelSubHeaderPreferencias.Name = "panelSubHeaderPreferencias";
-            panelSubHeaderPreferencias.Size = new Size(432, 41);
+            panelSubHeaderPreferencias.Size = new Size(426, 41);
             panelSubHeaderPreferencias.TabIndex = 42;
             // 
             // lblCRUDTitle
@@ -537,7 +547,7 @@
             txtmWhatsapp.BorderSize = 1;
             txtmWhatsapp.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtmWhatsapp.ForeColor = Color.DimGray;
-            txtmWhatsapp.Location = new Point(83, 128);
+            txtmWhatsapp.Location = new Point(77, 129);
             txtmWhatsapp.Margin = new Padding(4);
             txtmWhatsapp.Mask = "00 00000-0000";
             txtmWhatsapp.Multiline = false;
@@ -557,7 +567,7 @@
             txtEmail.BorderSize = 1;
             txtEmail.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             txtEmail.ForeColor = Color.DimGray;
-            txtEmail.Location = new Point(83, 187);
+            txtEmail.Location = new Point(77, 185);
             txtEmail.Margin = new Padding(4);
             txtEmail.Multiline = false;
             txtEmail.Name = "txtEmail";
@@ -571,7 +581,7 @@
             // pcbEmail
             // 
             pcbEmail.Image = (Image)resources.GetObject("pcbEmail.Image");
-            pcbEmail.Location = new Point(51, 191);
+            pcbEmail.Location = new Point(45, 189);
             pcbEmail.Name = "pcbEmail";
             pcbEmail.Size = new Size(25, 25);
             pcbEmail.TabIndex = 40;
@@ -580,7 +590,7 @@
             // pcbWhatsapp
             // 
             pcbWhatsapp.Image = (Image)resources.GetObject("pcbWhatsapp.Image");
-            pcbWhatsapp.Location = new Point(51, 132);
+            pcbWhatsapp.Location = new Point(45, 133);
             pcbWhatsapp.Name = "pcbWhatsapp";
             pcbWhatsapp.Size = new Size(25, 25);
             pcbWhatsapp.TabIndex = 40;
@@ -590,7 +600,7 @@
             // 
             lblWhatsapp.AutoSize = true;
             lblWhatsapp.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblWhatsapp.Location = new Point(83, 104);
+            lblWhatsapp.Location = new Point(77, 105);
             lblWhatsapp.Name = "lblWhatsapp";
             lblWhatsapp.Size = new Size(72, 19);
             lblWhatsapp.TabIndex = 0;
@@ -600,7 +610,7 @@
             // 
             lblEmail.AutoSize = true;
             lblEmail.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEmail.Location = new Point(83, 164);
+            lblEmail.Location = new Point(77, 162);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(49, 19);
             lblEmail.TabIndex = 0;
@@ -642,11 +652,11 @@
         private Panel panel3;
         private Label lblSuasPreferenciasTitle;
         private Panel panelPerfilConfigurado;
-        private Label label8;
-        private Label label4;
-        private Label label9;
+        private Label lblEstudanteWhatsapp;
+        private Label lblEstudanteEmail;
+        private Label lblEstudanteWhatsappTitle;
         private Panel panelSubHeaderSuasPreferencias;
-        private Label label5;
+        private Label lblEstudanteEmailTitle;
         private Label label2;
         private Label label3;
         private Label label1;

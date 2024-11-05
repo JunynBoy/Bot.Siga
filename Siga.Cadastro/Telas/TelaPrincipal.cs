@@ -23,6 +23,7 @@ namespace Bot.App.Telas
 
         public TelaPrincipal(Estudante estudante)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             this._loadingService = new LoadingService();
             this.estudante = estudante;
 
