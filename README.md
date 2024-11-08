@@ -1,4 +1,4 @@
-# Auto.Siga
+# Auto.Siga - TCC
 Essa ferramenta que construí foi estruturada para ser assunto TCC, e foi desenvolvido seguindo todas as boas práticas de programação que conheço, pretendo deixar público para quem quiser utilizar como base para construção de outras ferramentas, assim pode faze-lo
 
 AutoSIGA é uma aplicação que automatiza o processo de coleta de dados da plataforma SIGA (Sistema Integrado de Gestão Acadêmica) e notifica os usuários sobre atualizações relevantes, como notas e frequência. A solução foi criada para rodar localmente, proporcionando notificações proativas via WhatsApp e e-mail, sem a necessidade de consultar manualmente o SIGA.
