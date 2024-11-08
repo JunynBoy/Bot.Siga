@@ -318,7 +318,7 @@
             lblSuasPreferenciasTitle.Name = "lblSuasPreferenciasTitle";
             lblSuasPreferenciasTitle.Size = new Size(167, 25);
             lblSuasPreferenciasTitle.TabIndex = 62;
-            lblSuasPreferenciasTitle.Text = "Suas preferencias";
+            lblSuasPreferenciasTitle.Text = "Suas preferências";
             // 
             // lblEstudanteEmailTitle
             // 

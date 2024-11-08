@@ -129,11 +129,11 @@ namespace Siga.Cadastro
                             estudanteValidado = iniciadorColeta.ValidarLoginSiga(estudante, true);
                           
                             if (!estudanteValidado)
-                                throw new CustomException("Usuario ou senha inválidos, preencha seu login e senha e tente novamente");
+                                throw new CustomException("Usuário ou senha incorretos. Por favor, verifique se suas credenciais são as mesmas do SIGA e tente novamente.");
                         }
                         else if (estudante.Id == 0 && estudante.Autenticado == false && !estudante.Senha!.Equals(txtSenha.Texts.ToString()))
                         {
-                            throw new CustomException("Usuario ou senha inválidos, preencha seu login e senha e tente novamente");
+                            throw new CustomException("Usuário ou senha incorretos. Por favor, verifique se suas credenciais são as mesmas do SIGA e tente novamente.");
                         }
                         else
                         {

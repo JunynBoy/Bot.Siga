@@ -347,6 +347,7 @@ namespace Bot.App.Controls
                         this.UpdateDGVValues();
                         this.UpdateTable();
                         this._mensagemSelecionada = null;
+                        this.ConfigurarCrud(true);
                         CustomMessageBox.CustomMessageBox.Show("Mensagem excluída com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
