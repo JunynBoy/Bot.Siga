@@ -60,6 +60,9 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
             this.iniciadorColeta = new IniciadorColeta();
             this.loopingTime = 1;
             this.lblLoopingtime.Text = loopingTime + "m";
+            int fontSize = GetAdjustedFontSize();
+
+
 
             this.consoleOutput = new TextBox()
             {
@@ -69,7 +72,7 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
                 ScrollBars = ScrollBars.Vertical,
                 BackColor = Color.FromArgb(33, 33, 33),
                 ForeColor = Color.White,
-                Font = new Font("Consolas", 12, FontStyle.Regular)
+                Font = new Font("Consolas", fontSize, FontStyle.Regular) 
             };
 
             panelConsoleContainer.Controls.Add(consoleOutput);
@@ -78,6 +81,22 @@ Bem-vindo ao sistema de coleta de dados do siga automatizado
             iniciadorColeta.SetLogAction(WriteToConsoleOutput);
             this.DisplayAsciiArt();
             this.VerificarMateriaMaisRecente();
+        }
+
+        private int GetAdjustedFontSize()
+        {
+            using (Graphics graphics = this.CreateGraphics())
+            {
+                float dpiScale = graphics.DpiX / 96.0f; 
+                int scalePercentage = (int)(dpiScale * 100); 
+
+                int fontSize = 12; 
+                int scaleSteps = (scalePercentage - 100) / 25; 
+
+                fontSize = Math.Max(8, fontSize - scaleSteps);
+
+                return fontSize;
+            }
         }
 
         private void VerificarMateriaMaisRecente()
