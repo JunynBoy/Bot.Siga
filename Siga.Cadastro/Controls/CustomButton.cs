@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Bot.App.Controls
 {
     public class CustomButton : Button
     {
         private int borderSize = 0;
-        private int borderRadius = 0;
+        private float borderRadiusPercentage = 10; 
         private Color borderColor = Color.Gray;
 
         [Category("Custom Code Advance")]
@@ -26,12 +24,12 @@ namespace Bot.App.Controls
         }
 
         [Category("Custom Code Advance")]
-        public int BorderRadius
+        public float BorderRadiusPercentage
         {
-            get { return borderRadius; }
+            get { return borderRadiusPercentage; }
             set
             {
-                borderRadius = value;
+                borderRadiusPercentage = Math.Max(0, Math.Min(100, value)); // Limita entre 0 e 100
                 this.Invalidate();
             }
         }
@@ -71,9 +69,10 @@ namespace Bot.App.Controls
             this.Resize += new EventHandler(Button_Resize!);
         }
 
-        private GraphicsPath GetFigurePath(Rectangle rect, int radius)
+        private GraphicsPath GetFigurePath(Rectangle rect, float radiusPercentage)
         {
             GraphicsPath path = new GraphicsPath();
+            float radius = (Math.Min(rect.Width, rect.Height) * radiusPercentage) / 100; // Calcula o raio baseado na porcentagem
             float curveSize = radius * 2F;
 
             path.StartFigure();
@@ -89,17 +88,16 @@ namespace Bot.App.Controls
         {
             base.OnPaint(pevent);
 
-
             Rectangle rectSurface = this.ClientRectangle;
             Rectangle rectBorder = Rectangle.Inflate(rectSurface, -borderSize, -borderSize);
-            int smoothSize = 2;
-            if (borderSize > 0)
-                smoothSize = borderSize;
+            int smoothSize = borderSize > 0 ? borderSize : 2;
 
-            if (borderRadius > 2) 
+            float adjustedRadiusPercentage = BorderRadiusPercentage;
+
+            if (adjustedRadiusPercentage > 0)
             {
-                using (GraphicsPath pathSurface = GetFigurePath(rectSurface, borderRadius))
-                using (GraphicsPath pathBorder = GetFigurePath(rectBorder, borderRadius - borderSize))
+                using (GraphicsPath pathSurface = GetFigurePath(rectSurface, adjustedRadiusPercentage))
+                using (GraphicsPath pathBorder = GetFigurePath(rectBorder, adjustedRadiusPercentage))
                 using (Pen penSurface = new Pen(this.Parent.BackColor, smoothSize))
                 using (Pen penBorder = new Pen(borderColor, borderSize))
                 {
@@ -111,7 +109,7 @@ namespace Bot.App.Controls
                         pevent.Graphics.DrawPath(penBorder, pathBorder);
                 }
             }
-            else 
+            else
             {
                 pevent.Graphics.SmoothingMode = SmoothingMode.None;
 
@@ -127,6 +125,7 @@ namespace Bot.App.Controls
                 }
             }
         }
+
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
@@ -137,10 +136,10 @@ namespace Bot.App.Controls
         {
             this.Invalidate();
         }
+
         private void Button_Resize(object sender, EventArgs e)
         {
-            if (borderRadius > this.Height)
-                borderRadius = this.Height;
+            this.Invalidate();
         }
     }
 }

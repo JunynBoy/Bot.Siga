@@ -55,8 +55,9 @@
             panelHeader.Controls.Add(btnClose);
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
+            panelHeader.Margin = new Padding(3, 4, 3, 4);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(800, 35);
+            panelHeader.Size = new Size(914, 47);
             panelHeader.TabIndex = 35;
             panelHeader.MouseDown += panelHeader_MouseDown;
             // 
@@ -67,8 +68,9 @@
             pbxLogo.ImageLocation = "Center";
             pbxLogo.InitialImage = Properties.Resources.BotWhite25;
             pbxLogo.Location = new Point(0, 0);
+            pbxLogo.Margin = new Padding(3, 4, 3, 4);
             pbxLogo.Name = "pbxLogo";
-            pbxLogo.Size = new Size(41, 35);
+            pbxLogo.Size = new Size(47, 47);
             pbxLogo.SizeMode = PictureBoxSizeMode.CenterImage;
             pbxLogo.TabIndex = 36;
             pbxLogo.TabStop = false;
@@ -78,9 +80,9 @@
             lblNomeUsuario.AutoSize = true;
             lblNomeUsuario.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             lblNomeUsuario.ForeColor = Color.White;
-            lblNomeUsuario.Location = new Point(46, 10);
+            lblNomeUsuario.Location = new Point(53, 13);
             lblNomeUsuario.Name = "lblNomeUsuario";
-            lblNomeUsuario.Size = new Size(97, 19);
+            lblNomeUsuario.Size = new Size(118, 23);
             lblNomeUsuario.TabIndex = 35;
             lblNomeUsuario.Text = "Nome usuário";
             // 
@@ -93,9 +95,10 @@
             btnClose.FlatAppearance.MouseOverBackColor = Color.FromArgb(216, 0, 0);
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Image = (Image)resources.GetObject("btnClose.Image");
-            btnClose.Location = new Point(765, 0);
+            btnClose.Location = new Point(874, 0);
+            btnClose.Margin = new Padding(3, 4, 3, 4);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(35, 35);
+            btnClose.Size = new Size(40, 47);
             btnClose.TabIndex = 0;
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
@@ -115,9 +118,10 @@
             panelHeaderOptions.Controls.Add(btnPerfil);
             panelHeaderOptions.Controls.Add(btnHome);
             panelHeaderOptions.Dock = DockStyle.Top;
-            panelHeaderOptions.Location = new Point(0, 35);
+            panelHeaderOptions.Location = new Point(0, 47);
+            panelHeaderOptions.Margin = new Padding(3, 4, 3, 4);
             panelHeaderOptions.Name = "panelHeaderOptions";
-            panelHeaderOptions.Size = new Size(800, 26);
+            panelHeaderOptions.Size = new Size(914, 35);
             panelHeaderOptions.TabIndex = 36;
             // 
             // btnPreferencias
@@ -125,7 +129,7 @@
             btnPreferencias.BackColor = Color.FromArgb(176, 0, 0);
             btnPreferencias.BackgroundColor = Color.FromArgb(176, 0, 0);
             btnPreferencias.BorderColor = Color.Black;
-            btnPreferencias.BorderRadius = 0;
+            btnPreferencias.BorderRadiusPercentage = 0F;
             btnPreferencias.BorderSize = 0;
             btnPreferencias.Dock = DockStyle.Left;
             btnPreferencias.FlatAppearance.BorderSize = 0;
@@ -135,9 +139,10 @@
             btnPreferencias.FlatStyle = FlatStyle.Flat;
             btnPreferencias.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnPreferencias.ForeColor = Color.White;
-            btnPreferencias.Location = new Point(449, 0);
+            btnPreferencias.Location = new Point(514, 0);
+            btnPreferencias.Margin = new Padding(3, 4, 3, 4);
             btnPreferencias.Name = "btnPreferencias";
-            btnPreferencias.Size = new Size(169, 26);
+            btnPreferencias.Size = new Size(193, 35);
             btnPreferencias.TabIndex = 8;
             btnPreferencias.Text = "Preferências";
             btnPreferencias.TextColor = Color.White;
@@ -150,7 +155,7 @@
             btnMateriasNotas.BackColor = Color.FromArgb(176, 0, 0);
             btnMateriasNotas.BackgroundColor = Color.FromArgb(176, 0, 0);
             btnMateriasNotas.BorderColor = Color.Black;
-            btnMateriasNotas.BorderRadius = 0;
+            btnMateriasNotas.BorderRadiusPercentage = 0F;
             btnMateriasNotas.BorderSize = 0;
             btnMateriasNotas.Dock = DockStyle.Left;
             btnMateriasNotas.FlatAppearance.BorderSize = 0;
@@ -160,9 +165,10 @@
             btnMateriasNotas.FlatStyle = FlatStyle.Flat;
             btnMateriasNotas.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnMateriasNotas.ForeColor = Color.White;
-            btnMateriasNotas.Location = new Point(214, 0);
+            btnMateriasNotas.Location = new Point(245, 0);
+            btnMateriasNotas.Margin = new Padding(3, 4, 3, 4);
             btnMateriasNotas.Name = "btnMateriasNotas";
-            btnMateriasNotas.Size = new Size(235, 26);
+            btnMateriasNotas.Size = new Size(269, 35);
             btnMateriasNotas.TabIndex = 7;
             btnMateriasNotas.Text = "Materias / Notas / Faltas";
             btnMateriasNotas.TextColor = Color.White;
@@ -175,16 +181,17 @@
             btnSigaImage.BackgroundColor = Color.FromArgb(176, 0, 0);
             btnSigaImage.BackgroundImage = Properties.Resources.logosiga_124x26;
             btnSigaImage.BorderColor = Color.Black;
-            btnSigaImage.BorderRadius = 0;
+            btnSigaImage.BorderRadiusPercentage = 0F;
             btnSigaImage.BorderSize = 0;
             btnSigaImage.Dock = DockStyle.Right;
             btnSigaImage.FlatAppearance.BorderSize = 0;
             btnSigaImage.FlatStyle = FlatStyle.Flat;
             btnSigaImage.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSigaImage.ForeColor = Color.White;
-            btnSigaImage.Location = new Point(686, 0);
+            btnSigaImage.Location = new Point(784, 0);
+            btnSigaImage.Margin = new Padding(3, 4, 3, 4);
             btnSigaImage.Name = "btnSigaImage";
-            btnSigaImage.Size = new Size(114, 26);
+            btnSigaImage.Size = new Size(130, 35);
             btnSigaImage.TabIndex = 6;
             btnSigaImage.TextColor = Color.White;
             btnSigaImage.UseVisualStyleBackColor = false;
@@ -195,7 +202,7 @@
             btnPerfil.BackColor = Color.FromArgb(176, 0, 0);
             btnPerfil.BackgroundColor = Color.FromArgb(176, 0, 0);
             btnPerfil.BorderColor = Color.Black;
-            btnPerfil.BorderRadius = 0;
+            btnPerfil.BorderRadiusPercentage = 0F;
             btnPerfil.BorderSize = 0;
             btnPerfil.Dock = DockStyle.Left;
             btnPerfil.FlatAppearance.BorderSize = 0;
@@ -205,9 +212,10 @@
             btnPerfil.FlatStyle = FlatStyle.Flat;
             btnPerfil.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnPerfil.ForeColor = Color.White;
-            btnPerfil.Location = new Point(104, 0);
+            btnPerfil.Location = new Point(119, 0);
+            btnPerfil.Margin = new Padding(3, 4, 3, 4);
             btnPerfil.Name = "btnPerfil";
-            btnPerfil.Size = new Size(110, 26);
+            btnPerfil.Size = new Size(126, 35);
             btnPerfil.TabIndex = 5;
             btnPerfil.Text = "Perfil";
             btnPerfil.TextColor = Color.White;
@@ -219,7 +227,7 @@
             btnHome.BackColor = Color.FromArgb(176, 0, 0);
             btnHome.BackgroundColor = Color.FromArgb(176, 0, 0);
             btnHome.BorderColor = Color.Black;
-            btnHome.BorderRadius = 0;
+            btnHome.BorderRadiusPercentage = 0F;
             btnHome.BorderSize = 0;
             btnHome.Dock = DockStyle.Left;
             btnHome.FlatAppearance.BorderSize = 0;
@@ -230,8 +238,9 @@
             btnHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnHome.ForeColor = Color.White;
             btnHome.Location = new Point(0, 0);
+            btnHome.Margin = new Padding(3, 4, 3, 4);
             btnHome.Name = "btnHome";
-            btnHome.Size = new Size(104, 26);
+            btnHome.Size = new Size(119, 35);
             btnHome.TabIndex = 0;
             btnHome.Text = "Home";
             btnHome.TextColor = Color.White;
@@ -241,21 +250,23 @@
             // panelContainer
             // 
             panelContainer.Dock = DockStyle.Fill;
-            panelContainer.Location = new Point(0, 61);
+            panelContainer.Location = new Point(0, 82);
+            panelContainer.Margin = new Padding(3, 4, 3, 4);
             panelContainer.Name = "panelContainer";
-            panelContainer.Size = new Size(800, 389);
+            panelContainer.Size = new Size(914, 518);
             panelContainer.TabIndex = 37;
             // 
             // TelaPrincipal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(panelContainer);
             Controls.Add(panelHeaderOptions);
             Controls.Add(panelHeader);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             Name = "TelaPrincipal";
             Text = " ";
             panelHeader.ResumeLayout(false);

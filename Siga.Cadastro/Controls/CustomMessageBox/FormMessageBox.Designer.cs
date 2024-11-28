@@ -107,7 +107,6 @@ namespace CustomMessageBox.Private
             button3.BackColor = Color.FromArgb(66, 84, 96);
             button3.BackgroundColor = Color.FromArgb(66, 84, 96);
             button3.BorderColor = Color.FromArgb(64, 64, 64);
-            button3.BorderRadius = 3;
             button3.BorderSize = 1;
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
@@ -126,7 +125,6 @@ namespace CustomMessageBox.Private
             button2.BackColor = Color.FromArgb(66, 84, 96);
             button2.BackgroundColor = Color.FromArgb(66, 84, 96);
             button2.BorderColor = Color.FromArgb(64, 64, 64);
-            button2.BorderRadius = 3;
             button2.BorderSize = 1;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
@@ -145,7 +143,6 @@ namespace CustomMessageBox.Private
             button1.BackColor = Color.FromArgb(66, 84, 96);
             button1.BackgroundColor = Color.FromArgb(66, 84, 96);
             button1.BorderColor = Color.FromArgb(64, 64, 64);
-            button1.BorderRadius = 3;
             button1.BorderSize = 1;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;

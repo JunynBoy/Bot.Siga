@@ -73,8 +73,9 @@
             panel1.Controls.Add(panelInfoConfigTab);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(300, 389);
+            panel1.Size = new Size(343, 519);
             panel1.TabIndex = 0;
             // 
             // panelInfoConfig
@@ -99,9 +100,10 @@
             panelInfoConfig.Controls.Add(lblColetarMaterias);
             panelInfoConfig.Controls.Add(tbColetarFaltas);
             panelInfoConfig.Controls.Add(panelFooter);
-            panelInfoConfig.Location = new Point(0, 53);
+            panelInfoConfig.Location = new Point(0, 71);
+            panelInfoConfig.Margin = new Padding(3, 4, 3, 4);
             panelInfoConfig.Name = "panelInfoConfig";
-            panelInfoConfig.Size = new Size(300, 336);
+            panelInfoConfig.Size = new Size(343, 448);
             panelInfoConfig.TabIndex = 35;
             // 
             // lblLoopingtime
@@ -109,9 +111,9 @@
             lblLoopingtime.AutoSize = true;
             lblLoopingtime.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblLoopingtime.ForeColor = Color.FromArgb(30, 39, 44);
-            lblLoopingtime.Location = new Point(45, 245);
+            lblLoopingtime.Location = new Point(51, 327);
             lblLoopingtime.Name = "lblLoopingtime";
-            lblLoopingtime.Size = new Size(25, 15);
+            lblLoopingtime.Size = new Size(32, 20);
             lblLoopingtime.TabIndex = 28;
             lblLoopingtime.Text = "1m";
             // 
@@ -120,9 +122,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(30, 39, 44);
-            label1.Location = new Point(23, 218);
+            label1.Location = new Point(26, 291);
             label1.Name = "label1";
-            label1.Size = new Size(92, 15);
+            label1.Size = new Size(118, 20);
             label1.TabIndex = 27;
             label1.Text = "Tempo Looping";
             // 
@@ -131,15 +133,16 @@
             btnMoreTime.BackColor = Color.FromArgb(66, 84, 96);
             btnMoreTime.BackgroundColor = Color.FromArgb(66, 84, 96);
             btnMoreTime.BorderColor = Color.Gray;
-            btnMoreTime.BorderRadius = 0;
+            btnMoreTime.BorderRadiusPercentage = 10F;
             btnMoreTime.BorderSize = 0;
             btnMoreTime.FlatAppearance.BorderSize = 0;
             btnMoreTime.FlatStyle = FlatStyle.Flat;
             btnMoreTime.ForeColor = Color.White;
             btnMoreTime.Image = (Image)resources.GetObject("btnMoreTime.Image");
-            btnMoreTime.Location = new Point(81, 235);
+            btnMoreTime.Location = new Point(93, 313);
+            btnMoreTime.Margin = new Padding(3, 4, 3, 4);
             btnMoreTime.Name = "btnMoreTime";
-            btnMoreTime.Size = new Size(20, 15);
+            btnMoreTime.Size = new Size(23, 20);
             btnMoreTime.TabIndex = 25;
             btnMoreTime.TextColor = Color.White;
             btnMoreTime.UseVisualStyleBackColor = false;
@@ -150,9 +153,9 @@
             lblContador.AutoSize = true;
             lblContador.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblContador.ForeColor = Color.FromArgb(30, 39, 44);
-            lblContador.Location = new Point(124, 59);
+            lblContador.Location = new Point(142, 79);
             lblContador.Name = "lblContador";
-            lblContador.Size = new Size(14, 15);
+            lblContador.Size = new Size(18, 20);
             lblContador.TabIndex = 23;
             lblContador.Text = "0";
             lblContador.TextAlign = ContentAlignment.TopRight;
@@ -162,15 +165,16 @@
             btnLessTime.BackColor = Color.FromArgb(66, 84, 96);
             btnLessTime.BackgroundColor = Color.FromArgb(66, 84, 96);
             btnLessTime.BorderColor = Color.Gray;
-            btnLessTime.BorderRadius = 0;
+            btnLessTime.BorderRadiusPercentage = 10F;
             btnLessTime.BorderSize = 0;
             btnLessTime.FlatAppearance.BorderSize = 0;
             btnLessTime.FlatStyle = FlatStyle.Flat;
             btnLessTime.ForeColor = Color.White;
             btnLessTime.Image = (Image)resources.GetObject("btnLessTime.Image");
-            btnLessTime.Location = new Point(81, 251);
+            btnLessTime.Location = new Point(93, 335);
+            btnLessTime.Margin = new Padding(3, 4, 3, 4);
             btnLessTime.Name = "btnLessTime";
-            btnLessTime.Size = new Size(20, 15);
+            btnLessTime.Size = new Size(23, 20);
             btnLessTime.TabIndex = 26;
             btnLessTime.TextColor = Color.White;
             btnLessTime.UseVisualStyleBackColor = false;
@@ -181,9 +185,9 @@
             lblUltimaModificacao.AutoSize = true;
             lblUltimaModificacao.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblUltimaModificacao.ForeColor = Color.FromArgb(30, 39, 44);
-            lblUltimaModificacao.Location = new Point(140, 89);
+            lblUltimaModificacao.Location = new Point(160, 119);
             lblUltimaModificacao.Name = "lblUltimaModificacao";
-            lblUltimaModificacao.Size = new Size(92, 15);
+            lblUltimaModificacao.Size = new Size(119, 20);
             lblUltimaModificacao.TabIndex = 22;
             lblUltimaModificacao.Text = "dd/mm hh/MM";
             lblUltimaModificacao.TextAlign = ContentAlignment.TopRight;
@@ -195,9 +199,9 @@
             lblStatus.BackColor = Color.FromArgb(176, 0, 0);
             lblStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblStatus.ForeColor = Color.White;
-            lblStatus.Location = new Point(75, 31);
+            lblStatus.Location = new Point(86, 41);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(45, 15);
+            lblStatus.Size = new Size(58, 20);
             lblStatus.TabIndex = 21;
             lblStatus.Text = "Parado";
             lblStatus.TextAlign = ContentAlignment.TopRight;
@@ -207,9 +211,9 @@
             lblContadorTitle.AutoSize = true;
             lblContadorTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblContadorTitle.ForeColor = Color.FromArgb(30, 39, 44);
-            lblContadorTitle.Location = new Point(20, 59);
+            lblContadorTitle.Location = new Point(23, 79);
             lblContadorTitle.Name = "lblContadorTitle";
-            lblContadorTitle.Size = new Size(98, 15);
+            lblContadorTitle.Size = new Size(122, 20);
             lblContadorTitle.TabIndex = 20;
             lblContadorTitle.Text = "Qtd. Execuções :";
             lblContadorTitle.TextAlign = ContentAlignment.TopRight;
@@ -220,9 +224,9 @@
             lblUltimaModificacaoTitle.BackColor = Color.White;
             lblUltimaModificacaoTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblUltimaModificacaoTitle.ForeColor = Color.FromArgb(30, 39, 44);
-            lblUltimaModificacaoTitle.Location = new Point(20, 89);
+            lblUltimaModificacaoTitle.Location = new Point(23, 119);
             lblUltimaModificacaoTitle.Name = "lblUltimaModificacaoTitle";
-            lblUltimaModificacaoTitle.Size = new Size(114, 15);
+            lblUltimaModificacaoTitle.Size = new Size(145, 20);
             lblUltimaModificacaoTitle.TabIndex = 19;
             lblUltimaModificacaoTitle.Text = "Última Modificação";
             lblUltimaModificacaoTitle.TextAlign = ContentAlignment.TopRight;
@@ -233,9 +237,9 @@
             lblStatusTitle.AutoSize = true;
             lblStatusTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblStatusTitle.ForeColor = Color.FromArgb(30, 39, 44);
-            lblStatusTitle.Location = new Point(20, 31);
+            lblStatusTitle.Location = new Point(23, 41);
             lblStatusTitle.Name = "lblStatusTitle";
-            lblStatusTitle.Size = new Size(48, 15);
+            lblStatusTitle.Size = new Size(61, 20);
             lblStatusTitle.TabIndex = 18;
             lblStatusTitle.Text = "Status :";
             lblStatusTitle.TextAlign = ContentAlignment.TopRight;
@@ -245,9 +249,9 @@
             lblInformacoes.AutoSize = true;
             lblInformacoes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblInformacoes.ForeColor = Color.FromArgb(30, 39, 44);
-            lblInformacoes.Location = new Point(17, 3);
+            lblInformacoes.Location = new Point(19, 4);
             lblInformacoes.Name = "lblInformacoes";
-            lblInformacoes.Size = new Size(84, 17);
+            lblInformacoes.Size = new Size(108, 23);
             lblInformacoes.TabIndex = 17;
             lblInformacoes.Text = "Informações";
             lblInformacoes.TextAlign = ContentAlignment.TopRight;
@@ -257,9 +261,9 @@
             lblColetarNotas.AutoSize = true;
             lblColetarNotas.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblColetarNotas.ForeColor = Color.FromArgb(30, 39, 44);
-            lblColetarNotas.Location = new Point(23, 166);
+            lblColetarNotas.Location = new Point(26, 221);
             lblColetarNotas.Name = "lblColetarNotas";
-            lblColetarNotas.Size = new Size(39, 15);
+            lblColetarNotas.Size = new Size(51, 20);
             lblColetarNotas.TabIndex = 13;
             lblColetarNotas.Text = "Notas";
             // 
@@ -267,14 +271,15 @@
             // 
             tbColetarNotas.Checked = true;
             tbColetarNotas.CheckState = CheckState.Checked;
-            tbColetarNotas.Location = new Point(23, 184);
-            tbColetarNotas.MinimumSize = new Size(45, 22);
+            tbColetarNotas.Location = new Point(26, 245);
+            tbColetarNotas.Margin = new Padding(3, 4, 3, 4);
+            tbColetarNotas.MinimumSize = new Size(51, 29);
             tbColetarNotas.Name = "tbColetarNotas";
             tbColetarNotas.OffBackColor = Color.Gray;
             tbColetarNotas.OffToggleColor = Color.Gainsboro;
             tbColetarNotas.OnBackColor = Color.FromArgb(66, 84, 96);
             tbColetarNotas.OnToggleColor = Color.WhiteSmoke;
-            tbColetarNotas.Size = new Size(45, 22);
+            tbColetarNotas.Size = new Size(51, 29);
             tbColetarNotas.TabIndex = 16;
             tbColetarNotas.UseVisualStyleBackColor = true;
             // 
@@ -283,9 +288,9 @@
             lblItensParaAtualizar.AutoSize = true;
             lblItensParaAtualizar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblItensParaAtualizar.ForeColor = Color.FromArgb(30, 39, 44);
-            lblItensParaAtualizar.Location = new Point(17, 142);
+            lblItensParaAtualizar.Location = new Point(19, 189);
             lblItensParaAtualizar.Name = "lblItensParaAtualizar";
-            lblItensParaAtualizar.Size = new Size(128, 17);
+            lblItensParaAtualizar.Size = new Size(165, 23);
             lblItensParaAtualizar.TabIndex = 14;
             lblItensParaAtualizar.Text = "Itens Para Atualizar";
             lblItensParaAtualizar.TextAlign = ContentAlignment.TopRight;
@@ -295,9 +300,9 @@
             lblColetarFaltas.AutoSize = true;
             lblColetarFaltas.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblColetarFaltas.ForeColor = Color.FromArgb(30, 39, 44);
-            lblColetarFaltas.Location = new Point(136, 166);
+            lblColetarFaltas.Location = new Point(155, 221);
             lblColetarFaltas.Name = "lblColetarFaltas";
-            lblColetarFaltas.Size = new Size(38, 15);
+            lblColetarFaltas.Size = new Size(50, 20);
             lblColetarFaltas.TabIndex = 9;
             lblColetarFaltas.Text = "Faltas";
             // 
@@ -305,14 +310,15 @@
             // 
             tbColetarMaterias.Checked = true;
             tbColetarMaterias.CheckState = CheckState.Checked;
-            tbColetarMaterias.Location = new Point(76, 184);
-            tbColetarMaterias.MinimumSize = new Size(45, 22);
+            tbColetarMaterias.Location = new Point(87, 245);
+            tbColetarMaterias.Margin = new Padding(3, 4, 3, 4);
+            tbColetarMaterias.MinimumSize = new Size(51, 29);
             tbColetarMaterias.Name = "tbColetarMaterias";
             tbColetarMaterias.OffBackColor = Color.Gray;
             tbColetarMaterias.OffToggleColor = Color.Gainsboro;
             tbColetarMaterias.OnBackColor = Color.FromArgb(66, 84, 96);
             tbColetarMaterias.OnToggleColor = Color.WhiteSmoke;
-            tbColetarMaterias.Size = new Size(45, 22);
+            tbColetarMaterias.Size = new Size(51, 29);
             tbColetarMaterias.TabIndex = 12;
             tbColetarMaterias.UseVisualStyleBackColor = true;
             // 
@@ -321,9 +327,9 @@
             lblColetarMaterias.AutoSize = true;
             lblColetarMaterias.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblColetarMaterias.ForeColor = Color.FromArgb(30, 39, 44);
-            lblColetarMaterias.Location = new Point(75, 166);
+            lblColetarMaterias.Location = new Point(86, 221);
             lblColetarMaterias.Name = "lblColetarMaterias";
-            lblColetarMaterias.Size = new Size(55, 15);
+            lblColetarMaterias.Size = new Size(70, 20);
             lblColetarMaterias.TabIndex = 10;
             lblColetarMaterias.Text = "Matérias";
             lblColetarMaterias.TextAlign = ContentAlignment.TopRight;
@@ -332,14 +338,15 @@
             // 
             tbColetarFaltas.Checked = true;
             tbColetarFaltas.CheckState = CheckState.Checked;
-            tbColetarFaltas.Location = new Point(135, 184);
-            tbColetarFaltas.MinimumSize = new Size(45, 22);
+            tbColetarFaltas.Location = new Point(154, 245);
+            tbColetarFaltas.Margin = new Padding(3, 4, 3, 4);
+            tbColetarFaltas.MinimumSize = new Size(51, 29);
             tbColetarFaltas.Name = "tbColetarFaltas";
             tbColetarFaltas.OffBackColor = Color.Gray;
             tbColetarFaltas.OffToggleColor = Color.Gainsboro;
             tbColetarFaltas.OnBackColor = Color.FromArgb(66, 84, 96);
             tbColetarFaltas.OnToggleColor = Color.WhiteSmoke;
-            tbColetarFaltas.Size = new Size(45, 22);
+            tbColetarFaltas.Size = new Size(51, 29);
             tbColetarFaltas.TabIndex = 11;
             tbColetarFaltas.UseVisualStyleBackColor = true;
             // 
@@ -350,9 +357,10 @@
             panelFooter.Controls.Add(btnStop);
             panelFooter.Controls.Add(btnStart);
             panelFooter.Dock = DockStyle.Bottom;
-            panelFooter.Location = new Point(0, 272);
+            panelFooter.Location = new Point(0, 363);
+            panelFooter.Margin = new Padding(3, 4, 3, 4);
             panelFooter.Name = "panelFooter";
-            panelFooter.Size = new Size(300, 64);
+            panelFooter.Size = new Size(343, 85);
             panelFooter.TabIndex = 1;
             // 
             // btnLooping
@@ -360,15 +368,16 @@
             btnLooping.BackColor = Color.White;
             btnLooping.BackgroundColor = Color.White;
             btnLooping.BorderColor = Color.Black;
-            btnLooping.BorderRadius = 15;
+            btnLooping.BorderRadiusPercentage = 50F;
             btnLooping.BorderSize = 1;
             btnLooping.FlatAppearance.BorderSize = 0;
             btnLooping.FlatStyle = FlatStyle.Flat;
             btnLooping.ForeColor = Color.White;
             btnLooping.Image = (Image)resources.GetObject("btnLooping.Image");
-            btnLooping.Location = new Point(180, 19);
+            btnLooping.Location = new Point(206, 25);
+            btnLooping.Margin = new Padding(3, 4, 3, 4);
             btnLooping.Name = "btnLooping";
-            btnLooping.Size = new Size(30, 30);
+            btnLooping.Size = new Size(34, 40);
             btnLooping.TabIndex = 2;
             btnLooping.TextColor = Color.White;
             btnLooping.UseVisualStyleBackColor = false;
@@ -379,15 +388,16 @@
             btnStop.BackColor = Color.White;
             btnStop.BackgroundColor = Color.White;
             btnStop.BorderColor = Color.Black;
-            btnStop.BorderRadius = 15;
+            btnStop.BorderRadiusPercentage = 50F;
             btnStop.BorderSize = 1;
             btnStop.FlatAppearance.BorderSize = 0;
             btnStop.FlatStyle = FlatStyle.Flat;
             btnStop.ForeColor = Color.White;
             btnStop.Image = (Image)resources.GetObject("btnStop.Image");
-            btnStop.Location = new Point(85, 19);
+            btnStop.Location = new Point(97, 25);
+            btnStop.Margin = new Padding(3, 4, 3, 4);
             btnStop.Name = "btnStop";
-            btnStop.Size = new Size(30, 30);
+            btnStop.Size = new Size(34, 40);
             btnStop.TabIndex = 1;
             btnStop.TextColor = Color.White;
             btnStop.UseVisualStyleBackColor = false;
@@ -398,15 +408,16 @@
             btnStart.BackColor = Color.White;
             btnStart.BackgroundColor = Color.White;
             btnStart.BorderColor = Color.Black;
-            btnStart.BorderRadius = 29;
+            btnStart.BorderRadiusPercentage = 50F;
             btnStart.BorderSize = 1;
             btnStart.FlatAppearance.BorderSize = 0;
             btnStart.FlatStyle = FlatStyle.Flat;
             btnStart.ForeColor = Color.White;
             btnStart.Image = (Image)resources.GetObject("btnStart.Image");
-            btnStart.Location = new Point(121, 3);
+            btnStart.Location = new Point(138, 4);
+            btnStart.Margin = new Padding(3, 4, 3, 4);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(53, 53);
+            btnStart.Size = new Size(61, 71);
             btnStart.TabIndex = 0;
             btnStart.TextColor = Color.White;
             btnStart.UseVisualStyleBackColor = false;
@@ -417,8 +428,9 @@
             panelInfoConfigTab.Controls.Add(lblColetorDeDados);
             panelInfoConfigTab.Dock = DockStyle.Top;
             panelInfoConfigTab.Location = new Point(0, 0);
+            panelInfoConfigTab.Margin = new Padding(3, 4, 3, 4);
             panelInfoConfigTab.Name = "panelInfoConfigTab";
-            panelInfoConfigTab.Size = new Size(300, 53);
+            panelInfoConfigTab.Size = new Size(343, 71);
             panelInfoConfigTab.TabIndex = 34;
             // 
             // lblColetorDeDados
@@ -427,9 +439,9 @@
             lblColetorDeDados.AutoSize = true;
             lblColetorDeDados.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblColetorDeDados.ForeColor = Color.FromArgb(30, 39, 44);
-            lblColetorDeDados.Location = new Point(20, 15);
+            lblColetorDeDados.Location = new Point(23, 20);
             lblColetorDeDados.Name = "lblColetorDeDados";
-            lblColetorDeDados.Size = new Size(164, 25);
+            lblColetorDeDados.Size = new Size(209, 32);
             lblColetorDeDados.TabIndex = 33;
             lblColetorDeDados.Text = "Coletor de dados";
             // 
@@ -437,17 +449,19 @@
             // 
             panel2.Controls.Add(panelConsoleContainer);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(300, 0);
+            panel2.Location = new Point(343, 0);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(500, 389);
+            panel2.Size = new Size(571, 519);
             panel2.TabIndex = 1;
             // 
             // panelConsoleContainer
             // 
             panelConsoleContainer.Dock = DockStyle.Fill;
             panelConsoleContainer.Location = new Point(0, 0);
+            panelConsoleContainer.Margin = new Padding(3, 4, 3, 4);
             panelConsoleContainer.Name = "panelConsoleContainer";
-            panelConsoleContainer.Size = new Size(500, 389);
+            panelConsoleContainer.Size = new Size(571, 519);
             panelConsoleContainer.TabIndex = 2;
             // 
             // fileSystemWatcher1
@@ -457,12 +471,13 @@
             // 
             // HomeControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel2);
             Controls.Add(panel1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "HomeControl";
-            Size = new Size(800, 389);
+            Size = new Size(914, 519);
             panel1.ResumeLayout(false);
             panelInfoConfig.ResumeLayout(false);
             panelInfoConfig.PerformLayout();
