@@ -56,7 +56,7 @@ namespace Bot.App.Telas
             trayMenu.Items.Add("Sair", Properties.Resources.CloseRed, OnExit!);
             trayIcon = new NotifyIcon
             {
-                Text = "Robôzinho do Siga",
+                Text = "AutoSiga",
                 Icon = Properties.Resources.BotIco,
                 ContextMenuStrip = trayMenu,
                 Visible = true

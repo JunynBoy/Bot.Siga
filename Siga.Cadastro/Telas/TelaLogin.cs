@@ -19,6 +19,8 @@ namespace Siga.Cadastro
         LoadingService _loadingService;
         private Panel controlTempLoading;
         private bool primeiroAcesso = false;
+        private NotifyIcon? trayIcon;
+        
 
         IniciadorColeta coletor = new IniciadorColeta();
         List<EnumTipoDeExecucao> acoes = new List<EnumTipoDeExecucao>()
@@ -32,6 +34,14 @@ namespace Siga.Cadastro
             this.StartPosition = FormStartPosition.CenterScreen;
             this._loadingService = new LoadingService();
             this._estudanteService =  new EstudanteService();
+
+
+            this.trayIcon = new NotifyIcon
+            {
+                Text = "AutoSiga",
+                Icon = Bot.App.Properties.Resources.BotIco,
+                Visible = true
+            };
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
